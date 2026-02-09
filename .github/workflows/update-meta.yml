@@ -1,9 +1,26 @@
-name: Update meta
+name: Update RIFTO meta.json (daily)
+
 on:
+  schedule:
+    - cron: "0 7 * * *" # täglich 07:00 UTC (08:00 Berlin)
   workflow_dispatch:
+
 jobs:
   update:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: echo "workflow ok"
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install deps
+        run: pip install requests
+      - name: Update meta.json
+        run: python tools/update_meta.py
+      - name: Commit & push
+        run: |
+          git config user.name "rifto-bot"
+          git config user.email "rifto-bot@users.noreply.github.com"
+          git add meta.json
+          git commit -m "auto: update meta.json" || exit 0
+          git push
