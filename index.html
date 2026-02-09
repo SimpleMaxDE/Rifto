@@ -38,13 +38,13 @@
       </div>
 
       <div class="controlRow">
-        <select id="rank" class="select">
+        <button id="rankBtn" class="selectBtn" type="button">Dia+</button><select id="rank" class="select" style="display:none;">
           <option value="DIA">Dia+</option>
           <option value="MAS">Master+</option>
           <option value="CHA">Challenger</option>
           <option value="LEG">Legend</option>
         </select>
-        <select id="pos" class="select">
+        <button id="posBtn" class="selectBtn" type="button">Alle Lanes</button><select id="pos" class="select" style="display:none;">
           <option value="ALL">Alle Lanes</option>
           <option value="TOP">Baron (Top)</option>
           <option value="JUNGLE">Jungle</option>
@@ -52,7 +52,7 @@
           <option value="BOT">Bot (ADC)</option>
           <option value="SUPPORT">Support</option>
         </select>
-        <select id="sort" class="select">
+        <button id="sortBtn" class="selectBtn" type="button">Sort: MetaScore</button><select id="sort" class="select" style="display:none;">
           <option value="score">Sort: MetaScore</option>
           <option value="win">Sort: Winrate</option>
           <option value="pick">Sort: Pickrate</option>
@@ -68,7 +68,7 @@
       <div class="panel">
         <div class="panelTitle">Wen hast du gepickt?</div>
         <div class="panelRow">
-          <select id="picked" class="select">
+          <button id="pickedBtn" class="selectBtn" type="button">Champion auswählen…</button><select id="picked" class="select" style="display:none;">
             <option value="">Champion auswählen…</option>
           </select>
           <input id="pickedSearch" class="input" placeholder="oder tippen (z.B. Fiora)" />
@@ -156,6 +156,18 @@
     </section>
 
   </main>
+
+  <!-- bottom sheet picker -->
+  <div class="sheet" id="sheet" aria-hidden="true">
+    <div class="sheetBox">
+      <div class="sheetTop">
+        <div class="sheetTitle" id="sheetTitle">Auswahl</div>
+        <button class="xbtn" id="sheetClose" type="button">✕</button>
+      </div>
+      <div class="sheetList" id="sheetList"></div>
+    </div>
+  </div>
+
 
   <script src="app.js"></script>
 </body>

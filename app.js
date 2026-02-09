@@ -30,6 +30,38 @@ const qEl = document.getElementById("q");
 const allListEl = document.getElementById("allList");
 
 const modal = document.getElementById("modal");
+
+const sheet = document.getElementById("sheet");
+const sheetTitleEl = document.getElementById("sheetTitle");
+const sheetListEl = document.getElementById("sheetList");
+const sheetCloseBtn = document.getElementById("sheetClose");
+if(sheetCloseBtn){ sheetCloseBtn.onclick = closeSheet; }
+if(sheet){
+  sheet.addEventListener("click", (e)=>{ if(e.target===sheet) closeSheet(); });
+}
+function openSheet(title, items, currentValue, onPick){
+  if(!sheet) return;
+  sheetTitleEl.textContent = title;
+  sheetListEl.innerHTML = "";
+  items.forEach(it=>{
+    const row = document.createElement("div");
+    row.className = "sheetItem" + (it.value===currentValue ? " active" : "");
+    row.innerHTML = `<div>${it.label}</div>` + (it.sub ? `<div class="mut">${it.sub}</div>` : ``);
+    row.onclick = ()=>{
+      closeSheet();
+      onPick(it.value);
+    };
+    sheetListEl.appendChild(row);
+  });
+  sheet.classList.add("show");
+  sheet.setAttribute("aria-hidden","false");
+}
+function closeSheet(){
+  if(!sheet) return;
+  sheet.classList.remove("show");
+  sheet.setAttribute("aria-hidden","true");
+}
+
 document.getElementById("closeBtn").onclick = closeModal;
 modal.addEventListener("click", (e)=>{ if(e.target===modal) closeModal(); });
 
@@ -118,9 +150,9 @@ tabs.addEventListener("click", (e)=>{
   if(btn) setTab(btn.dataset.tab);
 });
 
-rankEl.addEventListener("change", ()=>{ renderTier(); renderAll(); updateReco(); });
-posEl.addEventListener("change", ()=>{ renderTier(); renderAll(); updateReco(); });
-sortEl.addEventListener("change", ()=>{ renderTier(); renderAll(); });
+rankEl.addEventListener("change", ()=>{ syncButtons(); renderTier(); renderAll(); updateReco(); });
+posEl.addEventListener("change", ()=>{ syncButtons(); renderTier(); renderAll(); updateReco(); });
+sortEl.addEventListener("change", ()=>{ syncButtons(); renderTier(); renderAll(); });
 
 qEl?.addEventListener("input", ()=>renderAll());
 
@@ -258,7 +290,61 @@ function fillPicked(){
   });
 }
 
-pickedEl.addEventListener("change", ()=>updateReco());
+pickedEl.addEventListener("change", ()=>{syncButtons(); updateReco();});
+
+const rankBtn = document.getElementById("rankBtn");
+const posBtn = document.getElementById("posBtn");
+const sortBtn = document.getElementById("sortBtn");
+const pickedBtn = document.getElementById("pickedBtn");
+
+function syncButtons(){
+  const rankMap = {DIA:"Dia+", MAS:"Master+", CHA:"Challenger", LEG:"Legend"};
+  const posMap = {ALL:"Alle Lanes", TOP:"Baron (Top)", JUNGLE:"Jungle", MID:"Mid", BOT:"Bot (ADC)", SUPPORT:"Support"};
+  const sortMap = {score:"Sort: MetaScore", win:"Sort: Winrate", pick:"Sort: Pickrate", ban:"Sort: Banrate"};
+  if(rankBtn) rankBtn.textContent = rankMap[rankEl.value] || "Dia+";
+  if(posBtn) posBtn.textContent = posMap[posEl.value] || "Alle Lanes";
+  if(sortBtn) sortBtn.textContent = sortMap[sortEl.value] || "Sort: MetaScore";
+  if(pickedBtn) pickedBtn.textContent = pickedEl.value ? pickedEl.value : "Champion auswählen…";
+}
+
+rankBtn?.addEventListener("click", ()=>{
+  openSheet("Rank", [
+    {value:"DIA", label:"Dia+"},
+    {value:"MAS", label:"Master+"},
+    {value:"CHA", label:"Challenger"},
+    {value:"LEG", label:"Legend"},
+  ], rankEl.value, (v)=>{ rankEl.value=v; syncButtons(); renderTier(); renderAll(); updateReco(); });
+});
+
+posBtn?.addEventListener("click", ()=>{
+  openSheet("Lane", [
+    {value:"ALL", label:"Alle Lanes"},
+    {value:"TOP", label:"Baron (Top)"},
+    {value:"JUNGLE", label:"Jungle"},
+    {value:"MID", label:"Mid"},
+    {value:"BOT", label:"Bot (ADC)"},
+    {value:"SUPPORT", label:"Support"},
+  ], posEl.value, (v)=>{ posEl.value=v; syncButtons(); renderTier(); renderAll(); updateReco(); });
+});
+
+sortBtn?.addEventListener("click", ()=>{
+  openSheet("Sortierung", [
+    {value:"score", label:"MetaScore"},
+    {value:"win", label:"Winrate"},
+    {value:"pick", label:"Pickrate"},
+    {value:"ban", label:"Banrate"},
+  ], sortEl.value, (v)=>{ sortEl.value=v; syncButtons(); renderTier(); renderAll(); });
+});
+
+pickedBtn?.addEventListener("click", ()=>{
+  if(!META) return;
+  const items = META.champions
+    .slice()
+    .sort((a,b)=>a.name.localeCompare(b.name,"de"))
+    .map(ch=>({value: ch.name, label: ch.name}));
+  openSheet("Dein Pick", [{value:"", label:"Champion auswählen…"} , ...items], pickedEl.value, (v)=>{ pickedEl.value=v; syncButtons(); updateReco(); });
+});
+
 pickedSearchEl.addEventListener("input", ()=>{
   const v = pickedSearchEl.value.trim().toLowerCase();
   if(!v) return;
@@ -333,6 +419,7 @@ async function boot(){
   lastUpdatedEl.textContent = `Update: ${META.lastUpdated || "—"} · Quelle: ${META.source || "—"}`;
 
   fillPicked();
+  syncButtons();
   setTab("tier");
   renderAll();
 }

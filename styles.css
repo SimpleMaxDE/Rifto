@@ -190,3 +190,49 @@ body{
   padding:12px;
 }
 .footnote{margin-top:12px}
+
+
+/* custom select buttons */
+.selectBtn{
+  flex:1; min-width:140px;
+  padding:12px 12px;border-radius:14px;
+  border:1px solid rgba(35,49,82,.75);
+  background:rgba(15,23,48,.55); color:var(--text);
+  text-align:left;
+  font-weight:900;
+  display:flex; align-items:center; justify-content:space-between;
+}
+.selectBtn:after{
+  content:"▾";
+  color:rgba(155,176,217,.85);
+  font-weight:900;
+}
+
+/* bottom sheet */
+.sheet{position:fixed;inset:0;background:rgba(0,0,0,.55);display:none;align-items:flex-end;z-index:60}
+.sheet.show{display:flex}
+.sheetBox{
+  width:100%;
+  border-radius:22px 22px 0 0;
+  background:linear-gradient(180deg, rgba(15,23,48,.97), rgba(7,11,20,.99));
+  border-top:1px solid rgba(35,49,82,.75);
+  padding:12px;
+}
+.sheetTop{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:2px 2px 8px 2px}
+.sheetTitle{font-weight:1000;font-size:16px}
+.sheetList{
+  max-height:55vh;
+  overflow:auto;
+  display:grid;
+  gap:8px;
+}
+.sheetItem{
+  padding:12px 12px;
+  border-radius:16px;
+  border:1px solid rgba(35,49,82,.75);
+  background:rgba(16,26,54,.70);
+  font-weight:900;
+  display:flex;justify-content:space-between;align-items:center;
+}
+.sheetItem .mut{color:rgba(155,176,217,.85);font-weight:800;font-size:12px}
+.sheetItem.active{outline:2px solid rgba(58,160,255,.35)}
