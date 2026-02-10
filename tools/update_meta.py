@@ -2,10 +2,10 @@ import json
 import requests
 from datetime import datetime, timezone
 
-# Tencent CN stats
+# Tencent CN stats endpoint (works in your browser as 200 OK)
 CN_RANK_URL = "https://mlol.qt.qq.com/go/lgame_battle_info/hero_rank_list_v2"
 
-# Riot Data Dragon (for champion names + icons)
+# Riot Data Dragon (stable champion names + icons)
 DD_VERSIONS = "https://ddragon.leagueoflegends.com/api/versions.json"
 DD_CHAMPS = "https://ddragon.leagueoflegends.com/cdn/{v}/data/en_US/champion.json"
 
@@ -20,15 +20,20 @@ def fetch_json(url, headers=None):
     return r.json()
 
 def get_dd_version():
-    return fetch_json(DD_VERSIONS)[0]
+    versions = fetch_json(DD_VERSIONS)
+    return versions[0] if versions else "14.1.1"
 
-def get_champion_map(version):
+def get_champion_map(version: str):
+    """
+    Returns: dict[str(hero_id)] -> {"name": "...", "icon": "Ahri.png"}
+    Uses champion 'key' from DDragon, which matches numeric IDs as strings.
+    """
     data = fetch_json(DD_CHAMPS.format(v=version))
     champ_map = {}
     for champ in data["data"].values():
-        champ_map[champ["key"]] = {
+        champ_map[str(champ["key"])] = {
             "name": champ["name"],
-            "icon": champ["image"]["full"]
+            "icon": champ["image"]["full"],
         }
     return champ_map
 
@@ -38,31 +43,44 @@ def main():
     champ_map = get_champion_map(dd_version)
 
     champions = []
+    data = rank_data.get("data", {})
 
-    for row in rank_data.get("data", []):
-        hero_id = str(row.get("hero_id"))
-        champ = champ_map.get(hero_id)
+    # Tencent response is nested: data is a dict of lane/segment -> list of rows
+    for lane, rows in (data.items() if isinstance(data, dict) else []):
+        if not isinstance(rows, list):
+            continue
 
-        if not champ:
-            continue  # skip unknown IDs
+        for row in rows:
+            if not isinstance(row, dict):
+                continue
 
-        champions.append({
-            "name": champ["name"],
-            "icon": f"https://ddragon.leagueoflegends.com/cdn/{dd_version}/img/champion/{champ['icon']}",
-            "positions": [row.get("position")],
-            "stats": {
-                "CN": {
-                    "win": round(float(row.get("win_rate", 0)) * 100, 2),
-                    "pick": round(float(row.get("appear_rate", 0)) * 100, 2),
-                    "ban": round(float(row.get("forbid_rate", 0)) * 100, 2),
+            hero_id = str(row.get("hero_id", "")).strip()
+            if not hero_id:
+                continue
+
+            champ = champ_map.get(hero_id)
+            if not champ:
+                # If Tencent hero_id isn't in DDragon, skip gracefully
+                continue
+
+            champions.append({
+                "name": champ["name"],
+                "icon": f"https://ddragon.leagueoflegends.com/cdn/{dd_version}/img/champion/{champ['icon']}",
+                "positions": [str(lane)],
+                "stats": {
+                    "CN": {
+                        "win": round(float(row.get("win_rate", 0)) * 100, 2),
+                        "pick": round(float(row.get("appear_rate", 0)) * 100, 2),
+                        "ban": round(float(row.get("forbid_rate", 0)) * 100, 2),
+                    }
                 }
-            }
-        })
+            })
 
     meta = {
         "patch": "CN Live",
         "lastUpdated": datetime.now(timezone.utc).astimezone().strftime("%Y-%m-%d %H:%M"),
-        "source": "Tencent CN + Riot DDragon",
+        "source": "Tencent CN (mlol.qt.qq.com hero_rank_list_v2) + Riot DDragon",
+        "ddragonVersion": dd_version,
         "champions": champions
     }
 
