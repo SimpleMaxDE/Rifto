@@ -6,7 +6,7 @@
   <title>RIFTO</title>
   <link rel="manifest" href="./manifest.json">
   <meta name="theme-color" content="#0b1220">
-  <link rel="stylesheet" href="./styles.css" />
+  <link rel="stylesheet" href="./styles.css?v=8" />
 </head>
 <body>
   <header class="topbar">
@@ -52,6 +52,17 @@
         <div class="modalTitle">
           <div id="modalName" class="modalName">Champion</div>
           <div id="modalId" class="modalId">#</div>
+
+          <div class="modalRoleRow">
+            <span class="k">Rolle:</span>
+            <select id="modalRoleSelect" class="select selectSmall" aria-label="Rolle wählen">
+              <option value="Baron">Baron</option>
+              <option value="Jungle" selected>Jungle</option>
+              <option value="Mid">Mid</option>
+              <option value="ADC">ADC</option>
+              <option value="Support">Support</option>
+            </select>
+          </div>
         </div>
         <div id="modalScore" class="modalScore">0.0</div>
       </div>
@@ -71,12 +82,21 @@
         </div>
       </div>
 
+      <div class="modalSection">
+        <div class="secHead">
+          <div class="secTitle">Hard Counter (Rolle)</div>
+          <div class="secSub">Auto: Rolle + Meta (Overwrites optional)</div>
+        </div>
+        <div id="modalCounters" class="counterList"></div>
+        <div class="tinyNote">Hinweis: Ohne echte Matchup-Daten ist das eine <b>smarte Heuristik</b> (Rolle + Meta). Wir bauen als Nächstes “echte Matchups” per Overrides aus.</div>
+      </div>
+
       <div class="modalHint">
-        🔜 Als Nächstes: <b>Smart Ban</b> & <b>Counter</b> für diesen Champion
+        🔜 Als Nächstes: <b>Smart Ban</b> (Top 3) + <b>Build/Runes</b>
       </div>
     </div>
   </div>
 
-  <script src="./app.js"></script>
+  <script src="./app.js?v=8"></script>
 </body>
 </html>
