@@ -2,64 +2,84 @@ import json
 import requests
 from datetime import datetime, timezone
 
-CN_RANK_URL = "https://mlol.qt.qq.com/go/lgame_battle_info/hero_rank_list_v2"
+BASE_URL = "https://mlol.qt.qq.com/go/lgame_battle_info/hero_rank_list_v2"
 
 HEADERS = {
     "User-Agent": "Mozilla/5.0 (RIFTO personal project)",
     "Referer": "https://lolm.qq.com/",
 }
 
-def fetch_json(url, headers=None):
-    r = requests.get(url, headers=headers, timeout=30)
+# Tencent lanes (as used by the site)
+LANES = {
+    "TOP": "1",
+    "JUNGLE": "2",
+    "MID": "3",
+    "ADC": "4",
+    "SUPPORT": "5",
+}
+
+def fetch_json(url):
+    r = requests.get(url, headers=HEADERS, timeout=30)
     r.raise_for_status()
     return r.json()
 
 def main():
-    rank_data = fetch_json(CN_RANK_URL, HEADERS)
+    champions = {}
+    now = datetime.now(timezone.utc).astimezone().strftime("%Y-%m-%d %H:%M")
 
-    champions = []
-    data = rank_data.get("data", {})
+    for lane_name, lane_id in LANES.items():
+        url = (
+            f"{BASE_URL}"
+            f"?partition=0"
+            f"&queue=420"
+            f"&tier=1"
+            f"&position={lane_id}"
+        )
 
-    # Tencent response is nested: data is a dict -> lane/segment -> list of rows
-    if isinstance(data, dict):
-        items = data.items()
-    else:
-        items = []
+        data = fetch_json(url).get("data", [])
 
-    for lane, rows in items:
-        if not isinstance(rows, list):
+        if not isinstance(data, list):
             continue
 
-        for row in rows:
-            if not isinstance(row, dict):
-                continue
-
+        for row in data:
             hero_id = str(row.get("hero_id", "")).strip()
             if not hero_id:
                 continue
 
-            # IMPORTANT: Don't drop champs if we can't map names yet
-            name = row.get("hero_name") or f"Hero {hero_id}"
-
-            champions.append({
-                "name": name,
-                "hero_id": hero_id,
-                "icon": "",  # will be filled in later when we map to real icons
-                "positions": [str(lane)],
-                "stats": {
-                    "CN": {
-                        "win": round(float(row.get("win_rate", 0)) * 100, 2),
-                        "pick": round(float(row.get("appear_rate", 0)) * 100, 2),
-                        "ban": round(float(row.get("forbid_rate", 0)) * 100, 2),
+            # Create champion if not exists
+            if hero_id not in champions:
+                champions[hero_id] = {
+                    "name": f"Hero {hero_id}",  # placeholder (icons/names next step)
+                    "hero_id": hero_id,
+                    "positions": [],
+                    "stats": {
+                        "CN": {
+                            "win": 0,
+                            "pick": 0,
+                            "ban": 0,
+                        }
                     }
                 }
-            })
+
+            champions[hero_id]["positions"].append(lane_name)
+
+            # Average stats across lanes
+            champions[hero_id]["stats"]["CN"]["win"] += float(row.get("win_rate", 0))
+            champions[hero_id]["stats"]["CN"]["pick"] += float(row.get("appear_rate", 0))
+            champions[hero_id]["stats"]["CN"]["ban"] += float(row.get("forbid_rate", 0))
+
+    # Finalize averages
+    for champ in champions.values():
+        count = max(len(champ["positions"]), 1)
+        champ["stats"]["CN"]["win"] = round((champ["stats"]["CN"]["win"] / count) * 100, 2)
+        champ["stats"]["CN"]["pick"] = round((champ["stats"]["CN"]["pick"] / count) * 100, 2)
+        champ["stats"]["CN"]["ban"] = round((champ["stats"]["CN"]["ban"] / count) * 100, 2)
 
     meta = {
         "patch": "CN Live",
-        "lastUpdated": datetime.now(timezone.utc).astimezone().strftime("%Y-%m-%d %H:%M"),
+        "lastUpdated": now,
         "source": "Tencent CN (mlol.qt.qq.com hero_rank_list_v2)",
-        "champions": champions
+        "champions": list(champions.values())
     }
 
     with open("meta.json", "w", encoding="utf-8") as f:
