@@ -6,7 +6,7 @@
   <title>RIFTO</title>
   <link rel="manifest" href="./manifest.json">
   <meta name="theme-color" content="#0b1220">
-  <link rel="stylesheet" href="./styles.css?v=14" />
+  <link rel="stylesheet" href="./styles.css?v=15" />
 </head>
 <body>
   <header class="topbar">
@@ -74,18 +74,27 @@
       <div class="draftGrid">
         <div class="draftCard">
           <div class="draftCardHead">Dein Pick</div>
-          <div id="myPickCard" class="pickCard empty">
-            <div class="emptyText">Kein Champion gewählt</div>
+          <div id="myPickCard" class="pickCard empty"><div class="emptyText">Kein Champion gewählt</div></div>
+          <div id="offMetaBox" class="hintBox hidden"></div>
+        </div>
+
+        <div class="draftCard">
+          <div class="draftCardHead">Dein Team (optional)</div>
+          <div class="enemyRow">
+            <button id="allySlot1" class="enemySlot">+ Ally 1</button>
+            <button id="allySlot2" class="enemySlot">+ Ally 2</button>
+            <button id="allySlot3" class="enemySlot">+ Ally 3</button>
+            <button id="allySlot4" class="enemySlot">+ Ally 4</button>
           </div>
+          <div class="tinyNote">Tippe auf Slots: setzen/nochmal tippen = löschen.</div>
         </div>
 
         <div class="draftCard">
           <div class="draftCardHead">Enemy Picks (optional)</div>
           <div class="enemyRow">
-            <button id="enemySlot1" class="enemySlot">+ Slot 1</button>
-            <button id="enemySlot2" class="enemySlot">+ Slot 2</button>
+            <button id="enemySlot1" class="enemySlot">+ Enemy 1</button>
+            <button id="enemySlot2" class="enemySlot">+ Enemy 2</button>
           </div>
-          <div class="tinyNote">Tippe auf einen Slot, um einen Champion zu setzen (gleich nochmal tippen = löschen).</div>
         </div>
       </div>
 
@@ -95,17 +104,76 @@
           <div id="draftContext" class="secSub">–</div>
         </div>
         <div id="draftBans" class="counterList"></div>
+
+        <div class="secHead" style="margin-top:14px">
+          <div class="secTitle">Draft-Hinweis</div>
+          <div class="secSub">Problem + konkrete Lösung</div>
+        </div>
+        <div id="draftWarn" class="hintBox hidden"></div>
+        <div id="draftFixes" class="fixRow"></div>
       </div>
     </section>
 
+    <!-- MATCHUP VIEW -->
     <section id="viewMatchup" class="panel hidden">
-      <div class="panelHead"><h2>Matchup</h2></div>
-      <div class="status">Kommt als Nächstes.</div>
+      <div class="panelHead">
+        <h2>Matchup</h2>
+        <div class="controls">
+          <button id="btnMatchPick" class="btn">🎯 Champion wählen</button>
+          <select id="matchRole" class="select">
+            <option value="Baron">Baron</option>
+            <option value="Jungle">Jungle</option>
+            <option value="Mid">Mid</option>
+            <option value="ADC">ADC</option>
+            <option value="Support">Support</option>
+          </select>
+        </div>
+      </div>
+      <div id="matchPickCard" class="pickCard empty" style="margin:12px 16px"><div class="emptyText">Kein Champion gewählt</div></div>
+
+      <div class="threeCols">
+        <div class="col">
+          <div class="secHead"><div class="secTitle">🔴 Schwer</div><div class="secSub">vermeiden / bannen</div></div>
+          <div id="matchHard" class="counterList"></div>
+        </div>
+        <div class="col">
+          <div class="secHead"><div class="secTitle">🟡 Spielbar</div><div class="secSub">Skill-Matchup</div></div>
+          <div id="matchEven" class="counterList"></div>
+        </div>
+        <div class="col">
+          <div class="secHead"><div class="secTitle">🟢 Gut</div><div class="secSub">Vorteil für dich</div></div>
+          <div id="matchGood" class="counterList"></div>
+        </div>
+      </div>
     </section>
 
+    <!-- TIERLIST VIEW -->
     <section id="viewTierlist" class="panel hidden">
-      <div class="panelHead"><h2>Tierlist</h2></div>
-      <div class="status">Kommt als Nächstes.</div>
+      <div class="panelHead">
+        <h2>Tierlist</h2>
+        <div class="controls">
+          <select id="tierRole" class="select">
+            <option value="Global">Global</option>
+            <option value="Baron">Baron</option>
+            <option value="Jungle">Jungle</option>
+            <option value="Mid">Mid</option>
+            <option value="ADC">ADC</option>
+            <option value="Support">Support</option>
+          </select>
+          <select id="tierFilter" class="select">
+            <option value="all">Alle</option>
+            <option value="SS">SS</option>
+            <option value="S">S</option>
+            <option value="A">A</option>
+            <option value="B">B</option>
+            <option value="C">C</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="tierWrap">
+        <div id="tierList" class="tierList"></div>
+      </div>
     </section>
   </main>
 
@@ -122,18 +190,18 @@
             <div id="modalName" class="modalName">Champion</div>
             <span id="modalTier" class="tierBadge tierC">C</span>
           </div>
-          <div id="modalId" class="modalId">#</div>
+          <div id="modalLane" class="modalId">Main Lane: –</div>
 
           <div class="modalRoleRow">
-            <span class="k">Rolle:</span>
-            <select id="modalRoleSelect" class="select selectSmall" aria-label="Rolle wählen">
+            <span class="k">Lane:</span>
+            <select id="modalRoleSelect" class="select selectSmall" aria-label="Lane wählen">
               <option value="Baron">Baron</option>
               <option value="Jungle">Jungle</option>
               <option value="Mid">Mid</option>
               <option value="ADC">ADC</option>
               <option value="Support">Support</option>
             </select>
-            <span id="offRole" class="warn hidden">Off-role</span>
+            <span id="offRole" class="warn hidden">Off-meta</span>
           </div>
         </div>
       </div>
@@ -146,19 +214,12 @@
 
       <div class="twoCol">
         <div class="modalSection">
-          <div class="secHead">
-            <div class="secTitle">Smart Ban (Rolle)</div>
-            <div class="secSub">Meta + Champion-Type + Trend</div>
-          </div>
+          <div class="secHead"><div class="secTitle">Smart Ban (3)</div><div class="secSub">gegen deinen Pick</div></div>
           <div id="modalBans" class="counterList"></div>
         </div>
-
         <div class="modalSection">
-          <div class="secHead">
-            <div class="secTitle">Hard Counter (Rolle)</div>
-            <div class="secSub">Threats gegen deinen Pick</div>
-          </div>
-          <div id="modalCounters" class="counterList"></div>
+          <div class="secHead"><div class="secTitle">Lane Tiers</div><div class="secSub">SS – ❌</div></div>
+          <div id="modalLaneTiers" class="laneTiers"></div>
         </div>
       </div>
 
@@ -181,6 +242,6 @@
     </div>
   </div>
 
-  <script src="./app.js?v=14"></script>
+  <script src="./app.js?v=15"></script>
 </body>
 </html>
