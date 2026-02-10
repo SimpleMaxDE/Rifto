@@ -1,15 +1,14 @@
 {
   "patch": "CN Live",
-  "lastUpdated": "2026-02-10 18:40",
-  "source": "Tencent CN (mlol.qt.qq.com hero_rank_list_v2)",
+  "lastUpdated": "2026-02-10 19:25",
+  "source": "Tencent hero_rank_list_v2 + hero_list.js mapping",
+  "champions": [],
   "statsByName": {},
   "debug": {
-    "tencent_status": 200,
-    "rows_found": 851,
-    "stats_written": 0,
-    "rows_used": 0,
-    "skipped_no_name": 851,
-    "skipped_not_wr": 0,
-    "note": "If stats_written is low, next step is hero_list.js mapping (hero_id -> WR name)."
+    "hero_list_count": 0,
+    "rank_rows_found": 851,
+    "dd_version": "16.3.1",
+    "wr_written": 0,
+    "note": "If wr_written is still 0, hero_list.js names might be non-EN; then we’ll normalize names."
   }
 }
