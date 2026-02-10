@@ -1,207 +1,165 @@
-// RIFTO robust app.js (self-healing DOM + clear logs)
+(() => {
+  const $ = (id) => document.getElementById(id);
 
-const state = {
-  champs: [],
-  meta: {},
-  selectedChamp: ""
-};
+  const grid = $("grid");
+  const statusEl = $("status");
+  const patchPill = $("patchPill");
+  const updatePill = $("updatePill");
+  const searchEl = $("search");
+  const sortEl = $("sort");
 
-function $(id) {
-  return document.getElementById(id);
-}
+  let allChamps = []; // normalized list
 
-function ensureRoot() {
-  // We try to find existing containers by common IDs.
-  // If they don't exist, we create a minimal UI so the page always reacts.
-  let select = $("champSelect") || $("championSelect") || $("champ-select");
-  let smart = $("smartBan") || $("smart-ban") || $("smartban");
-  let tier = $("tierList") || $("tier-list") || $("tierlist");
-
-  const host = document.querySelector("main") || document.body;
-
-  if (!select) {
-    const wrap = document.createElement("div");
-    wrap.style.margin = "12px 0";
-    wrap.innerHTML = `
-      <label style="display:block;opacity:.9;margin-bottom:6px;">Champion wählen</label>
-      <select id="champSelect" style="width:100%;padding:10px;border-radius:12px;"></select>
-    `;
-    host.prepend(wrap);
-    select = $("champSelect");
-    console.log("[RIFTO] champSelect created");
-  } else if (!select.id) {
-    select.id = "champSelect";
-  } else if (select.id !== "champSelect") {
-    // normalize to our ID
-    select.id = "champSelect";
+  function fmtPct(v) {
+    if (v === null || v === undefined) return "–";
+    const n = Number(v);
+    if (!Number.isFinite(n)) return "–";
+    return `${n.toFixed(2)}%`;
   }
 
-  if (!smart) {
-    smart = document.createElement("div");
-    smart.id = "smartBan";
-    smart.style.marginTop = "16px";
-    host.appendChild(smart);
-    console.log("[RIFTO] smartBan created");
-  } else if (smart.id !== "smartBan") {
-    smart.id = "smartBan";
+  // Simple "MetaScore" (can be improved later)
+  // Idea: Winrate weight + Pickrate weight + Banrate weight
+  function metaScore(c) {
+    const win = Number(c.stats?.CN?.win ?? 0);
+    const pick = Number(c.stats?.CN?.pick ?? 0);
+    const ban = Number(c.stats?.CN?.ban ?? 0);
+    // Weighted: win matters most, then pick, then ban
+    return (win * 1.2) + (pick * 0.9) + (ban * 0.5);
   }
 
-  if (!tier) {
-    tier = document.createElement("div");
-    tier.id = "tierList";
-    tier.style.marginTop = "16px";
-    host.appendChild(tier);
-    console.log("[RIFTO] tierList created");
-  } else if (tier.id !== "tierList") {
-    tier.id = "tierList";
+  function normalizeMeta(meta) {
+    const champs = Array.isArray(meta.champions) ? meta.champions : [];
+    return champs.map((c) => ({
+      hero_id: String(c.hero_id ?? ""),
+      name: String(c.name ?? "Unknown"),
+      icon: String(c.icon ?? ""),
+      stats: c.stats ?? { CN: { win: 0, pick: 0, ban: 0 } },
+    }));
   }
 
-  return { select, smart, tier };
-}
+  function render(list) {
+    grid.innerHTML = "";
 
-async function loadJSON(path) {
-  const res = await fetch(path, { cache: "no-store" });
-  if (!res.ok) throw new Error(`${path} -> ${res.status} ${res.statusText}`);
-  return await res.json();
-}
+    if (!list.length) {
+      statusEl.textContent = "Keine Treffer.";
+      statusEl.style.display = "block";
+      return;
+    }
 
-function calcMetaScore(s = {}) {
-  const win = Number(s.win ?? 0);
-  const pick = Number(s.pick ?? 0);
-  const ban = Number(s.ban ?? 0);
-  if (!win && !pick && !ban) return 0;
-  return (win * 0.55) + (pick * 0.25) + (ban * 0.20);
-}
+    statusEl.style.display = "none";
 
-function renderSelect() {
-  const select = $("champSelect");
-  if (!select) return;
+    const frag = document.createDocumentFragment();
 
-  select.innerHTML = `<option value="">Champion wählen…</option>`;
-  state.champs.forEach(c => {
-    const opt = document.createElement("option");
-    opt.value = c.name;
-    opt.textContent = c.name;
-    select.appendChild(opt);
-  });
+    for (const c of list) {
+      const win = c.stats?.CN?.win ?? null;
+      const pick = c.stats?.CN?.pick ?? null;
+      const ban = c.stats?.CN?.ban ?? null;
 
-  // IMPORTANT: bind change handler
-  select.onchange = (e) => {
-    state.selectedChamp = e.target.value;
-    console.log("[RIFTO] Selected:", state.selectedChamp);
-    renderSmartBan();
-  };
-}
+      const card = document.createElement("button");
+      card.className = "card";
+      card.type = "button";
+      card.setAttribute("data-name", c.name);
 
-function renderTierList() {
-  const box = $("tierList");
-  if (!box) return;
-
-  const sorted = [...state.champs].sort((a, b) => (b.metaScore || 0) - (a.metaScore || 0));
-
-  box.innerHTML = `
-    <h3 style="margin:0 0 10px 0;">Tier List (MetaScore)</h3>
-    <div style="display:grid;gap:8px;">
-      ${sorted.slice(0, 60).map(c => `
-        <div style="display:flex;justify-content:space-between;align-items:center;padding:10px;border-radius:14px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);">
-          <span><strong>${c.name}</strong></span>
-          <span style="opacity:.85;">${(c.metaScore || 0).toFixed(1)}</span>
-        </div>
-      `).join("")}
-    </div>
-  `;
-}
-
-function renderSmartBan() {
-  const box = $("smartBan");
-  if (!box) return;
-
-  if (!state.selectedChamp) {
-    box.innerHTML = `<h3 style="margin:0 0 10px 0;">Smart Ban</h3><div style="opacity:.85;">Wähle zuerst einen Champion.</div>`;
-    return;
-  }
-
-  // Very first version: ban value = ban% + pick% + win% weight
-  const scored = state.champs
-    .filter(c => c.name !== state.selectedChamp)
-    .map(c => {
-      const win = Number(c.win ?? 0);
-      const pick = Number(c.pick ?? 0);
-      const ban = Number(c.ban ?? 0);
-      const score = (ban * 1.0) + (pick * 0.8) + (Math.max(0, win - 50) * 1.2);
-      return { ...c, smartScore: score };
-    })
-    .sort((a, b) => b.smartScore - a.smartScore)
-    .slice(0, 5);
-
-  box.innerHTML = `
-    <h3 style="margin:0 0 10px 0;">Smart Ban gegen ${state.selectedChamp}</h3>
-    <div style="display:grid;gap:8px;">
-      ${scored.map(c => `
-        <div style="padding:10px;border-radius:14px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);">
-          <div style="display:flex;justify-content:space-between;align-items:center;">
-            <strong>${c.name}</strong>
-            <span style="opacity:.85;">Score ${c.smartScore.toFixed(1)}</span>
+      card.innerHTML = `
+        <div class="cardTop">
+          <img class="icon" src="${c.icon}" alt="${c.name}" loading="lazy" />
+          <div class="nameWrap">
+            <div class="name">${c.name}</div>
+            <div class="id">#${c.hero_id}</div>
           </div>
-          <div style="opacity:.85;margin-top:6px;font-size:13px;">
-            Win: ${c.win ?? "—"}% · Pick: ${c.pick ?? "—"}% · Ban: ${c.ban ?? "—"}%
+          <div class="score" title="MetaScore">${metaScore(c).toFixed(1)}</div>
+        </div>
+
+        <div class="stats">
+          <div class="stat">
+            <div class="k">Win</div>
+            <div class="v">${fmtPct(win)}</div>
+          </div>
+          <div class="stat">
+            <div class="k">Pick</div>
+            <div class="v">${fmtPct(pick)}</div>
+          </div>
+          <div class="stat">
+            <div class="k">Ban</div>
+            <div class="v">${fmtPct(ban)}</div>
           </div>
         </div>
-      `).join("")}
-    </div>
-  `;
-}
+      `;
 
-async function init() {
-  console.log("[RIFTO] init start");
-  ensureRoot();
+      // (Optional) later: open champion detail modal / smart ban
+      card.addEventListener("click", () => {
+        // For now: small toast-like status update
+        statusEl.textContent = `Ausgewählt: ${c.name} — Win ${fmtPct(win)} · Pick ${fmtPct(pick)} · Ban ${fmtPct(ban)}`;
+        statusEl.style.display = "block";
+        statusEl.classList.add("pulse");
+        setTimeout(() => statusEl.classList.remove("pulse"), 450);
+      });
 
-  let wrList, meta;
+      frag.appendChild(card);
+    }
 
-  try {
-    [wrList, meta] = await Promise.all([
-      loadJSON("wr_champions.json"),
-      loadJSON("meta.json"),
-    ]);
-  } catch (e) {
-    console.error("[RIFTO] load error:", e);
-    // Still render select with empty list so you see something
-    state.champs = [];
-    renderSelect();
-    renderTierList();
-    renderSmartBan();
-    return;
+    grid.appendChild(frag);
   }
 
-  state.meta = meta;
+  function applyFiltersAndRender() {
+    const q = (searchEl.value || "").trim().toLowerCase();
+    const sort = sortEl.value;
 
-  // Accept both schemas:
-  // A) meta.statsByName = { "Fiora": {win,pick,ban}, ... }
-  // B) meta.champions = [{name, stats:{CN:{win,pick,ban}}}, ...]
-  const statsByName = meta.statsByName || {};
-  const championsArray = Array.isArray(meta.champions) ? meta.champions : [];
+    let list = allChamps;
 
-  function getStatsFor(name) {
-    if (statsByName[name]) return statsByName[name];
-    const found = championsArray.find(x => x && x.name === name);
-    if (found?.stats?.CN) return found.stats.CN;
-    if (found?.stats?.DIA) return found.stats.DIA;
-    return {};
+    if (q) {
+      list = list.filter((c) => c.name.toLowerCase().includes(q));
+    }
+
+    list = [...list].sort((a, b) => {
+      if (sort === "name") return a.name.localeCompare(b.name);
+
+      const av = sort === "win" ? (a.stats?.CN?.win ?? 0)
+               : sort === "pick" ? (a.stats?.CN?.pick ?? 0)
+               : sort === "ban" ? (a.stats?.CN?.ban ?? 0)
+               : metaScore(a);
+
+      const bv = sort === "win" ? (b.stats?.CN?.win ?? 0)
+               : sort === "pick" ? (b.stats?.CN?.pick ?? 0)
+               : sort === "ban" ? (b.stats?.CN?.ban ?? 0)
+               : metaScore(b);
+
+      return Number(bv) - Number(av);
+    });
+
+    render(list);
   }
 
-  state.champs = (Array.isArray(wrList) ? wrList : []).map(name => {
-    const s = getStatsFor(name);
-    const win = s.win ?? null;
-    const pick = s.pick ?? null;
-    const ban = s.ban ?? null;
-    return { name, win, pick, ban, metaScore: calcMetaScore({ win, pick, ban }) };
-  });
+  async function load() {
+    try {
+      statusEl.textContent = "Lade Daten…";
 
-  console.log("[RIFTO] champs loaded:", state.champs.length);
+      // cache-bust, damit GitHub Pages nicht alte meta.json cached
+      const url = `./meta.json?ts=${Date.now()}`;
+      const res = await fetch(url, { cache: "no-store" });
+      if (!res.ok) throw new Error(`meta.json HTTP ${res.status}`);
 
-  renderSelect();
-  renderTierList();
-  renderSmartBan();
-}
+      const meta = await res.json();
 
-document.addEventListener("DOMContentLoaded", init);
+      patchPill.textContent = `Patch: ${meta.patch ?? "–"}`;
+      updatePill.textContent = `Update: ${meta.lastUpdated ?? "–"}`;
+
+      allChamps = normalizeMeta(meta);
+
+      statusEl.textContent = `Geladen: ${allChamps.length} Champions`;
+      statusEl.style.display = "block";
+
+      applyFiltersAndRender();
+    } catch (err) {
+      console.error(err);
+      statusEl.textContent = `Fehler beim Laden: ${err?.message ?? err}`;
+      statusEl.style.display = "block";
+    }
+  }
+
+  // Events
+  searchEl.addEventListener("input", applyFiltersAndRender);
+  sortEl.addEventListener("change", applyFiltersAndRender);
+
+  load();
+})();
