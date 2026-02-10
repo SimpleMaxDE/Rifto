@@ -8,6 +8,17 @@
   const searchEl = $("search");
   const sortEl = $("sort");
 
+  // Modal refs
+  const modal = $("champModal");
+  const modalClose = $("modalClose");
+  const modalIcon = $("modalIcon");
+  const modalName = $("modalName");
+  const modalId = $("modalId");
+  const modalScore = $("modalScore");
+  const modalWin = $("modalWin");
+  const modalPick = $("modalPick");
+  const modalBan = $("modalBan");
+
   let allChamps = []; // normalized list
 
   function fmtPct(v) {
@@ -18,12 +29,10 @@
   }
 
   // Simple "MetaScore" (can be improved later)
-  // Idea: Winrate weight + Pickrate weight + Banrate weight
   function metaScore(c) {
     const win = Number(c.stats?.CN?.win ?? 0);
     const pick = Number(c.stats?.CN?.pick ?? 0);
     const ban = Number(c.stats?.CN?.ban ?? 0);
-    // Weighted: win matters most, then pick, then ban
     return (win * 1.2) + (pick * 0.9) + (ban * 0.5);
   }
 
@@ -36,6 +45,29 @@
       stats: c.stats ?? { CN: { win: 0, pick: 0, ban: 0 } },
     }));
   }
+
+  function openModal(c) {
+    modalIcon.src = c.icon;
+    modalIcon.alt = c.name;
+    modalName.textContent = c.name;
+    modalId.textContent = `#${c.hero_id}`;
+    modalScore.textContent = metaScore(c).toFixed(1);
+
+    modalWin.textContent = fmtPct(c.stats?.CN?.win ?? null);
+    modalPick.textContent = fmtPct(c.stats?.CN?.pick ?? null);
+    modalBan.textContent = fmtPct(c.stats?.CN?.ban ?? null);
+
+    modal.classList.remove("hidden");
+  }
+
+  function closeModal() {
+    modal.classList.add("hidden");
+  }
+
+  modalClose.addEventListener("click", closeModal);
+  modal.addEventListener("click", (e) => {
+    if (e.target.classList.contains("modalBackdrop")) closeModal();
+  });
 
   function render(list) {
     grid.innerHTML = "";
@@ -86,15 +118,7 @@
         </div>
       `;
 
-      // (Optional) later: open champion detail modal / smart ban
-      card.addEventListener("click", () => {
-        // For now: small toast-like status update
-        statusEl.textContent = `Ausgewählt: ${c.name} — Win ${fmtPct(win)} · Pick ${fmtPct(pick)} · Ban ${fmtPct(ban)}`;
-        statusEl.style.display = "block";
-        statusEl.classList.add("pulse");
-        setTimeout(() => statusEl.classList.remove("pulse"), 450);
-      });
-
+      card.addEventListener("click", () => openModal(c));
       frag.appendChild(card);
     }
 
@@ -133,8 +157,6 @@
   async function load() {
     try {
       statusEl.textContent = "Lade Daten…";
-
-      // cache-bust, damit GitHub Pages nicht alte meta.json cached
       const url = `./meta.json?ts=${Date.now()}`;
       const res = await fetch(url, { cache: "no-store" });
       if (!res.ok) throw new Error(`meta.json HTTP ${res.status}`);
@@ -157,7 +179,6 @@
     }
   }
 
-  // Events
   searchEl.addEventListener("input", applyFiltersAndRender);
   sortEl.addEventListener("change", applyFiltersAndRender);
 

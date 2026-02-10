@@ -41,6 +41,42 @@
     </section>
   </main>
 
+  <!-- Champion Detail Modal -->
+  <div id="champModal" class="modal hidden" role="dialog" aria-modal="true">
+    <div class="modalBackdrop"></div>
+    <div class="modalCard">
+      <button id="modalClose" class="modalClose" aria-label="Schließen">✕</button>
+
+      <div class="modalHeader">
+        <img id="modalIcon" class="modalIcon" alt="" />
+        <div class="modalTitle">
+          <div id="modalName" class="modalName">Champion</div>
+          <div id="modalId" class="modalId">#</div>
+        </div>
+        <div id="modalScore" class="modalScore">0.0</div>
+      </div>
+
+      <div class="modalStats">
+        <div class="mstat">
+          <div class="k">Winrate</div>
+          <div id="modalWin" class="v">–</div>
+        </div>
+        <div class="mstat">
+          <div class="k">Pickrate</div>
+          <div id="modalPick" class="v">–</div>
+        </div>
+        <div class="mstat">
+          <div class="k">Banrate</div>
+          <div id="modalBan" class="v">–</div>
+        </div>
+      </div>
+
+      <div class="modalHint">
+        🔜 Als Nächstes: <b>Smart Ban</b> & <b>Counter</b> für diesen Champion
+      </div>
+    </div>
+  </div>
+
   <script src="./app.js"></script>
 </body>
 </html>
