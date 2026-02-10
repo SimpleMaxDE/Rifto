@@ -1,15 +1,25 @@
 {
   "patch": "CN Live",
-  "lastUpdated": "2026-02-10 19:32",
-  "source": "Tencent hero_rank_list_v2 + hero_list.js (regex parsed)",
+  "lastUpdated": "2026-02-10 19:37",
+  "source": "DEBUG hero_list.js structure",
   "champions": [],
   "statsByName": {},
   "debug": {
-    "hero_list_count": 0,
-    "hero_list_sample": [],
-    "rank_rows_found": 851,
-    "dd_version": "16.3.1",
-    "wr_written": 0,
-    "note": "hero_list.js parsed 0 entries; file format likely changed -> we can adjust regex once we see its raw content structure."
+    "hero_list_len": 106481,
+    "hero_list_head": "{\"heroList\":{\"10001\":{\"heroId\":\"10001\",\"name\":\"\\u76d6\\u4f26\",\"title\":\"\\u5fb7\\u739b\\u897f\\u4e9a\\u4e4b\\u529b\",\"roles\":[\"\\u6218\\u58eb\"],\"lane\":\"\\u5355\\u4eba\\u8def\",\"intro\":\"\\u201c\\u5fb7\\u739b\\u897f\\u4e9a\\u4e4b\\u529b\\u201d\\u76d6\\u4f26\\u52a0\\u5165\\u4f60\\u7684\\u961f\\u4f0d\\n<color=#5A5A5A>\\u201c\\u4eba\\u5728\\u5854\\u5728\\u3002\\u201d<\\/color>\",\"avatar\":\"https:\\/\\/game.gtimg.cn\\/images\\/lgamem\\/act\\/lrlib\\/img\\/HeadIcon\\/H_S_10001.png\",\"card\":\"https:\\/\\/game.gtimg.cn\\/images\\/lgamem\\/act\\/lrlib\\/img\\/CardPictures\\/S_R_1000101.png\",\"poster\":\"https:\\/\\/game.gtimg.cn\\/images\\/lgamem\\/act\\/lrlib\\/img\\/Posters\\/Garen_0.jpg\",\"highlightprice\":\"5500\",\"couponprice\":\"450\",\"alias\":\"gailun\",\"tags\":\"\",\"searchkey\":\"\",\"isWeekFree\":\"0\",\"difficultyL\":\"1\",\"damage\":\"2\",\"surviveL\":\"3\",\"assistL\":\"1\"},\"10002\":{\"heroId\":\"10002\",\"name\":\"\\u4e9a\\u6258\\u514b\\u65af\",\"title\":\"\\u6697\\u88d4\\u5251\\u9b54\",\"roles\":[\"\\u6218\\u58eb\"],\"lane\":\"\\u5355\\u4eba\\u8def;\\u6253\\u91ce\",\"intro\":\"\\u201c\\u6697\\u88d4\\u5251\\u9b54\\u201d\\u4e9a\\u6258\\u514b\\u65af\\u52a0\\u5165\\u4f60\\u7684\\u961f\\u4f0d\\n<color=#5A5A5A>\\u201c\\u8046\\u542c\\uff0c\\u706d\\u7edd\\u7684\\uff0c\\u6b7b\\u5bc2\\u5427\\uff01\\u201d<\\/color>\",\"avatar\":\"https:\\/\\/game.gtimg.cn\\/images\\/lgame",
+    "hero_list_tail": "8fdc\\u53ea\\u6709\\u4e00\\u6247\\u4f20\\u9001\\u95e8\\u7684\\u8ddd\\u79bb\\u3002\\u201d\",\"avatar\":\"https:\\/\\/game.gtimg.cn\\/images\\/lgamem\\/act\\/lrlib\\/img\\/HeadIcon\\/H_S_10166.png\",\"card\":\"https:\\/\\/game.gtimg.cn\\/images\\/lgamem\\/act\\/lrlib\\/img\\/CardPictures\\/S_R_1016601.png\",\"poster\":\"https:\\/\\/game.gtimg.cn\\/images\\/lgamem\\/act\\/lrlib\\/img\\/Posters\\/Norra_0.jpg\",\"highlightprice\":\"5500\",\"couponprice\":\"450\",\"alias\":\"nuola\",\"tags\":\"new\",\"searchkey\":\"\",\"isWeekFree\":\"1\",\"difficultyL\":\"2\",\"damage\":\"3\",\"surviveL\":\"1\",\"assistL\":\"1\"}},\"version\":\"7.0\",\"fileName\":\"hero_list.js\",\"fileTime\":\"2026-02-05 11:27:37\"}",
+    "hit_hero_id": 0,
+    "hit_heroid": 0,
+    "hit_heroId": 135,
+    "hit_en_name": 0,
+    "hit_alias": 135,
+    "hit_name_colon": 0,
+    "hit_id_colon": 0,
+    "hit_array_open": 135,
+    "hit_object_open": 137,
+    "hit_fetch": 0,
+    "hit_xmlhttprequest": 0,
+    "hit_location_href": 0,
+    "rank_rows_found": 851
   }
 }
