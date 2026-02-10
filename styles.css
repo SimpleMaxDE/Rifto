@@ -35,6 +35,9 @@ body{
   background:var(--pill); border-radius:999px;
   color:var(--muted); font-size:12px;
 }
+.pillMini{ padding:6px 10px; font-size:12px; }
+.pillGhost{ background: transparent; }
+.lanePills{ display:flex; gap:8px; align-items:center; margin-top:6px; flex-wrap:wrap; }
 .wrap{max-width:1100px; margin:0 auto; padding:16px;}
 .panel{
   background: rgba(255,255,255,.02);

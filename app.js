@@ -11,7 +11,8 @@ const grid=$("grid"),statusEl=$("status"),searchEl=$("search"),sortEl=$("sort");
 
 // META modal
 const modal=$("champModal"),modalClose=$("modalClose");
-const modalIcon=$("modalIcon"),modalName=$("modalName"),modalLane=$("modalLane"),modalTier=$("modalTier");
+const modalIcon=$("modalIcon"),modalName=$("modalName"),modalTier=$("modalTier");
+const modalMainLanePill=$("modalMainLanePill"),modalSelectedLanePill=$("modalSelectedLanePill");
 const modalWin=$("modalWin"),modalPick=$("modalPick"),modalBan=$("modalBan");
 const modalBans=$("modalBans"),modalLaneTiers=$("modalLaneTiers"),modalRoleSelect=$("modalRoleSelect"),offRole=$("offRole"),modalTrendHint=$("modalTrendHint");
 
@@ -383,10 +384,17 @@ function openMetaModal(champ){
 }
 function updateModalForRole(champ){
   const role=modalRoleSelect.value;
+  // Header pills (cleaner than "Main Lane: ...")
+  if(modalMainLanePill) modalMainLanePill.textContent = `Main: ${mainLaneText(champ.hero_id)}`;
+  if(modalSelectedLanePill) modalSelectedLanePill.textContent = `Lane: ${role}`;
+
   const roles=rolesForHero(champ.hero_id);
   offRole.classList.toggle("hidden",!(roles.length&&!roles.includes(role)));
+  // Tier should react to the selected lane (On‑meta vs Off‑meta)
+  const map = laneTierMap(champ);
+  const laneTier = map.find(x=>x.lane===role)?.tier;
   const th=thresholdsForRole(role);
-  const tier=tierForScore(metaScore(champ),th);
+  const tier = laneTier || tierForScore(metaScore(champ),th);
   modalTier.textContent=tier;modalTier.className=`tierBadge ${tierClass(tier)}`;
   renderCounterList(modalBans, smartTop3(champ.name, role).map(x=>({...x,why:x.why})), true);
   renderLaneTiers(modalLaneTiers, laneTierMap(champ));
