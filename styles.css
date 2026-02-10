@@ -175,3 +175,5 @@ body{
 .cName{ font-weight:900; }
 .cWhy{ color:var(--muted); font-size:12px; margin-top:2px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
 .modalHint{ margin-top:14px; color:var(--muted); font-size:13px; line-height:1.35; }
+
+#modalTrendHint{border-top:1px solid var(--line); padding-top:12px}
