@@ -6,13 +6,13 @@
   <title>RIFTO</title>
   <link rel="manifest" href="./manifest.json">
   <meta name="theme-color" content="#0b1220">
-  <link rel="stylesheet" href="./styles.css?v=11" />
+  <link rel="stylesheet" href="./styles.css?v=14" />
 </head>
 <body>
   <header class="topbar">
     <div class="brand">
       <div class="logo">RIFTO</div>
-      <div class="sub">Wild Rift Meta – Draft Helper</div>
+      <div class="sub">Wild Rift – Draft Helper</div>
     </div>
     <div class="meta">
       <div class="pill" id="patchPill">Patch: –</div>
@@ -21,8 +21,16 @@
     </div>
   </header>
 
+  <nav class="tabs" aria-label="Navigation">
+    <button class="tab active" data-tab="meta">META</button>
+    <button class="tab" data-tab="draft">DRAFT</button>
+    <button class="tab" data-tab="matchup">MATCHUP</button>
+    <button class="tab" data-tab="tierlist">TIERLIST</button>
+  </nav>
+
   <main class="wrap">
-    <section class="panel">
+    <!-- META VIEW -->
+    <section id="viewMeta" class="panel">
       <div class="panelHead">
         <h2>Champions</h2>
         <div class="controls">
@@ -36,13 +44,72 @@
           </select>
         </div>
       </div>
-
       <div id="status" class="status">Lade Daten…</div>
       <div id="grid" class="grid" aria-live="polite"></div>
     </section>
+
+    <!-- DRAFT VIEW -->
+    <section id="viewDraft" class="panel hidden">
+      <div class="panelHead">
+        <h2>Draft Mode</h2>
+        <div class="controls">
+          <button id="btnPickMe" class="btn">🎯 Meinen Champ wählen</button>
+          <select id="draftRole" class="select">
+            <option value="Baron">Baron</option>
+            <option value="Jungle">Jungle</option>
+            <option value="Mid">Mid</option>
+            <option value="ADC">ADC</option>
+            <option value="Support">Support</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="draftPhaseRow">
+        <button class="phase active" data-phase="enemy_fp">🎯 Enemy FP</button>
+        <button class="phase" data-phase="my_fp">⭐ My FP</button>
+        <button class="phase" data-phase="mid">🔄 Mid Draft</button>
+        <button class="phase" data-phase="late">🛑 Late Draft</button>
+      </div>
+
+      <div class="draftGrid">
+        <div class="draftCard">
+          <div class="draftCardHead">Dein Pick</div>
+          <div id="myPickCard" class="pickCard empty">
+            <div class="emptyText">Kein Champion gewählt</div>
+          </div>
+        </div>
+
+        <div class="draftCard">
+          <div class="draftCardHead">Enemy Picks (optional)</div>
+          <div class="enemyRow">
+            <button id="enemySlot1" class="enemySlot">+ Slot 1</button>
+            <button id="enemySlot2" class="enemySlot">+ Slot 2</button>
+          </div>
+          <div class="tinyNote">Tippe auf einen Slot, um einen Champion zu setzen (gleich nochmal tippen = löschen).</div>
+        </div>
+      </div>
+
+      <div class="draftResult">
+        <div class="secHead">
+          <div class="secTitle">Smart Ban – Top 3</div>
+          <div id="draftContext" class="secSub">–</div>
+        </div>
+        <div id="draftBans" class="counterList"></div>
+      </div>
+    </section>
+
+    <section id="viewMatchup" class="panel hidden">
+      <div class="panelHead"><h2>Matchup</h2></div>
+      <div class="status">Kommt als Nächstes.</div>
+    </section>
+
+    <section id="viewTierlist" class="panel hidden">
+      <div class="panelHead"><h2>Tierlist</h2></div>
+      <div class="status">Kommt als Nächstes.</div>
+    </section>
   </main>
 
-  <!-- Champion Detail Modal -->
+  <!-- META Champion Detail Modal -->
   <div id="champModal" class="modal hidden" role="dialog" aria-modal="true">
     <div class="modalBackdrop"></div>
     <div class="modalCard">
@@ -95,12 +162,25 @@
         </div>
       </div>
 
-      <div class="modalHint" id="modalTrendHint">
-        Trend: –
-      </div>
+      <div class="modalHint" id="modalTrendHint">Trend: –</div>
     </div>
   </div>
 
-  <script src="./app.js?v=11"></script>
+  <!-- PICKER MODAL -->
+  <div id="picker" class="modal hidden" role="dialog" aria-modal="true">
+    <div class="modalBackdrop"></div>
+    <div class="modalCard">
+      <button id="pickerClose" class="modalClose" aria-label="Schließen">✕</button>
+      <div class="panelHead" style="padding:0 0 12px 0; border-bottom:none">
+        <h2 style="margin:0">Champion auswählen</h2>
+        <div class="controls">
+          <input id="pickerSearch" class="input" placeholder="Suchen…" autocomplete="off" />
+        </div>
+      </div>
+      <div id="pickerGrid" class="grid" style="padding:0"></div>
+    </div>
+  </div>
+
+  <script src="./app.js?v=14"></script>
 </body>
 </html>
