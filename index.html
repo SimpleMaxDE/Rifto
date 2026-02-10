@@ -6,13 +6,13 @@
   <title>RIFTO</title>
   <link rel="manifest" href="./manifest.json">
   <meta name="theme-color" content="#0b1220">
-  <link rel="stylesheet" href="./styles.css?v=8" />
+  <link rel="stylesheet" href="./styles.css?v=9" />
 </head>
 <body>
   <header class="topbar">
     <div class="brand">
       <div class="logo">RIFTO</div>
-      <div class="sub">OP.GG-Style Meta für Wild Rift</div>
+      <div class="sub">Wild Rift Meta – Draft Helper</div>
     </div>
     <div class="meta">
       <div class="pill" id="patchPill">Patch: –</div>
@@ -27,7 +27,7 @@
         <div class="controls">
           <input id="search" class="input" placeholder="Champion suchen…" autocomplete="off" />
           <select id="sort" class="select">
-            <option value="meta">Sort: MetaScore</option>
+            <option value="tier">Sort: Tier</option>
             <option value="win">Sort: Winrate</option>
             <option value="pick">Sort: Pickrate</option>
             <option value="ban">Sort: Banrate</option>
@@ -50,21 +50,24 @@
       <div class="modalHeader">
         <img id="modalIcon" class="modalIcon" alt="" />
         <div class="modalTitle">
-          <div id="modalName" class="modalName">Champion</div>
+          <div class="modalNameRow">
+            <div id="modalName" class="modalName">Champion</div>
+            <span id="modalTier" class="tierBadge tierC">C</span>
+          </div>
           <div id="modalId" class="modalId">#</div>
 
           <div class="modalRoleRow">
             <span class="k">Rolle:</span>
             <select id="modalRoleSelect" class="select selectSmall" aria-label="Rolle wählen">
               <option value="Baron">Baron</option>
-              <option value="Jungle" selected>Jungle</option>
+              <option value="Jungle">Jungle</option>
               <option value="Mid">Mid</option>
               <option value="ADC">ADC</option>
               <option value="Support">Support</option>
             </select>
+            <span id="offRole" class="warn hidden">Off-role</span>
           </div>
         </div>
-        <div id="modalScore" class="modalScore">0.0</div>
       </div>
 
       <div class="modalStats">
@@ -82,21 +85,30 @@
         </div>
       </div>
 
-      <div class="modalSection">
-        <div class="secHead">
-          <div class="secTitle">Hard Counter (Rolle)</div>
-          <div class="secSub">Auto: Rolle + Meta (Overwrites optional)</div>
+      <div class="twoCol">
+        <div class="modalSection">
+          <div class="secHead">
+            <div class="secTitle">Smart Ban (Rolle)</div>
+            <div class="secSub">Banne starke Threats für DEINE Rolle</div>
+          </div>
+          <div id="modalBans" class="counterList"></div>
         </div>
-        <div id="modalCounters" class="counterList"></div>
-        <div class="tinyNote">Hinweis: Ohne echte Matchup-Daten ist das eine <b>smarte Heuristik</b> (Rolle + Meta). Wir bauen als Nächstes “echte Matchups” per Overrides aus.</div>
+
+        <div class="modalSection">
+          <div class="secHead">
+            <div class="secTitle">Hard Counter (Rolle)</div>
+            <div class="secSub">Wenn Gegner dich countern will</div>
+          </div>
+          <div id="modalCounters" class="counterList"></div>
+        </div>
       </div>
 
       <div class="modalHint">
-        🔜 Als Nächstes: <b>Smart Ban</b> (Top 3) + <b>Build/Runes</b>
+        Tipp: Wenn du Off-role spielst, zeige ich dir <b>Rollen-Tier</b> + passende Bans für die Lane.
       </div>
     </div>
   </div>
 
-  <script src="./app.js?v=8"></script>
+  <script src="./app.js?v=9"></script>
 </body>
 </html>
