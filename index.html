@@ -6,7 +6,7 @@
   <title>RIFTO</title>
   <link rel="manifest" href="./manifest.json">
   <meta name="theme-color" content="#0b1220">
-  <link rel="stylesheet" href="./styles.css?v=9" />
+  <link rel="stylesheet" href="./styles.css?v=10" />
 </head>
 <body>
   <header class="topbar">
@@ -71,25 +71,16 @@
       </div>
 
       <div class="modalStats">
-        <div class="mstat">
-          <div class="k">Winrate</div>
-          <div id="modalWin" class="v">–</div>
-        </div>
-        <div class="mstat">
-          <div class="k">Pickrate</div>
-          <div id="modalPick" class="v">–</div>
-        </div>
-        <div class="mstat">
-          <div class="k">Banrate</div>
-          <div id="modalBan" class="v">–</div>
-        </div>
+        <div class="mstat"><div class="k">Winrate</div><div id="modalWin" class="v">–</div></div>
+        <div class="mstat"><div class="k">Pickrate</div><div id="modalPick" class="v">–</div></div>
+        <div class="mstat"><div class="k">Banrate</div><div id="modalBan" class="v">–</div></div>
       </div>
 
       <div class="twoCol">
         <div class="modalSection">
           <div class="secHead">
             <div class="secTitle">Smart Ban (Rolle)</div>
-            <div class="secSub">Banne starke Threats für DEINE Rolle</div>
+            <div class="secSub">Meta + Champion-Type (nicht nur Banrate)</div>
           </div>
           <div id="modalBans" class="counterList"></div>
         </div>
@@ -97,18 +88,18 @@
         <div class="modalSection">
           <div class="secHead">
             <div class="secTitle">Hard Counter (Rolle)</div>
-            <div class="secSub">Wenn Gegner dich countern will</div>
+            <div class="secSub">Threats gegen deinen Pick</div>
           </div>
           <div id="modalCounters" class="counterList"></div>
         </div>
       </div>
 
       <div class="modalHint">
-        Tipp: Wenn du Off-role spielst, zeige ich dir <b>Rollen-Tier</b> + passende Bans für die Lane.
+        “Smart” heißt: <b>Rolle</b> + <b>Meta</b> + <b>Archetypen</b> (z.B. Assassins vs ADC, Point&Click CC vs Auto-Carry).
       </div>
     </div>
   </div>
 
-  <script src="./app.js?v=9"></script>
+  <script src="./app.js?v=10"></script>
 </body>
 </html>

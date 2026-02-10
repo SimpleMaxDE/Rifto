@@ -28,8 +28,12 @@
   const HERO_LIST_URL = "https://game.gtimg.cn/images/lgamem/act/lrlib/js/heroList/hero_list.js";
 
   let allChamps = [];
-  let heroDb = {};            // hero_id -> raw hero info from Tencent
+  let heroDb = {};
   let currentModalChamp = null;
+
+  // Tag DB (champion-type rules)
+  let tagDb = {};
+  let defaultWeakByRole = {};
 
   function fmtPct(v) {
     if (v === null || v === undefined) return "–";
@@ -70,7 +74,6 @@
     const lane = String(h.lane ?? "").toLowerCase();
     const roles = Array.isArray(h.roles) ? h.roles.map(r => String(r).toLowerCase()) : [];
 
-    // CN keywords
     if (lane.includes("打野")) out.add("Jungle");
     if (lane.includes("中路")) out.add("Mid");
     if (lane.includes("下路")) out.add("ADC");
@@ -99,7 +102,6 @@
     const pool = allChamps.filter(c => rolesForHero(c.hero_id).includes(role));
     const list = (pool.length ? pool : allChamps).map(c => metaScore(c)).sort((a,b)=>b-a);
     const q = (p) => list[Math.floor(p * (list.length-1))] ?? 0;
-    // Top 5% SS, next 10% S, next 20% A, next 30% B
     return { ss: q(0.05), s: q(0.15), a: q(0.35), b: q(0.65) };
   }
 
@@ -107,77 +109,91 @@
     return tier === "SS" ? "tierSS" : tier === "S" ? "tierS" : tier === "A" ? "tierA" : tier === "B" ? "tierB" : "tierC";
   }
 
-  // Smart Ban for a role: prioritize high threat in that role
-  // banScore = ban*1.0 + pick*0.7 + win*0.5 + metaScore*0.05
+  // --- Tag helpers ---
+  function champTypes(name) {
+    const t = tagDb?.[name]?.type;
+    return Array.isArray(t) ? t : [];
+  }
+
+  function pickedWeakVs(pickedName, role) {
+    const explicit = tagDb?.[pickedName]?.weak_vs;
+    if (Array.isArray(explicit) && explicit.length) return explicit;
+    return defaultWeakByRole?.[role]?.weak_vs || [];
+  }
+
+  function tagMatchBonus(pickedName, role, candidateName) {
+    const weaknesses = pickedWeakVs(pickedName, role);
+    if (!weaknesses.length) return 0;
+
+    const types = champTypes(candidateName);
+    let hits = 0;
+    for (const w of weaknesses) if (types.includes(w)) hits++;
+
+    // bonus per matching weakness
+    return hits * 15; // strong influence
+  }
+
+  function baseThreatScore(c) {
+    const win = Number(c.stats?.CN?.win ?? 0);
+    const pick = Number(c.stats?.CN?.pick ?? 0);
+    const ban = Number(c.stats?.CN?.ban ?? 0);
+    // threat = seen often + wins + banned
+    return (ban*1.0) + (pick*0.7) + (win*0.5);
+  }
+
+  // Smart Ban = role pool + meta threat + tag matching vs your pick
   function smartBansForRole(picked, role, limit=3) {
     const pool = allChamps.filter(c => c.hero_id !== picked.hero_id);
     const rolePool = pool.filter(c => rolesForHero(c.hero_id).includes(role));
     const candidates = rolePool.length ? rolePool : pool;
 
     const scored = candidates.map(c => {
-      const win = Number(c.stats?.CN?.win ?? 0);
-      const pick = Number(c.stats?.CN?.pick ?? 0);
-      const ban = Number(c.stats?.CN?.ban ?? 0);
       const ms = metaScore(c);
-      const score = (ban*1.0) + (pick*0.7) + (win*0.5) + (ms*0.05);
+      const base = baseThreatScore(c) + (ms*0.05);
+      const bonus = tagMatchBonus(picked.name, role, c.name);
+      const score = base + bonus;
 
-      // reasons: role oriented
-      let why = `Starker ${role}-Pick im Meta.`;
-      if (ban >= 25) why = `Sehr oft gebannt (${ban.toFixed(2)}%): höchster Threat in ${role}.`;
+      const win = Number(c.stats?.CN?.win ?? 0);
+      const pickr = Number(c.stats?.CN?.pick ?? 0);
+      const banr = Number(c.stats?.CN?.ban ?? 0);
+
+      let why = `Starker ${role}-Threat im aktuellen Meta.`;
+      if (bonus > 0) {
+        const w = pickedWeakVs(picked.name, role).slice(0,2).join(", ");
+        why = `Passt als Counter-Typ (${w}) + stark im Meta.`;
+      } else if (banr >= 25) why = `Sehr oft gebannt (${banr.toFixed(2)}%): höchster Threat in ${role}.`;
       else if (win >= 54) why = `Hohe Winrate (${win.toFixed(2)}%): snowballt zuverlässig.`;
-      else if (pick >= 12) why = `Sehr häufig gepickt (${pick.toFixed(2)}%): du siehst ihn oft.`;
+      else if (pickr >= 12) why = `Sehr häufig gepickt (${pickr.toFixed(2)}%): du siehst ihn oft.`;
 
-      return { name:c.name, icon:c.icon, score, why, win, pick, ban };
+      return { name:c.name, icon:c.icon, score, why };
     });
 
     scored.sort((a,b)=>b.score-a.score);
     return scored.slice(0, limit);
   }
 
-  // "Hard counter" shown as: if enemy wants to counter YOU in this role,
-  // we show high-threat picks in the same role (until we have matchup data).
+  // Hard Counter list = same as smart bans but phrased
   function hardCountersForRole(picked, role, limit=3) {
-    // Similar to bans but phrased as counter threats
     const list = smartBansForRole(picked, role, limit);
-    return list.map(x => ({...x, why: x.why.replace("Starker", "Gefährlicher")}));
+    return list.map(x => ({...x, why: x.why.replace("Threat", "Counter-Threat")}));
   }
 
-  function renderPickList(targetEl, list, thresholds, label) {
+  function renderPickList(targetEl, list, thresholds) {
     targetEl.innerHTML = "";
     for (const c of list) {
-      const tier = tierForScore(metaScore(getChampionByName(c.name)), thresholds);
+      const champ = getChampionByName(c.name);
+      const t = champ ? tierForScore(metaScore(champ), thresholds) : "C";
       const el = document.createElement("div");
       el.className = "counterItem";
       el.innerHTML = `
         <img class="cIcon" src="${c.icon}" alt="${c.name}" loading="lazy" />
         <div class="cMain">
-          <div class="cName">${c.name} <span class="tierBadge ${tierClass(tier)}" style="margin-left:8px">${tier}</span></div>
+          <div class="cName">${c.name} <span class="tierBadge ${tierClass(t)}" style="margin-left:8px">${t}</span></div>
           <div class="cWhy">${c.why}</div>
         </div>
       `;
       targetEl.appendChild(el);
     }
-  }
-
-  function openModal(c) {
-    currentModalChamp = c;
-
-    modalIcon.src = c.icon;
-    modalIcon.alt = c.name;
-    modalName.textContent = c.name;
-    modalId.textContent = `#${c.hero_id}`;
-
-    modalWin.textContent = fmtPct(c.stats?.CN?.win ?? null);
-    modalPick.textContent = fmtPct(c.stats?.CN?.pick ?? null);
-    modalBan.textContent = fmtPct(c.stats?.CN?.ban ?? null);
-
-    // Choose default role: champion's typical role if we know it, else Jungle
-    const roles = rolesForHero(c.hero_id);
-    const defaultRole = roles[0] || "Jungle";
-    modalRoleSelect.value = defaultRole;
-
-    updateModalForRole();
-    modal.classList.remove("hidden");
   }
 
   function updateModalForRole() {
@@ -195,8 +211,27 @@
     const bans = smartBansForRole(currentModalChamp, role, 3);
     const counters = hardCountersForRole(currentModalChamp, role, 3);
 
-    renderPickList(modalBans, bans, thresholds, "Ban");
-    renderPickList(modalCounters, counters, thresholds, "Counter");
+    renderPickList(modalBans, bans, thresholds);
+    renderPickList(modalCounters, counters, thresholds);
+  }
+
+  function openModal(c) {
+    currentModalChamp = c;
+
+    modalIcon.src = c.icon;
+    modalIcon.alt = c.name;
+    modalName.textContent = c.name;
+    modalId.textContent = `#${c.hero_id}`;
+
+    modalWin.textContent = fmtPct(c.stats?.CN?.win ?? null);
+    modalPick.textContent = fmtPct(c.stats?.CN?.pick ?? null);
+    modalBan.textContent = fmtPct(c.stats?.CN?.ban ?? null);
+
+    const roles = rolesForHero(c.hero_id);
+    modalRoleSelect.value = roles[0] || "Jungle";
+
+    updateModalForRole();
+    modal.classList.remove("hidden");
   }
 
   function closeModal(){ modal.classList.add("hidden"); }
@@ -215,7 +250,6 @@
     statusEl.style.display = "none";
     const frag = document.createDocumentFragment();
 
-    // Default tier role: Jungle (global view). We can add a global role filter later.
     const thresholds = thresholdsForRole("Jungle");
 
     for (const c of list) {
@@ -263,8 +297,7 @@
       if (sort === "win") return (b.stats?.CN?.win ?? 0) - (a.stats?.CN?.win ?? 0);
       if (sort === "pick") return (b.stats?.CN?.pick ?? 0) - (a.stats?.CN?.pick ?? 0);
       if (sort === "ban") return (b.stats?.CN?.ban ?? 0) - (a.stats?.CN?.ban ?? 0);
-      // tier: use metaScore desc
-      return metaScore(b) - metaScore(a);
+      return metaScore(b) - metaScore(a); // tier
     });
 
     render(list);
@@ -287,12 +320,22 @@
 
       allChamps = normalizeMeta(meta);
 
-      // Load Tencent hero_list for role/lane info (client-side, always up to date)
+      // Tencent hero_list (roles/lane)
       try {
         const heroList = await loadJson(`${HERO_LIST_URL}?ts=${ts}`);
         heroDb = (heroList && heroList.heroList) ? heroList.heroList : {};
       } catch (e) {
         heroDb = {};
+      }
+
+      // Tag DB (local file in your repo)
+      try {
+        const tags = await loadJson(`./champ_tags.json?ts=${ts}`);
+        tagDb = tags || {};
+        defaultWeakByRole = tagDb._defaults || {};
+      } catch (e) {
+        tagDb = {};
+        defaultWeakByRole = {};
       }
 
       statusEl.textContent = `Geladen: ${allChamps.length} Champions`;

@@ -1,0 +1,245 @@
+{
+  "_defaults": {
+    "ADC": {
+      "weak_vs": [
+        "assassin_burst",
+        "hard_engage",
+        "pointclick_cc"
+      ]
+    },
+    "Mid": {
+      "weak_vs": [
+        "assassin_burst",
+        "hard_engage",
+        "pointclick_cc"
+      ]
+    },
+    "Jungle": {
+      "weak_vs": [
+        "pointclick_cc",
+        "hard_cc"
+      ]
+    },
+    "Baron": {
+      "weak_vs": [
+        "kite_poke",
+        "true_damage",
+        "anti_tank"
+      ]
+    },
+    "Support": {
+      "weak_vs": [
+        "poke",
+        "anti_engage"
+      ]
+    }
+  },
+  "Rammus": {
+    "type": [
+      "tank",
+      "pointclick_cc",
+      "anti_auto",
+      "anti_carry"
+    ]
+  },
+  "Vi": {
+    "type": [
+      "fighter",
+      "pointclick_cc",
+      "hard_cc",
+      "lockdown"
+    ]
+  },
+  "Jax": {
+    "type": [
+      "duelist",
+      "anti_auto",
+      "split"
+    ]
+  },
+  "Nautilus": {
+    "type": [
+      "tank",
+      "hard_engage",
+      "pointclick_cc",
+      "hard_cc"
+    ]
+  },
+  "Malphite": {
+    "type": [
+      "tank",
+      "hard_engage",
+      "hard_cc",
+      "anti_ad"
+    ]
+  },
+  "Leona": {
+    "type": [
+      "support",
+      "hard_engage",
+      "hard_cc"
+    ]
+  },
+  "Alistar": {
+    "type": [
+      "support",
+      "hard_engage",
+      "hard_cc",
+      "disrupt"
+    ]
+  },
+  "Thresh": {
+    "type": [
+      "support",
+      "pick",
+      "hard_cc"
+    ]
+  },
+  "Zed": {
+    "type": [
+      "assassin_burst",
+      "snowball"
+    ]
+  },
+  "Kha'Zix": {
+    "type": [
+      "assassin_burst",
+      "snowball"
+    ]
+  },
+  "Evelynn": {
+    "type": [
+      "assassin_burst",
+      "stealth"
+    ]
+  },
+  "Fizz": {
+    "type": [
+      "assassin_burst"
+    ]
+  },
+  "Akali": {
+    "type": [
+      "assassin_burst"
+    ]
+  },
+  "Katarina": {
+    "type": [
+      "assassin_reset",
+      "aoe_burst"
+    ]
+  },
+  "Lucian": {
+    "type": [
+      "adc",
+      "lane_bully"
+    ]
+  },
+  "Draven": {
+    "type": [
+      "adc",
+      "lane_bully",
+      "snowball"
+    ]
+  },
+  "Caitlyn": {
+    "type": [
+      "adc",
+      "poke",
+      "range"
+    ]
+  },
+  "Jhin": {
+    "type": [
+      "adc",
+      "pick",
+      "burst"
+    ]
+  },
+  "Vayne": {
+    "type": [
+      "adc",
+      "true_damage",
+      "anti_tank"
+    ]
+  },
+  "Kai'Sa": {
+    "type": [
+      "adc",
+      "dive",
+      "burst"
+    ]
+  },
+  "Orianna": {
+    "type": [
+      "mage_control",
+      "aoe"
+    ]
+  },
+  "Syndra": {
+    "type": [
+      "mage_burst",
+      "pick"
+    ]
+  },
+  "Annie": {
+    "type": [
+      "mage_burst",
+      "pointclick_cc"
+    ]
+  },
+  "Lux": {
+    "type": [
+      "mage_poke",
+      "pick"
+    ]
+  },
+  "Ziggs": {
+    "type": [
+      "mage_poke"
+    ]
+  },
+  "Ahri": {
+    "type": [
+      "mage_pick",
+      "mobility"
+    ]
+  },
+  "Garen": {
+    "type": [
+      "fighter_tank",
+      "silence"
+    ]
+  },
+  "Fiora": {
+    "type": [
+      "duelist",
+      "true_damage"
+    ]
+  },
+  "Darius": {
+    "type": [
+      "juggernaut",
+      "snowball"
+    ]
+  },
+  "Camille": {
+    "type": [
+      "fighter",
+      "pick",
+      "dive"
+    ]
+  },
+  "Sett": {
+    "type": [
+      "fighter",
+      "hard_engage"
+    ]
+  },
+  "Renekton": {
+    "type": [
+      "fighter",
+      "lane_bully"
+    ]
+  }
+}
