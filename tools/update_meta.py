@@ -1,131 +1,207 @@
-import json
-import requests
-from datetime import datetime, timezone
+// RIFTO robust app.js (self-healing DOM + clear logs)
 
-# --- Sources ---
-# Riot page-data URLs change sometimes -> try multiple
-RIOT_PAGE_DATA_CANDIDATES = [
-    "https://wildrift.leagueoflegends.com/page-data/en-gb/champions/page-data.json",
-    "https://wildrift.leagueoflegends.com/page-data/en-us/champions/page-data.json",
-    "https://wildrift.leagueoflegends.com/page-data/de-de/champions/page-data.json",
-]
+const state = {
+  champs: [],
+  meta: {},
+  selectedChamp: ""
+};
 
-# Tencent CN stats base (may need params; still optional)
-CN_BASE = "https://mlol.qt.qq.com/go/lgame_battle_info/hero_rank_list_v2"
-
-# DDragon for icons (stable)
-DD_VERSIONS = "https://ddragon.leagueoflegends.com/api/versions.json"
-DD_CHAMPS = "https://ddragon.leagueoflegends.com/cdn/{v}/data/en_US/champion.json"
-
-HEADERS_CN = {
-    "User-Agent": "Mozilla/5.0 (RIFTO personal project)",
-    "Referer": "https://lolm.qq.com/",
+function $(id) {
+  return document.getElementById(id);
 }
 
-def safe_get_json(url, headers=None, timeout=45):
-    try:
-        r = requests.get(url, headers=headers, timeout=timeout)
-        if r.status_code != 200:
-            return None, f"{r.status_code} {r.reason}"
-        return r.json(), None
-    except Exception as e:
-        return None, str(e)
+function ensureRoot() {
+  // We try to find existing containers by common IDs.
+  // If they don't exist, we create a minimal UI so the page always reacts.
+  let select = $("champSelect") || $("championSelect") || $("champ-select");
+  let smart = $("smartBan") || $("smart-ban") || $("smartban");
+  let tier = $("tierList") || $("tier-list") || $("tierlist");
 
-def get_dd_version():
-    data, err = safe_get_json(DD_VERSIONS)
-    if not data:
-        return "14.1.1", f"dd_versions_error={err}"
-    return (data[0] if data else "14.1.1"), None
+  const host = document.querySelector("main") || document.body;
 
-def get_dd_name_to_id(version):
-    data, err = safe_get_json(DD_CHAMPS.format(v=version))
-    if not data:
-        return {}, f"dd_champs_error={err}"
-    out = {}
-    for champ in data["data"].values():
-        out[champ["name"]] = champ["id"]
-    # common aliases
-    out.setdefault("Wukong", "MonkeyKing")
-    out.setdefault("Dr. Mundo", "DrMundo")
-    out.setdefault("Nunu & Willump", "Nunu")
-    return out, None
+  if (!select) {
+    const wrap = document.createElement("div");
+    wrap.style.margin = "12px 0";
+    wrap.innerHTML = `
+      <label style="display:block;opacity:.9;margin-bottom:6px;">Champion wählen</label>
+      <select id="champSelect" style="width:100%;padding:10px;border-radius:12px;"></select>
+    `;
+    host.prepend(wrap);
+    select = $("champSelect");
+    console.log("[RIFTO] champSelect created");
+  } else if (!select.id) {
+    select.id = "champSelect";
+  } else if (select.id !== "champSelect") {
+    // normalize to our ID
+    select.id = "champSelect";
+  }
 
-def get_riot_champ_names(debug):
-    for url in RIOT_PAGE_DATA_CANDIDATES:
-        data, err = safe_get_json(url)
-        if data:
-            nodes = (
-                data.get("result", {})
-                    .get("data", {})
-                    .get("allContentstackChampion", {})
-                    .get("nodes", [])
-            )
-            names = []
-            for n in nodes:
-                name = n.get("name")
-                if name and name not in names:
-                    names.append(name)
-            debug["riot_page_data_used"] = url
-            return names
-        else:
-            debug.setdefault("riot_page_data_errors", []).append({ "url": url, "error": err })
-    return []
+  if (!smart) {
+    smart = document.createElement("div");
+    smart.id = "smartBan";
+    smart.style.marginTop = "16px";
+    host.appendChild(smart);
+    console.log("[RIFTO] smartBan created");
+  } else if (smart.id !== "smartBan") {
+    smart.id = "smartBan";
+  }
 
-def main():
-    now = datetime.now(timezone.utc).astimezone().strftime("%Y-%m-%d %H:%M")
-    debug = {}
+  if (!tier) {
+    tier = document.createElement("div");
+    tier.id = "tierList";
+    tier.style.marginTop = "16px";
+    host.appendChild(tier);
+    console.log("[RIFTO] tierList created");
+  } else if (tier.id !== "tierList") {
+    tier.id = "tierList";
+  }
 
-    dd_version, ddv_err = get_dd_version()
-    if ddv_err:
-        debug["dd_version_error"] = ddv_err
+  return { select, smart, tier };
+}
 
-    dd_name_to_id, dd_err = get_dd_name_to_id(dd_version)
-    if dd_err:
-        debug["dd_champs_error"] = dd_err
+async function loadJSON(path) {
+  const res = await fetch(path, { cache: "no-store" });
+  if (!res.ok) throw new Error(`${path} -> ${res.status} ${res.statusText}`);
+  return await res.json();
+}
 
-    # 1) Champion list (try Riot; if fails, fallback to DDragon names)
-    champ_names = get_riot_champ_names(debug)
-    if not champ_names:
-        # fallback: use DDragon names (may include non-WR champs, but app won't be empty)
-        champ_names = list(dd_name_to_id.keys())
-        debug["fallback"] = "Used DDragon champion names (Riot page-data unavailable)"
+function calcMetaScore(s = {}) {
+  const win = Number(s.win ?? 0);
+  const pick = Number(s.pick ?? 0);
+  const ban = Number(s.ban ?? 0);
+  if (!win && !pick && !ban) return 0;
+  return (win * 0.55) + (pick * 0.25) + (ban * 0.20);
+}
 
-    # 2) Build champion objects + icons
-    champions = []
-    for name in champ_names:
-        cid = dd_name_to_id.get(name)
-        icon = ""
-        if cid:
-            icon = f"https://ddragon.leagueoflegends.com/cdn/{dd_version}/img/champion/{cid}.png"
-        champions.append({
-            "name": name,
-            "icon": icon,
-            "positions": [],
-            "stats": {}  # CN stats can be added later
-        })
+function renderSelect() {
+  const select = $("champSelect");
+  if (!select) return;
 
-    # 3) Try Tencent CN (optional; don't fail workflow)
-    cn_data, cn_err = safe_get_json(CN_BASE, headers=HEADERS_CN)
-    if cn_err:
-        debug["tencent_error"] = cn_err
-    else:
-        # We keep raw keys for debugging; full parsing comes next once we have the full query URL
-        if isinstance(cn_data, dict):
-            debug["tencent_keys"] = list(cn_data.keys())[:30]
-        else:
-            debug["tencent_type"] = str(type(cn_data))
+  select.innerHTML = `<option value="">Champion wählen…</option>`;
+  state.champs.forEach(c => {
+    const opt = document.createElement("option");
+    opt.value = c.name;
+    opt.textContent = c.name;
+    select.appendChild(opt);
+  });
 
-    meta = {
-        "patch": "CN Live (safe mode)",
-        "lastUpdated": now,
-        "source": "Riot page-data (when available) + DDragon (icons) + Tencent (optional)",
-        "ddragonVersion": dd_version,
-        "champions": champions,
-        "debug": debug
-    }
+  // IMPORTANT: bind change handler
+  select.onchange = (e) => {
+    state.selectedChamp = e.target.value;
+    console.log("[RIFTO] Selected:", state.selectedChamp);
+    renderSmartBan();
+  };
+}
 
-    with open("meta.json", "w", encoding="utf-8") as f:
-        json.dump(meta, f, ensure_ascii=False, indent=2)
+function renderTierList() {
+  const box = $("tierList");
+  if (!box) return;
 
-if __name__ == "__main__":
-    main()
+  const sorted = [...state.champs].sort((a, b) => (b.metaScore || 0) - (a.metaScore || 0));
+
+  box.innerHTML = `
+    <h3 style="margin:0 0 10px 0;">Tier List (MetaScore)</h3>
+    <div style="display:grid;gap:8px;">
+      ${sorted.slice(0, 60).map(c => `
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:10px;border-radius:14px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);">
+          <span><strong>${c.name}</strong></span>
+          <span style="opacity:.85;">${(c.metaScore || 0).toFixed(1)}</span>
+        </div>
+      `).join("")}
+    </div>
+  `;
+}
+
+function renderSmartBan() {
+  const box = $("smartBan");
+  if (!box) return;
+
+  if (!state.selectedChamp) {
+    box.innerHTML = `<h3 style="margin:0 0 10px 0;">Smart Ban</h3><div style="opacity:.85;">Wähle zuerst einen Champion.</div>`;
+    return;
+  }
+
+  // Very first version: ban value = ban% + pick% + win% weight
+  const scored = state.champs
+    .filter(c => c.name !== state.selectedChamp)
+    .map(c => {
+      const win = Number(c.win ?? 0);
+      const pick = Number(c.pick ?? 0);
+      const ban = Number(c.ban ?? 0);
+      const score = (ban * 1.0) + (pick * 0.8) + (Math.max(0, win - 50) * 1.2);
+      return { ...c, smartScore: score };
+    })
+    .sort((a, b) => b.smartScore - a.smartScore)
+    .slice(0, 5);
+
+  box.innerHTML = `
+    <h3 style="margin:0 0 10px 0;">Smart Ban gegen ${state.selectedChamp}</h3>
+    <div style="display:grid;gap:8px;">
+      ${scored.map(c => `
+        <div style="padding:10px;border-radius:14px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);">
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <strong>${c.name}</strong>
+            <span style="opacity:.85;">Score ${c.smartScore.toFixed(1)}</span>
+          </div>
+          <div style="opacity:.85;margin-top:6px;font-size:13px;">
+            Win: ${c.win ?? "—"}% · Pick: ${c.pick ?? "—"}% · Ban: ${c.ban ?? "—"}%
+          </div>
+        </div>
+      `).join("")}
+    </div>
+  `;
+}
+
+async function init() {
+  console.log("[RIFTO] init start");
+  ensureRoot();
+
+  let wrList, meta;
+
+  try {
+    [wrList, meta] = await Promise.all([
+      loadJSON("wr_champions.json"),
+      loadJSON("meta.json"),
+    ]);
+  } catch (e) {
+    console.error("[RIFTO] load error:", e);
+    // Still render select with empty list so you see something
+    state.champs = [];
+    renderSelect();
+    renderTierList();
+    renderSmartBan();
+    return;
+  }
+
+  state.meta = meta;
+
+  // Accept both schemas:
+  // A) meta.statsByName = { "Fiora": {win,pick,ban}, ... }
+  // B) meta.champions = [{name, stats:{CN:{win,pick,ban}}}, ...]
+  const statsByName = meta.statsByName || {};
+  const championsArray = Array.isArray(meta.champions) ? meta.champions : [];
+
+  function getStatsFor(name) {
+    if (statsByName[name]) return statsByName[name];
+    const found = championsArray.find(x => x && x.name === name);
+    if (found?.stats?.CN) return found.stats.CN;
+    if (found?.stats?.DIA) return found.stats.DIA;
+    return {};
+  }
+
+  state.champs = (Array.isArray(wrList) ? wrList : []).map(name => {
+    const s = getStatsFor(name);
+    const win = s.win ?? null;
+    const pick = s.pick ?? null;
+    const ban = s.ban ?? null;
+    return { name, win, pick, ban, metaScore: calcMetaScore({ win, pick, ban }) };
+  });
+
+  console.log("[RIFTO] champs loaded:", state.champs.length);
+
+  renderSelect();
+  renderTierList();
+  renderSmartBan();
+}
+
+document.addEventListener("DOMContentLoaded", init);
