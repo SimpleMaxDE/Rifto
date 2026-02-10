@@ -1,652 +1,655 @@
-(()=>{const $=e=>document.getElementById(e);
-// Pills
-const patchPill=$("patchPill"),updatePill=$("updatePill"),trendPill=$("trendPill");
+/* RIFTO app.js — FULL REPLACE
+   Fixes:
+   - Cards always clickable (data-hero-id + event delegation)
+   - Tabs render real content (Meta/Draft/Matchup/Tierlist)
+   - Lane selection updates tier badge (off-meta penalty)
+*/
 
-// Tabs/views
-const tabBtns=[...document.querySelectorAll(".tab")];
-const viewMeta=$("viewMeta"),viewDraft=$("viewDraft"),viewMatchup=$("viewMatchup"),viewTierlist=$("viewTierlist");
+const state = {
+  tab: "meta", // meta | draft | matchup | tierlist
+  rank: "Dia+", // placeholder (future)
+  lane: "All", // All | Baron | Jungle | Mid | ADC | Support
+  selectedHeroId: null,
+  selectedLaneForPick: "All", // lane context in modal
+  enemyHeroId: null,
+  search: "",
+  sort: "tier", // tier | win | pick | ban
+  data: {
+    meta: null,       // meta.json
+    tags: null,       // champ_tags.json
+  },
+};
 
-// META list
-const grid=$("grid"),statusEl=$("status"),searchEl=$("search"),sortEl=$("sort");
+const TIERS = ["SS","S","A","B","C","D"];
 
-// META modal
-const modal=$("champModal"),modalClose=$("modalClose");
-const modalIcon=$("modalIcon"),modalName=$("modalName"),modalTier=$("modalTier");
-const modalMainLanePill=$("modalMainLanePill"),modalSelectedLanePill=$("modalSelectedLanePill");
-const modalWin=$("modalWin"),modalPick=$("modalPick"),modalBan=$("modalBan");
-const modalBans=$("modalBans"),modalLaneTiers=$("modalLaneTiers"),modalRoleSelect=$("modalRoleSelect"),offRole=$("offRole"),modalTrendHint=$("modalTrendHint");
+function clamp(n, a, b){ return Math.max(a, Math.min(b, n)); }
+function laneNorm(x){ return (x||"").toString().trim().toLowerCase(); }
 
-// Draft
-const btnPickMe=$("btnPickMe"),draftRole=$("draftRole"),myPickCard=$("myPickCard"),offMetaBox=$("offMetaBox");
-const enemySlot1=$("enemySlot1"),enemySlot2=$("enemySlot2");
-const allySlot1=$("allySlot1"),allySlot2=$("allySlot2"),allySlot3=$("allySlot3"),allySlot4=$("allySlot4");
-const draftBans=$("draftBans"),draftContext=$("draftContext"),draftWarn=$("draftWarn"),draftFixes=$("draftFixes");
-const phaseBtns=[...document.querySelectorAll(".phase")];
+function tierFromScore(score){
+  // score ranges in your data ~ 70..140
+  if (score >= 115) return "SS";
+  if (score >= 105) return "S";
+  if (score >= 95)  return "A";
+  if (score >= 85)  return "B";
+  if (score >= 75)  return "C";
+  return "D";
+}
+function downTier(tier, steps){
+  const i = TIERS.indexOf(tier);
+  if (i === -1) return tier;
+  return TIERS[clamp(i + steps, 0, TIERS.length - 1)];
+}
 
-// Matchup
-const btnMatchPick=$("btnMatchPick"),matchRole=$("matchRole"),matchPickCard=$("matchPickCard");
-const matchHard=$("matchHard"),matchEven=$("matchEven"),matchGood=$("matchGood");
+function getMainLane(heroId){
+  const tags = state.data.tags;
+  if (!tags) return null;
+  const t = tags[String(heroId)];
+  // supports either { mainLane:"Jungle" } or { main:"Jungle" }
+  return t?.mainLane || t?.main || null;
+}
 
-// Tierlist
-const tierRole=$("tierRole"),tierFilter=$("tierFilter"),tierList=$("tierList");
+function getLaneTier(ch, selectedLane){
+  const baseTier = ch.tierGlobal || tierFromScore(ch.metaScore ?? 0);
 
-// Picker
-const picker=$("picker"),pickerClose=$("pickerClose"),pickerSearch=$("pickerSearch"),pickerGrid=$("pickerGrid");
+  const main = laneNorm(getMainLane(ch.hero_id) || ch.mainLane);
+  const lane = laneNorm(selectedLane);
 
-const HERO_LIST_URL="https://game.gtimg.cn/images/lgamem/act/lrlib/js/heroList/hero_list.js";
+  const isOffMeta = main && lane && main !== lane && lane !== "all";
+  let penalty = 0;
 
-let allChamps=[],heroDb={},tagDb={},defaultWeakByRole={},roleTags={};
-let risingTypes=new Set(),fallingTypes=new Set(),trendText="–";
-
-// State
-let draftPhase="enemy_fp";
-let myPickName=null,enemy1=null,enemy2=null;
-let ally=[null,null,null,null];
-let matchPickName=null;
-let pickTarget="me";
-
-// Labels
-const TAG_LABEL={assassin_burst:"Assassin",assassin_reset:"Assassin",hard_engage:"Engage",pointclick_cc:"Point&Click CC",hard_cc:"CC",anti_auto:"Anti-Autoattacks",anti_tank:"Anti-Tank",true_damage:"True Damage",poke:"Poke",mage_poke:"Poke",mage_burst:"Burst Mage",mage_control:"Control Mage",lane_bully:"Lane Bully",dive:"Dive",tank:"Tank",fighter:"Fighter",kite_poke:"Poke",adc:"ADC"};
-const OFF_META_LABEL={playable:"🟢 Spielbar",risky:"🟡 Riskant",bad:"🔴 Nicht empfohlen"};
-
-// Helpers
-const fmtPct=v=>{const n=Number(v);return Number.isFinite(n)?`${n.toFixed(2)}%`:"–"};
-const metaScore=c=>{const win=Number(c.stats?.CN?.win??0),pick=Number(c.stats?.CN?.pick??0),ban=Number(c.stats?.CN?.ban??0);return win*1.2+pick*0.9+ban*0.5};
-const normalizeMeta=meta=>(Array.isArray(meta.champions)?meta.champions:[]).map(c=>({hero_id:String(c.hero_id??""),name:String(c.name??"Unknown"),icon:String(c.icon??""),stats:c.stats??{CN:{win:0,pick:0,ban:0}}}));
-const getChampionByName=name=>{if(!name)return null;const n=String(name).toLowerCase();return allChamps.find(c=>c.name.toLowerCase()===n)||null};
-const heroInfo=id=>heroDb?.[String(id)]||null;
-function labelTag(t){return TAG_LABEL[t]||t}
-function champTypes(name){const t=tagDb?.[name]?.type;return Array.isArray(t)?t:[]}
-function pickedWeakVs(name,role){const ex=tagDb?.[name]?.weak_vs;if(Array.isArray(ex)&&ex.length)return ex;return defaultWeakByRole?.[role]?.weak_vs||[]}
-
-// Roles
-function rolesForHero(id){
-  const h=heroInfo(id);const out=new Set();if(!h)return[];
-  const lane=String(h.lane??"").toLowerCase();
-  const roles=Array.isArray(h.roles)?h.roles.map(r=>String(r).toLowerCase()):[];
-  if(lane.includes("打野"))out.add("Jungle");
-  if(lane.includes("中路"))out.add("Mid");
-  if(lane.includes("下路"))out.add("ADC");
-  if(lane.includes("辅助"))out.add("Support");
-  if(lane.includes("单人")||lane.includes("上路"))out.add("Baron");
-  for(const r of roles){
-    if(r.includes("射手"))out.add("ADC");
-    if(r.includes("辅助"))out.add("Support");
-    if(r.includes("法师"))out.add("Mid");
-    if(r.includes("刺客"))out.add("Jungle");
-    if(r.includes("战士")||r.includes("坦克"))out.add("Baron");
+  // Off-meta penalty tuned to “feel right”
+  if (isOffMeta) {
+    if (lane === "jungle" || lane === "adc") penalty = 2;
+    else penalty = 1;
   }
-  return [...out];
-}
-function mainLaneText(id){
-  const roles=rolesForHero(id);
-  return roles.length?roles[0]:"–";
+
+  return downTier(baseTier, penalty);
 }
 
-// Tier thresholds per role
-function thresholdsForRole(role){
-  const pool=role==="Global"?allChamps:allChamps.filter(c=>rolesForHero(c.hero_id).includes(role));
-  const list=(pool.length?pool:allChamps).map(c=>metaScore(c)).sort((a,b)=>b-a);
-  const q=p=>list[Math.floor(p*(list.length-1))]??0;
-  return {ss:q(.05),s:q(.15),a:q(.35),b:q(.65)};
-}
-function tierForScore(s,t){return s>=t.ss?"SS":s>=t.s?"S":s>=t.a?"A":s>=t.b?"B":"C"}
-function tierClass(t){return t==="SS"?"tierSS":t==="S"?"tierS":t==="A"?"tierA":t==="B"?"tierB":"tierC"}
-
-// Trends (snapshot)
-function computeTypeStrength(){
-  const strength={},count={};
-  for(const c of allChamps){
-    const types=champTypes(c.name);if(!types.length)continue;
-    const ms=metaScore(c);
-    for(const t of types){strength[t]=(strength[t]||0)+ms;count[t]=(count[t]||0)+1}
-  }
-  for(const t of Object.keys(strength))strength[t]=strength[t]/Math.max(1,count[t]);
-  return strength;
-}
-function loadPrevSnapshot(){try{return JSON.parse(localStorage.getItem("rifto_type_snapshot")||"null")}catch{return null}}
-function saveSnapshot(s){try{localStorage.setItem("rifto_type_snapshot",JSON.stringify({ts:Date.now(),strength:s}))}catch{}}
-function formatTrend(rise,fall){const up=rise.length?`${labelTag(rise[0])} ↑`:"";const down=fall.length?`${labelTag(fall[0])} ↓`:"";return[up,down].filter(Boolean).join(" • ")||"–"}
-function updateTrends(){
-  const current=computeTypeStrength();const prev=loadPrevSnapshot();
-  risingTypes=new Set();fallingTypes=new Set();trendText="–";
-  if(prev&&prev.strength){
-    const deltas=[];
-    for(const t of Object.keys(current)){
-      if(prev.strength[t]===undefined)continue;
-      deltas.push({t,d:current[t]-prev.strength[t]})
-    }
-    deltas.sort((a,b)=>b.d-a.d);
-    const rise=deltas.filter(x=>x.d>0).slice(0,3);
-    const fall=deltas.filter(x=>x.d<0).slice(-3);
-    for(const r of rise)risingTypes.add(r.t);
-    for(const f of fall)fallingTypes.add(f.t);
-    trendText=formatTrend(rise.map(x=>x.t),fall.map(x=>x.t));
-  }
-  trendPill.textContent=`Trend: ${trendText}`;
-  modalTrendHint.textContent=`Trend: ${trendText}`;
-  saveSnapshot(current);
+function fmtPct(x){
+  if (x === null || x === undefined || Number.isNaN(Number(x))) return "—";
+  return `${Number(x).toFixed(2)}%`;
 }
 
-// Smart ban scoring
-function baseThreatScore(c){
-  const win=Number(c.stats?.CN?.win??0),pick=Number(c.stats?.CN?.pick??0),ban=Number(c.stats?.CN?.ban??0);
-  return ban*1.0+pick*0.7+win*0.5+metaScore(c)*0.05;
-}
-function phaseWeights(p){
-  if(p==="enemy_fp")return{meta:1.2,counter:.8,enemy:.9};
-  if(p==="my_fp")return{meta:.8,counter:1.4,enemy:.9};
-  if(p==="mid")return{meta:1.0,counter:1.1,enemy:1.2};
-  if(p==="late")return{meta:.9,counter:1.2,enemy:1.3};
-  return{meta:1.0,counter:1.0,enemy:1.0};
-}
-const ENEMY_SYNERGY_TO_BAN_TYPES={hard_engage:["assassin_burst","pointclick_cc","hard_cc"],pointclick_cc:["assassin_burst","mage_burst"],assassin_burst:["pointclick_cc","hard_cc"],tank:["true_damage","anti_tank"],poke:["hard_engage","assassin_burst"]};
-function enemyThreatTypes(){
-  const s=new Set();
-  for(const n of [enemy1,enemy2]){if(!n)continue;for(const t of champTypes(n))s.add(t)}
-  return s;
-}
-function enemySynergyBanTypes(){
-  const out=new Set();
-  for(const t of enemyThreatTypes()){
-    const arr=ENEMY_SYNERGY_TO_BAN_TYPES[t];if(!arr)continue;for(const x of arr)out.add(x)
-  }
-  return out;
-}
-function enemySynergyScore(name){
-  const wanted=enemySynergyBanTypes();if(!wanted.size)return 0;
-  const types=champTypes(name);let hits=0;
-  for(const w of wanted)if(types.includes(w))hits++;
-  return hits*10;
-}
-function tagMatchScore(my,role,cand){
-  const weak=pickedWeakVs(my,role);const types=champTypes(cand);
-  let hits=0;for(const w of weak)if(types.includes(w))hits++;
-  let bonus=hits*18;
-  for(const w of weak){
-    if(types.includes(w)&&risingTypes.has(w))bonus+=8;
-    if(types.includes(w)&&fallingTypes.has(w))bonus-=4;
-  }
-  return bonus;
-}
-function rolePool(role,excludeId){
-  const pool=allChamps.filter(c=>c.hero_id!==excludeId);
-  const rp=pool.filter(c=>role==="Global"||rolesForHero(c.hero_id).includes(role));
-  return rp.length?rp:pool;
-}
-function reasonAgainst(my,role,ban){
-  const weak=pickedWeakVs(my,role);const types=champTypes(ban);
-  for(const w of weak){
-    if(types.includes(w)){
-      if(w==="anti_auto")return `Kontert ${my} (Anti-Autoattacks)`;
-      if(w==="pointclick_cc")return `Hält ${my} fest (Point&Click CC)`;
-      if(w==="assassin_burst")return `Assassin tötet ${my} sehr schnell`;
-      if(w==="hard_engage")return `Engage + CC macht ${my} angreifbar`;
-      if(w==="hard_cc")return `${my} kommt kaum in Fights (viel CC)`;
-      return `Gefährlich für ${my}: ${labelTag(w)}`;
-    }
-  }
-  const wanted=enemySynergyBanTypes();
-  for(const w of wanted){if(types.includes(w))return `Synergie mit Enemy Picks – gefährlich für ${my}`;}
-  return `Starker ${role}-Pick gegen ${my}`;
-}
-function smartTop3(myName,role){
-  const my=getChampionByName(myName);if(!my)return[];
-  const w=phaseWeights(draftPhase);const th=thresholdsForRole(role);
-  const cand=rolePool(role,my.hero_id);
-  return cand.map(c=>{
-    const score=baseThreatScore(c)*w.meta+tagMatchScore(my.name,role,c.name)*w.counter+enemySynergyScore(c.name)*w.enemy;
-    return {name:c.name,icon:c.icon,score,why:reasonAgainst(my.name,role,c.name),tier:tierForScore(metaScore(c),th)};
-  }).sort((a,b)=>b.score-a.score).slice(0,3);
-}
+function bySort(list){
+  const key = state.sort;
+  const arr = [...list];
 
-// Off-meta evaluation (simple)
-function offMetaRating(myName,role){
-  const c=getChampionByName(myName);if(!c)return null;
-  const roles=rolesForHero(c.hero_id);
-  if(roles.includes(role))return null;
-  // if champ has at least one other lane, it's off-meta; rate based on meta score percentile vs global
-  const sc=metaScore(c);const th=thresholdsForRole("Global");
-  const base=tierForScore(sc,th);
-  if(base==="SS"||base==="S")return {lvl:"playable",txt:`Off-meta auf ${role}, aber Champion ist generell stark.`};
-  if(base==="A")return {lvl:"risky",txt:`Off-meta auf ${role}. Kann klappen, aber ist riskant.`};
-  return {lvl:"bad",txt:`Off-meta auf ${role}. Eher nicht empfohlen.`};
-}
-
-// Draft warnings + fixes
-function teamTags(names){
-  const types=[];for(const n of names){if(!n)continue;types.push(...champTypes(n))}
-  const has=(tagArr)=>tagArr.some(t=>types.includes(t));
-  const hardCC=has(roleTags.hard_cc||["hard_cc","pointclick_cc"]);
-  const frontline=has(roleTags.frontline||["tank"]);
-  const engage=has(roleTags.engage||["hard_engage"]);
-  const ap=has(roleTags.ap||["mage_burst","mage_control","mage_poke"]);
-  const poke=has(roleTags.poke||["poke","mage_poke","kite_poke"]);
-  const early=has(roleTags.early||["lane_bully","dive"]);
-  // crude damage split using types list
-  const adCount = types.filter(t=>["fighter","assassin_burst","assassin_reset","adc"].includes(t)).length;
-  const apCount = types.filter(t=>["mage_burst","mage_control","mage_poke"].includes(t)).length;
-  return {hardCC,frontline,engage,ap,early,poke,adCount,apCount};
-}
-function recommendFix(role,needTag,excludeNames){
-  const ex=new Set((excludeNames||[]).filter(Boolean).map(x=>x.toLowerCase()));
-  const pool=rolePool(role,null).filter(c=>!ex.has(c.name.toLowerCase()));
-  const wants=needTag; // a tag string like 'hard_cc' or 'tank' or 'mage_control' group; we map groups.
-  const groupMap={
-    need_cc:(roleTags.hard_cc||["hard_cc","pointclick_cc"]),
-    need_front:(roleTags.frontline||["tank"]),
-    need_engage:(roleTags.engage||["hard_engage"]),
-    need_ap:(roleTags.ap||["mage_burst","mage_control","mage_poke"]),
-    need_early:(roleTags.early||["lane_bully","dive"])
+  const get = (c) => {
+    if (key === "win") return c.stats?.CN?.win ?? 0;
+    if (key === "pick") return c.stats?.CN?.pick ?? 0;
+    if (key === "ban") return c.stats?.CN?.ban ?? 0;
+    // tier sort: higher metaScore first
+    return c.metaScore ?? 0;
   };
-  const wanted=groupMap[wants]||[wants];
-  const th=thresholdsForRole(role);
-  const scored=pool.map(c=>{
-    const t=champTypes(c.name);
-    const hit=wanted.some(x=>t.includes(x));
-    const score=(hit?50:0)+metaScore(c);
-    return {name:c.name,icon:c.icon,score,desc:"",tier:tierForScore(metaScore(c),th),hit};
-  }).filter(x=>x.hit).sort((a,b)=>b.score-a.score).slice(0,3);
-  return scored;
-}
-function draftWarning(){
-  const my=myPickName;
-  const team=[my,...ally].filter(Boolean);
-  if(!my) return null;
-  const tags=teamTags(team);
-  // priority
-  if(!tags.hardCC) return {key:"need_cc",title:"Eurem Team fehlt CC.",sub:"Pick einen Champion mit zuverlässigem CC."};
-  if(!tags.frontline) return {key:"need_front",title:"Eurem Team fehlt Frontline.",sub:"Pick einen Tank/Bruiser, der Schaden frisst."};
-  if(tags.apCount===0) return {key:"need_ap",title:"Eurem Team fehlt AP.",sub:"Gegner kann sonst früh Rüstung stacken."};
-  if(!tags.engage) return {key:"need_engage",title:"Eurem Team fehlt Engage.",sub:"Schwer, Fights zu starten."};
-  if(!tags.early) return {key:"need_early",title:"Euer Early Game ist schwach.",sub:"Risiko, früh zu snowballen."};
-  return null;
+
+  arr.sort((a,b) => get(b) - get(a));
+  return arr;
 }
 
-// Render helpers
-function renderCounterList(target,list,numbered=false){
-  target.innerHTML="";
-  for(let i=0;i<list.length;i++){
-    const c=list[i];
-    const el=document.createElement("div");
-    el.className="counterItem";
-    el.innerHTML=`<img class="cIcon" src="${c.icon}" alt="${c.name}" loading="lazy" />
-      <div class="cMain">
-        <div class="cName">${numbered?`${i+1}️⃣ `:""}${c.name} <span class="tierBadge ${tierClass(c.tier)}" style="margin-left:8px">${c.tier}</span></div>
-        <div class="cWhy">${c.why||c.desc||""}</div>
-      </div>`;
-    target.appendChild(el);
-  }
-}
-function renderPickCard(target,champName,role){
-  const c=getChampionByName(champName);
-  if(!c){target.classList.add("empty");target.innerHTML=`<div class="emptyText">Kein Champion gewählt</div>`;return}
-  target.classList.remove("empty");
-  const th=thresholdsForRole(role);const t=tierForScore(metaScore(c),th);
-  target.innerHTML=`<img class="pickIcon" src="${c.icon}" alt="${c.name}" />
-    <div class="pickMain">
-      <div class="pickName">${c.name}</div>
-      <div class="pickSub">Lane: ${role} • Main: ${mainLaneText(c.hero_id)}</div>
-    </div>
-    <span class="tierBadge ${tierClass(t)}">${t}</span>`;
-}
-function renderSlot(btn,name,label){
-  if(!name){btn.classList.remove("filled");btn.textContent=label;return}
-  const c=getChampionByName(name);btn.classList.add("filled");
-  btn.innerHTML=c?`<img src="${c.icon}" alt="${c.name}" /><div>${c.name}</div>`:name;
-}
+function filterList(list){
+  const q = state.search.trim().toLowerCase();
+  let out = list;
 
-// META modal lane tiers
-function laneTierMap(champ){
-  const lanes=["Baron","Jungle","Mid","ADC","Support"];
-  const roles=rolesForHero(champ.hero_id);
-  const out=[];
-  for(const r of lanes){
-    if(!roles.includes(r)){
-      // off role: compute tier but mark ❌ when very bad
-      const sc=metaScore(champ);
-      const th=thresholdsForRole("Global");
-      const t=tierForScore(sc,th);
-      const mark = (t==="SS"||t==="S") ? "B" : (t==="A" ? "C" : "❌");
-      out.push({lane:r,tier:mark});
-    }else{
-      const th=thresholdsForRole(r);
-      out.push({lane:r,tier:tierForScore(metaScore(champ),th)});
-    }
+  if (q) {
+    out = out.filter(c => (c.name||"").toLowerCase().includes(q));
   }
+
+  if (state.lane !== "All") {
+    const want = laneNorm(state.lane);
+    out = out.filter(c => {
+      const main = laneNorm(getMainLane(c.hero_id) || c.mainLane || "");
+      return main === want;
+    });
+  }
+
   return out;
 }
-function renderLaneTiers(target,arr){
-  target.innerHTML="";
-  for(const row of arr){
-    const el=document.createElement("div");
-    el.className="ltRow";
-    const badge = row.tier==="❌" ? `<span class="tierBadge tierC">❌</span>` : `<span class="tierBadge ${tierClass(row.tier)}">${row.tier}</span>`;
-    el.innerHTML=`<div class="k">${row.lane}</div>${badge}`;
-    target.appendChild(el);
-  }
+
+function computeMetaScore(c){
+  // If metaScore already provided, keep it.
+  if (typeof c.metaScore === "number") return c.metaScore;
+
+  const win = Number(c.stats?.CN?.win ?? 0);
+  const pick = Number(c.stats?.CN?.pick ?? 0);
+  const ban = Number(c.stats?.CN?.ban ?? 0);
+
+  // Simple but effective: win is strongest, pick/ban add “meta pressure”
+  // clamp to avoid extremes
+  const score =
+    (win * 2.0) +
+    (Math.min(pick, 30) * 1.2) +
+    (Math.min(ban, 40) * 0.8);
+
+  return Number(score.toFixed(1));
 }
 
-// META rendering
-function renderMetaGrid(list){
-  grid.innerHTML="";
-  if(!list.length){statusEl.textContent="Keine Treffer.";statusEl.style.display="block";return}
-  statusEl.style.display="none";
-  const frag=document.createDocumentFragment();
-  const th=thresholdsForRole("Global");
-  for(const c of list){
-    const tier=tierForScore(metaScore(c),th);
-    const card=document.createElement("button");
-    card.className="card";card.type="button";
-    card.innerHTML=`<div class="cardTop">
-      <img class="icon" src="${c.icon}" alt="${c.name}" loading="lazy" />
-      <div class="nameWrap"><div class="name">${c.name}</div><div class="id">Main: ${mainLaneText(c.hero_id)}</div></div>
-      <span class="tierBadge ${tierClass(tier)}">${tier}</span>
-    </div>
-    <div class="stats">
-      <div class="stat"><div class="k">Win</div><div class="v">${fmtPct(c.stats?.CN?.win??null)}</div></div>
-      <div class="stat"><div class="k">Pick</div><div class="v">${fmtPct(c.stats?.CN?.pick??null)}</div></div>
-      <div class="stat"><div class="k">Ban</div><div class="v">${fmtPct(c.stats?.CN?.ban??null)}</div></div>
-    </div>`;
-    card.addEventListener("click",()=>openMetaModal(c));
-    frag.appendChild(card);
-  }
-  grid.appendChild(frag);
-}
-function applyMeta(){
-  const q=(searchEl.value||"").trim().toLowerCase();
-  const sort=sortEl.value;
-  let list=allChamps;
-  if(q)list=list.filter(c=>c.name.toLowerCase().includes(q));
-  list=[...list].sort((a,b)=>{
-    if(sort==="name")return a.name.localeCompare(b.name);
-    if(sort==="win")return (b.stats?.CN?.win??0)-(a.stats?.CN?.win??0);
-    if(sort==="pick")return (b.stats?.CN?.pick??0)-(a.stats?.CN?.pick??0);
-    if(sort==="ban")return (b.stats?.CN?.ban??0)-(a.stats?.CN?.ban??0);
-    return metaScore(b)-metaScore(a);
+function enrich(meta){
+  const champs = (meta?.champions || []).map(c => {
+    const cc = { ...c };
+    cc.hero_id = String(cc.hero_id ?? cc.heroId ?? "");
+    cc.metaScore = computeMetaScore(cc);
+    cc.mainLane = getMainLane(cc.hero_id) || cc.mainLane || null;
+    cc.tierGlobal = tierFromScore(cc.metaScore);
+    return cc;
   });
-  renderMetaGrid(list);
+
+  return { ...meta, champions: champs };
 }
 
-// Modal open/update
-function openMetaModal(champ){
-  modalIcon.src=champ.icon;modalIcon.alt=champ.name;
-  modalName.textContent=champ.name;
-  modalLane.textContent=`Main Lane: ${mainLaneText(champ.hero_id)}`;
-  modalWin.textContent=fmtPct(champ.stats?.CN?.win??null);
-  modalPick.textContent=fmtPct(champ.stats?.CN?.pick??null);
-  modalBan.textContent=fmtPct(champ.stats?.CN?.ban??null);
+async function loadData(){
+  const [meta, tags] = await Promise.all([
+    fetch("./meta.json", { cache: "no-store" }).then(r => r.json()),
+    fetch("./champ_tags.json", { cache: "no-store" }).then(r => r.json()).catch(()=>null),
+  ]);
 
-  const roles=rolesForHero(champ.hero_id);
-  modalRoleSelect.value=roles[0]||"Jungle";
-  updateModalForRole(champ);
-  modal.classList.remove("hidden");
+  state.data.meta = enrich(meta);
+  state.data.tags = tags;
 }
-function updateModalForRole(champ){
-  const role=modalRoleSelect.value;
-  // Header pills (cleaner than "Main Lane: ...")
-  if(modalMainLanePill) modalMainLanePill.textContent = `Main: ${mainLaneText(champ.hero_id)}`;
-  if(modalSelectedLanePill) modalSelectedLanePill.textContent = `Lane: ${role}`;
 
-  const roles=rolesForHero(champ.hero_id);
-  offRole.classList.toggle("hidden",!(roles.length&&!roles.includes(role)));
-  // Tier should react to the selected lane (On‑meta vs Off‑meta)
-  const map = laneTierMap(champ);
-  const laneTier = map.find(x=>x.lane===role)?.tier;
-  const th=thresholdsForRole(role);
-  const tier = laneTier || tierForScore(metaScore(champ),th);
-  modalTier.textContent=tier;modalTier.className=`tierBadge ${tierClass(tier)}`;
-  renderCounterList(modalBans, smartTop3(champ.name, role).map(x=>({...x,why:x.why})), true);
-  renderLaneTiers(modalLaneTiers, laneTierMap(champ));
+function $(sel){ return document.querySelector(sel); }
+
+function setActiveTab(tab){
+  state.tab = tab;
+  render();
 }
+
+function openModal(heroId){
+  state.selectedHeroId = String(heroId);
+  // default lane context: main lane if exists, else All
+  const champ = getChampion(heroId);
+  const main = getMainLane(heroId) || champ?.mainLane || "All";
+  state.selectedLaneForPick = main || "All";
+  render(); // renders modal
+}
+
+function closeModal(){
+  state.selectedHeroId = null;
+  render();
+}
+
+function getChampion(heroId){
+  const list = state.data.meta?.champions || [];
+  return list.find(c => String(c.hero_id) === String(heroId)) || null;
+}
+
+/* ---------- SMART LOGIC (simple but “feels” smart) ---------- */
+
+// Picks that typically punish the selected champ on selected lane.
+// Uses tags + "meta pressure" to prefer actually strong champs.
+function smartBansForPick(pickChamp, lane){
+  const list = state.data.meta?.champions || [];
+  if (!pickChamp) return [];
+
+  const pickLane = laneNorm(lane === "All" ? (getMainLane(pickChamp.hero_id) || pickChamp.mainLane || "All") : lane);
+  const pickName = (pickChamp.name||"").toLowerCase();
+
+  // Basic archetype tags from champ_tags.json if present
+  const tags = state.data.tags?.[String(pickChamp.hero_id)] || {};
+  const weakTo = tags.weakTo || [];     // e.g. ["hardCC","burst","invade"]
+  const hates = new Set(weakTo.map(x => String(x).toLowerCase()));
+
+  function score(enemy){
+    // Base: strong meta champs on that lane
+    let s = (enemy.metaScore ?? 0);
+
+    // Prefer enemies whose main lane matches pick lane (realistic matchup)
+    const eMain = laneNorm(getMainLane(enemy.hero_id) || enemy.mainLane || "");
+    if (pickLane && eMain === pickLane) s += 20;
+    else if (pickLane && eMain && eMain !== pickLane) s -= 10;
+
+    // If your champ hates hard CC, boost champs tagged hardCC
+    const et = state.data.tags?.[String(enemy.hero_id)] || {};
+    const eTags = (et.tags || []).map(x => String(x).toLowerCase());
+
+    if (hates.has("hardcc") && eTags.includes("hardcc")) s += 25;
+    if (hates.has("burst") && eTags.includes("burst")) s += 18;
+    if (hates.has("antiheal") && eTags.includes("antiheal")) s += 10;
+    if (hates.has("invade") && eTags.includes("invade")) s += 14;
+
+    // Reduce mirror / same champ
+    if (String(enemy.hero_id) === String(pickChamp.hero_id)) s -= 999;
+
+    // tiny variety
+    s += (enemy.stats?.CN?.ban ?? 0) * 0.2;
+
+    return s;
+  }
+
+  // Candidate set: mostly same-lane champs + some global top meta
+  const candidates = list
+    .filter(c => c.hero_id && c.name)
+    .filter(c => String(c.hero_id) !== String(pickChamp.hero_id));
+
+  const ranked = candidates
+    .map(e => ({ e, s: score(e) }))
+    .sort((a,b) => b.s - a.s)
+    .slice(0, 3)
+    .map(x => x.e);
+
+  // Build readable reason per ban
+  return ranked.map((e, idx) => {
+    const eMain = getMainLane(e.hero_id) || e.mainLane || "—";
+    const why = `Starker ${eMain}-Pick gegen ${pickChamp.name}`;
+    return { idx: idx+1, champ: e, why };
+  });
+}
+
+// Very simple matchup grading (placeholder for later deeper logic)
+function matchupGrade(a, b){
+  if (!a || !b) return { grade: "—", text: "Wähle beide Champs" };
+  // if enemy is higher metaScore, assume harder
+  const diff = (b.metaScore ?? 0) - (a.metaScore ?? 0);
+  if (diff >= 20) return { grade: "🔴 Schwer", text: `${b.name} ist aktuell deutlich stärker in der Meta.` };
+  if (diff >= 8)  return { grade: "🟡 Spielbar", text: `${b.name} ist etwas stärker – spiel safe bis Items.` };
+  return { grade: "🟢 Gut", text: `${a.name} kann ${b.name} gut handeln, wenn du sauber spielst.` };
+}
+
+/* ---------- RENDER ---------- */
+
+function render(){
+  const root = $("#app");
+  if (!root) return;
+
+  const meta = state.data.meta;
+  if (!meta) {
+    root.innerHTML = `<div style="padding:24px;color:#cbd5ff">Lade Daten…</div>`;
+    return;
+  }
+
+  const champsAll = meta.champions || [];
+  const champs = bySort(filterList(champsAll));
+
+  root.innerHTML = `
+    ${renderTopBar(meta)}
+    ${renderTabs()}
+    <main class="main">
+      ${state.tab === "meta" ? renderMetaView(champs) : ""}
+      ${state.tab === "draft" ? renderDraftView(champsAll) : ""}
+      ${state.tab === "matchup" ? renderMatchupView(champsAll) : ""}
+      ${state.tab === "tierlist" ? renderTierlistView(champsAll) : ""}
+    </main>
+    ${state.selectedHeroId ? renderModal() : ""}
+  `;
+}
+
+function renderTopBar(meta){
+  const patch = meta.patch || "—";
+  const updated = meta.lastUpdated || "—";
+  return `
+    <header class="topbar">
+      <div class="brand">
+        <div class="logo">RIFTO</div>
+        <div class="sub">Wild Rift – Draft Helper</div>
+      </div>
+      <div class="metaPills">
+        <span class="pill">Patch: ${escapeHtml(patch)}</span>
+        <span class="pill">Update: ${escapeHtml(updated)}</span>
+      </div>
+    </header>
+  `;
+}
+
+function renderTabs(){
+  const t = state.tab;
+  return `
+    <nav class="tabs">
+      <button class="tab ${t==="meta"?"active":""}" data-tab="meta">META</button>
+      <button class="tab ${t==="draft"?"active":""}" data-tab="draft">DRAFT</button>
+      <button class="tab ${t==="matchup"?"active":""}" data-tab="matchup">MATCHUP</button>
+      <button class="tab ${t==="tierlist"?"active":""}" data-tab="tierlist">TIERLIST</button>
+    </nav>
+  `;
+}
+
+function renderMetaView(champs){
+  return `
+    <section class="panel">
+      <div class="panelHeader">
+        <h2>Champions</h2>
+        <div class="controls">
+          <input class="search" placeholder="Champion suchen…" value="${escapeAttr(state.search)}" data-action="search"/>
+          <select class="select" data-action="sort">
+            <option value="tier" ${state.sort==="tier"?"selected":""}>Sort: Tier</option>
+            <option value="win" ${state.sort==="win"?"selected":""}>Sort: Winrate</option>
+            <option value="pick" ${state.sort==="pick"?"selected":""}>Sort: Pickrate</option>
+            <option value="ban" ${state.sort==="ban"?"selected":""}>Sort: Banrate</option>
+          </select>
+          <select class="select" data-action="lane">
+            ${["All","Baron","Jungle","Mid","ADC","Support"].map(l=>`<option value="${l}" ${state.lane===l?"selected":""}>${l}</option>`).join("")}
+          </select>
+        </div>
+      </div>
+
+      <div id="grid" class="grid">
+        ${champs.map(renderCard).join("")}
+      </div>
+    </section>
+  `;
+}
+
+function renderCard(c){
+  const main = getMainLane(c.hero_id) || c.mainLane || "—";
+  const tier = c.tierGlobal || tierFromScore(c.metaScore ?? 0);
+
+  const win = c.stats?.CN?.win;
+  const pick = c.stats?.CN?.pick;
+  const ban = c.stats?.CN?.ban;
+
+  return `
+    <button class="card" type="button" data-hero-id="${escapeAttr(c.hero_id)}" aria-label="${escapeAttr(c.name)}">
+      <div class="cardTop">
+        <img class="icon" src="${escapeAttr(c.icon)}" alt="${escapeAttr(c.name)}"/>
+        <div class="cardName">
+          <div class="nameRow">
+            <div class="name">${escapeHtml(c.name)}</div>
+            <span class="tierBadge">${tier}</span>
+          </div>
+          <div class="laneText">Main: ${escapeHtml(main)}</div>
+        </div>
+      </div>
+
+      <div class="cardStats">
+        <div class="statBox"><div class="k">Win</div><div class="v">${fmtPct(win)}</div></div>
+        <div class="statBox"><div class="k">Pick</div><div class="v">${fmtPct(pick)}</div></div>
+        <div class="statBox"><div class="k">Ban</div><div class="v">${fmtPct(ban)}</div></div>
+      </div>
+    </button>
+  `;
+}
+
+function renderDraftView(all){
+  const pick = state.selectedHeroId ? getChampion(state.selectedHeroId) : null;
+  if (!pick) {
+    return `
+      <section class="panel">
+        <h2>Draft</h2>
+        <div class="hint">Wähle zuerst einen Champion (Tab META) – dann siehst du Smart Ban & Empfehlungen.</div>
+      </section>
+    `;
+  }
+
+  const lane = state.selectedLaneForPick === "All" ? (getMainLane(pick.hero_id) || pick.mainLane || "All") : state.selectedLaneForPick;
+  const bans = smartBansForPick(pick, lane);
+
+  return `
+    <section class="panel">
+      <h2>Draft</h2>
+      <div class="draftBox">
+        <div class="draftPick">
+          <img class="iconBig" src="${escapeAttr(pick.icon)}" alt="${escapeAttr(pick.name)}"/>
+          <div>
+            <div class="draftTitle">${escapeHtml(pick.name)}</div>
+            <div class="draftSub">Lane: ${escapeHtml(lane)}</div>
+          </div>
+        </div>
+
+        <h3>Smart Ban (Top 3)</h3>
+        <div class="banList">
+          ${bans.map(b => `
+            <button class="banRow" type="button" data-hero-id="${escapeAttr(b.champ.hero_id)}">
+              <span class="banNum">${b.idx}</span>
+              <img class="icon" src="${escapeAttr(b.champ.icon)}" alt="${escapeAttr(b.champ.name)}"/>
+              <div class="banText">
+                <div class="banName">${escapeHtml(b.champ.name)} <span class="tierSmall">${b.champ.tierGlobal}</span></div>
+                <div class="banWhy">${escapeHtml(b.why)}</div>
+              </div>
+            </button>
+          `).join("")}
+        </div>
+      </div>
+    </section>
+  `;
+}
+
+function renderMatchupView(all){
+  const pick = state.selectedHeroId ? getChampion(state.selectedHeroId) : null;
+  const enemy = state.enemyHeroId ? getChampion(state.enemyHeroId) : null;
+  const m = matchupGrade(pick, enemy);
+
+  return `
+    <section class="panel">
+      <h2>Matchup</h2>
+      <div class="matchupGrid">
+        <div class="matchCol">
+          <div class="hintSmall">Dein Champ</div>
+          ${pick ? renderTinyPick(pick) : `<div class="hint">Wähle deinen Champion im META Tab.</div>`}
+        </div>
+
+        <div class="matchCol">
+          <div class="hintSmall">Gegner</div>
+          ${enemy ? renderTinyPick(enemy) : `<div class="hint">Klicke auf einen Champion (oder Smart Ban) als Gegner.</div>`}
+        </div>
+
+        <div class="matchResult">
+          <div class="grade">${m.grade}</div>
+          <div class="gradeText">${escapeHtml(m.text)}</div>
+        </div>
+      </div>
+    </section>
+  `;
+}
+
+function renderTinyPick(c){
+  return `
+    <div class="tinyPick">
+      <img class="icon" src="${escapeAttr(c.icon)}" alt="${escapeAttr(c.name)}"/>
+      <div>
+        <div class="tinyName">${escapeHtml(c.name)} <span class="tierSmall">${c.tierGlobal}</span></div>
+        <div class="tinySub">Main: ${escapeHtml(getMainLane(c.hero_id) || c.mainLane || "—")}</div>
+      </div>
+      <button class="ghostBtn" type="button" data-action="setEnemy" data-hero-id="${escapeAttr(c.hero_id)}">als Gegner</button>
+    </div>
+  `;
+}
+
+function renderTierlistView(all){
+  const grouped = {
+    Baron: [], Jungle: [], Mid: [], ADC: [], Support: []
+  };
+  for (const c of all) {
+    const lane = getMainLane(c.hero_id) || c.mainLane || "";
+    const ln = laneNorm(lane);
+    if (ln.includes("baron")) grouped.Baron.push(c);
+    else if (ln.includes("jungle")) grouped.Jungle.push(c);
+    else if (ln.includes("mid")) grouped.Mid.push(c);
+    else if (ln.includes("adc")) grouped.ADC.push(c);
+    else if (ln.includes("support")) grouped.Support.push(c);
+  }
+
+  const lanes = ["Baron","Jungle","Mid","ADC","Support"];
+  return `
+    <section class="panel">
+      <h2>Tierlist</h2>
+      <div class="hintSmall">Klick auf einen Champ öffnet Details. (Lane-Tier kommt als nächstes, wenn wir Lane-Stats haben)</div>
+      <div class="tierCols">
+        ${lanes.map(L => {
+          const list = bySort(grouped[L]).slice(0, 20);
+          return `
+            <div class="tierCol">
+              <div class="tierColTitle">${L}</div>
+              ${list.map(c => `
+                <button class="tierRow" type="button" data-hero-id="${escapeAttr(c.hero_id)}">
+                  <img class="icon" src="${escapeAttr(c.icon)}" alt="${escapeAttr(c.name)}"/>
+                  <span class="tierRowName">${escapeHtml(c.name)}</span>
+                  <span class="tierSmall">${c.tierGlobal}</span>
+                </button>
+              `).join("")}
+            </div>
+          `;
+        }).join("")}
+      </div>
+    </section>
+  `;
+}
+
+function renderModal(){
+  const champ = getChampion(state.selectedHeroId);
+  if (!champ) return "";
+
+  const main = getMainLane(champ.hero_id) || champ.mainLane || "All";
+  const lane = state.selectedLaneForPick;
+  const laneForTier = lane === "All" ? main : lane;
+  const tier = getLaneTier(champ, laneForTier);
+
+  const isOffMeta = laneNorm(laneForTier) !== laneNorm(main) && laneForTier !== "All";
+
+  const bans = smartBansForPick(champ, laneForTier);
+
+  return `
+    <div class="modalOverlay" data-action="closeModal">
+      <div class="modal" role="dialog" aria-modal="true" aria-label="Champion Details" data-stop>
+        <button class="modalClose" type="button" data-action="closeModal">×</button>
+
+        <div class="modalTop">
+          <img class="iconBig" src="${escapeAttr(champ.icon)}" alt="${escapeAttr(champ.name)}"/>
+          <div class="modalTitle">
+            <div class="titleRow">
+              <div class="title">${escapeHtml(champ.name)}</div>
+              <span class="tierBadge">${tier}</span>
+            </div>
+
+            <div class="pillRow">
+              <span class="pill">Main: ${escapeHtml(main)}</span>
+              <span class="pill">Lane: ${escapeHtml(laneForTier)}</span>
+              ${isOffMeta ? `<span class="pill warn">Off-meta</span>` : ``}
+            </div>
+
+            <div class="lanePickerRow">
+              <label class="laneLabel">Lane</label>
+              <select class="select" data-action="pickLane">
+                ${["All","Baron","Jungle","Mid","ADC","Support"].map(l=>`<option value="${l}" ${lane===l?"selected":""}>${l}</option>`).join("")}
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="modalStats">
+          <div class="statBox"><div class="k">Winrate</div><div class="v">${fmtPct(champ.stats?.CN?.win)}</div></div>
+          <div class="statBox"><div class="k">Pickrate</div><div class="v">${fmtPct(champ.stats?.CN?.pick)}</div></div>
+          <div class="statBox"><div class="k">Banrate</div><div class="v">${fmtPct(champ.stats?.CN?.ban)}</div></div>
+        </div>
+
+        <div class="modalSection">
+          <h3>Smart Ban (Top 3)</h3>
+          <div class="banList">
+            ${bans.map(b => `
+              <button class="banRow" type="button" data-action="setEnemy" data-hero-id="${escapeAttr(b.champ.hero_id)}">
+                <span class="banNum">${b.idx}</span>
+                <img class="icon" src="${escapeAttr(b.champ.icon)}" alt="${escapeAttr(b.champ.name)}"/>
+                <div class="banText">
+                  <div class="banName">${escapeHtml(b.champ.name)} <span class="tierSmall">${getLaneTier(b.champ, getMainLane(b.champ.hero_id)||b.champ.mainLane||"All")}</span></div>
+                  <div class="banWhy">${escapeHtml(b.why)}</div>
+                </div>
+                <span class="ghostTag">als Gegner</span>
+              </button>
+            `).join("")}
+          </div>
+          <div class="hintSmall">Tipp: Klick auf einen Ban setzt ihn im MATCHUP als Gegner.</div>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+/* ---------- EVENTS ---------- */
 
 // Tabs
-function showTab(tab){
-  tabBtns.forEach(b=>b.classList.toggle("active",b.dataset.tab===tab));
-  viewMeta.classList.toggle("hidden",tab!=="meta");
-  viewDraft.classList.toggle("hidden",tab!=="draft");
-  viewMatchup.classList.toggle("hidden",tab!=="matchup");
-  viewTierlist.classList.toggle("hidden",tab!=="tierlist");
-  try{localStorage.setItem("rifto_active_tab",tab)}catch{}
-}
-function restoreTab(){try{const t=localStorage.getItem("rifto_active_tab");if(t)showTab(t)}catch{}}
-
-// Picker
-function openPicker(target){pickTarget=target;pickerSearch.value="";renderPicker("");picker.classList.remove("hidden");pickerSearch.focus()}
-function closePicker(){picker.classList.add("hidden")}
-function renderPicker(q){
-  const query=(q||"").trim().toLowerCase();
-  let list=allChamps;
-  if(query)list=list.filter(c=>c.name.toLowerCase().includes(query));
-  list=list.slice(0,180);
-  pickerGrid.innerHTML="";
-  const frag=document.createDocumentFragment();
-  for(const c of list){
-    const card=document.createElement("button");
-    card.className="card";card.type="button";
-    card.innerHTML=`<div class="cardTop"><img class="icon" src="${c.icon}" alt="${c.name}" loading="lazy" />
-      <div class="nameWrap"><div class="name">${c.name}</div><div class="id">Main: ${mainLaneText(c.hero_id)}</div></div></div>`;
-    card.addEventListener("click",()=>{
-      const name=c.name;
-      if(pickTarget==="me") myPickName=name;
-      else if(pickTarget==="enemy1") enemy1=(enemy1&&enemy1.toLowerCase()===name.toLowerCase())?null:name;
-      else if(pickTarget==="enemy2") enemy2=(enemy2&&enemy2.toLowerCase()===name.toLowerCase())?null:name;
-      else if(pickTarget==="ally1") ally[0]=(ally[0]&&ally[0].toLowerCase()===name.toLowerCase())?null:name;
-      else if(pickTarget==="ally2") ally[1]=(ally[1]&&ally[1].toLowerCase()===name.toLowerCase())?null:name;
-      else if(pickTarget==="ally3") ally[2]=(ally[2]&&ally[2].toLowerCase()===name.toLowerCase())?null:name;
-      else if(pickTarget==="ally4") ally[3]=(ally[3]&&ally[3].toLowerCase()===name.toLowerCase())?null:name;
-      else if(pickTarget==="match") matchPickName=name;
-      saveState();renderAll();closePicker();
-    });
-    frag.appendChild(card);
-  }
-  pickerGrid.appendChild(frag);
-}
-
-// Persistence
-function saveState(){try{localStorage.setItem("rifto_state",JSON.stringify({draftPhase,myPickName,enemy1,enemy2,ally,role:draftRole.value,matchPickName,matchRole:matchRole.value,tierRole:tierRole.value,tierFilter:tierFilter.value}))}catch{}}
-function loadState(){try{const raw=localStorage.getItem("rifto_state");if(!raw)return;const s=JSON.parse(raw);
-  if(s.draftPhase)draftPhase=s.draftPhase;
-  if(s.myPickName)myPickName=s.myPickName;
-  enemy1=s.enemy1||null; enemy2=s.enemy2||null;
-  ally=Array.isArray(s.ally)?[s.ally[0]||null,s.ally[1]||null,s.ally[2]||null,s.ally[3]||null]:[null,null,null,null];
-  if(s.role)draftRole.value=s.role;
-  if(s.matchPickName)matchPickName=s.matchPickName;
-  if(s.matchRole)matchRole.value=s.matchRole;
-  if(s.tierRole)tierRole.value=s.tierRole;
-  if(s.tierFilter)tierFilter.value=s.tierFilter;
-}catch{}}
-
-// Render Draft
-function setPhase(p){
-  draftPhase=p;
-  phaseBtns.forEach(b=>b.classList.toggle("active",b.dataset.phase===p));
-  saveState();renderDraft();
-}
-function renderDraft(){
-  renderPickCard(myPickCard,myPickName,draftRole.value);
-  renderSlot(enemySlot1,enemy1,"+ Enemy 1");
-  renderSlot(enemySlot2,enemy2,"+ Enemy 2");
-  renderSlot(allySlot1,ally[0],"+ Ally 1");
-  renderSlot(allySlot2,ally[1],"+ Ally 2");
-  renderSlot(allySlot3,ally[2],"+ Ally 3");
-  renderSlot(allySlot4,ally[3],"+ Ally 4");
-
-  const phaseLabel=draftPhase==="enemy_fp"?"🎯 Enemy FP":draftPhase==="my_fp"?"⭐ My FP":draftPhase==="mid"?"🔄 Mid Draft":"🛑 Late Draft";
-  const enemies=[enemy1,enemy2].filter(Boolean).join(", ")||"keine";
-  draftContext.textContent=`${phaseLabel} • ${draftRole.value} • Dein Pick: ${myPickName||"–"} • Enemy: ${enemies}`;
-
-  // Off-meta box
-  if(myPickName){
-    const off=offMetaRating(myPickName,draftRole.value);
-    if(off){
-      offMetaBox.classList.remove("hidden");
-      offMetaBox.innerHTML=`<div class="t">${OFF_META_LABEL[off.lvl]}</div><div class="s">${off.txt}</div>`;
-    }else{
-      offMetaBox.classList.add("hidden");
-      offMetaBox.innerHTML="";
-    }
-  }else{
-    offMetaBox.classList.add("hidden");
-    offMetaBox.innerHTML="";
-  }
-
-  // Smart bans
-  draftBans.innerHTML="";
-  if(!myPickName){
-    draftBans.innerHTML=`<div class="mstat"><div class="k">Info</div><div class="v">Wähle zuerst deinen Champion.</div></div>`;
-  }else{
-    renderCounterList(draftBans, smartTop3(myPickName,draftRole.value), true);
-  }
-
-  // Warning + clickable fixes
-  draftFixes.innerHTML="";
-  const warn = myPickName ? draftWarning() : null;
-  if(!warn){
-    draftWarn.classList.add("hidden");
-    draftWarn.innerHTML="";
+document.addEventListener("click", (e) => {
+  const tabBtn = e.target.closest("[data-tab]");
+  if (tabBtn) {
+    setActiveTab(tabBtn.dataset.tab);
     return;
   }
-  draftWarn.classList.remove("hidden");
-  draftWarn.innerHTML=`<div class="t">⚠️ ${warn.title}</div><div class="s">${warn.sub}</div>`;
-  const ex=[myPickName,...ally,enemy1,enemy2].filter(Boolean);
-  const fixes = recommendFix(draftRole.value, warn.key, ex);
-  for(const f of fixes){
-    const card=document.createElement("div");
-    card.className="fixCard";
-    card.innerHTML=`<img src="${f.icon}" alt="${f.name}" />
-      <div><div class="n">${f.name} <span class="tierBadge ${tierClass(f.tier)}" style="margin-left:8px">${f.tier}</span></div>
-      <div class="d">Klick = als dein Pick setzen</div></div>`;
-    card.addEventListener("click",()=>{myPickName=f.name;saveState();renderAll();});
-    draftFixes.appendChild(card);
-  }
-}
 
-// Matchup (heuristic)
-function matchupLists(myName,role){
-  const my=getChampionByName(myName); if(!my) return {hard:[],even:[],good:[]};
-  const pool=rolePool(role,my.hero_id);
-  const weak=pickedWeakVs(my.name,role);
-  const myTypes=champTypes(my.name);
-  const th=thresholdsForRole(role);
-  const scored=pool.map(c=>{
-    const types=champTypes(c.name);
-    let danger=0,good=0;
-    for(const w of weak) if(types.includes(w)) danger+=2;
-    // if enemy lacks your counter traits, it's good
-    for(const t of myTypes){
-      if(t==="assassin_burst" && types.includes("mage_burst")) danger+=1;
-      if(t==="poke" && types.includes("hard_engage")) danger+=1;
-      if(t==="tank" && (types.includes("true_damage")||types.includes("anti_tank"))) danger+=2;
+  // Close modal click on overlay (but not inside modal)
+  const actionEl = e.target.closest("[data-action]");
+  if (actionEl) {
+    const act = actionEl.dataset.action;
+
+    if (act === "closeModal") {
+      // only close if clicked overlay or close button
+      if (e.target.classList.contains("modalOverlay") || actionEl.classList.contains("modalClose")) {
+        closeModal();
+      }
+      return;
     }
-    // good if you counter them: if they have 'assassin_burst' and you have 'pointclick_cc' etc (rough)
-    if(types.includes("assassin_burst") && myTypes.includes("pointclick_cc")) good+=2;
-    if(types.includes("tank") && (myTypes.includes("true_damage")||myTypes.includes("anti_tank"))) good+=2;
-    const diff = (danger - good);
-    return {name:c.name,icon:c.icon,score:diff, tier:tierForScore(metaScore(c),th),
-            why: diff>=3?`Schwer für ${my.name} (Counter + Meta)`:diff<=-2?`Gut für ${my.name} (Vorteil)`: `Skill-Matchup gegen ${my.name}`};
-  }).sort((a,b)=>b.score-a.score);
-  const hard=scored.slice(0,3).map(x=>({...x,why:reasonAgainst(my.name,role,x.name)}));
-  const good=scored.slice(-3).reverse().map(x=>({...x,why:`Du hast Vorteil gegen ${x.name} (besserer Trade/Range/Setup)`}));
-  const even=scored.slice(3,6).map(x=>({...x,why:`Skill-Matchup: beide können gewinnen.`}));
-  return {hard,even,good};
-}
-function renderMatchup(){
-  renderPickCard(matchPickCard, matchPickName, matchRole.value);
-  matchHard.innerHTML="";matchEven.innerHTML="";matchGood.innerHTML="";
-  if(!matchPickName){
-    matchHard.innerHTML=`<div class="mstat"><div class="k">Info</div><div class="v">Wähle einen Champion.</div></div>`;
+
+    if (act === "setEnemy") {
+      const heroId = actionEl.dataset.heroId || actionEl.getAttribute("data-hero-id");
+      if (heroId) {
+        state.enemyHeroId = String(heroId);
+        state.tab = "matchup";
+        render();
+      }
+      return;
+    }
+  }
+
+  // MAIN FIX: Champion cards always clickable (Event Delegation)
+  const card = e.target.closest("button.card[data-hero-id], button.tierRow[data-hero-id], button.banRow[data-hero-id]");
+  if (card) {
+    const heroId = card.dataset.heroId || card.getAttribute("data-hero-id");
+    if (heroId) {
+      openModal(heroId);
+    }
+  }
+});
+
+// Prevent overlay clicks from closing when inside modal
+document.addEventListener("click", (e) => {
+  if (e.target && e.target.hasAttribute("data-stop")) {
+    e.stopPropagation();
+  }
+}, true);
+
+// Inputs / selects
+document.addEventListener("input", (e) => {
+  const el = e.target;
+  if (!el) return;
+
+  if (el.matches('input[data-action="search"]')) {
+    state.search = el.value || "";
+    render();
+  }
+});
+
+document.addEventListener("change", (e) => {
+  const el = e.target;
+  if (!el) return;
+
+  if (el.matches('select[data-action="sort"]')) {
+    state.sort = el.value;
+    render();
     return;
   }
-  const lists=matchupLists(matchPickName, matchRole.value);
-  renderCounterList(matchHard, lists.hard);
-  renderCounterList(matchEven, lists.even);
-  renderCounterList(matchGood, lists.good);
-}
-
-// Tierlist
-function renderTierlist(){
-  const role=tierRole.value;
-  const filt=tierFilter.value;
-  const th=thresholdsForRole(role==="Global"?"Global":role);
-  const list = (role==="Global"?allChamps:allChamps.filter(c=>rolesForHero(c.hero_id).includes(role)));
-  const rows=list.map(c=>{
-    const tier=tierForScore(metaScore(c),th);
-    return {name:c.name,icon:c.icon,hero_id:c.hero_id, tier, lane:mainLaneText(c.hero_id), score:metaScore(c)};
-  }).sort((a,b)=>b.score-a.score);
-  const filtered = filt==="all"?rows:rows.filter(r=>r.tier===filt);
-  tierList.innerHTML="";
-  for(const r of filtered){
-    const el=document.createElement("div");
-    el.className="tierRow";
-    el.innerHTML=`<img src="${r.icon}" alt="${r.name}" /><div class="main"><div class="nm">${r.name}</div><div class="ln">Main: ${r.lane}</div></div><span class="tierBadge ${tierClass(r.tier)}">${r.tier}</span>`;
-    el.addEventListener("click",()=>{
-      const c=getChampionByName(r.name);
-      if(c) openMetaModal(c);
-      showTab("meta");
-    });
-    tierList.appendChild(el);
+  if (el.matches('select[data-action="lane"]')) {
+    state.lane = el.value;
+    render();
+    return;
   }
-}
-
-// Render all
-function renderAll(){renderDraft();renderMatchup();renderTierlist();applyMeta();}
-
-// Events
-tabBtns.forEach(b=>b.addEventListener("click",()=>showTab(b.dataset.tab)));
-modalClose.addEventListener("click",()=>modal.classList.add("hidden"));
-modal.addEventListener("click",e=>{if(e.target.classList.contains("modalBackdrop"))modal.classList.add("hidden")});
-modalRoleSelect.addEventListener("change",()=>{const c=getChampionByName(modalName.textContent);if(c)updateModalForRole(c)});
-
-searchEl.addEventListener("input",applyMeta);
-sortEl.addEventListener("change",applyMeta);
-
-phaseBtns.forEach(b=>b.addEventListener("click",()=>setPhase(b.dataset.phase)));
-btnPickMe.addEventListener("click",()=>openPicker("me"));
-draftRole.addEventListener("change",()=>{saveState();renderDraft()});
-enemySlot1.addEventListener("click",()=>openPicker("enemy1"));
-enemySlot2.addEventListener("click",()=>openPicker("enemy2"));
-allySlot1.addEventListener("click",()=>openPicker("ally1"));
-allySlot2.addEventListener("click",()=>openPicker("ally2"));
-allySlot3.addEventListener("click",()=>openPicker("ally3"));
-allySlot4.addEventListener("click",()=>openPicker("ally4"));
-
-btnMatchPick.addEventListener("click",()=>openPicker("match"));
-matchRole.addEventListener("change",()=>{saveState();renderMatchup()});
-tierRole.addEventListener("change",()=>{saveState();renderTierlist()});
-tierFilter.addEventListener("change",()=>{saveState();renderTierlist()});
-
-pickerClose.addEventListener("click",closePicker);
-picker.addEventListener("click",e=>{if(e.target.classList.contains("modalBackdrop"))closePicker()});
-pickerSearch.addEventListener("input",()=>renderPicker(pickerSearch.value));
-
-// Load
-async function loadJson(url){const res=await fetch(url,{cache:"no-store"});if(!res.ok)throw new Error(`${url} HTTP ${res.status}`);return res.json()}
-async function load(){
-  try{
-    statusEl.textContent="Lade Daten…";
-    const ts=Date.now();
-    const meta=await loadJson(`./meta.json?ts=${ts}`);
-    patchPill.textContent=`Patch: ${meta.patch??"–"}`;
-    updatePill.textContent=`Update: ${meta.lastUpdated??"–"}`;
-    allChamps=normalizeMeta(meta);
-
-    try{const heroList=await loadJson(`${HERO_LIST_URL}?ts=${ts}`);heroDb=(heroList&&heroList.heroList)?heroList.heroList:{}}catch{heroDb={}}
-    try{const tags=await loadJson(`./champ_tags.json?ts=${ts}`);tagDb=tags||{};defaultWeakByRole=tagDb._defaults||{};roleTags=tagDb._role_tags||{}}catch{tagDb={};defaultWeakByRole={};roleTags={}}
-
-    updateTrends();
-    statusEl.textContent=`Geladen: ${allChamps.length} Champions`;
-    statusEl.style.display="block";
-
-    restoreTab();
-    loadState();
-    setPhase(draftPhase);
-    renderAll();
-  }catch(err){
-    console.error(err);
-    statusEl.textContent=`Fehler beim Laden: ${err?.message??err}`;
-    statusEl.style.display="block";
+  if (el.matches('select[data-action="pickLane"]')) {
+    state.selectedLaneForPick = el.value;
+    render();
+    return;
   }
+});
+
+/* ---------- HELPERS ---------- */
+
+function escapeHtml(s){
+  return String(s ?? "")
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
 }
-load();
+function escapeAttr(s){ return escapeHtml(s); }
+
+/* ---------- BOOT ---------- */
+
+(async function boot(){
+  await loadData();
+  render();
 })();
