@@ -4,7 +4,7 @@ import requests
 from datetime import datetime, timezone
 
 # 1) Always-works champion list (Wild Rift site page-data)
-RIOT_PAGE_DATA = "https://wildrift.leagueoflegends.com/page-data/en-us/champions/page-data.json"
+RIOT_PAGE_DATA = "https://wildrift.leagueoflegends.com/page-data/en-gb/champions/page-data.json"
 
 # 2) Always-works icons (Riot DDragon)
 DD_VERSIONS = "https://ddragon.leagueoflegends.com/api/versions.json"
