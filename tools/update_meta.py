@@ -9,33 +9,28 @@ HEADERS = {
     "Referer": "https://lolm.qq.com/",
 }
 
-def fetch_json(url: str):
-    r = requests.get(url, headers=HEADERS, timeout=30)
-    r.raise_for_status()
-    return r.json()
+def try_fetch_json(url: str, timeout_seconds: int = 8):
+    try:
+        r = requests.get(url, headers=HEADERS, timeout=timeout_seconds)
+        return r.status_code, r.text[:5000]  # keep it small for debug
+    except Exception as e:
+        return None, str(e)
 
 def main():
     now = datetime.now(timezone.utc).astimezone().strftime("%Y-%m-%d %H:%M")
+
+    status, snippet = try_fetch_json(CN_URL, timeout_seconds=8)
 
     meta = {
         "patch": "CN Live",
         "lastUpdated": now,
         "source": "Tencent CN (mlol.qt.qq.com hero_rank_list_v2)",
-        "statsByName": {},   # Frontend kann damit arbeiten
-        "debug": {}
+        "statsByName": {},
+        "debug": {
+            "tencent_status": status,
+            "tencent_snippet": snippet
+        }
     }
-
-    try:
-        data = fetch_json(CN_URL)
-        # Wir speichern erstmal nur Debug-Infos, damit nix mehr crasht.
-        # (Stats/Mapping machen wir im nächsten Schritt richtig WR-only.)
-        if isinstance(data, dict):
-            meta["debug"]["tencent_keys"] = list(data.keys())[:30]
-            meta["debug"]["data_type"] = str(type(data.get("data")).__name__)
-        else:
-            meta["debug"]["data_type"] = str(type(data).__name__)
-    except Exception as e:
-        meta["debug"]["tencent_error"] = str(e)
 
     with open("meta.json", "w", encoding="utf-8") as f:
         json.dump(meta, f, ensure_ascii=False, indent=2)
