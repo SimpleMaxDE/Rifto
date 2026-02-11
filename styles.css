@@ -317,3 +317,41 @@ body{
 
 .tinyNote{ color: var(--muted); font-size:12px; margin-top:8px; }
 .draftResult{ padding:12px 16px 16px 16px; }
+/* ===== Tier Sections ===== */
+
+.tier-section {
+  margin-bottom: 48px;
+}
+
+.tier-title {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 18px;
+  padding-left: 6px;
+  letter-spacing: 1px;
+}
+
+.tier-title.ss {
+  color: #ff4d6d;
+  text-shadow: 0 0 12px rgba(255, 77, 109, 0.6);
+}
+
+.tier-title.s {
+  color: #ff8c42;
+}
+
+.tier-title.a {
+  color: #4da6ff;
+}
+
+.tier-title.b {
+  color: #9aa4b2;
+}
+
+/* ===== SS Badge Upgrade ===== */
+
+.tier-badge.ss {
+  background: linear-gradient(135deg, #ff4d6d, #ff1f4b);
+  box-shadow: 0 0 12px rgba(255, 77, 109, 0.6);
+  transform: scale(1.1);
+}
