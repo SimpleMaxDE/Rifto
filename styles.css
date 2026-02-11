@@ -443,3 +443,38 @@ body{
   gap: 6px;
   margin-top: 6px;
 }
+/* ===== Lane badge: pill + dezenter ===== */
+.laneBadge{
+  border-radius: 999px !important;
+  padding: 3px 7px !important;
+  font-size: 10px !important;
+  font-weight: 800 !important;
+  letter-spacing: .6px !important;
+  background: rgba(255,255,255,.02) !important;
+  border: 1px solid rgba(255,255,255,.12) !important;
+  opacity: .72 !important;
+}
+/* ===== Tier SS: Premium Glow ===== */
+.tierBadge.tierSS,
+.tierBadge.SS,
+.tier-badge.ss{
+  border-color: rgba(255,77,109,.65) !important;
+  background: linear-gradient(135deg, rgba(255,77,109,.26), rgba(255,31,91,.10)) !important;
+  box-shadow:
+    0 0 0 1px rgba(255,77,109,.18) inset,
+    0 0 16px rgba(255,77,109,.28) !important;
+  position: relative;
+}
+
+.tierBadge.tierSS::after,
+.tierBadge.SS::after,
+.tier-badge.ss::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:999px;
+  background: linear-gradient(90deg, rgba(255,255,255,.10), rgba(255,255,255,0));
+  pointer-events:none;
+  mix-blend-mode: screen;
+  opacity:.35;
+}
