@@ -110,37 +110,51 @@ body{
 .tierB{ border-color: rgba(160,200,120,.35); background: rgba(160,200,120,.12); }
 .tierC{ border-color: rgba(255,255,255,.10); background: rgba(255,255,255,.04); }
 
-.laneBadge{
-  display:inline-flex; align-items:center; justify-content:center;
-  min-width:42px;
-  padding:4px 8px;
-  border-radius:999px;
-  border:1px solid var(--line);
-  font-weight:900;
-  font-size:11px;
-  background: rgba(255,255,255,.04);
-  margin-right:6px;
+/* ===== Lane Badge (sekundär – dezenter als Tier) ===== */
+
+.laneBadge {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 999px;
+  letter-spacing: .5px;
+
+  background: transparent;
+  border: 1.5px solid;
+  opacity: 0.85;
 }
 
-.lane-jungle{ background: rgba(68, 214, 133, .10); border-color: rgba(68, 214, 133, .30); }
-.lane-mid{ background: rgba(90, 160, 255, .10); border-color: rgba(90, 160, 255, .30); }
-.lane-adc{ background: rgba(255, 173, 85, .10); border-color: rgba(255, 173, 85, .30); }
-.lane-support{ background: rgba(185, 108, 255, .10); border-color: rgba(185, 108, 255, .30); }
-.lane-baron{ background: rgba(255, 107, 107, .10); border-color: rgba(255, 107, 107, .30); }
+/* Jungle */
+.lane-jungle {
+  color: #44d685;
+  border-color: rgba(68, 214, 133, 0.6);
+}
+
+/* Mid */
+.lane-mid {
+  color: #4da6ff;
+  border-color: rgba(77, 166, 255, 0.6);
+}
+
+/* ADC */
+.lane-adc {
+  color: #ffb347;
+  border-color: rgba(255, 179, 71, 0.6);
+}
+
+/* Support */
+.lane-support {
+  color: #c084fc;
+  border-color: rgba(192, 132, 252, 0.6);
+}
+
+/* Top */
+.lane-top {
+  color: #f87171;
+  border-color: rgba(248, 113, 113, 0.6);
+}
 
 .id .hash{ opacity:.65; font-size:12px; }
-.laneBaron{ border-color: rgba(255,200,120,.25); background: rgba(255,200,120,.10); }
-.laneJungle{ border-color: rgba(120,255,200,.25); background: rgba(120,255,200,.10); }
-.laneMid{ border-color: rgba(120,160,255,.25); background: rgba(120,160,255,.10); }
-.laneADC{ border-color: rgba(255,140,80,.25); background: rgba(255,140,80,.10); }
-.laneSupport{ border-color: rgba(200,160,255,.25); background: rgba(200,160,255,.10); }
-
-/* Lowercase keys used by JS: lane-jungle, lane-mid, lane-adc, lane-support, lane-baron */
-.lane-jungle{ border-color: rgba(68,214,133,.30); background: rgba(68,214,133,.10); }
-.lane-mid{ border-color: rgba(90,160,255,.30); background: rgba(90,160,255,.10); }
-.lane-adc{ border-color: rgba(255,173,85,.30); background: rgba(255,173,85,.10); }
-.lane-support{ border-color: rgba(200,160,255,.30); background: rgba(200,160,255,.10); }
-.lane-baron{ border-color: rgba(255,120,120,.30); background: rgba(255,120,120,.10); }
 
 .id .hash{ margin-left:0; }
 
