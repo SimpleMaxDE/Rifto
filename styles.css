@@ -110,6 +110,40 @@ body{
 .tierB{ border-color: rgba(160,200,120,.35); background: rgba(160,200,120,.12); }
 .tierC{ border-color: rgba(255,255,255,.10); background: rgba(255,255,255,.04); }
 
+.laneBadge{
+  display:inline-flex; align-items:center; justify-content:center;
+  min-width:42px;
+  padding:4px 8px;
+  border-radius:999px;
+  border:1px solid var(--line);
+  font-weight:900;
+  font-size:11px;
+  background: rgba(255,255,255,.04);
+  margin-right:6px;
+}
+
+.lane-jungle{ background: rgba(68, 214, 133, .10); border-color: rgba(68, 214, 133, .30); }
+.lane-mid{ background: rgba(90, 160, 255, .10); border-color: rgba(90, 160, 255, .30); }
+.lane-adc{ background: rgba(255, 173, 85, .10); border-color: rgba(255, 173, 85, .30); }
+.lane-support{ background: rgba(185, 108, 255, .10); border-color: rgba(185, 108, 255, .30); }
+.lane-baron{ background: rgba(255, 107, 107, .10); border-color: rgba(255, 107, 107, .30); }
+
+.id .hash{ opacity:.65; font-size:12px; }
+.laneBaron{ border-color: rgba(255,200,120,.25); background: rgba(255,200,120,.10); }
+.laneJungle{ border-color: rgba(120,255,200,.25); background: rgba(120,255,200,.10); }
+.laneMid{ border-color: rgba(120,160,255,.25); background: rgba(120,160,255,.10); }
+.laneADC{ border-color: rgba(255,140,80,.25); background: rgba(255,140,80,.10); }
+.laneSupport{ border-color: rgba(200,160,255,.25); background: rgba(200,160,255,.10); }
+
+/* Lowercase keys used by JS: lane-jungle, lane-mid, lane-adc, lane-support, lane-baron */
+.lane-jungle{ border-color: rgba(68,214,133,.30); background: rgba(68,214,133,.10); }
+.lane-mid{ border-color: rgba(90,160,255,.30); background: rgba(90,160,255,.10); }
+.lane-adc{ border-color: rgba(255,173,85,.30); background: rgba(255,173,85,.10); }
+.lane-support{ border-color: rgba(200,160,255,.30); background: rgba(200,160,255,.10); }
+.lane-baron{ border-color: rgba(255,120,120,.30); background: rgba(255,120,120,.10); }
+
+.id .hash{ margin-left:0; }
+
 .stats{display:flex; gap:10px; margin-top:12px;}
 .stat{
   flex:1; padding:10px;
@@ -283,59 +317,3 @@ body{
 
 .tinyNote{ color: var(--muted); font-size:12px; margin-top:8px; }
 .draftResult{ padding:12px 16px 16px 16px; }
-/* ===== UI Polish v15 (CSS-only) ===== */
-
-/* Better focus styling */
-.input:focus, .select:focus, .btn:focus, .tab:focus, .phase:focus, .card:focus{
-  outline: none;
-  box-shadow: 0 0 0 3px rgba(120,160,255,.18);
-  border-color: rgba(120,160,255,.28);
-}
-
-/* Custom select arrow */
-.select{
-  -webkit-appearance: none;
-  appearance: none;
-  padding-right: 36px;
-  background-image:
-    linear-gradient(45deg, transparent 50%, rgba(232,238,252,.85) 50%),
-    linear-gradient(135deg, rgba(232,238,252,.85) 50%, transparent 50%);
-  background-position:
-    calc(100% - 18px) 50%,
-    calc(100% - 12px) 50%;
-  background-size: 6px 6px, 6px 6px;
-  background-repeat: no-repeat;
-}
-
-/* Card polish */
-.card{
-  box-shadow: 0 8px 22px rgba(0,0,0,.22);
-  transition: transform .12s ease, border-color .12s ease, box-shadow .12s ease;
-}
-.card:hover{
-  box-shadow: 0 14px 30px rgba(0,0,0,.32);
-}
-.card:active{
-  transform: scale(.995);
-}
-
-/* Tier badge refinement */
-.tierBadge{
-  letter-spacing: .3px;
-}
-
-/* Modal close improvement */
-.modalClose{
-  width: 34px;
-  height: 34px;
-  border-radius: 12px;
-  border: 1px solid rgba(255,255,255,.10);
-  background: rgba(255,255,255,.04);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-.modalClose:hover{
-  border-color: rgba(255,255,255,.18);
-  background: rgba(255,255,255,.06);
-}

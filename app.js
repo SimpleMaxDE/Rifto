@@ -152,6 +152,28 @@
     return Array.from(out);
   }
 
+  // Main role badge (compact) shown on champion cards.
+  // Uses the first detected role as "main".
+  function mainRoleForHero(hero_id) {
+    const roles = rolesForHero(hero_id);
+    return roles[0] || "";
+  }
+
+  function roleShort(role) {
+    if (role === "Jungle") return "JGL";
+    if (role === "Mid") return "MID";
+    if (role === "ADC") return "ADC";
+    if (role === "Support") return "SUP";
+    if (role === "Baron") return "TOP";
+    return role ? role.toUpperCase().slice(0, 3) : "";
+  }
+
+  function roleBadgeHTML(role) {
+    if (!role) return "";
+    const key = role.toLowerCase();
+    return `<span class="laneBadge lane-${key}">${roleShort(role)}</span>`;
+  }
+
   function thresholdsForRole(role) {
     const pool = allChamps.filter(c => rolesForHero(c.hero_id).includes(role));
     const list = (pool.length ? pool : allChamps).map(c => metaScore(c)).sort((a,b)=>b-a);
@@ -410,7 +432,7 @@
           <img class="icon" src="${c.icon}" alt="${c.name}" loading="lazy" />
           <div class="nameWrap">
             <div class="name">${c.name}</div>
-            <div class="id">#${c.hero_id}</div>
+            <div class="id">${roleBadgeHTML(mainRoleForHero(c.hero_id))}<span class="hash">#${c.hero_id}</span></div>
           </div>
           <span class="tierBadge ${tierClass(tier)}">${tier}</span>
         </div>
