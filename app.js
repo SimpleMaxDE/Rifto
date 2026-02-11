@@ -152,35 +152,6 @@
     return Array.from(out);
   }
 
-function mainRoleForHero(heroId){
-  const rolesArr = rolesForHero(heroId);
-  const roles = new Set(rolesArr);
-  const pref = ["Jungle","Mid","Baron","ADC","Support"];
-  for (const r of pref) if (roles.has(r)) return r;
-  return "Global";
-}
-function roleShort(role){
-  switch(role){
-    case "Jungle": return "JGL";
-    case "Mid": return "MID";
-    case "Baron": return "TOP";
-    case "ADC": return "ADC";
-    case "Support": return "SUP";
-    default: return (role||"").toUpperCase().slice(0,3);
-  }
-}
-function roleClass(role){
-  switch(role){
-    case "Jungle": return "laneJungle";
-    case "Mid": return "laneMid";
-    case "Baron": return "laneBaron";
-    case "ADC": return "laneAdc";
-    case "Support": return "laneSupport";
-    default: return "laneGlobal";
-  }
-}
-
-
   function thresholdsForRole(role) {
     const pool = allChamps.filter(c => rolesForHero(c.hero_id).includes(role));
     const list = (pool.length ? pool : allChamps).map(c => metaScore(c)).sort((a,b)=>b-a);
@@ -439,7 +410,7 @@ function roleClass(role){
           <img class="icon" src="${c.icon}" alt="${c.name}" loading="lazy" />
           <div class="nameWrap">
             <div class="name">${c.name}</div>
-            <div class="subline"><span class="laneBadge ${roleClass(mainRole)}" title="Main: ${mainRole}">${roleShort(mainRole)}</span></div>
+            <div class="id">#${c.hero_id}</div>
           </div>
           <span class="tierBadge ${tierClass(tier)}">${tier}</span>
         </div>
@@ -620,7 +591,7 @@ function roleClass(role){
           <img class="icon" src="${c.icon}" alt="${c.name}" loading="lazy" />
           <div class="nameWrap">
             <div class="name">${c.name}</div>
-            <div class="subline"><span class="laneBadge ${roleClass(mainRole)}" title="Main: ${mainRole}">${roleShort(mainRole)}</span></div>
+            <div class="id">#${c.hero_id}</div>
           </div>
         </div>
       `;
