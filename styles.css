@@ -100,41 +100,45 @@ body{
 .name{font-weight:800; font-size:14px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
 .id{color:var(--muted); font-size:11px; margin-top:2px;}
 .tierBadge{
-  display:inline-flex; align-items:center; justify-content:center;
-  min-width:28px;
-  padding:4px 8px;
-  border-radius:999px;
-  border:1px solid var(--line);
+  border-width:1px;
+  background: rgba(255,255,255,.05);
   font-weight:900;
-  font-size:12px;
-  background: rgba(255,255,255,.04);
+  letter-spacing:.6px;
 }
+
 .tierSS{ border-color: rgba(255,80,120,.35); background: rgba(255,80,120,.12); }
 .tierS{ border-color: rgba(255,140,80,.35); background: rgba(255,140,80,.12); }
 .tierA{ border-color: rgba(120,160,255,.35); background: rgba(120,160,255,.12); }
 .tierB{ border-color: rgba(160,200,120,.35); background: rgba(160,200,120,.12); }
 .tierC{ border-color: rgba(255,255,255,.10); background: rgba(255,255,255,.04); }
 
+/* ===== SS Premium Glow Upgrade ===== */
+.tierBadge.SS,
+.tier-badge.ss{
+  box-shadow: 0 0 14px rgba(255,77,109,.35);
+  border-color: rgba(255,77,109,.55);
+  background: linear-gradient(135deg, rgba(255,77,109,.22), rgba(255,31,91,.12));
+}
+
+
 /* ===== Lane Badge (sekundär – dezenter als Tier) ===== */
 
 .laneBadge{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-
-  min-width:36px;          /* vorher 42px */
-  padding:2px 6px;         /* kleiner */
-  border-radius:999px;
-
+  opacity:.78;
   font-weight:800;
-  font-size:10px;          /* vorher 11px */
-  letter-spacing:.5px;
-
-  border:1px solid rgba(255,255,255,.15);
-  background:rgba(255,255,255,.06);
-
-  margin-right:6px;
+  font-size:10px;
+  padding:3px 7px;
+  min-width:36px;
+  border-width:1px;
+  background: rgba(255,255,255,.03);
+  letter-spacing:.6px;
 }
+/* Make lane badges less dominant (keep text color, soften bg/border) */
+.lane-jungle,.lane-mid,.lane-adc,.lane-support,.lane-baron,.lane-top{
+  background: rgba(255,255,255,.02) !important;
+  border-color: rgba(255,255,255,.12) !important;
+}
+
 
 /* Jungle */
 .lane-jungle {
