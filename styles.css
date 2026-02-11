@@ -112,16 +112,23 @@ body{
 
 /* ===== Lane Badge (sekundär – dezenter als Tier) ===== */
 
-.laneBadge {
-  font-size: 11px;
-  font-weight: 600;
-  padding: 3px 8px;
-  border-radius: 999px;
-  letter-spacing: .5px;
+.laneBadge{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
 
-  background: transparent;
-  border: 1.5px solid;
-  opacity: 0.85;
+  min-width:36px;          /* vorher 42px */
+  padding:2px 6px;         /* kleiner */
+  border-radius:999px;
+
+  font-weight:800;
+  font-size:10px;          /* vorher 11px */
+  letter-spacing:.5px;
+
+  border:1px solid rgba(255,255,255,.15);
+  background:rgba(255,255,255,.06);
+
+  margin-right:6px;
 }
 
 /* Jungle */
