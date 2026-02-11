@@ -18,14 +18,16 @@ body{
               radial-gradient(900px 600px at 90% 10%, rgba(120,80,255,.14), transparent 65%),
               var(--bg);
   color:var(--text);
+  overflow-x:hidden;
 }
 .topbar{
   display:flex; justify-content:space-between; align-items:center;
   padding:18px 18px;
-  border-bottom:1px solid var(--line);
-  background: linear-gradient(180deg, rgba(255,255,255,.02), transparent);
-  position:sticky; top:0; z-index:10;
-  backdrop-filter: blur(10px);
+  border-bottom:none;
+  background: rgba(7,11,20,.98);
+  position:sticky; top:0; z-index:40;
+  backdrop-filter: blur(6px);
+  box-shadow:none;
 }
 .brand .logo{font-weight:900; letter-spacing:.6px; font-size:22px;}
 .brand .sub{color:var(--muted); font-size:12px; margin-top:2px;}
@@ -104,6 +106,8 @@ body{
   background: rgba(255,255,255,.05);
   font-weight:900;
   letter-spacing:.6px;
+  margin-left:auto;
+  flex:0 0 auto;
 }
 
 .tierSS{ border-color: rgba(255,80,120,.35); background: rgba(255,80,120,.12); }
@@ -247,12 +251,13 @@ body{
   display:flex;
   gap:10px;
   padding:10px 16px;
-  border-bottom:1px solid var(--line);
+  border-bottom:none;
   position:sticky;
-  top:64px;
-  z-index:9;
-  background: rgba(7,11,20,.65);
-  backdrop-filter: blur(10px);
+  top:var(--tabs-top, 64px);
+  z-index:39;
+  background: rgba(7,11,20,.92);
+  backdrop-filter: blur(8px);
+  box-shadow:none;
 }
 .tab{
   padding:10px 12px;
@@ -563,3 +568,50 @@ body{
   background-clip: padding-box;
 }
 
+/* ===== PATCH 2026-02-11b: sticky polish + badge hierarchy lock ===== */
+
+.cardTop{
+  align-items:flex-start;
+}
+
+.nameWrap{
+  flex:1;
+}
+
+.tierBadge{
+  align-self:flex-start;
+  margin-top:1px;
+}
+
+/* lane badge always secondary */
+.laneBadge{
+  opacity:.68 !important;
+  border-color: rgba(255,255,255,.10) !important;
+  background: rgba(255,255,255,.015) !important;
+}
+
+/* SS has the strongest visual signal */
+.tierBadge.tierSS,
+.tierBadge.SS{
+  box-shadow:
+    0 0 0 1px rgba(255,77,109,.22) inset,
+    0 0 20px rgba(255,77,109,.36);
+}
+
+
+/* ===== PATCH 2026-02-11d: sticky stability without seam lines ===== */
+.topbar,
+.tabs{
+  border-bottom: 1px solid rgba(255,255,255,.06);
+  box-shadow: none !important;
+}
+
+.topbar::after,
+.tabs::after{
+  content:none !important;
+}
+
+/* keep the tab bar always visible over card content */
+.tabs{
+  isolation:isolate;
+}

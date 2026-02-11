@@ -6,6 +6,8 @@
   const trendPill = $("trendPill");
 
   const tabBtns = Array.from(document.querySelectorAll(".tab"));
+  const topbar = document.querySelector(".topbar");
+  const tabsNav = document.querySelector(".tabs");
   const viewMeta = $("viewMeta");
   const viewDraft = $("viewDraft");
   const viewMatchup = $("viewMatchup");
@@ -650,8 +652,16 @@
     } catch {}
   }
 
+  function syncStickyOffsets() {
+    if (!topbar || !tabsNav) return;
+    const h = Math.ceil(topbar.getBoundingClientRect().height || 64);
+    document.documentElement.style.setProperty("--tabs-top", `${h}px`);
+  }
+
   // Events
   tabBtns.forEach(b => b.addEventListener("click", () => showTab(b.dataset.tab)));
+  window.addEventListener("resize", syncStickyOffsets);
+  window.addEventListener("orientationchange", syncStickyOffsets);
 
   modalClose.addEventListener("click", ()=>modal.classList.add("hidden"));
   modal.addEventListener("click", (e)=>{ if (e.target.classList.contains("modalBackdrop")) modal.classList.add("hidden"); });
@@ -688,6 +698,7 @@
       const meta = await loadJson(`./meta.json?ts=${ts}`);
       patchPill.textContent = `Patch: ${meta.patch ?? "–"}`;
       updatePill.textContent = `Update: ${meta.lastUpdated ?? "–"}`;
+      syncStickyOffsets();
 
       allChamps = normalizeMeta(meta);
 
@@ -713,6 +724,7 @@
 
       applyMetaFilters();
       renderDraft();
+      syncStickyOffsets();
     } catch (err) {
       console.error(err);
       statusEl.textContent = `Fehler beim Laden: ${err?.message ?? err}`;
@@ -720,5 +732,6 @@
     }
   }
 
+  syncStickyOffsets();
   load();
 })();
