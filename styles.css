@@ -1,7 +1,5 @@
 /* Theme */
 :root{
-  --topbarH: 76px;
-
   --bg:#070b14;
   --panel:#0b1220;
   --card2:#0c1628;
@@ -22,17 +20,12 @@ body{
   color:var(--text);
 }
 .topbar{
-  position: sticky;
-  top: 0;
-  z-index: 20;
-  padding: 18px 16px;
-  min-height: var(--topbarH);
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  background: rgba(7,11,20,.82);
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(255,255,255,.06);
+  display:flex; justify-content:space-between; align-items:center;
+  padding:18px 18px;
+  border-bottom:1px solid var(--line);
+  background: linear-gradient(180deg, rgba(255,255,255,.02), transparent);
+  position:sticky; top:0; z-index:10;
+  backdrop-filter: blur(10px);
 }
 .brand .logo{font-weight:900; letter-spacing:.6px; font-size:22px;}
 .brand .sub{color:var(--muted); font-size:12px; margin-top:2px;}
@@ -254,13 +247,12 @@ body{
   display:flex;
   gap:10px;
   padding:10px 16px;
+  border-bottom:1px solid var(--line);
   position:sticky;
-  top: var(--topbarH);
-  z-index: 19;
-  background: rgba(7,11,20,.78);
-  backdrop-filter: blur(12px);
-  box-shadow: 0 10px 25px rgba(0,0,0,.18);
-  border-bottom: 1px solid rgba(255,255,255,.05);
+  top:64px;
+  z-index:9;
+  background: rgba(7,11,20,.65);
+  backdrop-filter: blur(10px);
 }
 .tab{
   padding:10px 12px;
@@ -487,7 +479,87 @@ body{
   opacity:.35;
 }
 
-/* === Patch: Tier badge alignment + sticky header polish === */
-.cardTop{align-items:center;}
-.nameWrap{flex:1; min-width:0;}
-.tierBadge, .tier-badge{margin-left:auto;}
+
+/* ===== PATCH 2026-02-11: Lane badges calmer + SS tier more special + name overlap fix ===== */
+
+/* Fix: name should never collide with role badge */
+.nameWrap{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  gap:3px;
+  min-width:0;
+}
+.name{
+  line-height:1.15;
+}
+
+/* Put lane badge + #id on its own line */
+.id{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  margin-top:2px;
+  min-width:0;
+}
+
+/* Lane badge: pill, smaller, less dominant */
+.laneBadge{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:999px;
+  padding:3px 8px;
+  min-width:38px;
+  font-weight:800;
+  font-size:10px;
+  letter-spacing:.6px;
+  opacity:.78;
+  border:1px solid rgba(255,255,255,.12);
+  background: rgba(255,255,255,.02);
+}
+
+/* Lane colors: keep ONLY text color (background stays neutral) */
+.lane-jungle{ color:#44d685; }
+.lane-mid{    color:#4da6ff; }
+.lane-adc{    color:#ffad5b; }
+.lane-support{color:#caa0ff; }
+.lane-baron,
+.lane-top{    color:#ff7a7a; }
+
+/* If you still have older border/bg rules, this forces them neutral */
+.lane-jungle,.lane-mid,.lane-adc,.lane-support,.lane-baron,.lane-top{
+  background: rgba(255,255,255,.02) !important;
+  border-color: rgba(255,255,255,.12) !important;
+}
+
+/* Tier SS: stronger glow + subtle animated shine */
+.tierBadge.tierSS,
+.tierSS{
+  background: linear-gradient(135deg, rgba(255,77,109,.24), rgba(255,31,91,.12));
+  border-color: rgba(255,77,109,.60);
+  box-shadow: 0 0 18px rgba(255,77,109,.38);
+  transform: translateZ(0);
+}
+.tierBadge.tierSS::after{
+  content:"";
+  position:absolute;
+  inset:-1px;
+  border-radius:999px;
+  background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,.22) 45%, transparent 70%);
+  opacity:.22;
+  pointer-events:none;
+  animation: tierShine 2.8s ease-in-out infinite;
+}
+@keyframes tierShine{
+  0%{ transform: translateX(-40%); opacity:.0; }
+  20%{ opacity:.25; }
+  50%{ transform: translateX(40%); opacity:.18; }
+  100%{ transform: translateX(40%); opacity:.0; }
+}
+
+/* Optional: remove the thin “scroll line” that can appear from subpixel seams */
+.panel, .card{
+  background-clip: padding-box;
+}
+
