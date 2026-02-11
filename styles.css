@@ -284,3 +284,45 @@ button, .card {
 body, .app, .panel, .card, .tabs, .tab, .title, .subtitle, .meta, .label {
   color: inherit;
 }
+/* ===== RIFTO: GLOBAL TEXT COLOR FIX (black text bug) ===== */
+
+/* 1) Grundfarben */
+:root{
+  --rifto-fg: #EAF2FF;      /* Standard-Text */
+  --rifto-fg-2: #B9C7E6;    /* Secondary */
+  --rifto-fg-3: #8EA3CC;    /* Muted */
+}
+
+/* 2) Global: alles soll hell sein */
+html, body{
+  color: var(--rifto-fg) !important;
+}
+
+/* 3) Hauptcontainer / Panels / Cards */
+body, .app, .wrap, .container, .panel, .panelInner, .content,
+.card, .row, .list, .tierRow, .tierItem{
+  color: var(--rifto-fg) !important;
+}
+
+/* 4) Überschriften (das ist bei dir “RIFTO” + “Tierlist”) */
+h1, h2, h3, h4, h5, h6,
+.brand, .logo, .title, .headline, .sectionTitle, .panelTitle{
+  color: var(--rifto-fg) !important;
+}
+
+/* 5) Tabs / Buttons / Labels */
+button, .tab, .tabBtn, .tabs button, .pill, .badge, label{
+  color: var(--rifto-fg) !important;
+}
+
+/* 6) Input placeholder & helper text */
+input, select, textarea{
+  color: var(--rifto-fg) !important;
+}
+::placeholder{
+  color: var(--rifto-fg-3) !important;
+}
+
+/* 7) Links (falls welche existieren) */
+a{ color: var(--rifto-fg) !important; }
+a:hover{ color: #FFFFFF !important; }
