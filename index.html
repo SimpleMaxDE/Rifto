@@ -3,21 +3,20 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>RIFTO</title>
-  <link rel="manifest" href="./manifest.json">
-  <meta name="theme-color" content="#0b1220">
-  <link rel="stylesheet" href="./styles.css?v=14" />
+  <title>RIFTO – Wild Rift Draft Helper</title>
+  <link rel="stylesheet" href="styles.css?v=18">
 </head>
 <body>
   <header class="topbar">
     <div class="brand">
       <div class="logo">RIFTO</div>
-      <div class="sub">Wild Rift – Draft Helper</div>
+      <div class="subtitle">Wild Rift – Draft Helper</div>
     </div>
-    <div class="meta">
-      <div class="pill" id="patchPill">Patch: –</div>
-      <div class="pill" id="updatePill">Update: –</div>
-      <div class="pill" id="trendPill">Trend: –</div>
+
+    <div class="pills">
+      <span class="pill" id="patchPill">Patch: –</span>
+      <span class="pill" id="updatePill">Update: –</span>
+      <span class="pill" id="trendPill">Trend: –</span>
     </div>
   </header>
 
@@ -28,33 +27,42 @@
     <button class="tab" data-tab="tierlist">TIERLIST</button>
   </nav>
 
-  <main class="wrap">
-    <!-- META VIEW -->
+  <main class="container">
+    <!-- META -->
     <section id="viewMeta" class="panel">
-      <div class="panelHead">
+      <div class="row row-between">
         <h2>Champions</h2>
         <div class="controls">
-          <input id="search" class="input" placeholder="Champion suchen…" autocomplete="off" />
-          <select id="sort" class="select">
+          <input id="searchInput" class="input" placeholder="Champion suchen..." />
+          <select id="sortSelect" class="select">
             <option value="tier">Sort: Tier</option>
-            <option value="win">Sort: Winrate</option>
-            <option value="pick">Sort: Pickrate</option>
-            <option value="ban">Sort: Banrate</option>
+            <option value="win">Sort: Win</option>
+            <option value="pick">Sort: Pick</option>
+            <option value="ban">Sort: Ban</option>
             <option value="name">Sort: Name</option>
           </select>
         </div>
       </div>
-      <div id="status" class="status">Lade Daten…</div>
+
+      <div id="status" class="status"></div>
       <div id="grid" class="grid" aria-live="polite"></div>
     </section>
 
-    <!-- DRAFT VIEW -->
+    <!-- DRAFT -->
     <section id="viewDraft" class="panel hidden">
-      <div class="panelHead">
-        <h2>Draft Mode</h2>
-        <div class="controls">
-          <button id="btnPickMe" class="btn">🎯 Meinen Champ wählen</button>
-          <select id="draftRole" class="select">
+      <h2>Draft Mode</h2>
+
+      <div class="draftModes">
+        <button class="chip active" data-mode="enemyfp">🎯 Enemy FP</button>
+        <button class="chip" data-mode="myfp">⭐ My FP</button>
+        <button class="chip" data-mode="middraft">🔁 Mid Draft</button>
+        <button class="chip" data-mode="latedraft">🧱 Late Draft</button>
+      </div>
+
+      <div class="draftBox">
+        <div class="draftRow">
+          <div class="draftLabel">Lane:</div>
+          <select id="draftLane" class="select">
             <option value="Baron">Baron</option>
             <option value="Jungle">Jungle</option>
             <option value="Mid">Mid</option>
@@ -62,125 +70,163 @@
             <option value="Support">Support</option>
           </select>
         </div>
-      </div>
 
-      <div class="draftPhaseRow">
-        <button class="phase active" data-phase="enemy_fp">🎯 Enemy FP</button>
-        <button class="phase" data-phase="my_fp">⭐ My FP</button>
-        <button class="phase" data-phase="mid">🔄 Mid Draft</button>
-        <button class="phase" data-phase="late">🛑 Late Draft</button>
-      </div>
-
-      <div class="draftGrid">
-        <div class="draftCard">
-          <div class="draftCardHead">Dein Pick</div>
-          <div id="myPickCard" class="pickCard empty">
-            <div class="emptyText">Kein Champion gewählt</div>
-          </div>
+        <div class="draftPick">
+          <div class="muted">Dein Pick</div>
+          <button id="pickMyChamp" class="btn">🎯 Meinen Champ wählen</button>
+          <div id="draftMyChamp" class="draftCard muted">Kein Champion gewählt</div>
         </div>
 
-        <div class="draftCard">
-          <div class="draftCardHead">Enemy Picks (optional)</div>
-          <div class="enemyRow">
-            <button id="enemySlot1" class="enemySlot">+ Slot 1</button>
-            <button id="enemySlot2" class="enemySlot">+ Slot 2</button>
-          </div>
-          <div class="tinyNote">Tippe auf einen Slot, um einen Champion zu setzen (gleich nochmal tippen = löschen).</div>
+        <div class="draftResult">
+          <h3>Smart Ban – Top 3</h3>
+          <div id="draftBans" class="stack"></div>
+          <div id="draftHint" class="hint"></div>
         </div>
-      </div>
-
-      <div class="draftResult">
-        <div class="secHead">
-          <div class="secTitle">Smart Ban – Top 3</div>
-          <div id="draftContext" class="secSub">–</div>
-        </div>
-        <div id="draftBans" class="counterList"></div>
       </div>
     </section>
 
+    <!-- MATCHUP -->
     <section id="viewMatchup" class="panel hidden">
-      <div class="panelHead"><h2>Matchup</h2></div>
-      <div class="status">Kommt als Nächstes.</div>
-    </section>
-
-    <section id="viewTierlist" class="panel hidden">
-      <div class="panelHead"><h2>Tierlist</h2></div>
-      <div class="status">Kommt als Nächstes.</div>
-    </section>
-  </main>
-
-  <!-- META Champion Detail Modal -->
-  <div id="champModal" class="modal hidden" role="dialog" aria-modal="true">
-    <div class="modalBackdrop"></div>
-    <div class="modalCard">
-      <button id="modalClose" class="modalClose" aria-label="Schließen">✕</button>
-
-      <div class="modalHeader">
-        <img id="modalIcon" class="modalIcon" alt="" />
-        <div class="modalTitle">
-          <div class="modalNameRow">
-            <div id="modalName" class="modalName">Champion</div>
-            <span id="modalTier" class="tierBadge tierC">C</span>
-          </div>
-          <div id="modalId" class="modalId">#</div>
-
-          <div class="modalRoleRow">
-            <span class="k">Rolle:</span>
-            <select id="modalRoleSelect" class="select selectSmall" aria-label="Rolle wählen">
+      <h2>Matchup</h2>
+      <div class="matchGrid">
+        <div class="box">
+          <div class="row row-between">
+            <div>
+              <div class="muted">Mein Champion</div>
+              <div id="muMyName" class="titleSmall">–</div>
+            </div>
+            <select id="muMyLane" class="select">
               <option value="Baron">Baron</option>
               <option value="Jungle">Jungle</option>
               <option value="Mid">Mid</option>
               <option value="ADC">ADC</option>
               <option value="Support">Support</option>
             </select>
-            <span id="offRole" class="warn hidden">Off-role</span>
           </div>
+          <button id="muPickMy" class="btn">Meinen Champ wählen</button>
+        </div>
+
+        <div class="box">
+          <div class="row row-between">
+            <div>
+              <div class="muted">Enemy Champion</div>
+              <div id="muEnemyName" class="titleSmall">–</div>
+            </div>
+            <select id="muEnemyLane" class="select">
+              <option value="Baron">Baron</option>
+              <option value="Jungle">Jungle</option>
+              <option value="Mid">Mid</option>
+              <option value="ADC">ADC</option>
+              <option value="Support">Support</option>
+            </select>
+          </div>
+          <button id="muPickEnemy" class="btn">Enemy wählen</button>
+        </div>
+      </div>
+
+      <div class="rowGap">
+        <div class="box">
+          <h3>Hard Counter (konkret)</h3>
+          <div id="muCounters" class="stack"></div>
+        </div>
+        <div class="box">
+          <h3>Gute Picks gegen ihn</h3>
+          <div id="muGoodPicks" class="stack"></div>
+        </div>
+        <div class="box">
+          <h3>Lieber meiden</h3>
+          <div id="muAvoid" class="stack"></div>
+        </div>
+      </div>
+
+      <div class="hint" id="muExplain"></div>
+    </section>
+
+    <!-- TIERLIST -->
+    <section id="viewTierlist" class="panel hidden">
+      <div class="row row-between">
+        <h2>Tierlist</h2>
+        <div class="controls">
+          <select id="tlLane" class="select">
+            <option value="Global">Global</option>
+            <option value="Baron">Baron</option>
+            <option value="Jungle">Jungle</option>
+            <option value="Mid">Mid</option>
+            <option value="ADC">ADC</option>
+            <option value="Support">Support</option>
+          </select>
+          <select id="tlSort" class="select">
+            <option value="tier">Sort: Tier</option>
+            <option value="score">Sort: Score</option>
+            <option value="win">Sort: Win</option>
+            <option value="pick">Sort: Pick</option>
+            <option value="ban">Sort: Ban</option>
+          </select>
+        </div>
+      </div>
+
+      <div id="tlList" class="tierList"></div>
+    </section>
+  </main>
+
+  <!-- MODAL (META + Picker) -->
+  <div id="modalBackdrop" class="backdrop hidden" role="dialog" aria-modal="true">
+    <div id="modal" class="modal">
+      <button id="modalClose" class="modalClose" aria-label="Schließen">✕</button>
+
+      <div class="modalTop">
+        <img id="modalIcon" class="modalIcon" alt="">
+        <div class="modalHead">
+          <div class="modalTitleRow">
+            <div id="modalName" class="modalTitle">–</div>
+            <span id="modalTier" class="tierBadge">–</span>
+          </div>
+          <div id="modalLanes" class="muted">–</div>
         </div>
       </div>
 
       <div class="modalStats">
-        <div class="mstat"><div class="k">Winrate</div><div id="modalWin" class="v">–</div></div>
-        <div class="mstat"><div class="k">Pickrate</div><div id="modalPick" class="v">–</div></div>
-        <div class="mstat"><div class="k">Banrate</div><div id="modalBan" class="v">–</div></div>
-      </div>
-
-      <div class="twoCol">
-        <div class="modalSection">
-          <div class="secHead">
-            <div class="secTitle">Smart Ban (Rolle)</div>
-            <div class="secSub">Meta + Champion-Type + Trend</div>
-          </div>
-          <div id="modalBans" class="counterList"></div>
+        <div class="statBox">
+          <div class="muted">Winrate</div>
+          <div id="modalWin" class="statVal">–</div>
         </div>
-
-        <div class="modalSection">
-          <div class="secHead">
-            <div class="secTitle">Hard Counter (Rolle)</div>
-            <div class="secSub">Threats gegen deinen Pick</div>
-          </div>
-          <div id="modalCounters" class="counterList"></div>
+        <div class="statBox">
+          <div class="muted">Pickrate</div>
+          <div id="modalPick" class="statVal">–</div>
+        </div>
+        <div class="statBox">
+          <div class="muted">Banrate</div>
+          <div id="modalBan" class="statVal">–</div>
         </div>
       </div>
 
-      <div class="modalHint" id="modalTrendHint">Trend: –</div>
+      <div class="modalRow">
+        <label class="muted" for="modalLaneSelect">Lane</label>
+        <select id="modalLaneSelect" class="select">
+          <option value="Auto">Auto</option>
+          <option value="Baron">Baron</option>
+          <option value="Jungle">Jungle</option>
+          <option value="Mid">Mid</option>
+          <option value="ADC">ADC</option>
+          <option value="Support">Support</option>
+        </select>
+        <span id="modalOffmeta" class="offmeta hidden">Off-meta</span>
+      </div>
+
+      <div class="box">
+        <h3>Smart Ban (Top 3)</h3>
+        <div id="modalBans" class="stack"></div>
+      </div>
+
+      <div id="modalReason" class="hint"></div>
+
+      <div class="modalActions">
+        <button id="useAsMyChamp" class="btn">Als meinen Champ setzen</button>
+        <button id="useAsEnemyChamp" class="btn ghost">Als Enemy setzen</button>
+      </div>
     </div>
   </div>
 
-  <!-- PICKER MODAL -->
-  <div id="picker" class="modal hidden" role="dialog" aria-modal="true">
-    <div class="modalBackdrop"></div>
-    <div class="modalCard">
-      <button id="pickerClose" class="modalClose" aria-label="Schließen">✕</button>
-      <div class="panelHead" style="padding:0 0 12px 0; border-bottom:none">
-        <h2 style="margin:0">Champion auswählen</h2>
-        <div class="controls">
-          <input id="pickerSearch" class="input" placeholder="Suchen…" autocomplete="off" />
-        </div>
-      </div>
-      <div id="pickerGrid" class="grid" style="padding:0"></div>
-    </div>
-  </div>
-
-  <script src="./app.js?v=14"></script>
+  <script src="app.js?v=18"></script>
 </body>
 </html>
