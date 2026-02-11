@@ -1,327 +1,196 @@
 import json
-import os
-from datetime import datetime, timezone
-
+import re
 import requests
+from datetime import datetime, timezone
+from urllib.parse import urlparse
 
-
-# ✅ RICHTIGE, funktionierende Quellen (ohne .json)
-CN_RANK_URL = "https://mlol.qt.qq.com/go/lgame_battle_info/hero_rank_list_v2"
 HERO_LIST_JS_URL = "https://game.gtimg.cn/images/lgamem/act/lrlib/js/heroList/hero_list.js"
+CN_RANK_URL = "https://mlol.qt.qq.com/go/lgame_battle_info/hero_rank_list_v2"
 
-# File paths (Repo root)
-META_PATH = "meta.json"
-WR_MAP_PATH = "wr_champions.json"
+HEADERS_CN = {
+    "User-Agent": "Mozilla/5.0 (RIFTO meta updater)",
+    "Referer": "https://lolm.qq.com/",
+}
 
-
-def fetch_text(url: str, timeout: int = 25) -> str:
-    headers = {
-        "User-Agent": "Mozilla/5.0 (RIFTO meta updater)",
-        "Referer": "https://mlol.qt.qq.com/",
-    }
-    r = requests.get(url, headers=headers, timeout=timeout)
-    r.raise_for_status()
-    return r.text
-
-
-def fetch_json(url: str, timeout: int = 25) -> dict:
-    headers = {
-        "User-Agent": "Mozilla/5.0 (RIFTO meta updater)",
-        "Referer": "https://mlol.qt.qq.com/",
-    }
-    r = requests.get(url, headers=headers, timeout=timeout)
+def http_get_json(url: str, timeout=12, headers=None):
+    r = requests.get(url, timeout=timeout, headers=headers)
     r.raise_for_status()
     return r.json()
 
+def load_wr_list(path="wr_champions.json"):
+    with open(path, "r", encoding="utf-8") as f:
+        arr = json.load(f)
+    return set(arr) if isinstance(arr, list) else set()
 
-def extract_json_object_containing(text: str, needle: str) -> str | None:
-    """
-    Robust: findet das JSON-Objekt, das z.B. '"heroList"' enthält,
-    und extrahiert es per Klammer-Zähler (string-safe).
-    """
-    idx = text.find(needle)
-    if idx == -1:
+def flatten_rows(x):
+    rows = []
+    if isinstance(x, list):
+        for v in x:
+            rows += flatten_rows(v)
+    elif isinstance(x, dict):
+        if ("hero_id" in x) or ("heroId" in x) or ("win_rate" in x) or ("appear_rate" in x) or ("forbid_rate" in x):
+            rows.append(x)
+        for v in x.values():
+            rows += flatten_rows(v)
+    return rows
+
+def to_pct(x):
+    try:
+        return round(float(x) * 100, 2)
+    except Exception:
         return None
 
-    # finde die öffnende '{' vor needle
-    start = text.rfind("{", 0, idx)
-    if start == -1:
+def poster_to_en_name(poster_url: str) -> str | None:
+    """
+    Example:
+      .../Posters/Garen_0.jpg -> "Garen"
+      .../Posters/Norra_0.jpg -> "Norra"
+    """
+    if not isinstance(poster_url, str) or not poster_url:
         return None
+    path = urlparse(poster_url).path
+    filename = path.split("/")[-1]  # Garen_0.jpg
+    m = re.match(r"^(.+?)_\d+\.(jpg|png|webp)$", filename, flags=re.IGNORECASE)
+    if not m:
+        return None
+    base = m.group(1)
+    # Convert underscores to spaces if needed (rare)
+    base = base.replace("_", " ").strip()
+    return base
 
-    depth = 0
-    in_str = False
-    esc = False
-
-    for i in range(start, len(text)):
-        ch = text[i]
-
-        if in_str:
-            if esc:
-                esc = False
-            elif ch == "\\":
-                esc = True
-            elif ch == '"':
-                in_str = False
-            continue
-
-        if ch == '"':
-            in_str = True
-            continue
-
-        if ch == "{":
-            depth += 1
-        elif ch == "}":
-            depth -= 1
-            if depth == 0:
-                return text[start : i + 1]
-
-    return None
-
-
-def parse_hero_list() -> dict:
-    js = fetch_text(HERO_LIST_JS_URL)
-
-    # Versuch 1: direktes JSON-Objekt im JS (oft so)
-    blob = extract_json_object_containing(js, '"heroList"')
-    if blob:
-        try:
-            obj = json.loads(blob)
-            if isinstance(obj, dict) and "heroList" in obj:
-                return obj
-        except Exception:
-            pass
-
-    # Versuch 2: manche Varianten packen das JSON als String zusammen (head/tail)
-    # Wir suchen nach "hero_list_head" / "hero_list_tail" wie du es gesehen hast.
-    def find_json_string(key: str) -> str | None:
-        k = f'"{key}"'
-        p = js.find(k)
-        if p == -1:
-            return None
-        # finde erstes ':' danach
-        c = js.find(":", p)
-        if c == -1:
-            return None
-        # finde erstes '"' danach
-        q = js.find('"', c)
-        if q == -1:
-            return None
-        # parse bis zum nächsten unescaped '"'
-        i = q + 1
-        out = []
-        esc = False
-        while i < len(js):
-            ch = js[i]
-            if esc:
-                out.append(ch)
-                esc = False
-            else:
-                if ch == "\\":
-                    esc = True
-                elif ch == '"':
-                    break
-                else:
-                    out.append(ch)
-            i += 1
-        return "".join(out)
-
-    head = find_json_string("hero_list_head")
-    tail = find_json_string("hero_list_tail")
-    if head and tail:
-        candidate = head + tail
-        # candidate ist JSON string-escaped, also wieder entschärfen:
-        # Erst als JSON-String laden, dann das Ergebnis als JSON parsen.
-        try:
-            unescaped = json.loads(f'"{candidate}"')
-            obj = json.loads(unescaped)
-            if isinstance(obj, dict) and "heroList" in obj:
-                return obj
-        except Exception:
-            pass
-
-    raise RuntimeError("Konnte hero_list.js nicht parsen (kein heroList JSON gefunden).")
-
-
-def load_wr_map() -> dict:
-    if not os.path.exists(WR_MAP_PATH):
-        return {}
-    try:
-        with open(WR_MAP_PATH, "r", encoding="utf-8") as f:
-            data = json.load(f)
-        # akzeptiere dict oder list
-        if isinstance(data, dict):
-            return data
-        if isinstance(data, list):
-            # list von objs -> map per hero_id/heroId
-            out = {}
-            for it in data:
-                if not isinstance(it, dict):
-                    continue
-                hid = str(it.get("hero_id") or it.get("heroId") or it.get("id") or "")
-                if hid:
-                    out[hid] = it
-            return out
-    except Exception:
-        return {}
-    return {}
-
-
-def fetch_rank_stats() -> dict[str, dict]:
+def normalize_wr_name(name: str) -> str:
     """
-    Liefert map hero_id -> {win,pick,ban}
-    Versucht verschiedene Feldnamen, weil Tencent das gern leicht ändert.
+    Make names match your wr_champions.json as closely as possible.
     """
-    data = fetch_json(CN_RANK_URL)
+    if not isinstance(name, str):
+        return name
+    n = name.strip()
 
-    # oft: {"data":[...]} oder direkt list
-    rows = None
-    if isinstance(data, dict):
-        rows = data.get("data") or data.get("list") or data.get("result")
-    if rows is None and isinstance(data, list):
-        rows = data
-
-    if not isinstance(rows, list):
-        return {}
-
-    out: dict[str, dict] = {}
-    for row in rows:
-        if not isinstance(row, dict):
-            continue
-        hid = str(row.get("hero_id") or row.get("heroId") or row.get("id") or "")
-        if not hid:
-            continue
-
-        # Prozent-Felder kommen teils als Strings
-        def to_float(x):
-            try:
-                return float(x)
-            except Exception:
-                return None
-
-        win = (
-            to_float(row.get("win_rate_percent"))
-            or to_float(row.get("win_rate"))
-            or to_float(row.get("winrate"))
-        )
-        pick = (
-            to_float(row.get("appear_rate_percent"))
-            or to_float(row.get("pick_rate_percent"))
-            or to_float(row.get("pick_rate"))
-            or to_float(row.get("appear_rate"))
-        )
-        ban = (
-            to_float(row.get("forbid_rate_percent"))
-            or to_float(row.get("ban_rate_percent"))
-            or to_float(row.get("ban_rate"))
-            or to_float(row.get("forbid_rate"))
-        )
-
-        # falls Werte 0..1 statt Prozent kommen
-        def norm(v):
-            if v is None:
-                return None
-            return v * 100.0 if 0 < v <= 1.0 else v
-
-        out[hid] = {
-            "win": round(norm(win) or 0.0, 2),
-            "pick": round(norm(pick) or 0.0, 2),
-            "ban": round(norm(ban) or 0.0, 2),
-        }
-    return out
-
-
-def read_existing_meta() -> dict:
-    if not os.path.exists(META_PATH):
-        return {}
-    try:
-        with open(META_PATH, "r", encoding="utf-8") as f:
-            return json.load(f)
-    except Exception:
-        return {}
-
+    # Common aliases / formatting
+    fixes = {
+        "DrMundo": "Dr. Mundo",
+        "Nunu": "Nunu & Willump",
+        "Kaisa": "Kai'Sa",
+        "KaiSa": "Kai'Sa",
+        "Khazix": "Kha'Zix",
+        "KhaZix": "Kha'Zix",
+        "JarvanIV": "Jarvan IV",
+        "Jarvan Iv": "Jarvan IV",
+        "XinZhao": "Xin Zhao",
+        "TwistedFate": "Twisted Fate",
+        "MasterYi": "Master Yi",
+        "MissFortune": "Miss Fortune",
+        "AurelionSol": "Aurelion Sol",
+    }
+    return fixes.get(n, n)
 
 def main():
-    now = datetime.now(timezone.utc).astimezone(timezone.utc)
-    last_updated = now.strftime("%Y-%m-%d %H:%M")
-
-    existing = read_existing_meta()
-    existing_champs = existing.get("champions") if isinstance(existing, dict) else None
-    existing_count = len(existing_champs) if isinstance(existing_champs, list) else 0
-
-    # 1) Hero list (Pflicht)
-    try:
-        hero_obj = parse_hero_list()
-        hero_list = hero_obj.get("heroList", {})
-        if not isinstance(hero_list, dict):
-            hero_list = {}
-    except Exception as e:
-        # Wenn hero list down ist: NICHT überschreiben
-        print(f"[WARN] hero_list.js Fehler: {e}")
-        if existing_count >= 50:
-            print("[OK] Behalte bestehendes meta.json (kein Überschreiben).")
-            return
-        raise
-
-    # 2) Rank stats (optional)
-    stats = {}
-    try:
-        stats = fetch_rank_stats()
-    except Exception as e:
-        print(f"[WARN] Rank stats Fehler (ok, fallback ohne stats): {e}")
-        stats = {}
-
-    # 3) Optional English mapping
-    wr_map = load_wr_map()
-
-    champions = []
-    for hero_id, h in hero_list.items():
-        hid = str(h.get("heroId") or hero_id)
-
-        # Name: bevorzugt Englisch aus wr_champions.json
-        mapped = wr_map.get(hid, {}) if isinstance(wr_map, dict) else {}
-        name = (
-            mapped.get("name")
-            or mapped.get("en")
-            or mapped.get("name_en")
-            or mapped.get("english")
-            or h.get("alias")  # pinyin fallback
-            or h.get("name")   # CN fallback
-            or hid
-        )
-
-        icon = h.get("avatar") or mapped.get("icon") or ""
-
-        champ = {
-            "hero_id": hid,
-            "name": name,
-            "icon": icon,
-            "stats": {
-                "CN": stats.get(hid, {"win": 0.0, "pick": 0.0, "ban": 0.0})
-            },
-        }
-        champions.append(champ)
-
-    # ✅ Sicherheits-Gurt: NIE wieder leer schreiben
-    if len(champions) < 50:
-        print(f"[WARN] Zu wenige Champions ({len(champions)}).")
-        if existing_count >= 50:
-            print("[OK] Behalte bestehendes meta.json (kein Überschreiben).")
-            return
-        # wenn es wirklich neu ist und leer wäre -> hart failen
-        raise RuntimeError("Champion-Liste zu klein – würde meta.json zerstören.")
+    now = datetime.now(timezone.utc).astimezone().strftime("%Y-%m-%d %H:%M")
+    wr_set = load_wr_list()
 
     meta = {
         "patch": "CN Live",
-        "lastUpdated": last_updated,
-        "source": f"Tencent hero_list.js (WR list + icons) + hero_rank_list_v2 (CN stats) | {CN_RANK_URL}",
-        "champions": champions,
+        "lastUpdated": now,
+        "source": "Tencent hero_list.js (WR list + icons) + hero_rank_list_v2 (CN stats)",
+        "champions": [],
+        "statsByName": {},
+        "debug": {}
     }
 
-    with open(META_PATH, "w", encoding="utf-8") as f:
+    # 1) Load hero_list.js (JSON) and build id->(en_name, icon)
+    hero_list = http_get_json(HERO_LIST_JS_URL, timeout=12)
+    hero_list_obj = hero_list.get("heroList", {}) if isinstance(hero_list, dict) else {}
+
+    id_to_info = {}
+    for _, obj in (hero_list_obj.items() if isinstance(hero_list_obj, dict) else []):
+        if not isinstance(obj, dict):
+            continue
+        hid = str(obj.get("heroId") or obj.get("hero_id") or "").strip()
+        if not hid:
+            continue
+
+        poster = obj.get("poster")
+        en = poster_to_en_name(poster)
+        if en:
+            en = normalize_wr_name(en)
+
+        icon = obj.get("avatar") if isinstance(obj.get("avatar"), str) else ""
+
+        # Keep even if en is None; we’ll debug count
+        id_to_info[hid] = {"name": en, "icon": icon, "alias": obj.get("alias")}
+
+    meta["debug"]["hero_list_total"] = len(id_to_info)
+    meta["debug"]["hero_list_version"] = hero_list.get("version") if isinstance(hero_list, dict) else None
+    meta["debug"]["hero_list_fileTime"] = hero_list.get("fileTime") if isinstance(hero_list, dict) else None
+
+    # 2) Load CN rank stats
+    raw = http_get_json(CN_RANK_URL, timeout=12, headers=HEADERS_CN)
+    rows = flatten_rows(raw.get("data"))
+    meta["debug"]["rank_rows_found"] = len(rows)
+
+    # 3) Merge by hero_id -> WR-only by name
+    champions_out = {}
+    missing_name = 0
+    filtered_not_wr = 0
+
+    for r in rows:
+        if not isinstance(r, dict):
+            continue
+
+        hid = r.get("hero_id") or r.get("heroId")
+        if hid is None:
+            continue
+        hid = str(hid).strip()
+
+        info = id_to_info.get(hid)
+        if not info:
+            continue
+
+        name = info.get("name")
+        if not name:
+            missing_name += 1
+            continue
+
+        if name not in wr_set:
+            filtered_not_wr += 1
+            continue
+
+        win = to_pct(r.get("win_rate"))
+        pick = to_pct(r.get("appear_rate"))
+        ban = to_pct(r.get("forbid_rate"))
+
+        if win is None and pick is None and ban is None:
+            continue
+
+        prev = champions_out.get(name, {
+            "hero_id": hid,
+            "name": name,
+            "icon": info.get("icon", ""),
+            "stats": {"CN": {"win": 0, "pick": 0, "ban": 0}}
+        })
+
+        cn = prev["stats"]["CN"]
+        prev["stats"]["CN"] = {
+            "win": max(cn.get("win", 0) or 0, win or 0),
+            "pick": max(cn.get("pick", 0) or 0, pick or 0),
+            "ban": max(cn.get("ban", 0) or 0, ban or 0),
+        }
+        # ensure icon present
+        if info.get("icon"):
+            prev["icon"] = info["icon"]
+
+        champions_out[name] = prev
+
+    meta["champions"] = list(champions_out.values())
+    meta["statsByName"] = {c["name"]: c["stats"]["CN"] for c in meta["champions"]}
+
+    meta["debug"]["wr_written"] = len(meta["champions"])
+    meta["debug"]["missing_en_name_from_poster"] = missing_name
+    meta["debug"]["filtered_not_in_wr_list"] = filtered_not_wr
+    meta["debug"]["sample_written"] = meta["champions"][:5]
+
+    with open("meta.json", "w", encoding="utf-8") as f:
         json.dump(meta, f, ensure_ascii=False, indent=2)
-
-    print(f"[OK] meta.json geschrieben: {len(champions)} Champions")
-
 
 if __name__ == "__main__":
     main()
