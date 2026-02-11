@@ -5,19 +5,25 @@ from datetime import datetime
 RANK_URL = "https://game.gtimg.cn/images/lgamem/act/lrlib/js/hero_rank_list_v2.json"
 
 def main():
-    rank_data = requests.get(RANK_URL, timeout=15).json()
-    champions_base = json.load(open("wr_champions.json", "r", encoding="utf-8"))
+    response = requests.get(RANK_URL, timeout=15)
+    response.raise_for_status()
 
-    champs = []
+    rank_data = response.json()
 
-    for champ in champions_base:
+    with open("wr_champions.json", "r", encoding="utf-8") as f:
+        base_champs = json.load(f)
+
+    champions = []
+
+    hero_rank = rank_data.get("heroRank", {})
+
+    for champ in base_champs:
         cid = str(champ["id"])
-        stats = rank_data.get("heroRank", {}).get(cid)
-
+        stats = hero_rank.get(cid)
         if not stats:
             continue
 
-        champs.append({
+        champions.append({
             "id": champ["id"],
             "name": champ["name"],
             "lanes": champ["lanes"],
@@ -32,7 +38,7 @@ def main():
     meta = {
         "patch": "CN Live",
         "updated": datetime.utcnow().isoformat(),
-        "champions": champs
+        "champions": champions
     }
 
     with open("meta.json", "w", encoding="utf-8") as f:
