@@ -380,13 +380,13 @@
     modalIcon.src = champ.icon;
     modalIcon.alt = champ.name;
     modalName.textContent = champ.name;
-    modalId.textContent = `#${champ.hero_id}`;
+    const roles = rolesForHero(champ.hero_id);
+    modalId.textContent = roles.length ? roles.join(" • ") : "–";
 
     modalWin.textContent = fmtPct(champ.stats?.CN?.win ?? null);
     modalPick.textContent = fmtPct(champ.stats?.CN?.pick ?? null);
     modalBan.textContent = fmtPct(champ.stats?.CN?.ban ?? null);
 
-    const roles = rolesForHero(champ.hero_id);
     modalRoleSelect.value = roles[0] || "Jungle";
     updateMetaModalForRole(champ);
 
@@ -434,7 +434,7 @@
           <img class="icon" src="${c.icon}" alt="${c.name}" loading="lazy" />
           <div class="nameWrap">
             <div class="name">${c.name}</div>
-            <div class="id">${roleBadgeHTML(mainRoleForHero(c.hero_id))}<span class="hash">#${c.hero_id}</span></div>
+            <div class="id">${roleBadgeHTML(mainRoleForHero(c.hero_id))}</div>
           </div>
           <span class="tierBadge ${tierClass(tier)}">${tier}</span>
         </div>
@@ -615,7 +615,7 @@
           <img class="icon" src="${c.icon}" alt="${c.name}" loading="lazy" />
           <div class="nameWrap">
             <div class="name">${c.name}</div>
-            <div class="id">#${c.hero_id}</div>
+            <div class="id">${roleBadgeHTML(mainRoleForHero(c.hero_id))}</div>
           </div>
         </div>
       `;

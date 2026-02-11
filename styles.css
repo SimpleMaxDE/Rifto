@@ -14,19 +14,18 @@ html,body{height:100%}
 body{
   margin:0;
   font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
-  background: radial-gradient(1200px 600px at 20% -10%, rgba(80,120,255,.18), transparent 60%),
-              radial-gradient(900px 600px at 90% 10%, rgba(120,80,255,.14), transparent 65%),
-              var(--bg);
+  background: var(--bg);
   color:var(--text);
+  background-attachment: scroll;
   overflow-x:hidden;
 }
 .topbar{
   display:flex; justify-content:space-between; align-items:center;
   padding:18px 18px;
   border-bottom:none;
-  background: rgba(7,11,20,.98);
+  background: #070b14;
   position:sticky; top:0; z-index:40;
-  backdrop-filter: blur(6px);
+  backdrop-filter: none;
   box-shadow:none;
 }
 .brand .logo{font-weight:900; letter-spacing:.6px; font-size:22px;}
@@ -39,7 +38,7 @@ body{
 }
 .wrap{max-width:1100px; margin:0 auto; padding:16px;}
 .panel{
-  background: rgba(255,255,255,.02);
+  background: #0b1220;
   border:1px solid var(--line);
   border-radius:18px;
   box-shadow: var(--shadow);
@@ -79,13 +78,15 @@ body{
   background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01));
   border-radius:16px;
   padding:12px;
+  overflow:hidden;
+  contain:paint;
   text-align:left;
   cursor:pointer;
   color:inherit;
   transition: transform .12s ease, border-color .12s ease;
 }
 .card:hover{ transform: translateY(-1px); border-color: rgba(255,255,255,.18); }
-.cardTop{ display:flex; align-items:center; gap:10px; }
+.cardTop{ display:flex; align-items:center; gap:10px; min-width:0; }
 .icon{
   width:44px; height:44px;
   border-radius:14px;
@@ -97,6 +98,8 @@ body{
   display:flex;
   align-items:center;
   flex-wrap:wrap;
+  flex:1;
+  min-width:0;
   gap:8px; /* WICHTIG */
 }
 .name{font-weight:800; font-size:14px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
@@ -174,16 +177,19 @@ body{
   border-color: rgba(248, 113, 113, 0.6);
 }
 
-.id .hash{ opacity:.65; font-size:12px; }
-
-.id .hash{ margin-left:0; }
-
-.stats{display:flex; gap:10px; margin-top:12px;}
+.stats{
+  display:grid;
+  grid-template-columns:repeat(3, minmax(0, 1fr));
+  gap:10px;
+  margin-top:12px;
+  overflow:hidden;
+}
 .stat{
-  flex:1; padding:10px;
+  min-width:0;
+  padding:10px;
   border-radius:14px;
   background: rgba(255,255,255,.03);
-  border:1px solid var(--line);
+  border:none;
 }
 .k{color:var(--muted); font-size:11px}
 .v{font-weight:900; font-size:13px; margin-top:4px}
@@ -255,8 +261,8 @@ body{
   position:sticky;
   top:var(--tabs-top, 64px);
   z-index:39;
-  background: rgba(7,11,20,.92);
-  backdrop-filter: blur(8px);
+  background: #070b14;
+  backdrop-filter: none;
   box-shadow:none;
 }
 .tab{
@@ -602,7 +608,7 @@ body{
 /* ===== PATCH 2026-02-11d: sticky stability without seam lines ===== */
 .topbar,
 .tabs{
-  border-bottom: 1px solid rgba(255,255,255,.06);
+  border-bottom: none;
   box-shadow: none !important;
 }
 
