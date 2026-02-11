@@ -35,45 +35,6 @@ body{
   background:var(--pill); border-radius:999px;
   color:var(--muted); font-size:12px;
 }
-
-/* Select in pill (Role filter) */
-.select-pill{display:inline-flex;align-items:center;gap:8px;padding:6px 10px;}
-.select-pill .select-label{opacity:.9}
-.select-pill select{
-  appearance:none;
-  border:0;
-  background:transparent;
-  color:var(--text);
-  font-weight:700;
-  padding:6px 18px 6px 8px;
-  border-radius:999px;
-  cursor:pointer;
-}
-.select-pill{position:relative;}
-.select-pill:after{
-  content:"▾";
-  position:absolute;
-  right:12px;
-  top:50%;
-  transform:translateY(-50%);
-  color:var(--muted);
-  pointer-events:none;
-  font-size:12px;
-}
-
-/* Tierlist */
-.tierlist{padding:16px; display:flex; flex-direction:column; gap:10px;}
-.tierGroup{border:1px solid var(--line); border-radius:14px; overflow:hidden; background:rgba(255,255,255,.02);}
-.tierGroupHead{display:flex; align-items:center; justify-content:space-between; padding:12px 14px; border-bottom:1px solid var(--line);}
-.tierGroupHead .t{font-weight:900; letter-spacing:.4px;}
-.tierGroupHead .c{color:var(--muted); font-size:12px;}
-.tierRow{display:flex; align-items:center; justify-content:space-between; padding:10px 14px; gap:12px;}
-.tierRow + .tierRow{border-top:1px solid rgba(255,255,255,.06)}
-.tierRow .left{display:flex; align-items:center; gap:10px;}
-.tierRow img{width:34px; height:34px; border-radius:10px;}
-.tierRow .name{font-weight:800;}
-.tierRow .lane{color:var(--muted); font-size:12px; margin-left:6px;}
-.tierRow .stats{color:var(--muted); font-size:12px; white-space:nowrap;}
 .wrap{max-width:1100px; margin:0 auto; padding:16px;}
 .panel{
   background: rgba(255,255,255,.02);
@@ -110,15 +71,6 @@ body{
 }
 @media (min-width: 740px){ .grid{ grid-template-columns: repeat(3, minmax(0,1fr)); } }
 @media (min-width: 1020px){ .grid{ grid-template-columns: repeat(4, minmax(0,1fr)); } }
-
-/* Tierlist */
-.tierlist{display:flex;flex-direction:column;gap:8px;padding:12px}
-.tierRow{display:flex;align-items:center;gap:10px;padding:12px;border:1px solid var(--line);border-radius:16px;background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01))}
-.tierIdx{width:34px;color:var(--muted);font-weight:800}
-.tierIcon{width:36px;height:36px;border-radius:10px;object-fit:cover;border:1px solid rgba(255,255,255,.16)}
-.tierName{flex:1;display:flex;flex-direction:column;gap:4px}
-.tierTitle{display:flex;align-items:center;gap:8px;font-weight:800}
-.tierSub{color:var(--muted);font-size:12px}
 
 .card{
   border:1px solid var(--line);
@@ -157,17 +109,6 @@ body{
 .tierA{ border-color: rgba(120,160,255,.35); background: rgba(120,160,255,.12); }
 .tierB{ border-color: rgba(160,200,120,.35); background: rgba(160,200,120,.12); }
 .tierC{ border-color: rgba(255,255,255,.10); background: rgba(255,255,255,.04); }
-
-.lanePill{
-  display:inline-flex; align-items:center; justify-content:center;
-  padding:4px 10px;
-  border-radius:999px;
-  border:1px solid var(--line);
-  background: rgba(255,255,255,.03);
-  color:var(--muted);
-  font-weight:800;
-  font-size:12px;
-}
 
 .stats{display:flex; gap:10px; margin-top:12px;}
 .stat{

@@ -15,8 +15,6 @@
   const statusEl = $("status");
   const searchEl = $("search");
   const sortEl = $("sort");
-  const roleFilterEl = $("roleFilter");
-  const tierlistEl = $("tierlist");
 
   // META modal
   const modal = $("champModal");
@@ -158,13 +156,6 @@
     const pool = allChamps.filter(c => rolesForHero(c.hero_id).includes(role));
     const list = (pool.length ? pool : allChamps).map(c => metaScore(c)).sort((a,b)=>b-a);
     const q = (p) => list[Math.floor(p * (list.length-1))] ?? 0;
-    return { ss: q(0.05), s: q(0.15), a: q(0.35), b: q(0.65) };
-  }
-
-  // Same tier cutoffs, but computed from the currently shown list
-  function thresholdsFromList(list) {
-    const scores = list.map(metaScore).filter((x) => Number.isFinite(x)).sort((a, b) => b - a);
-    const q = (p) => scores[Math.floor(p * (scores.length - 1))] ?? 0;
     return { ss: q(0.05), s: q(0.15), a: q(0.35), b: q(0.65) };
   }
 
@@ -394,7 +385,7 @@
     renderCounterList(modalCounters, counters);
   }
 
-  function renderMetaGrid(list, role) {
+  function renderMetaGrid(list) {
     grid.innerHTML = "";
     if (!list.length) {
       statusEl.textContent = "Keine Treffer.";
@@ -403,7 +394,7 @@
     }
     statusEl.style.display = "none";
     const frag = document.createDocumentFragment();
-    const th = thresholdsFromList(list);
+    const th = thresholdsForRole("Jungle");
 
     for (const c of list) {
       const tier = tierForScore(metaScore(c), th);
@@ -419,9 +410,7 @@
           <img class="icon" src="${c.icon}" alt="${c.name}" loading="lazy" />
           <div class="nameWrap">
             <div class="name">${c.name}</div>
-            <div class="subline">
-              <span class="lanePill">${mainLaneForHero(c.hero_id) || "–"}</span>
-            </div>
+            <div class="id">#${c.hero_id}</div>
           </div>
           <span class="tierBadge ${tierClass(tier)}">${tier}</span>
         </div>
@@ -437,43 +426,11 @@
     grid.appendChild(frag);
   }
 
-  function renderTierlist(list) {
-    if (!tierlistEl) return;
-    if (!list.length) {
-      tierlistEl.innerHTML = `<div class="status">Keine Treffer.</div>`;
-      return;
-    }
-    const th = thresholdsFromList(list);
-    const items = list
-      .slice()
-      .sort((a, b) => metaScore(b) - metaScore(a))
-      .map((c, idx) => {
-        const tier = tierForScore(metaScore(c), th);
-        const main = mainLaneForHero(c.hero_id) || "–";
-        return `
-          <div class="tierRow">
-            <div class="tierIdx">${idx + 1}.</div>
-            <img class="tierIcon" src="${c.icon}" alt="${c.name}">
-            <div class="tierName">
-              <div class="name">${c.name}</div>
-              <div class="sub">${main}</div>
-            </div>
-            <div class="tierBadge tier${tier}">${tier}</div>
-          </div>`;
-      })
-      .join("");
-    tierlistEl.innerHTML = items;
-  }
-
   function applyMetaFilters() {
     const q = (searchEl.value || "").trim().toLowerCase();
     const sort = sortEl.value;
-    const role = (roleFilterEl?.value || "Global");
 
     let list = allChamps;
-    if (role !== "Global") {
-      list = list.filter((c) => mainLaneForHero(c.hero_id) === role);
-    }
     if (q) list = list.filter((c) => c.name.toLowerCase().includes(q));
 
     list = [...list].sort((a, b) => {
@@ -484,8 +441,7 @@
       return metaScore(b) - metaScore(a);
     });
 
-    renderMetaGrid(list, role);
-    renderTierlist(list);
+    renderMetaGrid(list);
   }
 
   // Draft persistence
@@ -684,7 +640,6 @@
 
   searchEl.addEventListener("input", applyMetaFilters);
   sortEl.addEventListener("change", applyMetaFilters);
-  roleFilterEl?.addEventListener("change", applyMetaFilters);
 
   phaseBtns.forEach(b => b.addEventListener("click", ()=>setPhase(b.dataset.phase)));
   btnPickMe.addEventListener("click", ()=>openPicker("me"));
