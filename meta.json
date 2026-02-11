@@ -1,6 +1,1627 @@
 {
   "patch": "CN Live",
-  "lastUpdated": "2026-02-11 00:31",
-  "source": "Tencent: hero_list.js (WR roster/icons) + hero_rank_list_v2 (CN stats)",
-  "champions": []
+  "lastUpdated": "2026-02-11 00:32",
+  "source": "Tencent hero_list.js (WR list + icons) + hero_rank_list_v2 (CN stats) | https://mlol.qt.qq.com/go/lgame_battle_info/hero_rank_list_v2",
+  "champions": [
+    {
+      "hero_id": "10001",
+      "name": "gailun",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10001.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10002",
+      "name": "yatuokesi",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10002.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10003",
+      "name": "lakesi",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10003.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10004",
+      "name": "emumu",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10004.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10005",
+      "name": "kaiyin",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10005.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10006",
+      "name": "leienjiaer",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10006.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10007",
+      "name": "kaerma",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10007.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10008",
+      "name": "nunuheweilangpu",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10008.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10009",
+      "name": "sunwukong",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10009.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10010",
+      "name": "weien",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10010.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10011",
+      "name": "aike",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10011.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10012",
+      "name": "aolianna",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10012.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10013",
+      "name": "daianna",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10013.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10014",
+      "name": "zuoyi",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10014.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10015",
+      "name": "taidamier",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10015.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10016",
+      "name": "zhaoxin",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10016.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10017",
+      "name": "kazike",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10017.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10018",
+      "name": "jinkesi",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10018.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10019",
+      "name": "hekalimu",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10019.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10020",
+      "name": "youmi",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10020.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10021",
+      "name": "bulong",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10021.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10022",
+      "name": "jin",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10022.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10023",
+      "name": "aoruilian·suoer",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10023.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10024",
+      "name": "xindela",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10024.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10025",
+      "name": "cuisite",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10025.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10026",
+      "name": "kasha",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10026.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10027",
+      "name": "ni菈",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10027.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10028",
+      "name": "moganna",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10028.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10029",
+      "name": "yifulin",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10029.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10030",
+      "name": "pansen",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10030.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10031",
+      "name": "ekali",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10031.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10032",
+      "name": "feiaona",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10032.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10033",
+      "name": "bulici",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10033.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10034",
+      "name": "salefenni",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10034.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10035",
+      "name": "modekaisa",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10035.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10036",
+      "name": "anni",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10036.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10037",
+      "name": "yasuo",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10037.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10038",
+      "name": "eli",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10038.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10039",
+      "name": "jie",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10039.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10040",
+      "name": "jiakesi",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10040.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10041",
+      "name": "kaier",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10041.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10042",
+      "name": "luxian",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10042.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10044",
+      "name": "leiouna",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10044.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10045",
+      "name": "cuisitana",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10045.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10046",
+      "name": "timo",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10046.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10047",
+      "name": "suona",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10047.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10048",
+      "name": "lulu",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10048.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10049",
+      "name": "xiwana",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10049.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10050",
+      "name": "wei",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10050.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10051",
+      "name": "xia",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10051.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10052",
+      "name": "luo",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10052.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10053",
+      "name": "tuqi",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10053.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10054",
+      "name": "gewen",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10054.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10055",
+      "name": "kamier",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10055.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10056",
+      "name": "jiawensishi",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10056.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10057",
+      "name": "foyege",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10057.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10058",
+      "name": "wolibeier",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10058.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10059",
+      "name": "liqing",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10059.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10060",
+      "name": "kuqi",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10060.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10061",
+      "name": "kainan",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10061.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10062",
+      "name": "mengduoyisheng",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10062.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10063",
+      "name": "jiela",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10063.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10064",
+      "name": "lamosi",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10064.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10065",
+      "name": "neisesi",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10065.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10066",
+      "name": "eyunxiaojie",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10066.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10067",
+      "name": "zeli",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10067.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10068",
+      "name": "seti",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10068.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10069",
+      "name": "yongen",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10069.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10070",
+      "name": "yi",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10070.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10071",
+      "name": "delaiesi",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10071.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10072",
+      "name": "geleifusi",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10072.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10073",
+      "name": "qianjue",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10073.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10074",
+      "name": "maokai",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10074.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10075",
+      "name": "jiana",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10075.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10076",
+      "name": "bobi",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10076.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10077",
+      "name": "delaiwen",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10077.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10078",
+      "name": "naer",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10078.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10079",
+      "name": "aixi",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10079.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10080",
+      "name": "jilan",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10080.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10081",
+      "name": "elisita",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10081.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10082",
+      "name": "anbeisa",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10082.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10083",
+      "name": "mofeite",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10083.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10084",
+      "name": "naideli",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10084.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10085",
+      "name": "eluola",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10085.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10086",
+      "name": "feizi",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10086.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10087",
+      "name": "jigesi",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10087.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10089",
+      "name": "gulajiasi",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10089.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10090",
+      "name": "fulajimier",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10090.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10091",
+      "name": "namei",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10091.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10092",
+      "name": "ruiwen",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10092.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10093",
+      "name": "weilusi",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10093.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10094",
+      "name": "airuiliya",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10094.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10095",
+      "name": "katelinna",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10095.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10096",
+      "name": "xinjide",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10096.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10097",
+      "name": "suolaka",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10097.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10098",
+      "name": "yizeruier",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10098.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10099",
+      "name": "jialiao",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10099.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10100",
+      "name": "ekeshang",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10100.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10101",
+      "name": "jiesi",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10101.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10102",
+      "name": "ejiate",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10102.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10103",
+      "name": "kasading",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10103.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10104",
+      "name": "shamila",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10104.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10105",
+      "name": "bade",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10105.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10106",
+      "name": "aolafu",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10106.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10107",
+      "name": "xiweier",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10107.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10108",
+      "name": "miliou",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10108.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10109",
+      "name": "lisangzhuo",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10109.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10110",
+      "name": "kegemo",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10110.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10112",
+      "name": "kaitelin",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10112.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10116",
+      "name": "ruier",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10116.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10118",
+      "name": "shen",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10118.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10119",
+      "name": "bulande",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10119.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10121",
+      "name": "leikedun",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10121.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10122",
+      "name": "weijia",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10122.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10123",
+      "name": "saina",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10123.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10124",
+      "name": "paike",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10124.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10125",
+      "name": "saien",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10125.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10126",
+      "name": "siweiyin",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10126.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10127",
+      "name": "heimodingge",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10127.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10128",
+      "name": "tailong",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10128.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10129",
+      "name": "weikezi",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10129.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10130",
+      "name": "chuishi",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10130.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10131",
+      "name": "wolike",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10131.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10132",
+      "name": "nuotilesi",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10132.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10133",
+      "name": "feidetike",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10133.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10134",
+      "name": "kalisita",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10134.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10135",
+      "name": "liliya",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10135.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10136",
+      "name": "aoen",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10136.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10137",
+      "name": "ruizi",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10137.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10138",
+      "name": "simode",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10138.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10140",
+      "name": "lanbo",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10140.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10141",
+      "name": "weigusi",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10141.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10144",
+      "name": "weiketuo",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10144.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10151",
+      "name": "moteng",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10151.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    },
+    {
+      "hero_id": "10166",
+      "name": "nuola",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10166.png",
+      "stats": {
+        "CN": {
+          "win": 0.0,
+          "pick": 0.0,
+          "ban": 0.0
+        }
+      }
+    }
+  ]
 }
