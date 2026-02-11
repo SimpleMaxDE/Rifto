@@ -44,6 +44,14 @@
   const draftContext = $("draftContext");
   const phaseBtns = Array.from(document.querySelectorAll(".phase"));
 
+  // MATCHUP + TIERLIST
+  const matchupChampA = $("matchupChampA");
+  const matchupChampB = $("matchupChampB");
+  const matchupRole = $("matchupRole");
+  const matchupResults = $("matchupResults");
+  const tierlistRole = $("tierlistRole");
+  const tierlistSections = $("tierlistSections");
+
   // Picker
   const picker = $("picker");
   const pickerClose = $("pickerClose");
@@ -468,6 +476,159 @@
     renderMetaGrid(list);
   }
 
+  function fillChampionSelect(selectEl, selectedName) {
+    if (!selectEl) return;
+    const options = allChamps
+      .slice()
+      .sort((a, b) => a.name.localeCompare(b.name));
+
+    selectEl.innerHTML = options.map(c => `<option value="${c.name}">${c.name}</option>`).join("");
+    if (!options.length) return;
+    const hasSelected = selectedName && options.some(c => c.name === selectedName);
+    selectEl.value = hasSelected ? selectedName : options[0].name;
+  }
+
+  function matchupMetric(c, key) {
+    return Number(c?.stats?.CN?.[key] ?? 0);
+  }
+
+  function renderMatchupView() {
+    if (!allChamps.length || !matchupResults) return;
+
+    const champA = getChampionByName(matchupChampA?.value);
+    const champB = getChampionByName(matchupChampB?.value);
+    const role = matchupRole?.value || "";
+
+    matchupResults.innerHTML = "";
+    if (!champA || !champB) {
+      matchupResults.innerHTML = `<div class="card"><div class="k">Info</div><div class="v">Wähle zwei Champions für den Vergleich.</div></div>`;
+      return;
+    }
+
+    const winA = matchupMetric(champA, "win");
+    const winB = matchupMetric(champB, "win");
+    const pickA = matchupMetric(champA, "pick");
+    const pickB = matchupMetric(champB, "pick");
+    const banA = matchupMetric(champA, "ban");
+    const banB = matchupMetric(champB, "ban");
+
+    const roleA = role || rolesForHero(champA.hero_id)[0] || "Jungle";
+    const roleB = role || rolesForHero(champB.hero_id)[0] || "Jungle";
+
+    const recA = smartBansForRole(champA, roleA, 2);
+    const recB = smartBansForRole(champB, roleB, 2);
+    const recommended = [...recA, ...recB]
+      .sort((x, y) => y.score - x.score)
+      .filter((x, i, arr) => arr.findIndex(z => z.name === x.name) === i)
+      .slice(0, 3);
+
+    const thRole = role || "Jungle";
+    const th = thresholdsForRole(thRole);
+    const tierA = tierForScore(metaScore(champA), th);
+    const tierB = tierForScore(metaScore(champB), th);
+
+    matchupResults.innerHTML = `
+      <article class="card">
+        <div class="cardTop">
+          <img class="icon" src="${champA.icon}" alt="${champA.name}" loading="lazy" />
+          <div class="nameWrap">
+            <div class="name">${champA.name}</div>
+            <div class="id">${fmtPct(winA)} Win</div>
+          </div>
+          <span class="tierBadge ${tierClass(tierA)}">${tierA}</span>
+        </div>
+        <div class="tinyNote">Δ Winrate zu ${champB.name}: ${(winA - winB).toFixed(2)}%</div>
+      </article>
+      <article class="card">
+        <div class="cardTop">
+          <img class="icon" src="${champB.icon}" alt="${champB.name}" loading="lazy" />
+          <div class="nameWrap">
+            <div class="name">${champB.name}</div>
+            <div class="id">${fmtPct(winB)} Win</div>
+          </div>
+          <span class="tierBadge ${tierClass(tierB)}">${tierB}</span>
+        </div>
+        <div class="tinyNote">Δ Winrate zu ${champA.name}: ${(winB - winA).toFixed(2)}%</div>
+      </article>
+      <article class="card">
+        <div class="k">Pick/Ban Vergleich ${role ? `(${role})` : ""}</div>
+        <div class="stats">
+          <div class="stat"><div class="k">${champA.name} Pick</div><div class="v">${fmtPct(pickA)}</div></div>
+          <div class="stat"><div class="k">${champA.name} Ban</div><div class="v">${fmtPct(banA)}</div></div>
+          <div class="stat"><div class="k">Score</div><div class="v">${metaScore(champA).toFixed(1)}</div></div>
+          <div class="stat"><div class="k">${champB.name} Pick</div><div class="v">${fmtPct(pickB)}</div></div>
+          <div class="stat"><div class="k">${champB.name} Ban</div><div class="v">${fmtPct(banB)}</div></div>
+          <div class="stat"><div class="k">Score</div><div class="v">${metaScore(champB).toFixed(1)}</div></div>
+        </div>
+      </article>
+      <article class="card">
+        <div class="k">Empfohlene Bans</div>
+        <div class="counterList">
+          ${recommended.map((c, idx) => `
+            <div class="counterItem">
+              <img class="cIcon" src="${c.icon}" alt="${c.name}" loading="lazy" />
+              <div class="cMain">
+                <div class="cName">${idx + 1}. ${c.name} <span class="tierBadge ${tierClass(c.tier)}" style="margin-left:8px">${c.tier}</span></div>
+                <div class="cWhy">${c.why}</div>
+              </div>
+            </div>
+          `).join("") || `<div class="tinyNote">Keine Ban-Empfehlung verfügbar.</div>`}
+        </div>
+      </article>
+    `;
+  }
+
+  function thresholdsForList(list) {
+    const scores = list.map(c => metaScore(c)).sort((a, b) => b - a);
+    const q = (p) => scores[Math.floor(p * (scores.length - 1))] ?? 0;
+    return { ss: q(0.05), s: q(0.15), a: q(0.35), b: q(0.65) };
+  }
+
+  function renderTierlistView() {
+    if (!tierlistSections) return;
+    const role = tierlistRole?.value || "";
+    const pool = role ? allChamps.filter(c => rolesForHero(c.hero_id).includes(role)) : allChamps.slice();
+
+    if (!pool.length) {
+      tierlistSections.innerHTML = `<div class="card"><div class="k">Info</div><div class="v">Keine Champions für diese Rolle gefunden.</div></div>`;
+      return;
+    }
+
+    const th = role ? thresholdsForRole(role) : thresholdsForList(pool);
+    const groups = { SS: [], S: [], A: [], B: [], C: [] };
+    for (const c of pool) groups[tierForScore(metaScore(c), th)].push(c);
+    for (const tier of Object.keys(groups)) groups[tier].sort((a, b) => metaScore(b) - metaScore(a));
+
+    const tiers = ["SS", "S", "A", "B", "C"];
+    tierlistSections.innerHTML = tiers.map((tier) => `
+      <section class="tier-section">
+        <div class="secHead" style="margin-bottom:10px">
+          <div class="secTitle">${tier}</div>
+          <span class="tierBadge ${tierClass(tier)}">${groups[tier].length}</span>
+        </div>
+        <div class="grid" style="padding:0">
+          ${groups[tier].map(c => `
+            <article class="card">
+              <div class="cardTop">
+                <img class="icon" src="${c.icon}" alt="${c.name}" loading="lazy" />
+                <div class="nameWrap">
+                  <div class="name">${c.name}</div>
+                  <div class="id">${roleBadgeHTML(mainRoleForHero(c.hero_id))}</div>
+                </div>
+                <span class="tierBadge ${tierClass(tier)}">${tier}</span>
+              </div>
+              <div class="stats">
+                <div class="stat"><div class="k">Win</div><div class="v">${fmtPct(c.stats?.CN?.win)}</div></div>
+                <div class="stat"><div class="k">Pick</div><div class="v">${fmtPct(c.stats?.CN?.pick)}</div></div>
+                <div class="stat"><div class="k">Ban</div><div class="v">${fmtPct(c.stats?.CN?.ban)}</div></div>
+              </div>
+            </article>
+          `).join("") || `<div class="tinyNote">Keine Champions in diesem Tier.</div>`}
+        </div>
+      </section>
+    `).join("");
+  }
+
   // Draft persistence
   function saveDraftState() {
     try {
@@ -643,6 +804,8 @@
     viewDraft.classList.toggle("hidden", tab !== "draft");
     viewMatchup.classList.toggle("hidden", tab !== "matchup");
     viewTierlist.classList.toggle("hidden", tab !== "tierlist");
+    if (tab === "matchup") renderMatchupView();
+    if (tab === "tierlist") renderTierlistView();
     try { localStorage.setItem("rifto_active_tab", tab); } catch {}
   }
   function restoreTab() {
@@ -678,6 +841,10 @@
   enemySlot1.addEventListener("click", ()=>openPicker("enemy1"));
   enemySlot2.addEventListener("click", ()=>openPicker("enemy2"));
   draftRole.addEventListener("change", ()=>{ saveDraftState(); renderDraft(); });
+  matchupChampA?.addEventListener("change", renderMatchupView);
+  matchupChampB?.addEventListener("change", renderMatchupView);
+  matchupRole?.addEventListener("change", renderMatchupView);
+  tierlistRole?.addEventListener("change", renderTierlistView);
 
   pickerClose.addEventListener("click", closePicker);
   picker.addEventListener("click", (e)=>{ if (e.target.classList.contains("modalBackdrop")) closePicker(); });
@@ -718,12 +885,17 @@
       statusEl.textContent = `Geladen: ${allChamps.length} Champions`;
       statusEl.style.display = "block";
 
+      fillChampionSelect(matchupChampA);
+      fillChampionSelect(matchupChampB, allChamps[1]?.name || allChamps[0]?.name);
+
       restoreTab();
       loadDraftState();
       setPhase(draftPhase);
 
       applyMetaFilters();
       renderDraft();
+      renderMatchupView();
+      renderTierlistView();
       syncStickyOffsets();
     } catch (err) {
       console.error(err);

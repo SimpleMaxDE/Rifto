@@ -99,13 +99,39 @@
     </section>
 
     <section id="viewMatchup" class="panel hidden">
-      <div class="panelHead"><h2>Matchup</h2></div>
-      <div class="status">Kommt als Nächstes.</div>
+      <div class="panelHead">
+        <h2>Matchup</h2>
+        <div class="controls">
+          <select id="matchupChampA" class="select" aria-label="Champion A wählen"></select>
+          <select id="matchupChampB" class="select" aria-label="Champion B wählen"></select>
+          <select id="matchupRole" class="select" aria-label="Rolle filtern">
+            <option value="">Alle Rollen</option>
+            <option value="Baron">Baron</option>
+            <option value="Jungle">Jungle</option>
+            <option value="Mid">Mid</option>
+            <option value="ADC">ADC</option>
+            <option value="Support">Support</option>
+          </select>
+        </div>
+      </div>
+      <div id="matchupResults" class="grid" aria-live="polite"></div>
     </section>
 
     <section id="viewTierlist" class="panel hidden">
-      <div class="panelHead"><h2>Tierlist</h2></div>
-      <div class="status">Kommt als Nächstes.</div>
+      <div class="panelHead">
+        <h2>Tierlist</h2>
+        <div class="controls">
+          <select id="tierlistRole" class="select" aria-label="Tierlist Rolle wählen">
+            <option value="">Alle Rollen</option>
+            <option value="Baron">Baron</option>
+            <option value="Jungle">Jungle</option>
+            <option value="Mid">Mid</option>
+            <option value="ADC">ADC</option>
+            <option value="Support">Support</option>
+          </select>
+        </div>
+      </div>
+      <div id="tierlistSections" style="padding:16px"></div>
     </section>
   </main>
 
