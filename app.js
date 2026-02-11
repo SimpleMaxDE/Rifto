@@ -1,5 +1,21 @@
 (() => {
   const $ = (id) => document.getElementById(id);
+  
+  // --- Hard safety: Modal niemals "stuck open" beim Laden ---
+  window.addEventListener("DOMContentLoaded", () => {
+    const bd = document.getElementById("modalBackdrop");
+    if (bd) bd.classList.add("hidden");
+    document.body.style.overflow = "";
+  });
+
+  // Escape schließt Modal (auch wenn später JS irgendwo crasht)
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      const bd = document.getElementById("modalBackdrop");
+      if (bd) bd.classList.add("hidden");
+      document.body.style.overflow = "";
+    }
+  });
 
   // Pills
   const patchPill = $("patchPill");
