@@ -91,7 +91,12 @@ body{
   background: rgba(0,0,0,.2);
   flex:0 0 auto;
 }
-.nameWrap{min-width:0; flex:1}
+.nameWrap{
+  display:flex;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:8px; /* WICHTIG */
+}
 .name{font-weight:800; font-size:14px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
 .id{color:var(--muted); font-size:11px; margin-top:2px;}
 .tierBadge{
