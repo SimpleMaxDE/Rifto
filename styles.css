@@ -252,3 +252,35 @@ button, .card {
 .card .name, .card .sub, .metric, .metric b {
   color: inherit;
 }
+/* ===== RIFTO: Hard fix modal overlay ===== */
+#modalBackdrop {
+  display: none !important;     /* default: closed */
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  align-items: center;
+  justify-content: center;
+}
+
+#modalBackdrop.show {
+  display: flex !important;     /* open */
+}
+
+#champModal {
+  position: relative;
+  z-index: 10000;
+}
+
+/* Backdrop darf Klicks annehmen, aber Close muss drüber liegen */
+#modalBackdrop .modalClose,
+#modalBackdrop .modal-close,
+#modalBackdrop [data-close="modal"] {
+  position: relative;
+  z-index: 10001;
+  pointer-events: auto !important;
+}
+
+/* Falls irgendwas global auf schwarz springt */
+body, .app, .panel, .card, .tabs, .tab, .title, .subtitle, .meta, .label {
+  color: inherit;
+}
