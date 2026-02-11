@@ -1,3 +1,31 @@
+// ===== RIFTO: Modal safety boot =====
+(() => {
+  const closeNow = () => {
+    const bd = document.getElementById("modalBackdrop");
+    if (!bd) return;
+    bd.classList.remove("show");
+    bd.style.display = "none";
+    document.body.classList.remove("modalOpen");
+    document.body.style.overflow = "";
+  };
+
+  // sofort + nach DOM load (doppelt hält besser)
+  closeNow();
+  document.addEventListener("DOMContentLoaded", closeNow);
+  window.addEventListener("load", closeNow);
+
+  // ESC schließt immer
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeNow();
+  });
+
+  // Klick auf Backdrop schließt (nicht wenn man auf Modal klickt)
+  document.addEventListener("click", (e) => {
+    const bd = document.getElementById("modalBackdrop");
+    if (!bd) return;
+    if (e.target === bd) closeNow();
+  });
+})();
 (() => {
   const $ = (id) => document.getElementById(id);
   
