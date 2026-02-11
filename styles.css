@@ -240,3 +240,15 @@ body{
   padding:6px 10px;border-radius:999px;font-weight:900;
 }
 .modalActions{display:flex;gap:10px;justify-content:flex-end;margin-top:12px;flex-wrap:wrap}
+/* --- SAFETY FIXES --- */
+.hidden { display: none !important; }
+.backdrop.hidden { display: none !important; }
+
+/* Buttons (cards) sollen niemals "default black text" bekommen */
+button, .card {
+  color: var(--text) !important;
+}
+
+.card .name, .card .sub, .metric, .metric b {
+  color: inherit;
+}
