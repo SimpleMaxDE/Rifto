@@ -478,3 +478,88 @@ body{
   mix-blend-mode: screen;
   opacity:.35;
 }
+
+
+/* ===== PATCH 2026-02-11: Lane badges calmer + SS tier more special + name overlap fix ===== */
+
+/* Fix: name should never collide with role badge */
+.nameWrap{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  gap:3px;
+  min-width:0;
+}
+.name{
+  line-height:1.15;
+}
+
+/* Put lane badge + #id on its own line */
+.id{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  margin-top:2px;
+  min-width:0;
+}
+
+/* Lane badge: pill, smaller, less dominant */
+.laneBadge{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:999px;
+  padding:3px 8px;
+  min-width:38px;
+  font-weight:800;
+  font-size:10px;
+  letter-spacing:.6px;
+  opacity:.78;
+  border:1px solid rgba(255,255,255,.12);
+  background: rgba(255,255,255,.02);
+}
+
+/* Lane colors: keep ONLY text color (background stays neutral) */
+.lane-jungle{ color:#44d685; }
+.lane-mid{    color:#4da6ff; }
+.lane-adc{    color:#ffad5b; }
+.lane-support{color:#caa0ff; }
+.lane-baron,
+.lane-top{    color:#ff7a7a; }
+
+/* If you still have older border/bg rules, this forces them neutral */
+.lane-jungle,.lane-mid,.lane-adc,.lane-support,.lane-baron,.lane-top{
+  background: rgba(255,255,255,.02) !important;
+  border-color: rgba(255,255,255,.12) !important;
+}
+
+/* Tier SS: stronger glow + subtle animated shine */
+.tierBadge.tierSS,
+.tierSS{
+  background: linear-gradient(135deg, rgba(255,77,109,.24), rgba(255,31,91,.12));
+  border-color: rgba(255,77,109,.60);
+  box-shadow: 0 0 18px rgba(255,77,109,.38);
+  transform: translateZ(0);
+}
+.tierBadge.tierSS::after{
+  content:"";
+  position:absolute;
+  inset:-1px;
+  border-radius:999px;
+  background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,.22) 45%, transparent 70%);
+  opacity:.22;
+  pointer-events:none;
+  animation: tierShine 2.8s ease-in-out infinite;
+}
+@keyframes tierShine{
+  0%{ transform: translateX(-40%); opacity:.0; }
+  20%{ opacity:.25; }
+  50%{ transform: translateX(40%); opacity:.18; }
+  100%{ transform: translateX(40%); opacity:.0; }
+}
+
+/* Optional: remove the thin “scroll line” that can appear from subpixel seams */
+.panel, .card{
+  background-clip: padding-box;
+}
+
