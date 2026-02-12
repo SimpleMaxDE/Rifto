@@ -146,15 +146,24 @@
       <div class="panelHead">
         <h2>Matchup</h2>
         <div class="controls matchupControls">
-          <select id="matchupLane" class="select" aria-label="Lane wählen">
-            <option value="Baron">Baron Lane</option>
-            <option value="Jungle">Jungle</option>
-            <option value="Mid">Mid Lane</option>
-            <option value="ADC">Duo ADC</option>
-            <option value="Support">Duo Support</option>
-          </select>
-          <select id="matchupChampA" class="select" aria-label="Deinen Champion wählen"></select>
-          <select id="matchupChampB" class="select" aria-label="Gegnerischen Champion wählen"></select>
+          <label class="matchupField" for="matchupLane">
+            <span class="matchupLabel">Lane</span>
+            <select id="matchupLane" class="select matchupLaneSelect" aria-label="Lane wählen">
+              <option value="Baron">Baron Lane</option>
+              <option value="Jungle">Jungle</option>
+              <option value="Mid">Mid Lane</option>
+              <option value="ADC">Duo ADC</option>
+              <option value="Support">Duo Support</option>
+            </select>
+          </label>
+          <label class="matchupField" for="matchupChampA">
+            <span class="matchupLabel">Dein Champion</span>
+            <select id="matchupChampA" class="select matchupMyChampSelect" aria-label="Deinen Champion wählen"></select>
+          </label>
+          <label class="matchupField" for="matchupChampB">
+            <span class="matchupLabel">Gegner Champion</span>
+            <select id="matchupChampB" class="select matchupEnemyChampSelect" aria-label="Gegnerischen Champion wählen"></select>
+          </label>
           <button id="matchupAnalyse" class="btn primaryAction" type="button" aria-label="Matchup analysieren">⚔ Analyse</button>
         </div>
       </div>
