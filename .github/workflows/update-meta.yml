@@ -29,12 +29,14 @@ jobs:
       - name: Run catalog + meta updater
         run: |
           python tools/update_live_catalog.py
+          python tools/update_localization_en.py
+          python tools/update_champion_abilities_en.py
           python tools/update_meta.py
 
       - name: Commit and push changes
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add meta.json data/live_catalog.json
+          git add meta.json data/live_catalog.json data/localization_en.json data/champion_abilities_en.json
           git commit -m "chore: update meta.json" || echo "No changes to commit"
           git push

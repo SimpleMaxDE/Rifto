@@ -63,7 +63,7 @@ def item_records(raw: dict) -> list[dict]:
             continue
         out.append(
             {
-                "item_id": str(item.get("id") or item.get("itemId") or ""),
+                "item_id": str(item.get("equipId") or item.get("id") or item.get("itemId") or ""),
                 "name": item.get("name") or "",
                 "icon": item.get("iconPath") or "",
                 "price": item.get("price") or 0,

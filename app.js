@@ -90,6 +90,8 @@
   let liveRuneDb = [];
   let liveSkillDb = [];
   let liveCatalogData = null;
+  let localizationDb = { items: {}, runes: {}, summonerSpells: {} };
+  let championAbilityDb = {};
 
   let risingTypes = new Set();
   let fallingTypes = new Set();
@@ -391,17 +393,43 @@
   function saveSnapshot(strength) {
     try { localStorage.setItem("rifto_type_snapshot", JSON.stringify({ ts: Date.now(), strength })); } catch {}
   }
-  function formatTrend(rise, fall) {
-    const up = rise.length ? `${labelTag(rise[0])} ↑` : "";
-    const down = fall.length ? `${labelTag(fall[0])} ↓` : "";
-    return [up, down].filter(Boolean).join(" • ") || "–";
+
+  function renderTrendPill({ rise = [], fall = [], baselineHours = null } = {}) {
+    if (!trendPill) return;
+    const topRise = rise[0];
+    const topFall = fall[0];
+
+    if (!topRise && !topFall) {
+      trendPill.classList.remove("trendPillRich");
+      trendPill.textContent = "Trend: lernt noch…";
+      trendPill.title = "Trend benötigt mindestens zwei Snapshots.";
+      return;
+    }
+
+    const riseTxt = topRise ? `${labelTag(topRise.t)} +${topRise.d.toFixed(1)}` : "–";
+    const fallTxt = topFall ? `${labelTag(topFall.t)} ${topFall.d.toFixed(1)}` : "–";
+    const baseTxt = Number.isFinite(baselineHours) ? `Basis ${baselineHours}h` : "Basis n/a";
+
+    trendPill.classList.add("trendPillRich");
+    trendPill.innerHTML = `
+      <span class="trendLabel">Trend</span>
+      <span class="trendUp">↑ ${riseTxt}</span>
+      <span class="trendDown">↓ ${fallTxt}</span>
+      <span class="trendBase">${baseTxt}</span>
+    `;
+    trendPill.title = `Steigend: ${riseTxt} | Fallend: ${fallTxt} | ${baseTxt}`;
   }
+
   function updateTrends() {
     const current = computeTypeStrength();
     const prev = loadPrevSnapshot();
     risingTypes = new Set();
     fallingTypes = new Set();
     trendText = "–";
+
+    let rise = [];
+    let fall = [];
+    let baselineHours = null;
 
     if (prev && prev.strength) {
       const deltas = [];
@@ -410,13 +438,16 @@
         deltas.push({ t, d: current[t] - prev.strength[t] });
       }
       deltas.sort((a,b)=>b.d-a.d);
-      const rise = deltas.filter(x=>x.d>0).slice(0,3);
-      const fall = deltas.filter(x=>x.d<0).slice(-3);
+      rise = deltas.filter(x=>x.d>0).slice(0,3);
+      fall = deltas.filter(x=>x.d<0).slice(-3);
       for (const r of rise) risingTypes.add(r.t);
       for (const f of fall) fallingTypes.add(f.t);
-      trendText = formatTrend(rise.map(x=>x.t), fall.map(x=>x.t));
+      const riseTxt = rise.length ? `${labelTag(rise[0].t)} ↑` : "";
+      const fallTxt = fall.length ? `${labelTag(fall[0].t)} ↓` : "";
+      trendText = [riseTxt, fallTxt].filter(Boolean).join(" • ") || "–";
+      baselineHours = Math.max(1, Math.round((Date.now() - Number(prev.ts || 0)) / 36e5));
     }
-    trendPill.textContent = `Trend: ${trendText}`;
+    renderTrendPill({ rise, fall, baselineHours });
     modalTrendHint.textContent = `Trend: ${trendText}`;
     saveSnapshot(current);
   }
@@ -722,24 +753,48 @@
     return "Ausgeglichen";
   }
 
+  function enemyAbilityRows(enemyName) {
+    const row = championAbilityDb?.[enemyName];
+    return Array.isArray(row?.spells) ? row.spells : [];
+  }
+
+  function pickEnemyAbility(enemyName, mode = "danger") {
+    const spells = enemyAbilityRows(enemyName);
+    if (!spells.length) return null;
+    const by = (r) => spells.find((sp) => r.test(`${sp.name || ""} ${sp.description || ""}`.toLowerCase()));
+    if (mode === "danger") {
+      return by(/stun|knock|airborne|taunt|snare|charm|suppress|fear/) || spells.find((x) => x.slot === "R") || spells[0];
+    }
+    if (mode === "burst") {
+      return by(/execute|burst|damage|critical|slash|strike|爆发/) || spells.find((x) => x.slot === "R") || spells[0];
+    }
+    return spells[0];
+  }
+
+  function abilityLabel(spell) {
+    return spell?.name ? `${spell.slot} (${spell.name})` : "key ability";
+  }
+
   function guideByEnemyTypes(types, myChamp, enemyChamp, delta) {
     const set = new Set(types || []);
     const lane = [];
     const fight = [];
     const spikes = [];
+    const ccSpell = pickEnemyAbility(enemyChamp.name, "danger");
+    const burstSpell = pickEnemyAbility(enemyChamp.name, "burst");
 
     if (set.has("assassin_burst") || set.has("assassin_reset")) {
-      lane.push(`Bis Level 5 gegen ${enemyChamp.name} nur Short-Trades nach seinem Engage-Spell starten.`);
-      fight.push(`Halte Defensive-CD bis ${enemyChamp.name} committed – danach sofort Counter-Trade.`);
+      lane.push(`Bis Level 5 gegen ${enemyChamp.name} nur Short-Trades nach ${abilityLabel(burstSpell)} starten.`);
+      fight.push(`Defensive-CD erst halten, bis ${enemyChamp.name} ${abilityLabel(burstSpell)} committed – dann Counter-Trade.`);
       spikes.push(`Ab erstem Def-Item kannst du gegen ${enemyChamp.name} deutlich länger traden.`);
     }
     if (set.has("hard_engage") || set.has("pointclick_cc") || set.has("hard_cc")) {
-      lane.push(`Wave nie ohne Vision tief drücken, weil ${enemyChamp.name} Engage erzwingen will.`);
-      fight.push(`Stell dich seitlich hinter Frontline, damit ${enemyChamp.name} keinen freien Start bekommt.`);
-      spikes.push(`Mit Tenacity/QSS kannst du ${enemyChamp.name}s All-In stark entschärfen.`);
+      lane.push(`Wave nicht ohne Vision tief drücken, weil ${enemyChamp.name} über ${abilityLabel(ccSpell)} Engage erzwingt.`);
+      fight.push(`Seitlich hinter Frontline stehen, damit ${enemyChamp.name} mit ${abilityLabel(ccSpell)} keinen freien Start bekommt.`);
+      spikes.push(`Mit Tenacity/QSS kannst du ${abilityLabel(ccSpell)} stark entschärfen.`);
     }
     if (set.has("poke") || set.has("mage_poke")) {
-      lane.push(`Seitlich in Minions spielen und nur bei verfehltem Poke von ${enemyChamp.name} traden.`);
+      lane.push(`Seitlich in Minions spielen und nur traden, wenn ${enemyChamp.name} ${abilityLabel(burstSpell)} verfehlt.`);
       fight.push(`Nicht pre-fight HP verlieren: erst resetten/healen, dann contesten.`);
       spikes.push(`Sobald Sustain/Resists stehen, verliert ${enemyChamp.name} deutlich Druck.`);
     }
@@ -758,7 +813,19 @@
       spikes.push(`Ab 6 Min mit Vision zuerst rotieren, dann aggressiver traden.`);
     }
     if (!fight.length) {
-      fight.push(`Teamfight-Regel: nur committen wenn ${enemyChamp.name}s wichtigste Tools auf Cooldown sind.`);
+      fight.push(`Teamfight-Regel: nur committen wenn ${enemyChamp.name}s ${abilityLabel(ccSpell)} auf Cooldown ist.`);
+    }
+
+    const firstSpells = enemyAbilityRows(enemyChamp.name).slice(0, 3);
+    for (const sp of firstSpells) {
+      if (!sp?.name) continue;
+      const low = `${sp.name} ${sp.description || ""}`.toLowerCase();
+      if (/dash|blink|jump|charge/.test(low)) {
+        lane.push(`Halte dein CC/Slow bis ${enemyChamp.name} ${sp.slot} (${sp.name}) nutzt, dann punishen.`);
+      }
+      if (/heal|regen|shield/.test(low)) {
+        spikes.push(`Gegen ${sp.slot} (${sp.name}) früh Anti-Heal einplanen.`);
+      }
     }
 
     const tempo = delta >= 0
@@ -828,15 +895,52 @@
     return String(v || "").trim().toLowerCase();
   }
 
+  function itemCandidateVariants(candidates = []) {
+    const map = localizationDb?.items || {};
+    const reverse = {};
+    for (const [zh, en] of Object.entries(map)) {
+      const e = normalizeText(en);
+      if (!e) continue;
+      if (!reverse[e]) reverse[e] = [];
+      reverse[e].push(zh);
+    }
+
+    const out = new Set();
+    for (const c of candidates) {
+      const raw = String(c || "").trim();
+      if (!raw) continue;
+      out.add(raw);
+      const mapped = map[raw];
+      if (mapped) out.add(mapped);
+      const rev = reverse[normalizeText(raw)] || [];
+      for (const zh of rev) out.add(zh);
+    }
+    return Array.from(out);
+  }
+
+  function containsCjk(v) {
+    return /[\u3400-\u9fff]/.test(String(v || ""));
+  }
+
+  function localizedName(category, name, fallback = "") {
+    const original = String(name || "").trim();
+    if (!original) return fallback || "";
+    const fromMap = localizationDb?.[category]?.[original];
+    const isNumericPlaceholder = /^(Item|Rune|Spell)\s+\d+$/i.test(String(fromMap || "").trim());
+    if (fromMap && !containsCjk(fromMap) && !isNumericPlaceholder) return fromMap;
+    if (!containsCjk(original)) return original;
+    return fallback || original;
+  }
+
   function findWildRiftItem(candidates = []) {
     if (!liveItemDb?.length) return null;
-    const exact = candidates.map(normalizeText).filter(Boolean);
+    const exact = itemCandidateVariants(candidates).map(normalizeText).filter(Boolean);
     for (const c of exact) {
-      const hit = liveItemDb.find((x) => normalizeText(x.name) === c);
+      const hit = liveItemDb.find((x) => normalizeText(x.name) === c || normalizeText(x.nativeName) === c);
       if (hit) return hit;
     }
     for (const c of exact) {
-      const hit = liveItemDb.find((x) => normalizeText(x.name).includes(c));
+      const hit = liveItemDb.find((x) => normalizeText(x.name).includes(c) || normalizeText(x.nativeName).includes(c));
       if (hit) return hit;
     }
     return null;
@@ -844,8 +948,9 @@
 
   function buildWrItem(candidates, why, fallbackName) {
     const found = findWildRiftItem(candidates);
+    const translated = localizedName("items", found?.name, fallbackName || candidates[0] || "Item");
     return {
-      name: fallbackName || found?.name || candidates[0] || "Wild Rift Item",
+      name: translated,
       nativeName: found?.name || "",
       icon: found?.iconPath || fallbackItemIcon(),
       why,
@@ -866,72 +971,139 @@
     return buildWrItem(["明朗之靴"], "Sicherer Standard für häufige Ability-Rotationen.", "Ionian Boots");
   }
 
-  function templateBuildForProfile(profile) {
-    if (profile === "marksman") {
-      return [
-        [["无尽之刃"], "Skaliert stark in Mid/Late-Teamfights.", "Infinity Edge"],
-        [["收集者"], "Hilft beim Snowballen in Kills/Skirmishes.", "The Collector"],
-        [["疾射火炮", "火炮"], "Besseres Poke-/Pick-Fenster vor Fights.", "Rapid Firecannon"],
-        [["凡性的提醒"], "Pflicht gegen Armor/Heal im Midgame.", "Mortal Reminder"],
-        [["守护天使"], "Absicherung bei Shutdown-Risiko.", "Guardian Angel"]
-      ];
-    }
-    if (profile === "assassin") {
-      return [
-        [["德拉克萨的暮刃", "暮刃"], "Burst-Core für schnelle Picks.", "Duskblade"],
-        [["幽梦之魂", "幽梦"], "Mobility-Tempo für Roams und Picks.", "Youmuu's Ghostblade"],
-        [["夜之锋刃"], "Spellshield schützt deine Engage-Windows.", "Edge of Night"],
-        [["赛瑞尔达的怨恨"], "Verstärkt Kill-Pressure vs Armor.", "Serylda's Grudge"],
-        [["守护天使"], "Sicherheit in entscheidenden Fights.", "Guardian Angel"]
-      ];
-    }
+  function itemText(item) {
+    const desc = Array.isArray(item?.description) ? item.description.join(" ") : String(item?.description || "");
+    const labels = Array.isArray(item?.labels) ? item.labels.join(" ") : "";
+    return `${String(item?.name || "")} ${desc} ${labels}`.toLowerCase();
+  }
+
+  function itemHasAny(text, words = []) {
+    return words.some((w) => text.includes(w));
+  }
+
+  function isBootOrEnchantItem(item) {
+    const name = String(item?.name || "");
+    return name.includes("靴") || name.includes("附魔") || name.includes("·");
+  }
+
+  function fallbackTemplateBuild(profile) {
     if (profile === "mage") {
       return [
-        [["卢登的回声"], "Konstanter AP-Burst im Core.", "Luden's Echo"],
-        [["灭世者之帽"], "Starker Multiplikator für deine Combo.", "Rabadon's Deathcap"],
-        [["虚空之杖"], "MR-Penetration gegen MR-Stack.", "Void Staff"],
-        [["中娅沙漏", "中娅"], "Defensives Fenster gegen Burst/Engage.", "Zhonya's Hourglass"],
-        [["莫雷洛秘典"], "Anti-Heal gegen Sustain-Comp.", "Morellonomicon"]
-      ];
-    }
-    if (profile === "tank" || profile === "tank_support") {
-      return [
-        [["日炎圣盾"], "Früher Tank-Powerspike für Lane/Skirmish.", "Sunfire Aegis"],
-        [["荆棘之甲"], "Stark gegen AD-Heal und Frontline-Fights.", "Thornmail"],
-        [["兰顿之兆"], "Sehr gut gegen Crit/Auto-basierte Gegner.", "Randuin's Omen"],
-        [["振奋盔甲"], "Mehr Sustain in langen Kämpfen.", "Spirit Visage"],
-        [["石像鬼石板甲", "石板甲"], "Late-Game-Frontline Absicherung.", "Gargoyle Stoneplate"]
-      ];
-    }
-    if (profile === "enchanter") {
-      return [
-        [["流水法杖"], "Utility-Core für Teamfight-Buffs.", "Staff of Flowing Water"],
-        [["和音之律", "和音"], "Mehr Team-Sustain in längeren Kämpfen.", "Harmonic Echo"],
-        [["炽热香炉"], "Starker Carry-Buff in DPS-Fights.", "Ardent Censer"],
-        [["米凯尔的祝福", "米凯尔"], "Cleanse/Peel gegen harten CC.", "Mikael's Blessing"],
-        [["救赎"], "Global/Teamfight Utility in Mid-Late.", "Redemption"]
+        buildWrItem(["卢登的回声"], "Konstanter AP-Burst im Core.", "Luden's Echo"),
+        buildWrItem(["灭世者之帽"], "Starker Multiplikator für deine Combo.", "Rabadon's Deathcap"),
+        buildWrItem(["虚空之杖"], "MR-Penetration gegen MR-Stack.", "Void Staff"),
+        buildWrItem(["中娅沙漏", "中娅"], "Defensives Fenster gegen Burst/Engage.", "Zhonya's Hourglass"),
+        buildWrItem(["莫雷洛秘典"], "Anti-Heal gegen Sustain-Comp.", "Morellonomicon")
       ];
     }
     return [
-      [["黑色切割者"], "Starker AD-Allround-Core gegen viele Matchups.", "Black Cleaver"],
-      [["死亡之舞"], "Überlebt Burst besser in Midgame-Fights.", "Death's Dance"],
-      [["神圣分离者"], "Sehr stark in längeren Duellen vs Bruiser/Tank.", "Divine Sunderer"],
-      [["斯特拉克的挑战护手", "挑战护手"], "Duellstärke + Teamfight-Survival.", "Sterak's Gage"],
-      [["守护天使"], "Sicherheit für entscheidende Fights.", "Guardian Angel"]
+      buildWrItem(["黑色切割者"], "Starker AD-Allround-Core gegen viele Matchups.", "Black Cleaver"),
+      buildWrItem(["死亡之舞"], "Überlebt Burst besser in Midgame-Fights.", "Death's Dance"),
+      buildWrItem(["神圣分离者"], "Sehr stark in längeren Duellen vs Bruiser/Tank.", "Divine Sunderer"),
+      buildWrItem(["斯特拉克的挑战护手", "挑战护手"], "Duellstärke + Teamfight-Survival.", "Sterak's Gage"),
+      buildWrItem(["守护天使"], "Sicherheit für entscheidende Fights.", "Guardian Angel")
     ];
   }
 
-  function adaptBuildToEnemy(enemyTypesRaw) {
+  function scoreItemForMatchup(item, profile, myRole, myTypesRaw, enemyTypesRaw) {
+    const text = itemText(item);
+    const enemy = new Set(enemyTypesRaw || []);
+    const mine = new Set(myTypesRaw || []);
+    let score = 0;
+    const reasons = [];
+
+    const push = (points, reason) => {
+      score += points;
+      if (reason) reasons.push(reason);
+    };
+
+    if (profile === "marksman") {
+      if (itemHasAny(text, ["攻击力", "暴击", "攻速", "吸血", "护甲穿透"])) push(16, "ADC-DPS-Stats");
+    } else if (profile === "mage") {
+      if (itemHasAny(text, ["法术强度", "法术穿透", "法力", "技能急速", "冷却"])) push(16, "AP-Core-Stats");
+    } else if (profile === "assassin") {
+      if (itemHasAny(text, ["攻击力", "护甲穿透", "移动速度", "技能急速", "冷却"])) push(16, "Burst/Pick-Stats");
+    } else if (profile === "tank" || profile === "tank_support") {
+      if (itemHasAny(text, ["生命值", "护甲", "魔法抗性", "减速", "格挡"])) push(16, "Frontline-Stats");
+    } else if (profile === "enchanter") {
+      if (itemHasAny(text, ["治疗", "护盾", "法力回复", "法术强度", "技能急速"])) push(16, "Support-Utility");
+    } else {
+      if (itemHasAny(text, ["攻击力", "生命值", "技能急速", "吸血"])) push(14, "Fighter-Allround");
+    }
+
+    if (myRole === "Baron" && itemHasAny(text, ["生命值", "护甲", "回复", "吸血"])) push(5, "Lane-Duel Sustain");
+    if (myRole === "Mid" && itemHasAny(text, ["法力", "法术强度", "冷却"])) push(5, "Mid Tempo/Wave");
+    if (myRole === "Jungle" && itemHasAny(text, ["移动速度", "技能急速", "穿透"])) push(5, "Jungle Tempo");
+    if (myRole === "ADC" && itemHasAny(text, ["暴击", "攻速", "吸血"])) push(5, "ADC Teamfight DPS");
+    if (myRole === "Support" && itemHasAny(text, ["护盾", "治疗", "回复", "生命值", "魔法抗性"])) push(5, "Support Lane Value");
+
+    if (enemy.has("hard_cc") || enemy.has("pointclick_cc")) {
+      if (itemHasAny(text, ["韧性", "解控", "免疫", "净化", "魔法抗性"])) push(11, "Anti-CC");
+    }
+    if (enemy.has("assassin_burst") || enemy.has("mage_burst")) {
+      if (itemHasAny(text, ["护甲", "魔法抗性", "生命值", "免疫", "护盾"])) push(10, "Anti-Burst");
+    }
+    if (enemy.has("tank") || enemy.has("hard_engage")) {
+      if (itemHasAny(text, ["穿透", "百分比", "破甲", "法术穿透", "重伤"])) push(10, "Vs Frontline");
+    }
+    if (enemy.has("anti_auto") || enemy.has("fighter")) {
+      if (itemHasAny(text, ["护甲", "攻速", "减速", "反伤", "格挡"])) push(9, "Anti-Auto/Fighter");
+    }
+    if (enemy.has("poke") || enemy.has("mage_poke")) {
+      if (itemHasAny(text, ["回复", "生命值", "魔法抗性", "吸血", "治疗"])) push(8, "Anti-Poke Sustain");
+    }
+
+    if (mine.has("anti_tank") && itemHasAny(text, ["穿透", "破甲", "百分比"])) push(6, "Champion-Synergie");
+    if (mine.has("hard_engage") && itemHasAny(text, ["移动速度", "生命值", "护甲", "魔法抗性"])) push(6, "Engage-Synergie");
+    if (mine.has("assassin_burst") && itemHasAny(text, ["穿透", "攻击力", "技能急速"])) push(6, "Assassin-Synergie");
+    if (mine.has("mage_burst") && itemHasAny(text, ["法术强度", "法术穿透", "冷却"])) push(6, "Mage-Synergie");
+
+    if (itemHasAny(text, ["唯一被动", "唯一主动", "装备急速"])) push(2, "Item Quality");
+
+    return { score, reasons: Array.from(new Set(reasons)).slice(0, 2) };
+  }
+
+  function smartCoreBuild(myChamp, myRole, profile, myTypesRaw, enemyChamp, enemyTypesRaw) {
+    if (!liveItemDb?.length) return fallbackTemplateBuild(profile);
+    const pool = liveItemDb.filter((item) => item?.name && !isBootOrEnchantItem(item));
+    const scored = pool.map((item) => {
+      const decision = scoreItemForMatchup(item, profile, myRole, myTypesRaw, enemyTypesRaw);
+      return { item, score: decision.score, reasons: decision.reasons };
+    }).filter((x) => x.score > 8).sort((a, b) => b.score - a.score);
+
+    const selected = [];
+    const seen = new Set();
+    for (const row of scored) {
+      const name = String(row.item?.name || "");
+      if (!name || seen.has(name)) continue;
+      selected.push({
+        name: localizedName("items", name, row.item?.nativeName || name),
+        nativeName: name,
+        icon: row.item?.iconPath || fallbackItemIcon(),
+        why: `Vs ${enemyChamp.name}: ${row.reasons.join(" + ") || "Matchup-Wert"}`,
+        stats: row.item?.description || ""
+      });
+      seen.add(name);
+      if (selected.length >= 5) break;
+    }
+
+    return selected.length >= 5 ? selected : fallbackTemplateBuild(profile);
+  }
+
+  function adaptBuildToEnemy(enemyTypesRaw, profile, myRole) {
     const set = new Set(enemyTypesRaw || []);
     const out = [];
     if (set.has("hard_cc") || set.has("pointclick_cc")) {
-      out.push(buildWrItem(["水银饰带", "银饰"], "Situativ gegen harte CC-Ketten einbauen.", "Quicksilver"));
+      out.push(buildWrItem(["水银饰带", "银饰", "中娅沙漏"], "Gegen harte CC-Ketten einbauen.", "Quicksilver / Stasis"));
     }
     if (set.has("poke") || set.has("mage_poke") || set.has("mage_burst")) {
-      out.push(buildWrItem(["饮魔刀"], "Defensiv-Option gegen hohen Magic-Burst.", "Maw of Malmortius"));
+      out.push(buildWrItem(["振奋盔甲", "饮魔刀", "自然之力"], "Defensiv-Option gegen hohen Magic-Burst.", "MR Defensive"));
     }
-    if (set.has("anti_auto")) {
-      out.push(buildWrItem(["冰霜之心", "冰心"], "Gegen Auto-Attack-Druck priorisieren.", "Frozen Heart"));
+    if (set.has("anti_auto") || set.has("fighter")) {
+      out.push(buildWrItem(["冰霜之心", "兰顿之兆", "荆棘之甲"], "Gegen Auto-Attack-Druck priorisieren.", "Armor Counter"));
+    }
+    if ((profile === "marksman" || myRole === "ADC") && (set.has("tank") || set.has("hard_engage"))) {
+      out.push(buildWrItem(["凡性的提醒"], "Früh gegen Frontline + Heal kaufen.", "Mortal Reminder"));
     }
     return out;
   }
@@ -970,12 +1142,10 @@
     const boots = chooseBootsByMatchup(enemyTypesRaw, profile);
     const enchant = chooseBootEnchant(enemyTypesRaw, profile);
 
-    const coreTemplate = templateBuildForProfile(profile)
-      .map(([names, why, fallback]) => buildWrItem(names, why, fallback));
-
+    const coreTemplate = smartCoreBuild(myChamp, myRole, profile, myTypesRaw, enemyChamp, enemyTypesRaw);
     const coreItems = coreTemplate.slice(0, 3);
     const finalBuild = [...coreItems, ...coreTemplate.slice(3, 5), boots, enchant].slice(0, 6);
-    const situational = adaptBuildToEnemy(enemyTypesRaw).slice(0, 3);
+    const situational = adaptBuildToEnemy(enemyTypesRaw, profile, myRole).slice(0, 3);
 
     return {
       profile,
@@ -1008,6 +1178,28 @@
     patchContext = patchNotesData.patch || DEFAULT_PATCH_NOTES.patch;
   }
 
+  async function loadLocalizationEn(ts) {
+    try {
+      const localized = await loadJson(`./data/localization_en.json?ts=${ts}`);
+      localizationDb = {
+        items: localized?.items || {},
+        runes: localized?.runes || {},
+        summonerSpells: localized?.summonerSpells || {}
+      };
+    } catch {
+      localizationDb = { items: {}, runes: {}, summonerSpells: {} };
+    }
+  }
+
+  async function loadChampionAbilities(ts) {
+    try {
+      const data = await loadJson(`./data/champion_abilities_en.json?ts=${ts}`);
+      championAbilityDb = data?.champions || {};
+    } catch {
+      championAbilityDb = {};
+    }
+  }
+
   async function loadLiveRuneData() {
     if (liveCatalogData?.runes?.length) {
       liveRuneDb = liveCatalogData.runes;
@@ -1037,9 +1229,12 @@
   async function loadLiveItemData() {
     if (liveCatalogData?.items?.length) {
       liveItemDb = liveCatalogData.items.map((x) => ({
-        name: x.name,
+        name: localizedName("items", x.name, x.name),
+        nativeName: x.name,
         iconPath: x.icon,
-        description: x.description
+        description: x.description,
+        labels: x.labels,
+        price: x.price
       }));
       liveItemPatch = liveCatalogData?.versions?.items || "–";
       return;
@@ -1047,7 +1242,13 @@
     try {
       const equipData = await loadJson(WR_EQUIP_URL);
       liveItemPatch = equipData?.version || "–";
-      liveItemDb = Array.isArray(equipData?.equipList) ? equipData.equipList : null;
+      liveItemDb = Array.isArray(equipData?.equipList)
+        ? equipData.equipList.map((x, idx) => ({
+            ...x,
+            nativeName: x?.name,
+            name: localizedName("items", x?.name, x?.name || "Unknown Item")
+          }))
+        : null;
     } catch (err) {
       console.warn("Wild Rift item data unavailable, fallback names/icons only", err);
       liveItemPatch = "–";
@@ -1197,14 +1398,23 @@
     if (!patchnotesGrid || !patchnotesSummary) return;
     patchnotesSummary.textContent = `Patch ${patchContext}: Live ausgewertet für Champions, Items, Runen und Summoner Spells.`;
 
+    const shortChampionPatchText = (entry, direction) => {
+      const arrow = direction === "buff" ? "↑" : "↓";
+      const delta = Number(entry?.delta || 0);
+      const absDelta = Math.abs(delta).toFixed(1);
+      const note = String(entry?.note || "").trim();
+      const firstPart = note.split(/[.!?]/).map((x) => x.trim()).find(Boolean) || "Änderung erkannt";
+      return `${arrow} ${absDelta}: ${firstPart}`;
+    };
+
     const championBuffCards = (patchNotesData.championBuffs || []).map((x) => {
       const champ = getChampionByName(x.name);
-      return `<article class="highlightCard pnCard pnUp"><div class="highlightTitle">Champion Buff</div><div class="highlightMain">${champ ? `<img src="${champ.icon}" alt="${x.name}" loading="lazy" />` : ''} ${x.name}</div><div class="tinyNote">${x.note}</div></article>`;
+      return `<article class="highlightCard pnCard pnUp"><div class="highlightTitle">Champion Buff</div><div class="highlightMain">${champ ? `<img src="${champ.icon}" alt="${x.name}" loading="lazy" />` : ''} ${x.name}</div><div class="tinyNote">${shortChampionPatchText(x, "buff")}</div></article>`;
     }).join('');
 
     const championNerfCards = (patchNotesData.championNerfs || []).map((x) => {
       const champ = getChampionByName(x.name);
-      return `<article class="highlightCard pnCard pnDown"><div class="highlightTitle">Champion Nerf</div><div class="highlightMain">${champ ? `<img src="${champ.icon}" alt="${x.name}" loading="lazy" />` : ''} ${x.name}</div><div class="tinyNote">${x.note}</div></article>`;
+      return `<article class="highlightCard pnCard pnDown"><div class="highlightTitle">Champion Nerf</div><div class="highlightMain">${champ ? `<img src="${champ.icon}" alt="${x.name}" loading="lazy" />` : ''} ${x.name}</div><div class="tinyNote">${shortChampionPatchText(x, "nerf")}</div></article>`;
     }).join('');
 
     const itemCards = (patchNotesData.itemChanges || []).map((x) => {
@@ -1715,6 +1925,10 @@
       } catch { heroDb = {}; }
 
       await loadLiveCatalog(ts);
+      await Promise.all([
+        loadLocalizationEn(ts),
+        loadChampionAbilities(ts)
+      ]);
       mergeAllChampionsFromHeroDb();
 
       try {
