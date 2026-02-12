@@ -6,7 +6,7 @@
   <title>RIFTO</title>
   <link rel="manifest" href="./manifest.json">
   <meta name="theme-color" content="#0b1220">
-  <link rel="stylesheet" href="./styles.css?v=17" />
+  <link rel="stylesheet" href="./styles.css?v=20" />
 </head>
 <body>
   <header class="topbar">
@@ -26,6 +26,7 @@
     <button class="tab" data-tab="draft">DRAFT</button>
     <button class="tab" data-tab="matchup">MATCHUP</button>
     <button class="tab" data-tab="tierlist">TIERLIST</button>
+    <button class="tab" data-tab="patchnotes">PATCHNOTES</button>
   </nav>
 
   <main class="wrap">
@@ -144,22 +145,29 @@
     <section id="viewMatchup" class="panel hidden">
       <div class="panelHead">
         <h2>Matchup</h2>
-        <div class="controls">
-          <select id="matchupChampA" class="select" aria-label="Champion A wählen"></select>
-          <select id="matchupChampB" class="select" aria-label="Champion B wählen"></select>
-          <select id="matchupRole" class="select" aria-label="Rolle filtern">
-            <option value="">Alle Rollen</option>
-            <option value="Baron">Baron</option>
+        <div class="controls matchupControls">
+          <select id="matchupLane" class="select" aria-label="Lane wählen">
+            <option value="Baron">Baron Lane</option>
             <option value="Jungle">Jungle</option>
-            <option value="Mid">Mid</option>
-            <option value="ADC">ADC</option>
-            <option value="Support">Support</option>
+            <option value="Mid">Mid Lane</option>
+            <option value="ADC">Duo ADC</option>
+            <option value="Support">Duo Support</option>
           </select>
-          <button id="matchupSwap" class="btn" type="button" aria-label="Champion A und B tauschen">⇄ Swap</button>
-          <button id="matchupSmartPick" class="btn" type="button" aria-label="Meta Duell automatisch setzen">✨ Smart Duel</button>
+          <select id="matchupChampA" class="select" aria-label="Deinen Champion wählen"></select>
+          <select id="matchupChampB" class="select" aria-label="Gegnerischen Champion wählen"></select>
+          <button id="matchupAnalyse" class="btn primaryAction" type="button" aria-label="Matchup analysieren">⚔ Analyse</button>
         </div>
       </div>
-      <div id="matchupResults" class="grid"></div>
+      <div id="matchupResults" class="matchupResults"></div>
+    </section>
+
+
+    <section id="viewPatchnotes" class="panel hidden">
+      <div class="panelHead">
+        <h2>Patchnotes</h2>
+      </div>
+      <div id="patchnotesSummary" class="status">Patchnotes werden geladen…</div>
+      <div id="patchnotesGrid" class="highlightRow"></div>
     </section>
 
     <section id="viewTierlist" class="panel hidden">
