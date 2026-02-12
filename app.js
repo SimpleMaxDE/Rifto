@@ -87,11 +87,21 @@
   let defaultWeakByRole = {};
   let liveItemPatch = "–";
   let liveItemDb = null;
+  let liveItemLookup = new Map();
+  let championAliasLookup = new Map();
   let liveRuneDb = [];
   let liveSkillDb = [];
   let liveCatalogData = null;
   let localizationDb = { items: {}, runes: {}, summonerSpells: {} };
   let championAbilityDb = {};
+
+  const WR_ALIAS_TO_EN_CHAMPION = {
+    sunwukong: "Wukong",
+    liqing: "Lee Sin",
+    kegemo: "Kog'Maw",
+    weikezi: "Vel'Koz",
+    nuola: "Norra"
+  };
 
   let risingTypes = new Set();
   let fallingTypes = new Set();
@@ -281,10 +291,26 @@
     }
   }
 
+  function championDisplayName(catalogChamp, existingChampName = "") {
+    const alias = normalizeText(catalogChamp?.alias || "");
+    if (alias && WR_ALIAS_TO_EN_CHAMPION[alias]) return WR_ALIAS_TO_EN_CHAMPION[alias];
+    if (existingChampName) return existingChampName;
+    return String(catalogChamp?.name || catalogChamp?.title || "Unknown");
+  }
+
   function getChampionByName(name) {
     if (!name) return null;
-    const n = String(name).toLowerCase();
-    return allChamps.find(c => c.name.toLowerCase() === n) || null;
+    const raw = String(name);
+    const n = normalizeText(raw);
+    const direct = allChamps.find((c) => normalizeText(c.name) === n);
+    if (direct) return direct;
+
+    const aliasTarget = championAliasLookup.get(normalizeLookupKey(raw));
+    if (aliasTarget) {
+      const aliased = allChamps.find((c) => normalizeText(c.name) === normalizeText(aliasTarget));
+      if (aliased) return aliased;
+    }
+    return null;
   }
 
   function heroInfo(hero_id) {
@@ -932,9 +958,35 @@
     return fallback || original;
   }
 
+  function normalizeLookupKey(v) {
+    return normalizeText(v).replace(/['"`´’‘\-_.()\[\]{}:;,+/\|!?]/g, "").replace(/\s+/g, "");
+  }
+
+  function registerItemLookup(item, aliases = []) {
+    if (!item) return;
+    const keys = [item.name, item.nativeName, item.itemId, ...(aliases || [])];
+    for (const k of keys) {
+      const nk = normalizeLookupKey(k || "");
+      if (!nk) continue;
+      if (!liveItemLookup.has(nk)) liveItemLookup.set(nk, item);
+    }
+  }
+
+  function translatedItemName(nativeName) {
+    const translated = localizedName("items", nativeName, nativeName);
+    const bad = /^(item\s+\d+|unknown item)$/i.test(String(translated || "").trim());
+    return bad ? nativeName : translated;
+  }
+
   function findWildRiftItem(candidates = []) {
     if (!liveItemDb?.length) return null;
-    const exact = itemCandidateVariants(candidates).map(normalizeText).filter(Boolean);
+    const variants = itemCandidateVariants(candidates);
+    for (const raw of variants) {
+      const nk = normalizeLookupKey(raw);
+      if (nk && liveItemLookup.has(nk)) return liveItemLookup.get(nk);
+    }
+
+    const exact = variants.map(normalizeText).filter(Boolean);
     for (const c of exact) {
       const hit = liveItemDb.find((x) => normalizeText(x.name) === c || normalizeText(x.nativeName) === c);
       if (hit) return hit;
@@ -948,10 +1000,11 @@
 
   function buildWrItem(candidates, why, fallbackName) {
     const found = findWildRiftItem(candidates);
-    const translated = localizedName("items", found?.name, fallbackName || candidates[0] || "Item");
+    const native = found?.nativeName || found?.name || "";
+    const translated = native ? translatedItemName(native) : (fallbackName || candidates[0] || "Item");
     return {
       name: translated,
-      nativeName: found?.name || "",
+      nativeName: native,
       icon: found?.iconPath || fallbackItemIcon(),
       why,
       stats: found?.description || ""
@@ -981,6 +1034,117 @@
     return words.some((w) => text.includes(w));
   }
 
+  function scoreByKeywords(text, words = []) {
+    return words.reduce((sum, w) => sum + (text.includes(w) ? 1 : 0), 0);
+  }
+
+  function numericSignalsFromText(text) {
+    const plain = Array.from(text.matchAll(/(\d+(?:\.\d+)?)/g)).map((m) => Number(m[1]));
+    const percents = Array.from(text.matchAll(/(\d+(?:\.\d+)?)\s*%/g)).map((m) => Number(m[1]));
+    const cooldownHits = Array.from(text.matchAll(/(?:cooldown|冷却|cd)\s*[:：]?\s*(\d+(?:\.\d+)?)/gi)).map((m) => Number(m[1]));
+    const burstHits = Array.from(text.matchAll(/(?:damage|伤害)\s*[:：+]?\s*(\d+(?:\.\d+)?)/gi)).map((m) => Number(m[1]));
+    const avg = (arr) => arr.length ? arr.reduce((a, b) => a + b, 0) / arr.length : 0;
+    return {
+      numberCount: plain.length,
+      avgFlat: avg(plain),
+      maxFlat: plain.length ? Math.max(...plain) : 0,
+      avgPercent: avg(percents),
+      cooldownAvg: avg(cooldownHits),
+      burstBaseAvg: avg(burstHits)
+    };
+  }
+
+  function championAbilityProfile(championName) {
+    const row = championAbilityDb?.[championName] || {};
+    const passive = row?.passive?.description || "";
+    const spells = Array.isArray(row?.spells) ? row.spells : [];
+    const text = `${passive} ${spells.map((sp) => `${sp.name || ""} ${sp.description || ""}`).join(" ")}`.toLowerCase();
+
+    const n = numericSignalsFromText(text);
+    const byKw = (arr) => scoreByKeywords(text, arr);
+    const spellCooldownAvg = (() => {
+      const cds = [];
+      for (const sp of spells) {
+        const raw = String(sp?.cooldown || "");
+        for (const m of raw.matchAll(/(\d+(?:\.\d+)?)/g)) cds.push(Number(m[1]));
+      }
+      return cds.length ? cds.reduce((a, b) => a + b, 0) / cds.length : n.cooldownAvg;
+    })();
+
+    return {
+      spellCount: spells.length,
+      cooldownAvg: spellCooldownAvg,
+      burst: byKw(["burst", "execute", "detonate", "爆发", "斩杀", "high damage"]) + (n.burstBaseAvg > 140 ? 1 : 0),
+      sustained: byKw(["attack speed", "on-hit", "every attack", "持续", "连击", "stack"]),
+      adScaling: byKw(["attack damage", "bonus ad", "physical damage", "攻击力", "物理伤害"]),
+      apScaling: byKw(["ability power", "magic damage", "法术强度", "魔法伤害"]),
+      trueDamage: byKw(["true damage", "真实伤害"]),
+      tankiness: byKw(["shield", "heal", "max health", "armor", "magic resist", "护盾", "治疗", "生命值"]),
+      mobility: byKw(["dash", "blink", "jump", "speed", "位移", "冲刺"]),
+      cc: byKw(["stun", "knock", "airborne", "slow", "taunt", "fear", "charm", "禁锢", "眩晕", "击飞"]),
+      poke: byKw(["range", "projectile", "poke", "long range", "远程", "消耗"]),
+      manaNeed: byKw(["mana", "法力"]) + (spellCooldownAvg <= 7 ? 1 : 0),
+      numericDepth: n.numberCount + Math.min(4, Math.round(n.avgPercent / 10))
+    };
+  }
+
+  function runeMetaProfile(profile, myRole) {
+    const runes = Array.isArray(liveRuneDb) ? liveRuneDb : [];
+    const focus = { damage: 0, defense: 0, utility: 0, haste: 0, sustain: 0 };
+    const keywordMap = {
+      damage: ["伤害", "damage", "爆发", "penetration"],
+      defense: ["护甲", "魔抗", "减伤", "resist", "health", "生命值"],
+      utility: ["move", "移动", "control", "vision", "gold"],
+      haste: ["cooldown", "haste", "冷却", "技能急速"],
+      sustain: ["heal", "shield", "治疗", "护盾", "回复"]
+    };
+
+    for (const rune of runes) {
+      const text = `${String(rune?.name || "")} ${String(rune?.description || "")}`.toLowerCase();
+      for (const [bucket, words] of Object.entries(keywordMap)) {
+        focus[bucket] += scoreByKeywords(text, words);
+      }
+    }
+
+    if (profile === "marksman" || myRole === "ADC") focus.damage += 4;
+    if (profile === "tank" || profile === "tank_support") focus.defense += 4;
+    if (profile === "enchanter" || myRole === "Support") focus.utility += 3;
+    if (profile === "mage") focus.haste += 3;
+
+    return focus;
+  }
+
+  function itemSignals(item) {
+    const text = itemText(item);
+    const n = numericSignalsFromText(text);
+    return {
+      text,
+      ad: scoreByKeywords(text, ["攻击力", "ad", "attack damage", "物理"]),
+      ap: scoreByKeywords(text, ["法术强度", "ability power", "ap", "法强"]),
+      crit: scoreByKeywords(text, ["暴击", "critical"]),
+      atkspd: scoreByKeywords(text, ["攻速", "attack speed"]),
+      haste: scoreByKeywords(text, ["技能急速", "冷却", "ability haste", "cooldown"]),
+      pen: scoreByKeywords(text, ["穿透", "破甲", "法术穿透", "lethality", "penetration"]),
+      hp: scoreByKeywords(text, ["生命值", "health", "hp"]),
+      armor: scoreByKeywords(text, ["护甲", "armor"]),
+      mr: scoreByKeywords(text, ["魔法抗性", "magic resist", "mr"]),
+      healShield: scoreByKeywords(text, ["治疗", "护盾", "回复", "heal", "shield"]),
+      mana: scoreByKeywords(text, ["法力", "mana"]),
+      antiHeal: scoreByKeywords(text, ["重伤", "grievous"]),
+      ccleanse: scoreByKeywords(text, ["净化", "解控", "免疫", "quicksilver", "stasis"]),
+      trueDamage: scoreByKeywords(text, ["真实伤害", "true damage"]),
+      onHit: scoreByKeywords(text, ["on-hit", "普攻", "每次攻击", "attack applies"]),
+      moveSpeed: scoreByKeywords(text, ["移动速度", "movement speed", "ms"]),
+      omnivamp: scoreByKeywords(text, ["全能吸血", "omnivamp", "lifesteal", "吸血"]),
+      tenacity: scoreByKeywords(text, ["韧性", "tenacity"]),
+      activePlaymaking: scoreByKeywords(text, ["主动", "active", "dash", "stasis"]),
+      numericDetail: Math.min(10, n.numberCount),
+      avgFlat: n.avgFlat,
+      avgPercent: n.avgPercent,
+      cooldownAvg: n.cooldownAvg
+    };
+  }
+
   function isBootOrEnchantItem(item) {
     const name = String(item?.name || "");
     return name.includes("靴") || name.includes("附魔") || name.includes("·");
@@ -1005,82 +1169,122 @@
     ];
   }
 
-  function scoreItemForMatchup(item, profile, myRole, myTypesRaw, enemyTypesRaw) {
-    const text = itemText(item);
+  function scoreItemForMatchup(item, profile, myRole, myTypesRaw, enemyTypesRaw, myChamp, enemyChamp) {
+    const sig = itemSignals(item);
+    const text = sig.text;
     const enemy = new Set(enemyTypesRaw || []);
     const mine = new Set(myTypesRaw || []);
+    const myAbilities = championAbilityProfile(myChamp?.name || "");
+    const enemyAbilities = championAbilityProfile(enemyChamp?.name || "");
+    const runeMeta = runeMetaProfile(profile, myRole);
+
     let score = 0;
     const reasons = [];
 
     const push = (points, reason) => {
       score += points;
-      if (reason) reasons.push(reason);
+      if (reason && points !== 0) reasons.push(reason);
     };
 
-    if (profile === "marksman") {
-      if (itemHasAny(text, ["攻击力", "暴击", "攻速", "吸血", "护甲穿透"])) push(16, "ADC-DPS-Stats");
-    } else if (profile === "mage") {
-      if (itemHasAny(text, ["法术强度", "法术穿透", "法力", "技能急速", "冷却"])) push(16, "AP-Core-Stats");
-    } else if (profile === "assassin") {
-      if (itemHasAny(text, ["攻击力", "护甲穿透", "移动速度", "技能急速", "冷却"])) push(16, "Burst/Pick-Stats");
-    } else if (profile === "tank" || profile === "tank_support") {
-      if (itemHasAny(text, ["生命值", "护甲", "魔法抗性", "减速", "格挡"])) push(16, "Frontline-Stats");
-    } else if (profile === "enchanter") {
-      if (itemHasAny(text, ["治疗", "护盾", "法力回复", "法术强度", "技能急速"])) push(16, "Support-Utility");
-    } else {
-      if (itemHasAny(text, ["攻击力", "生命值", "技能急速", "吸血"])) push(14, "Fighter-Allround");
-    }
+    const profileNeeds = {
+      marksman: { ad: 2.4, crit: 2.2, atkspd: 2.1, pen: 1.4, haste: 0.7, ap: -2.4, armor: 0.4, mr: 0.4 },
+      mage: { ap: 2.5, haste: 1.7, pen: 1.6, mana: 1.3, ad: -2.2, crit: -1.5 },
+      assassin: { ad: 2.3, pen: 2.0, haste: 1.6, moveSpeed: 1.0, ap: -1.2, hp: 0.5 },
+      tank: { hp: 2.2, armor: 1.9, mr: 1.9, healShield: 1.1, ad: -1.2, crit: -2.1 },
+      tank_support: { hp: 2.0, armor: 1.7, mr: 1.7, healShield: 1.4, haste: 0.9, crit: -2.0 },
+      enchanter: { healShield: 2.5, haste: 1.8, ap: 1.3, mana: 1.1, hp: 0.8, crit: -2.1, pen: -1.1 },
+      fighter: { ad: 1.9, hp: 1.6, haste: 1.2, armor: 0.8, mr: 0.8, pen: 0.9, ap: -1.1 }
+    };
+    const needs = profileNeeds[profile] || profileNeeds.fighter;
 
-    if (myRole === "Baron" && itemHasAny(text, ["生命值", "护甲", "回复", "吸血"])) push(5, "Lane-Duel Sustain");
-    if (myRole === "Mid" && itemHasAny(text, ["法力", "法术强度", "冷却"])) push(5, "Mid Tempo/Wave");
-    if (myRole === "Jungle" && itemHasAny(text, ["移动速度", "技能急速", "穿透"])) push(5, "Jungle Tempo");
-    if (myRole === "ADC" && itemHasAny(text, ["暴击", "攻速", "吸血"])) push(5, "ADC Teamfight DPS");
-    if (myRole === "Support" && itemHasAny(text, ["护盾", "治疗", "回复", "生命值", "魔法抗性"])) push(5, "Support Lane Value");
+    const weightedProfileFit = Object.entries(needs).reduce((sum, [k, w]) => sum + (Number(sig[k] || 0) * w), 0);
+    push(Math.round(weightedProfileFit * 3.2), "Profile-Fit");
 
-    if (enemy.has("hard_cc") || enemy.has("pointclick_cc")) {
-      if (itemHasAny(text, ["韧性", "解控", "免疫", "净化", "魔法抗性"])) push(11, "Anti-CC");
+    const offProfileHard =
+      (profile === "marksman" && sig.ap >= 2 && (sig.ad + sig.crit + sig.atkspd) === 0) ||
+      (profile === "mage" && (sig.ad + sig.crit + sig.atkspd) >= 2 && sig.ap === 0) ||
+      ((profile === "tank" || profile === "tank_support") && (sig.crit + sig.pen) >= 2 && (sig.hp + sig.armor + sig.mr) <= 1);
+    if (offProfileHard) push(-24, "Off-Profile-Hard");
+
+    const abilityDamageBias = myAbilities.adScaling - myAbilities.apScaling;
+    if (abilityDamageBias >= 2) push((sig.ad + sig.pen + sig.haste) * 3, "Champion-AD-Scaling");
+    if (abilityDamageBias <= -2) push((sig.ap + sig.pen + sig.haste + sig.mana) * 3, "Champion-AP-Scaling");
+    if (myAbilities.sustained >= 2) push((sig.atkspd + sig.onHit + sig.omnivamp) * 2, "Champion-Sustain-DPS");
+    if (myAbilities.burst >= 2) push((sig.pen + sig.trueDamage + sig.activePlaymaking) * 2, "Champion-Burst-Window");
+    if (myAbilities.cc >= 2) push((sig.haste + sig.moveSpeed + sig.hp) * 2, "Champion-CC-Cycle");
+
+    if (enemy.has("hard_cc") || enemy.has("pointclick_cc") || enemyAbilities.cc >= 3) {
+      push((sig.ccleanse + sig.tenacity + sig.mr + sig.hp) * 3, "Anti-CC");
     }
-    if (enemy.has("assassin_burst") || enemy.has("mage_burst")) {
-      if (itemHasAny(text, ["护甲", "魔法抗性", "生命值", "免疫", "护盾"])) push(10, "Anti-Burst");
+    if (enemy.has("assassin_burst") || enemy.has("mage_burst") || enemyAbilities.burst >= 2) {
+      push((sig.armor + sig.mr + sig.hp + sig.healShield + sig.activePlaymaking) * 3, "Anti-Burst");
     }
     if (enemy.has("tank") || enemy.has("hard_engage")) {
-      if (itemHasAny(text, ["穿透", "百分比", "破甲", "法术穿透", "重伤"])) push(10, "Vs Frontline");
+      push((sig.pen + sig.trueDamage + sig.antiHeal) * 3, "Vs-Frontline");
+      if (itemHasAny(text, ["百分比", "max health", "最大生命值"])) push(5, "Percent-Scaling");
     }
-    if (enemy.has("anti_auto") || enemy.has("fighter")) {
-      if (itemHasAny(text, ["护甲", "攻速", "减速", "反伤", "格挡"])) push(9, "Anti-Auto/Fighter");
+    if (enemy.has("anti_auto") || enemy.has("fighter") || enemyAbilities.sustained >= 2) {
+      push((sig.armor + sig.hp + sig.healShield) * 2, "Vs-Sustained-AD");
     }
-    if (enemy.has("poke") || enemy.has("mage_poke")) {
-      if (itemHasAny(text, ["回复", "生命值", "魔法抗性", "吸血", "治疗"])) push(8, "Anti-Poke Sustain");
+    if (enemy.has("poke") || enemy.has("mage_poke") || enemyAbilities.poke >= 2) {
+      push((sig.healShield + sig.hp + sig.mr + sig.omnivamp) * 2, "Vs-Poke");
     }
 
-    if (mine.has("anti_tank") && itemHasAny(text, ["穿透", "破甲", "百分比"])) push(6, "Champion-Synergie");
-    if (mine.has("hard_engage") && itemHasAny(text, ["移动速度", "生命值", "护甲", "魔法抗性"])) push(6, "Engage-Synergie");
-    if (mine.has("assassin_burst") && itemHasAny(text, ["穿透", "攻击力", "技能急速"])) push(6, "Assassin-Synergie");
-    if (mine.has("mage_burst") && itemHasAny(text, ["法术强度", "法术穿透", "冷却"])) push(6, "Mage-Synergie");
+    if (mine.has("anti_tank")) push((sig.pen + sig.trueDamage + sig.antiHeal) * 2, "Team-Need-AntiTank");
+    if (mine.has("hard_engage")) push((sig.moveSpeed + sig.hp + sig.armor + sig.mr + sig.haste) * 2, "Team-Need-Engage");
+    if (mine.has("assassin_burst")) push((sig.pen + sig.ad + sig.activePlaymaking) * 2, "Team-Need-Burst");
+    if (mine.has("mage_burst")) push((sig.ap + sig.pen + sig.haste) * 2, "Team-Need-AP-Burst");
 
-    if (itemHasAny(text, ["唯一被动", "唯一主动", "装备急速"])) push(2, "Item Quality");
+    const runeDamageWeight = runeMeta.damage / Math.max(1, (runeMeta.damage + runeMeta.defense + runeMeta.utility));
+    const runeDefenseWeight = runeMeta.defense / Math.max(1, (runeMeta.damage + runeMeta.defense + runeMeta.utility));
+    const runeUtilityWeight = runeMeta.utility / Math.max(1, (runeMeta.damage + runeMeta.defense + runeMeta.utility));
+    push(Math.round((sig.ad + sig.ap + sig.pen + sig.crit + sig.atkspd) * runeDamageWeight * 4), "Rune-Meta-Damage");
+    push(Math.round((sig.hp + sig.armor + sig.mr + sig.healShield) * runeDefenseWeight * 4), "Rune-Meta-Defense");
+    push(Math.round((sig.haste + sig.moveSpeed + sig.mana) * runeUtilityWeight * 4), "Rune-Meta-Utility");
 
-    return { score, reasons: Array.from(new Set(reasons)).slice(0, 2) };
+    const patches = Array.isArray(patchNotesData?.itemChanges) ? patchNotesData.itemChanges : [];
+    const patchHit = patches.find((row) => {
+      const name = normalizeText(row?.name || "");
+      return name && (normalizeText(item?.name).includes(name) || normalizeText(item?.nativeName).includes(name));
+    });
+    if (patchHit?.direction === "buff") push(8, "Patch-Buff");
+    if (patchHit?.direction === "nerf") push(-6, "Patch-Nerf");
+
+    if (sig.numericDetail >= 6) push(2, "Detailed-Stat-Item");
+    if (sig.avgPercent >= 6) push(2, "Percent-Value");
+    if (sig.cooldownAvg > 0 && sig.cooldownAvg <= 20 && sig.activePlaymaking > 0) push(2, "Active-Timing-Value");
+
+    const uniqueReasons = Array.from(new Set(reasons));
+    return { score, reasons: uniqueReasons.slice(0, 4), debug: { sig, myAbilities, enemyAbilities, runeMeta } };
   }
 
   function smartCoreBuild(myChamp, myRole, profile, myTypesRaw, enemyChamp, enemyTypesRaw) {
     if (!liveItemDb?.length) return fallbackTemplateBuild(profile);
     const pool = liveItemDb.filter((item) => item?.name && !isBootOrEnchantItem(item));
-    const scored = pool.map((item) => {
-      const decision = scoreItemForMatchup(item, profile, myRole, myTypesRaw, enemyTypesRaw);
-      return { item, score: decision.score, reasons: decision.reasons };
-    }).filter((x) => x.score > 8).sort((a, b) => b.score - a.score);
+    const scored = pool
+      .map((item) => {
+        const decision = scoreItemForMatchup(item, profile, myRole, myTypesRaw, enemyTypesRaw, myChamp, enemyChamp);
+        return { item, score: decision.score, reasons: decision.reasons, debug: decision.debug };
+      })
+      .filter((x) => x.score > 12)
+      .sort((a, b) => b.score - a.score);
 
     const selected = [];
     const seen = new Set();
     for (const row of scored) {
       const name = String(row.item?.name || "");
       if (!name || seen.has(name)) continue;
+
+      const sig = row.debug?.sig || {};
+      const offProfileRisk = (sig.ap >= 2 && profile === "marksman") || (sig.crit >= 2 && (profile === "mage" || profile === "enchanter"));
+      if (offProfileRisk && selected.length < 4) continue;
+      if (row.score < 18 && selected.length < 3) continue;
+
       selected.push({
         name: localizedName("items", name, row.item?.nativeName || name),
         nativeName: name,
         icon: row.item?.iconPath || fallbackItemIcon(),
-        why: `Vs ${enemyChamp.name}: ${row.reasons.join(" + ") || "Matchup-Wert"}`,
+        why: `Vs ${enemyChamp.name}: ${row.reasons.join(" + ") || "Matchup-Wert"} (${Math.round(row.score)})`,
         stats: row.item?.description || ""
       });
       seen.add(name);
@@ -1089,6 +1293,7 @@
 
     return selected.length >= 5 ? selected : fallbackTemplateBuild(profile);
   }
+
 
   function adaptBuildToEnemy(enemyTypesRaw, profile, myRole) {
     const set = new Set(enemyTypesRaw || []);
@@ -1227,32 +1432,52 @@
   }
 
   async function loadLiveItemData() {
+    liveItemLookup = new Map();
+    const byKey = new Map();
+    let patchFromCatalog = null;
+    let patchFromLive = null;
+
+    const upsert = (raw = {}) => {
+      const nativeName = String(raw?.nativeName || raw?.name || "").trim();
+      const itemId = String(raw?.itemId || raw?.item_id || raw?.equipId || raw?.id || raw?.itemId || "").trim();
+      const key = itemId || normalizeLookupKey(nativeName);
+      if (!key) return;
+
+      const prev = byKey.get(key) || {};
+      const merged = {
+        itemId: itemId || prev.itemId || "",
+        nativeName: nativeName || prev.nativeName || "",
+        name: translatedItemName(nativeName || prev.nativeName || "Unknown Item"),
+        iconPath: raw?.iconPath || raw?.icon || prev.iconPath || fallbackItemIcon(),
+        description: raw?.description || prev.description || "",
+        labels: raw?.labels || prev.labels || [],
+        price: raw?.price || prev.price || 0
+      };
+      byKey.set(key, merged);
+      registerItemLookup(merged, [merged.nativeName, merged.name, merged.itemId]);
+    };
+
     if (liveCatalogData?.items?.length) {
-      liveItemDb = liveCatalogData.items.map((x) => ({
-        name: localizedName("items", x.name, x.name),
-        nativeName: x.name,
-        iconPath: x.icon,
-        description: x.description,
-        labels: x.labels,
-        price: x.price
-      }));
-      liveItemPatch = liveCatalogData?.versions?.items || "–";
-      return;
+      patchFromCatalog = liveCatalogData?.versions?.items || null;
+      for (const x of liveCatalogData.items) upsert(x);
     }
+
     try {
       const equipData = await loadJson(WR_EQUIP_URL);
-      liveItemPatch = equipData?.version || "–";
-      liveItemDb = Array.isArray(equipData?.equipList)
-        ? equipData.equipList.map((x, idx) => ({
-            ...x,
-            nativeName: x?.name,
-            name: localizedName("items", x?.name, x?.name || "Unknown Item")
-          }))
-        : null;
+      patchFromLive = equipData?.version || null;
+      const equipList = Array.isArray(equipData?.equipList) ? equipData.equipList : [];
+      for (const x of equipList) upsert(x);
     } catch (err) {
-      console.warn("Wild Rift item data unavailable, fallback names/icons only", err);
-      liveItemPatch = "–";
+      console.warn("Live WR equip endpoint unavailable, using catalog snapshot", err);
+    }
+
+    liveItemPatch = patchFromLive || patchFromCatalog || "–";
+    liveItemDb = Array.from(byKey.values());
+
+    if (!liveItemDb.length) {
+      console.warn("Wild Rift item data unavailable, fallback names/icons only");
       liveItemDb = null;
+      liveItemLookup = new Map();
     }
   }
 
@@ -1265,16 +1490,33 @@
       }
       liveCatalogData = catalog;
       if (Array.isArray(catalog.champions) && catalog.champions.length) {
+        championAliasLookup = new Map();
+        const champById = new Map(allChamps.map((c) => [String(c.hero_id), c]));
         for (const champ of catalog.champions) {
-          if (!champ?.hero_id) continue;
-          if (!heroDb[String(champ.hero_id)]) {
-            heroDb[String(champ.hero_id)] = {
-              hero_id: String(champ.hero_id),
-              name: champ.name,
-              title: champ.title,
-              lane: champ.lane,
-              roles: champ.roles
-            };
+          const heroId = String(champ?.hero_id || "");
+          if (!heroId) continue;
+          const icon = String(champ?.icon || buildHeroIconById(heroId));
+
+          const existingHero = heroDb[heroId] || {};
+          heroDb[heroId] = {
+            hero_id: heroId,
+            name: championDisplayName(champ, existingChamp?.name || existingHero?.name || ""),
+            title: champ?.title || existingHero?.title || "",
+            lane: champ?.lane || existingHero?.lane || "",
+            roles: Array.isArray(champ?.roles) ? champ.roles : (existingHero?.roles || []),
+            icon
+          };
+
+          const existingChamp = champById.get(heroId);
+          if (existingChamp) {
+            existingChamp.icon = icon;
+          }
+
+          const aliases = [champ?.name, champ?.alias, champ?.title, existingChamp?.name];
+          for (const alias of aliases) {
+            const key = normalizeLookupKey(alias || "");
+            if (!key) continue;
+            championAliasLookup.set(key, championDisplayName(champ, existingChamp?.name || ""));
           }
         }
       }
