@@ -89,6 +89,7 @@
   let liveItemDb = null;
   let liveRuneDb = [];
   let liveSkillDb = [];
+  let liveCatalogData = null;
 
   let risingTypes = new Set();
   let fallingTypes = new Set();
@@ -219,6 +220,19 @@
     return bonus;
   }
 
+  function catalogVolatilityBonus(c) {
+    if (!liveCatalogData?.diff) return 0;
+    const champName = String(c?.name || "");
+    let bonus = 0;
+    if ((liveCatalogData.diff.newChampions || []).includes(champName)) bonus += 1.2;
+    const shifts =
+      (liveCatalogData.diff.newItems || []).length +
+      (liveCatalogData.diff.newRunes || []).length +
+      (liveCatalogData.diff.newSummonerSpells || []).length;
+    bonus += Math.min(1.5, shifts * 0.05);
+    return bonus;
+  }
+
   function championPatchMap() {
     return Object.fromEntries([
       ...(patchNotesData.championBuffs || []).map((x) => [String(x.name || "").toLowerCase(), Number(x.delta || 0)]),
@@ -232,7 +246,8 @@
     const ban = Number(c.stats?.CN?.ban ?? 0);
     const patchBonus = patchChampionBonus(c?.name);
     const itemPatchBonus = patchItemSynergyBonus(c);
-    return (win * 1.2) + (pick * 0.9) + (ban * 0.5) + patchBonus + itemPatchBonus;
+    const volatilityBonus = catalogVolatilityBonus(c);
+    return (win * 1.2) + (pick * 0.9) + (ban * 0.5) + patchBonus + itemPatchBonus + volatilityBonus;
   }
 
   function normalizeMeta(meta) {
@@ -994,6 +1009,10 @@
   }
 
   async function loadLiveRuneData() {
+    if (liveCatalogData?.runes?.length) {
+      liveRuneDb = liveCatalogData.runes;
+      return;
+    }
     try {
       const runeData = await loadJson(WR_RUNE_URL);
       liveRuneDb = Array.isArray(runeData?.runeList) ? runeData.runeList : [];
@@ -1003,6 +1022,10 @@
   }
 
   async function loadLiveSkillData() {
+    if (liveCatalogData?.summonerSpells?.length) {
+      liveSkillDb = liveCatalogData.summonerSpells;
+      return;
+    }
     try {
       const skillData = await loadJson(WR_SKILL_URL);
       liveSkillDb = Array.isArray(skillData?.skillList) ? skillData.skillList : [];
@@ -1012,6 +1035,15 @@
   }
 
   async function loadLiveItemData() {
+    if (liveCatalogData?.items?.length) {
+      liveItemDb = liveCatalogData.items.map((x) => ({
+        name: x.name,
+        iconPath: x.icon,
+        description: x.description
+      }));
+      liveItemPatch = liveCatalogData?.versions?.items || "–";
+      return;
+    }
     try {
       const equipData = await loadJson(WR_EQUIP_URL);
       liveItemPatch = equipData?.version || "–";
@@ -1020,6 +1052,33 @@
       console.warn("Wild Rift item data unavailable, fallback names/icons only", err);
       liveItemPatch = "–";
       liveItemDb = null;
+    }
+  }
+
+  async function loadLiveCatalog(ts) {
+    try {
+      const catalog = await loadJson(`./data/live_catalog.json?ts=${ts}`);
+      if (!catalog || typeof catalog !== "object") {
+        liveCatalogData = null;
+        return;
+      }
+      liveCatalogData = catalog;
+      if (Array.isArray(catalog.champions) && catalog.champions.length) {
+        for (const champ of catalog.champions) {
+          if (!champ?.hero_id) continue;
+          if (!heroDb[String(champ.hero_id)]) {
+            heroDb[String(champ.hero_id)] = {
+              hero_id: String(champ.hero_id),
+              name: champ.name,
+              title: champ.title,
+              lane: champ.lane,
+              roles: champ.roles
+            };
+          }
+        }
+      }
+    } catch {
+      liveCatalogData = null;
     }
   }
 
@@ -1154,8 +1213,15 @@
     }).join('');
 
     const coverageCard = `<article class="highlightCard pnCard pnNeutral"><div class="highlightTitle">Live Catalog</div><div class="highlightMain">${allChamps.length} Champions</div><div class="tinyNote">${liveItemDb?.length || 0} Items • ${liveRuneDb.length} Runen • ${liveSkillDb.length} Summoner Spells</div></article>`;
+    const newCatalogParts = [
+      `+${liveCatalogData?.diff?.newChampions?.length || 0} Champions`,
+      `+${liveCatalogData?.diff?.newItems?.length || 0} Items`,
+      `+${liveCatalogData?.diff?.newRunes?.length || 0} Runen`,
+      `+${liveCatalogData?.diff?.newSummonerSpells?.length || 0} Spells`
+    ];
+    const liveDeltaCard = `<article class="highlightCard pnCard pnNeutral"><div class="highlightTitle">Auto Delta</div><div class="highlightMain">Patch-Zyklus erkannt</div><div class="tinyNote">${newCatalogParts.join(" • ")}</div></article>`;
 
-    patchnotesGrid.innerHTML = coverageCard + championBuffCards + championNerfCards + itemCards;
+    patchnotesGrid.innerHTML = coverageCard + liveDeltaCard + championBuffCards + championNerfCards + itemCards;
   }
 
   function thresholdsForList(list) {
@@ -1648,6 +1714,7 @@
         heroDb = (heroList && heroList.heroList) ? heroList.heroList : {};
       } catch { heroDb = {}; }
 
+      await loadLiveCatalog(ts);
       mergeAllChampionsFromHeroDb();
 
       try {
