@@ -1,0 +1,38 @@
+version: 1
+name: wildrift-analytics-etl
+
+connections:
+  warehouse_env: WAREHOUSE_DSN
+  source_env: WR_API_TOKEN
+
+jobs:
+  - id: daily_backfill
+    description: "Täglicher Backfill für die letzten 30 Tage inklusive Re-Aggregation der 7/14/30-Fenster"
+    schedule: "0 2 * * *"
+    mode: backfill
+    params:
+      lookback_days: 30
+      regions: ["AMERICAS", "EUROPE", "ASIA", "SEA"]
+      elo_segments: ["IRON-BRONZE", "SILVER-GOLD", "PLATINUM-EMERALD", "DIAMOND+"]
+    steps:
+      - extract_matches
+      - upsert_dimensions
+      - load_match_facts
+      - recompute_matchup_stats_daily
+      - recompute_rolling_windows
+      - run_data_quality_checks
+
+  - id: incremental_update
+    description: "Inkrementelles Update seit letztem erfolgreichen Lauf mit 2h Sicherheitsüberlappung"
+    schedule: "0 */2 * * *"
+    mode: incremental
+    params:
+      overlap_hours: 2
+      regions: ["AMERICAS", "EUROPE", "ASIA", "SEA"]
+    steps:
+      - extract_matches
+      - upsert_dimensions
+      - merge_incremental_match_facts
+      - merge_incremental_matchup_stats
+      - recompute_rolling_windows
+      - run_data_quality_checks
