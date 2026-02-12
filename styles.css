@@ -36,6 +36,34 @@ body{
   background:var(--pill); border-radius:999px;
   color:var(--muted); font-size:12px;
 }
+
+.trendPillRich{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  padding:7px 12px;
+  border-color:rgba(122,149,205,.35);
+}
+
+.trendPillRich .trendLabel{
+  color:#9cb3e5;
+  font-weight:700;
+}
+
+.trendPillRich .trendUp{
+  color:#50d68f;
+  font-weight:700;
+}
+
+.trendPillRich .trendDown{
+  color:#f08b95;
+  font-weight:700;
+}
+
+.trendPillRich .trendBase{
+  color:#8fa2c9;
+  font-size:11px;
+}
 .wrap{max-width:1280px; margin:0 auto; padding:16px;}
 .panel{
   background: #0b1220;
@@ -435,6 +463,21 @@ body{
 
 .matchupControls{display:grid; grid-template-columns:repeat(4, minmax(0,1fr)); gap:8px; width:100%;}
 
+.matchupField{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+
+.matchupLabel{
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:#9eb2e7;
+  padding-left:2px;
+}
+
 .matchupControls .select{
   min-width:200px;
   height:54px;
@@ -446,6 +489,21 @@ body{
     0 0 0 1px rgba(116,151,226,.12) inset,
     0 8px 20px rgba(2,9,20,.35);
   font-weight:600;
+}
+
+.matchupLaneSelect{
+  border-color:rgba(126,180,241,.5) !important;
+  box-shadow:0 0 0 1px rgba(126,180,241,.16) inset, 0 8px 20px rgba(2,9,20,.35);
+}
+
+.matchupMyChampSelect{
+  border-color:rgba(99,224,168,.5) !important;
+  box-shadow:0 0 0 1px rgba(99,224,168,.16) inset, 0 8px 20px rgba(2,9,20,.35);
+}
+
+.matchupEnemyChampSelect{
+  border-color:rgba(242,126,138,.5) !important;
+  box-shadow:0 0 0 1px rgba(242,126,138,.16) inset, 0 8px 20px rgba(2,9,20,.35);
 }
 
 .matchupControls .select:hover{
