@@ -78,7 +78,7 @@
   let trendText = "–";
 
   // Draft state (persisted)
-  let draftPhase = "enemy_fp";
+  let draftPhase = "auto";
   let myPickName = null;
   let enemy1 = null;
   let enemy2 = null;
@@ -314,6 +314,22 @@
     if (phase === "mid")      return { meta: 1.0, counter: 1.1, enemy: 1.2 };
     if (phase === "late")     return { meta: 0.9, counter: 1.2, enemy: 1.3 };
     return { meta: 1.0, counter: 1.0, enemy: 1.0 };
+  }
+
+  function effectiveDraftPhase() {
+    if (draftPhase !== "auto") return draftPhase;
+    const enemyCount = [enemy1, enemy2].filter(Boolean).length;
+    if (enemyCount === 0) return "enemy_fp";
+    if (enemyCount === 1) return "my_fp";
+    return "mid";
+  }
+
+  function phaseLabel(phase) {
+    if (phase === "enemy_fp") return "🟢 Frühe Bans";
+    if (phase === "my_fp") return "🟡 Du pickst früh";
+    if (phase === "mid") return "🟡 Team ergänzt";
+    if (phase === "late") return "🔴 Letzte Bans";
+    return "⚡ Auto";
   }
 
   function enemyThreatTypes() {
@@ -778,7 +794,8 @@
     const my = getChampionByName(myPickName);
     if (!my) return [];
     const role = draftRole.value;
-    const w = phaseWeights(draftPhase);
+    const activePhase = effectiveDraftPhase();
+    const w = phaseWeights(activePhase);
     const candidates = roleFilterPool(role, my.hero_id);
 
     const th = thresholdsForRole(role);
@@ -859,14 +876,13 @@
     renderEnemySlot(enemySlot1, enemy1, "+ Slot 1");
     renderEnemySlot(enemySlot2, enemy2, "+ Slot 2");
 
-    const phaseLabel = draftPhase === "enemy_fp" ? "🎯 Enemy FP"
-                    : draftPhase === "my_fp" ? "⭐ My FP"
-                    : draftPhase === "mid" ? "🔄 Mid Draft"
-                    : "🛑 Late Draft";
+    const activePhase = effectiveDraftPhase();
+    const currentPhaseLabel = phaseLabel(activePhase);
+    const modeLabel = draftPhase === "auto" ? "⚡ Auto" : "🛠️ Manuell";
 
     const my = myPickName ? myPickName : "–";
     const enemies = [enemy1, enemy2].filter(Boolean).join(", ") || "keine";
-    draftContext.textContent = `${phaseLabel} • ${draftRole.value} • Dein Pick: ${my} • Enemy: ${enemies}`;
+    draftContext.textContent = `${modeLabel} • ${currentPhaseLabel} • ${draftRole.value} • Dein Pick: ${my} • Enemy: ${enemies}`;
 
     draftBans.innerHTML = "";
     if (!myPickName) {

@@ -302,6 +302,11 @@ body{
   cursor:pointer;
 }
 .phase.active{ background: rgba(120,160,255,.12); border-color: rgba(120,160,255,.22); }
+.phaseHint{
+  padding:0 16px 10px;
+  color:var(--muted);
+  font-size:12px;
+}
 
 .draftGrid{
   display:grid;
