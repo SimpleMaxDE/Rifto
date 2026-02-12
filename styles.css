@@ -359,6 +359,48 @@ body{
 .tinyNote{ color: var(--muted); font-size:12px; margin-top:8px; }
 .draftResult{ padding:12px 16px 16px 16px; }
 
+.draftAdvancedGrid{
+  padding-top:0;
+}
+.controlsStack{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:10px;
+}
+.sliderWrap{
+  display:flex;
+  justify-content:space-between;
+  font-size:12px;
+  color:var(--muted);
+  font-weight:800;
+}
+.slider{
+  width:100%;
+  accent-color:#7aa2ff;
+}
+.signalRow{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin:10px 0 12px;
+}
+.signalPill{
+  border:1px solid var(--line);
+  border-radius:999px;
+  padding:6px 10px;
+  font-size:12px;
+  color:var(--muted);
+  background: rgba(255,255,255,.03);
+}
+.coachCard{
+  border-style:dashed;
+}
+.coachHint{
+  margin-top:6px;
+  font-size:12px;
+  color:#cdd7f9;
+}
+
 /* ===== Tier Sections ===== */
 
 .tier-section {

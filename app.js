@@ -42,6 +42,12 @@
   const enemySlot2 = $("enemySlot2");
   const draftBans = $("draftBans");
   const draftContext = $("draftContext");
+  const draftSignals = $("draftSignals");
+  const coachMode = $("coachMode");
+  const riskProfile = $("riskProfile");
+  const patchWeight = $("patchWeight");
+  const patchWeightValue = $("patchWeightValue");
+  const autoCoachOutput = $("autoCoachOutput");
   const phaseBtns = Array.from(document.querySelectorAll(".phase"));
 
   // MATCHUP + TIERLIST
@@ -76,6 +82,9 @@
   let myPickName = null;
   let enemy1 = null;
   let enemy2 = null;
+  let coachLevel = "beginner";
+  let riskMode = "balanced";
+  let patchItemFocus = 55;
   let pickTarget = "me";
   let modalTriggerEl = null;
   let pickerTriggerEl = null;
@@ -108,6 +117,18 @@
     poke: ["hard_engage", "assassin_burst"]
   };
 
+  const PATCH_ITEM_PRESSURE = {
+    anti_auto: 8,
+    pointclick_cc: 7,
+    hard_cc: 6,
+    anti_tank: 6,
+    true_damage: 6,
+    assassin_burst: 5,
+    hard_engage: 5,
+    lane_bully: 4,
+    poke: 4,
+    mage_burst: 3
+  };
 
   function setDialogFocus(target) {
     if (!target) return;
@@ -322,6 +343,37 @@
     return hits * 10;
   }
 
+  function patchItemPressureScore(candidateName) {
+    const types = champTypes(candidateName);
+    let score = 0;
+    for (const t of types) score += PATCH_ITEM_PRESSURE[t] || 0;
+    const focusBoost = patchItemFocus / 100;
+    return score * focusBoost;
+  }
+
+  function riskMultiplier() {
+    if (riskMode === "safe") return 0.88;
+    if (riskMode === "aggressive") return 1.12;
+    return 1.0;
+  }
+
+  function confidenceFor(score, patchSignal, enemySignal) {
+    const normalized = Math.max(0, Math.min(100, score / 2.4));
+    const confidence = Math.round((normalized * 0.6) + (patchSignal * 0.25) + (enemySignal * 0.15));
+    return Math.max(35, Math.min(97, confidence));
+  }
+
+  function tagFromTypes(types = []) {
+    for (const t of types) {
+      if (t === "anti_auto" || t === "pointclick_cc") return "Stoppt Hyper-Carrys";
+      if (t === "anti_tank" || t === "true_damage") return "Stark vs Frontline";
+      if (t === "assassin_burst") return "One-Shot Threat";
+      if (t === "hard_engage") return "Engage Druck";
+      if (t === "lane_bully") return "Lane Dominanz";
+    }
+    return "Meta Gefahr";
+  }
+
   function tagMatchScore(pickedName, role, candidateName) {
     const weaknesses = pickedWeakVs(pickedName, role);
     const types = champTypes(candidateName);
@@ -392,7 +444,7 @@
         <img class="cIcon" src="${c.icon}" alt="${c.name}" loading="lazy" />
         <div class="cMain">
           <div class="cName">${c.name} <span class="tierBadge ${tierClass(c.tier)}" style="margin-left:8px">${c.tier}</span></div>
-          <div class="cWhy">${c.why}</div>
+          <div class="cWhy">${c.why}${c.tag ? ` • ${c.tag}` : ""}${Number.isFinite(c.confidence) ? ` • Confidence ${c.confidence}%` : ""}</div>
         </div>
       `;
       targetEl.appendChild(el);
@@ -655,7 +707,8 @@
   function saveDraftState() {
     try {
       localStorage.setItem("rifto_draft_state", JSON.stringify({
-        phase: draftPhase, myPickName, role: draftRole.value, enemy1, enemy2
+        phase: draftPhase, myPickName, role: draftRole.value, enemy1, enemy2,
+        coachLevel, riskMode, patchItemFocus
       }));
     } catch {}
   }
@@ -669,6 +722,9 @@
       if (s.role) draftRole.value = s.role;
       enemy1 = s.enemy1 || null;
       enemy2 = s.enemy2 || null;
+      coachLevel = s.coachLevel || coachLevel;
+      riskMode = s.riskMode || riskMode;
+      patchItemFocus = Number.isFinite(Number(s.patchItemFocus)) ? Number(s.patchItemFocus) : patchItemFocus;
     } catch {}
   }
 
@@ -727,8 +783,23 @@
 
     const th = thresholdsForRole(role);
     const scored = candidates.map(c => {
-      const score = (baseThreatScore(c) * w.meta) + (tagMatchScore(my.name, role, c.name) * w.counter) + (enemySynergyScore(c.name) * w.enemy);
-      return { name: c.name, icon: c.icon, score, why: buildReasonAgainstMyChamp(my.name, role, c.name), tier: tierForScore(metaScore(c), th) };
+      const counter = tagMatchScore(my.name, role, c.name) * w.counter;
+      const patchScore = patchItemPressureScore(c.name);
+      const enemyScore = enemySynergyScore(c.name) * w.enemy;
+      const base = baseThreatScore(c) * w.meta;
+      const total = (base + counter + enemyScore + patchScore) * riskMultiplier();
+      const confidence = confidenceFor(total, patchScore, enemyScore);
+      return {
+        name: c.name,
+        icon: c.icon,
+        score: total,
+        confidence,
+        patchScore,
+        enemyScore,
+        tag: tagFromTypes(champTypes(c.name)),
+        why: buildReasonAgainstMyChamp(my.name, role, c.name),
+        tier: tierForScore(metaScore(c), th)
+      };
     }).sort((a,b)=>b.score-a.score);
 
     const out = [];
@@ -740,6 +811,47 @@
       if (out.length === 3) break;
     }
     return out;
+  }
+
+  function renderDraftSignals(list) {
+    if (!draftSignals) return;
+    const patchAvg = list.length ? Math.round(list.reduce((acc, x) => acc + x.patchScore, 0) / list.length) : 0;
+    const enemyAvg = list.length ? Math.round(list.reduce((acc, x) => acc + x.enemyScore, 0) / list.length) : 0;
+    const confidenceAvg = list.length ? Math.round(list.reduce((acc, x) => acc + x.confidence, 0) / list.length) : 0;
+    draftSignals.innerHTML = `
+      <div class="signalPill">Patch/Item Druck: <b>${patchAvg}</b></div>
+      <div class="signalPill">Enemy Sync: <b>${enemyAvg}</b></div>
+      <div class="signalPill">Confidence: <b>${confidenceAvg}%</b></div>
+    `;
+  }
+
+  function renderAutoCoach(list) {
+    if (!autoCoachOutput) return;
+    if (!myPickName) {
+      autoCoachOutput.innerHTML = `<div class="mstat"><div class="k">Coach</div><div class="v">Wähle zuerst deinen Champion.</div></div>`;
+      return;
+    }
+    const top = list[0];
+    if (!top) {
+      autoCoachOutput.innerHTML = `<div class="mstat"><div class="k">Coach</div><div class="v">Keine Daten verfügbar.</div></div>`;
+      return;
+    }
+
+    const modeTitle = coachLevel === "pro" ? "Pro Call" : "Beginner Call";
+    const alt = list[1] ? `${list[1].name} (${list[1].confidence}%)` : "–";
+    const deepHint = coachLevel === "pro"
+      ? `Trade-off: Falls ${top.name} gebannt ist, priorisiere ${alt} und spiele safer bis Level-5 Power Spike.`
+      : `Einfacher Plan: Ban ${top.name}, spiele dein Comfort-Pick und rotiere früh zu Objectives.`;
+
+    autoCoachOutput.innerHTML = `
+      <div class="counterItem coachCard">
+        <div class="cMain">
+          <div class="cName">${modeTitle}: Ban ${top.name} zuerst</div>
+          <div class="cWhy">${top.why}</div>
+          <div class="coachHint">${deepHint}</div>
+        </div>
+      </div>
+    `;
   }
 
   function renderDraft() {
@@ -759,10 +871,14 @@
     draftBans.innerHTML = "";
     if (!myPickName) {
       draftBans.innerHTML = `<div class="mstat"><div class="k">Info</div><div class="v">Wähle zuerst deinen Champion.</div></div>`;
+      renderDraftSignals([]);
+      renderAutoCoach([]);
       return;
     }
 
     const list = buildDraftBansTop3();
+    renderDraftSignals(list);
+    renderAutoCoach(list);
     for (let i=0;i<list.length;i++) {
       const c = list[i];
       const el = document.createElement("div");
@@ -771,7 +887,8 @@
         <img class="cIcon" src="${c.icon}" alt="${c.name}" loading="lazy" />
         <div class="cMain">
           <div class="cName">${i+1}️⃣ ${c.name} <span class="tierBadge ${tierClass(c.tier)}" style="margin-left:8px">${c.tier}</span></div>
-          <div class="cWhy">${c.why}</div>
+          <div class="cWhy">${c.why} • ${c.tag}</div>
+          <div class="coachHint">Confidence ${c.confidence}% · Patch/Item ${Math.round(c.patchScore)} · Enemy Sync ${Math.round(c.enemyScore)}</div>
         </div>
       `;
       draftBans.appendChild(el);
@@ -875,6 +992,14 @@
   enemySlot1.addEventListener("click", ()=>openPicker("enemy1"));
   enemySlot2.addEventListener("click", ()=>openPicker("enemy2"));
   draftRole.addEventListener("change", ()=>{ saveDraftState(); renderDraft(); });
+  coachMode?.addEventListener("change", ()=>{ coachLevel = coachMode.value; saveDraftState(); renderDraft(); });
+  riskProfile?.addEventListener("change", ()=>{ riskMode = riskProfile.value; saveDraftState(); renderDraft(); });
+  patchWeight?.addEventListener("input", ()=>{
+    patchItemFocus = Number(patchWeight.value || 0);
+    if (patchWeightValue) patchWeightValue.textContent = `${patchItemFocus}%`;
+    saveDraftState();
+    renderDraft();
+  });
   matchupChampA?.addEventListener("change", renderMatchupView);
   matchupChampB?.addEventListener("change", renderMatchupView);
   matchupRole?.addEventListener("change", renderMatchupView);
@@ -933,6 +1058,10 @@
 
       restoreTab();
       loadDraftState();
+      if (coachMode) coachMode.value = coachLevel;
+      if (riskProfile) riskProfile.value = riskMode;
+      if (patchWeight) patchWeight.value = String(patchItemFocus);
+      if (patchWeightValue) patchWeightValue.textContent = `${patchItemFocus}%`;
       setPhase(draftPhase);
 
       applyMetaFilters();

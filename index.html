@@ -92,6 +92,34 @@
         </div>
       </div>
 
+      <div class="draftGrid draftAdvancedGrid">
+        <div class="draftCard">
+          <div class="draftCardHead">Smart Engine Setup</div>
+          <div class="controls controlsStack">
+            <select id="coachMode" class="select" aria-label="Coach Modus wählen">
+              <option value="beginner">Coach: Beginner</option>
+              <option value="pro">Coach: Pro</option>
+            </select>
+            <select id="riskProfile" class="select" aria-label="Risiko-Profil wählen">
+              <option value="safe">Risiko: Safe</option>
+              <option value="balanced" selected>Risiko: Balanced</option>
+              <option value="aggressive">Risiko: Aggressiv</option>
+            </select>
+            <label class="sliderWrap" for="patchWeight">Patch/Item Fokus <span id="patchWeightValue">55%</span></label>
+            <input id="patchWeight" class="slider" type="range" min="0" max="100" value="55" aria-label="Patch und Item Fokus" />
+          </div>
+          <details class="tinyInfo">
+            <summary>Was berücksichtigt das System?</summary>
+            <div class="tinyNote">Meta, Counter-Typen, Enemy-Synergien, Patch/Item-Druck und dein Risiko-Profil.</div>
+          </details>
+        </div>
+
+        <div class="draftCard">
+          <div class="draftCardHead">Auto Coach – Nächster Schritt</div>
+          <div id="autoCoachOutput" class="counterList"></div>
+        </div>
+      </div>
+
       <div class="draftResult">
         <div class="secHead">
           <div class="secTitle">Smart Ban – Top 3</div>
@@ -100,6 +128,7 @@
             <div id="draftContext" class="secSub" aria-live="polite">–</div>
           </details>
         </div>
+        <div id="draftSignals" class="signalRow"></div>
         <div id="draftBans" class="counterList"></div>
       </div>
     </section>
