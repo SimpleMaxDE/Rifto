@@ -48,6 +48,10 @@
   const patchWeight = $("patchWeight");
   const patchWeightValue = $("patchWeightValue");
   const autoCoachOutput = $("autoCoachOutput");
+  const draftGuide = $("draftGuide");
+  const btnSmartSetup = $("btnSmartSetup");
+  const btnClearEnemies = $("btnClearEnemies");
+  const btnResetDraft = $("btnResetDraft");
   const phaseBtns = Array.from(document.querySelectorAll(".phase"));
 
   // MATCHUP + TIERLIST
@@ -871,6 +875,66 @@
     `;
   }
 
+  function bestMyPickForRole(role) {
+    const pool = roleFilterPool(role, null);
+    if (!pool.length) return null;
+    const sorted = [...pool].sort((a,b)=>metaScore(b)-metaScore(a));
+    return sorted[0] || null;
+  }
+
+  function applySmartSetup() {
+    if (!myPickName) {
+      const best = bestMyPickForRole(draftRole.value);
+      if (best) myPickName = best.name;
+    }
+    draftPhase = "auto";
+    if (!enemy1) {
+      const picks = roleFilterPool(draftRole.value, getChampionByName(myPickName)?.hero_id || null)
+        .sort((a,b)=>baseThreatScore(b)-baseThreatScore(a));
+      enemy1 = picks[0]?.name || null;
+    }
+    saveDraftState();
+    setPhase(draftPhase);
+    renderDraft();
+  }
+
+  function clearEnemyPicks() {
+    enemy1 = null;
+    enemy2 = null;
+    saveDraftState();
+    renderDraft();
+  }
+
+  function resetDraftAll() {
+    draftPhase = "auto";
+    myPickName = null;
+    enemy1 = null;
+    enemy2 = null;
+    coachLevel = "beginner";
+    riskMode = "balanced";
+    patchItemFocus = 55;
+    if (coachMode) coachMode.value = coachLevel;
+    if (riskProfile) riskProfile.value = riskMode;
+    if (patchWeight) patchWeight.value = String(patchItemFocus);
+    if (patchWeightValue) patchWeightValue.textContent = `${patchItemFocus}%`;
+    saveDraftState();
+    setPhase(draftPhase);
+    renderDraft();
+  }
+
+  function renderDraftGuide() {
+    if (!draftGuide) return;
+    if (!myPickName) {
+      draftGuide.textContent = "Schritt 1: Wähle deinen Champion.";
+      return;
+    }
+    if (!enemy1 && !enemy2) {
+      draftGuide.textContent = "Schritt 2: Optional Enemy Picks setzen für genauere Smart-Bans.";
+      return;
+    }
+    draftGuide.textContent = "Schritt 3: Nutze Top-3 Bans + Auto Coach als direkte Entscheidung.";
+  }
+
   function renderDraft() {
     renderMyPickCard();
     renderEnemySlot(enemySlot1, enemy1, "+ Slot 1");
@@ -884,6 +948,7 @@
     const enemies = [enemy1, enemy2].filter(Boolean).join(", ") || "keine";
     draftContext.textContent = `${modeLabel} • ${currentPhaseLabel} • ${draftRole.value} • Dein Pick: ${my} • Enemy: ${enemies}`;
 
+    renderDraftGuide();
     draftBans.innerHTML = "";
     if (!myPickName) {
       draftBans.innerHTML = `<div class="mstat"><div class="k">Info</div><div class="v">Wähle zuerst deinen Champion.</div></div>`;
@@ -1016,6 +1081,9 @@
     saveDraftState();
     renderDraft();
   });
+  btnSmartSetup?.addEventListener("click", applySmartSetup);
+  btnClearEnemies?.addEventListener("click", clearEnemyPicks);
+  btnResetDraft?.addEventListener("click", resetDraftAll);
   matchupChampA?.addEventListener("change", renderMatchupView);
   matchupChampB?.addEventListener("change", renderMatchupView);
   matchupRole?.addEventListener("change", renderMatchupView);

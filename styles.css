@@ -307,6 +307,16 @@ body{
   color:var(--muted);
   font-size:12px;
 }
+.draftQuickActions{
+  display:flex;
+  gap:8px;
+  padding:0 16px 12px;
+  flex-wrap:wrap;
+}
+.draftQuickActions .btn{
+  font-size:12px;
+  padding:8px 10px;
+}
 
 .draftGrid{
   display:grid;
