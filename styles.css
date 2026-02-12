@@ -416,6 +416,39 @@ body{
   color:#cdd7f9;
 }
 
+
+.matchupLead{
+  border:1px solid rgba(120,160,255,.25);
+  background: rgba(120,160,255,.08);
+}
+.matchupBadge{
+  display:inline-flex;
+  padding:4px 8px;
+  border-radius:999px;
+  border:1px solid rgba(120,160,255,.35);
+  color:#b9ccff;
+  font-size:11px;
+  font-weight:900;
+}
+.highlightRow{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:10px;
+  padding:0 16px 10px;
+}
+@media (min-width: 860px){
+  .highlightRow{ grid-template-columns:repeat(3, minmax(0,1fr)); }
+}
+.highlightCard{
+  border:1px solid var(--line);
+  border-radius:14px;
+  background: rgba(255,255,255,.03);
+  padding:10px;
+}
+.highlightTitle{ font-size:11px; color:var(--muted); font-weight:800; }
+.highlightMain{ margin-top:6px; font-weight:900; display:flex; align-items:center; gap:8px; }
+.highlightMain img{ width:28px; height:28px; border-radius:10px; border:1px solid var(--line); }
+
 /* ===== Tier Sections ===== */
 
 .tier-section {

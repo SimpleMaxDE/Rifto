@@ -59,7 +59,11 @@
   const matchupChampB = $("matchupChampB");
   const matchupRole = $("matchupRole");
   const matchupResults = $("matchupResults");
+  const matchupSwap = $("matchupSwap");
+  const matchupSmartPick = $("matchupSmartPick");
   const tierlistRole = $("tierlistRole");
+  const tierlistSort = $("tierlistSort");
+  const tierlistHighlights = $("tierlistHighlights");
   const tierlistSections = $("tierlistSections");
 
   // Picker
@@ -586,6 +590,29 @@
     return Number(c?.stats?.CN?.[key] ?? 0);
   }
 
+  function matchupRolePenalty(champ, role) {
+    if (!role) return 0;
+    return rolesForHero(champ.hero_id).includes(role) ? 0 : 8;
+  }
+
+  function matchupPower(champ, role) {
+    const win = matchupMetric(champ, "win") * 1.1;
+    const presence = matchupMetric(champ, "pick") + matchupMetric(champ, "ban");
+    const base = metaScore(champ) + win + (presence * 0.25);
+    return base - matchupRolePenalty(champ, role);
+  }
+
+  function roleFitLabel(champ, role) {
+    if (!role) return "Auto-Rolle";
+    return rolesForHero(champ.hero_id).includes(role) ? "On-Role" : "Off-Role";
+  }
+
+  function pickSmartMatchupPair(role) {
+    const pool = role ? allChamps.filter(c => rolesForHero(c.hero_id).includes(role)) : allChamps.slice();
+    const sorted = pool.sort((a,b)=>metaScore(b)-metaScore(a));
+    return [sorted[0] || null, sorted[1] || null];
+  }
+
   function renderMatchupView() {
     if (!allChamps.length || !matchupResults) return;
 
@@ -620,8 +647,18 @@
     const th = thresholdsForRole(thRole);
     const tierA = tierForScore(metaScore(champA), th);
     const tierB = tierForScore(metaScore(champB), th);
+    const powerA = matchupPower(champA, role);
+    const powerB = matchupPower(champB, role);
+    const delta = powerA - powerB;
+    const leadName = delta >= 0 ? champA.name : champB.name;
+    const leadText = Math.abs(delta).toFixed(1);
 
     matchupResults.innerHTML = `
+      <article class="card matchupLead">
+        <div class="k">Matchup Empfehlung ${role ? `(${role})` : ""}</div>
+        <div class="v" style="margin-top:8px">Vorteil: ${leadName} <span class="matchupBadge">+${leadText} Matchup Score</span></div>
+        <div class="tinyNote">${champA.name}: ${roleFitLabel(champA, role)} • ${champB.name}: ${roleFitLabel(champB, role)}</div>
+      </article>
       <article class="card">
         <div class="cardTop">
           <img class="icon" src="${champA.icon}" alt="${champA.name}" loading="lazy" />
@@ -663,7 +700,7 @@
               <img class="cIcon" src="${c.icon}" alt="${c.name}" loading="lazy" />
               <div class="cMain">
                 <div class="cName">${idx + 1}. ${c.name} <span class="tierBadge ${tierClass(c.tier)}" style="margin-left:8px">${c.tier}</span></div>
-                <div class="cWhy">${c.why}</div>
+                <div class="cWhy">${c.why} • Score ${c.score.toFixed(1)}</div>
               </div>
             </div>
           `).join("") || `<div class="tinyNote">Keine Ban-Empfehlung verfügbar.</div>`}
@@ -678,20 +715,52 @@
     return { ss: q(0.05), s: q(0.15), a: q(0.35), b: q(0.65) };
   }
 
+  function tierPresence(c) {
+    return matchupMetric(c, "pick") + matchupMetric(c, "ban");
+  }
+
+  function sortTierGroup(list, mode) {
+    if (mode === "win") return list.sort((a,b)=>matchupMetric(b, "win") - matchupMetric(a, "win"));
+    if (mode === "presence") return list.sort((a,b)=>tierPresence(b) - tierPresence(a));
+    return list.sort((a,b)=>metaScore(b) - metaScore(a));
+  }
+
+  function renderTierHighlights(pool) {
+    if (!tierlistHighlights) return;
+    const byMeta = [...pool].sort((a,b)=>metaScore(b)-metaScore(a))[0];
+    const byWin = [...pool].sort((a,b)=>matchupMetric(b, "win")-matchupMetric(a, "win"))[0];
+    const byPresence = [...pool].sort((a,b)=>tierPresence(b)-tierPresence(a))[0];
+    const card = (title, champ, value) => champ ? `
+      <article class="highlightCard">
+        <div class="highlightTitle">${title}</div>
+        <div class="highlightMain"><img src="${champ.icon}" alt="${champ.name}" loading="lazy" /> ${champ.name}</div>
+        <div class="tinyNote">${value}</div>
+      </article>` : "";
+    tierlistHighlights.innerHTML = [
+      card("Top Meta", byMeta, `Score ${metaScore(byMeta).toFixed(1)}`),
+      card("Beste Winrate", byWin, `${fmtPct(matchupMetric(byWin, "win"))}`),
+      card("Höchste Presence", byPresence, `${tierPresence(byPresence).toFixed(2)}%`)
+    ].join("");
+  }
+
   function renderTierlistView() {
     if (!tierlistSections) return;
     const role = tierlistRole?.value || "";
+    const sortMode = tierlistSort?.value || "meta";
     const pool = role ? allChamps.filter(c => rolesForHero(c.hero_id).includes(role)) : allChamps.slice();
 
     if (!pool.length) {
+      if (tierlistHighlights) tierlistHighlights.innerHTML = "";
       tierlistSections.innerHTML = `<div class="card"><div class="k">Info</div><div class="v">Keine Champions für diese Rolle gefunden.</div></div>`;
       return;
     }
 
+    renderTierHighlights(pool);
+
     const th = role ? thresholdsForRole(role) : thresholdsForList(pool);
     const groups = { SS: [], S: [], A: [], B: [], C: [] };
     for (const c of pool) groups[tierForScore(metaScore(c), th)].push(c);
-    for (const tier of Object.keys(groups)) groups[tier].sort((a, b) => metaScore(b) - metaScore(a));
+    for (const tier of Object.keys(groups)) sortTierGroup(groups[tier], sortMode);
 
     const tiers = ["SS", "S", "A", "B", "C"];
     tierlistSections.innerHTML = tiers.map((tier) => `
@@ -1087,7 +1156,21 @@
   matchupChampA?.addEventListener("change", renderMatchupView);
   matchupChampB?.addEventListener("change", renderMatchupView);
   matchupRole?.addEventListener("change", renderMatchupView);
+  matchupSwap?.addEventListener("click", ()=>{
+    if (!matchupChampA || !matchupChampB) return;
+    const a = matchupChampA.value;
+    matchupChampA.value = matchupChampB.value;
+    matchupChampB.value = a;
+    renderMatchupView();
+  });
+  matchupSmartPick?.addEventListener("click", ()=>{
+    const [a,b] = pickSmartMatchupPair(matchupRole?.value || "");
+    if (a && matchupChampA) matchupChampA.value = a.name;
+    if (b && matchupChampB) matchupChampB.value = b.name;
+    renderMatchupView();
+  });
   tierlistRole?.addEventListener("change", renderTierlistView);
+  tierlistSort?.addEventListener("change", renderTierlistView);
 
   pickerClose.addEventListener("click", closePicker);
   picker.addEventListener("click", (e)=>{ if (e.target.classList.contains("modalBackdrop")) closePicker(); });

@@ -155,6 +155,8 @@
             <option value="ADC">ADC</option>
             <option value="Support">Support</option>
           </select>
+          <button id="matchupSwap" class="btn" type="button" aria-label="Champion A und B tauschen">⇄ Swap</button>
+          <button id="matchupSmartPick" class="btn" type="button" aria-label="Meta Duell automatisch setzen">✨ Smart Duel</button>
         </div>
       </div>
       <div id="matchupResults" class="grid"></div>
@@ -172,8 +174,14 @@
             <option value="ADC">ADC</option>
             <option value="Support">Support</option>
           </select>
+          <select id="tierlistSort" class="select" aria-label="Tierlist Sortierung wählen">
+            <option value="meta">Sort: Meta Score</option>
+            <option value="win">Sort: Winrate</option>
+            <option value="presence">Sort: Presence</option>
+          </select>
         </div>
       </div>
+      <div id="tierlistHighlights" class="highlightRow"></div>
       <div id="tierlistSections" style="padding:16px"></div>
     </section>
   </main>
