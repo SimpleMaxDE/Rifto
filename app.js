@@ -57,6 +57,8 @@
   const pickerClose = $("pickerClose");
   const pickerSearch = $("pickerSearch");
   const pickerGrid = $("pickerGrid");
+  const modalCard = modal?.querySelector(".modalCard");
+  const pickerCard = picker?.querySelector(".modalCard");
 
   const HERO_LIST_URL = "https://game.gtimg.cn/images/lgamem/act/lrlib/js/heroList/hero_list.js";
 
@@ -75,6 +77,8 @@
   let enemy1 = null;
   let enemy2 = null;
   let pickTarget = "me";
+  let modalTriggerEl = null;
+  let pickerTriggerEl = null;
 
   const TAG_LABEL = {
     assassin_burst: "Assassin",
@@ -103,6 +107,17 @@
     tank: ["true_damage", "anti_tank"],
     poke: ["hard_engage", "assassin_burst"]
   };
+
+
+  function setDialogFocus(target) {
+    if (!target) return;
+    if (typeof target.focus === "function") target.focus();
+  }
+
+  function restoreFocus(el) {
+    if (!el || typeof el.focus !== "function") return;
+    el.focus();
+  }
 
   function labelTag(t){ return TAG_LABEL[t] || t; }
 
@@ -385,6 +400,7 @@
   }
 
   function openMetaModal(champ) {
+    modalTriggerEl = document.activeElement;
     modalIcon.src = champ.icon;
     modalIcon.alt = champ.name;
     modalName.textContent = champ.name;
@@ -399,6 +415,12 @@
     updateMetaModalForRole(champ);
 
     modal.classList.remove("hidden");
+    setDialogFocus(modalCard || modalClose);
+  }
+
+  function closeMetaModal() {
+    modal.classList.add("hidden");
+    restoreFocus(modalTriggerEl);
   }
 
   function updateMetaModalForRole(champ) {
@@ -658,15 +680,22 @@
   }
 
   function renderEnemySlot(btn, name, slotLabel) {
+    const slotAria = btn.id === "enemySlot1" ? "Gegner-Slot 1" : "Gegner-Slot 2";
     if (!name) {
       btn.classList.remove("filled");
       btn.textContent = slotLabel;
+      btn.setAttribute("aria-label", `${slotAria} setzen`);
       return;
     }
     const c = getChampionByName(name);
     btn.classList.add("filled");
-    if (c) btn.innerHTML = `<img src="${c.icon}" alt="${c.name}" /> <div>${c.name}</div>`;
-    else btn.textContent = name;
+    if (c) {
+      btn.innerHTML = `<img src="${c.icon}" alt="${c.name}" /> <div>${c.name}</div>`;
+      btn.setAttribute("aria-label", `${slotAria}: ${c.name}. Erneut tippen zum Entfernen`);
+    } else {
+      btn.textContent = name;
+      btn.setAttribute("aria-label", `${slotAria}: ${name}. Erneut tippen zum Entfernen`);
+    }
   }
 
   function renderMyPickCard() {
@@ -751,13 +780,18 @@
 
   // Picker
   function openPicker(target) {
+    pickerTriggerEl = document.activeElement;
     pickTarget = target;
     pickerSearch.value = "";
     renderPickerGrid("");
     picker.classList.remove("hidden");
+    setDialogFocus(pickerCard || pickerSearch);
     pickerSearch.focus();
   }
-  function closePicker(){ picker.classList.add("hidden"); }
+  function closePicker(){
+    picker.classList.add("hidden");
+    restoreFocus(pickerTriggerEl);
+  }
 
   function renderPickerGrid(q) {
     const query = (q||"").trim().toLowerCase();
@@ -826,8 +860,8 @@
   window.addEventListener("resize", syncStickyOffsets);
   window.addEventListener("orientationchange", syncStickyOffsets);
 
-  modalClose.addEventListener("click", ()=>modal.classList.add("hidden"));
-  modal.addEventListener("click", (e)=>{ if (e.target.classList.contains("modalBackdrop")) modal.classList.add("hidden"); });
+  modalClose.addEventListener("click", closeMetaModal);
+  modal.addEventListener("click", (e)=>{ if (e.target.classList.contains("modalBackdrop")) closeMetaModal(); });
   modalRoleSelect.addEventListener("change", () => {
     const c = getChampionByName(modalName.textContent);
     if (c) updateMetaModalForRole(c);
@@ -849,6 +883,15 @@
   pickerClose.addEventListener("click", closePicker);
   picker.addEventListener("click", (e)=>{ if (e.target.classList.contains("modalBackdrop")) closePicker(); });
   pickerSearch.addEventListener("input", ()=>renderPickerGrid(pickerSearch.value));
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key !== "Escape") return;
+    if (!picker.classList.contains("hidden")) {
+      closePicker();
+      return;
+    }
+    if (!modal.classList.contains("hidden")) closeMetaModal();
+  });
 
   // Loaders
   async function loadJson(url) {

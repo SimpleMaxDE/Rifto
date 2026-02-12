@@ -34,8 +34,8 @@
       <div class="panelHead">
         <h2>Champions</h2>
         <div class="controls">
-          <input id="search" class="input" placeholder="Champion suchen…" autocomplete="off" />
-          <select id="sort" class="select">
+          <input id="search" class="input" placeholder="Champion suchen…" autocomplete="off" aria-label="Champion suchen" />
+          <select id="sort" class="select" aria-label="Champion-Sortierung wählen">
             <option value="tier">Sort: Tier</option>
             <option value="win">Sort: Winrate</option>
             <option value="pick">Sort: Pickrate</option>
@@ -45,7 +45,7 @@
         </div>
       </div>
       <div id="status" class="status">Lade Daten…</div>
-      <div id="grid" class="grid" aria-live="polite"></div>
+      <div id="grid" class="grid"></div>
     </section>
 
     <!-- DRAFT VIEW -->
@@ -53,8 +53,8 @@
       <div class="panelHead">
         <h2>Draft Mode</h2>
         <div class="controls">
-          <button id="btnPickMe" class="btn">🎯 Meinen Champ wählen</button>
-          <select id="draftRole" class="select">
+          <button id="btnPickMe" class="btn primaryAction" aria-label="Eigenen Champion im Draft wählen">🎯 Meinen Champ wählen</button>
+          <select id="draftRole" class="select" aria-label="Draft-Rolle wählen">
             <option value="Baron">Baron</option>
             <option value="Jungle">Jungle</option>
             <option value="Mid">Mid</option>
@@ -65,10 +65,10 @@
       </div>
 
       <div class="draftPhaseRow">
-        <button class="phase active" data-phase="enemy_fp">🎯 Enemy FP</button>
-        <button class="phase" data-phase="my_fp">⭐ My FP</button>
-        <button class="phase" data-phase="mid">🔄 Mid Draft</button>
-        <button class="phase" data-phase="late">🛑 Late Draft</button>
+        <button class="phase active" data-phase="enemy_fp" aria-label="Draft-Phase Enemy First Pick">🎯 Enemy FP</button>
+        <button class="phase" data-phase="my_fp" aria-label="Draft-Phase My First Pick">⭐ My FP</button>
+        <button class="phase" data-phase="mid" aria-label="Draft-Phase Mid Draft">🔄 Mid Draft</button>
+        <button class="phase" data-phase="late" aria-label="Draft-Phase Late Draft">🛑 Late Draft</button>
       </div>
 
       <div class="draftGrid">
@@ -82,17 +82,23 @@
         <div class="draftCard">
           <div class="draftCardHead">Enemy Picks (optional)</div>
           <div class="enemyRow">
-            <button id="enemySlot1" class="enemySlot">+ Slot 1</button>
-            <button id="enemySlot2" class="enemySlot">+ Slot 2</button>
+            <button id="enemySlot1" class="enemySlot" aria-label="Gegner-Slot 1 setzen">+ Slot 1</button>
+            <button id="enemySlot2" class="enemySlot" aria-label="Gegner-Slot 2 setzen">+ Slot 2</button>
           </div>
-          <div class="tinyNote">Tippe auf einen Slot, um einen Champion zu setzen (gleich nochmal tippen = löschen).</div>
+          <details class="tinyInfo" open>
+            <summary>Sekundäre Info anzeigen</summary>
+            <div class="tinyNote">Tippe auf einen Slot, um einen Champion zu setzen (gleich nochmal tippen = löschen).</div>
+          </details>
         </div>
       </div>
 
       <div class="draftResult">
         <div class="secHead">
           <div class="secTitle">Smart Ban – Top 3</div>
-          <div id="draftContext" class="secSub">–</div>
+          <details class="tinyInfo">
+            <summary>Draft-Kontext anzeigen</summary>
+            <div id="draftContext" class="secSub" aria-live="polite">–</div>
+          </details>
         </div>
         <div id="draftBans" class="counterList"></div>
       </div>
@@ -114,7 +120,7 @@
           </select>
         </div>
       </div>
-      <div id="matchupResults" class="grid" aria-live="polite"></div>
+      <div id="matchupResults" class="grid"></div>
     </section>
 
     <section id="viewTierlist" class="panel hidden">
@@ -136,9 +142,9 @@
   </main>
 
   <!-- META Champion Detail Modal -->
-  <div id="champModal" class="modal hidden" role="dialog" aria-modal="true">
+  <div id="champModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modalName">
     <div class="modalBackdrop"></div>
-    <div class="modalCard">
+    <div class="modalCard" tabindex="-1">
       <button id="modalClose" class="modalClose" aria-label="Schließen">✕</button>
 
       <div class="modalHeader">
@@ -193,14 +199,14 @@
   </div>
 
   <!-- PICKER MODAL -->
-  <div id="picker" class="modal hidden" role="dialog" aria-modal="true">
+  <div id="picker" class="modal hidden" role="dialog" aria-modal="true" aria-label="Champion-Auswahl">
     <div class="modalBackdrop"></div>
-    <div class="modalCard">
+    <div class="modalCard" tabindex="-1">
       <button id="pickerClose" class="modalClose" aria-label="Schließen">✕</button>
       <div class="panelHead" style="padding:0 0 12px 0; border-bottom:none">
         <h2 style="margin:0">Champion auswählen</h2>
         <div class="controls">
-          <input id="pickerSearch" class="input" placeholder="Suchen…" autocomplete="off" />
+          <input id="pickerSearch" class="input" placeholder="Suchen…" autocomplete="off" aria-label="Champion im Picker suchen" />
         </div>
       </div>
       <div id="pickerGrid" class="grid" style="padding:0"></div>

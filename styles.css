@@ -621,3 +621,53 @@ body{
 .tabs{
   isolation:isolate;
 }
+
+/* ===== Accessibility + mobile interaction improvements ===== */
+.btn:focus-visible,
+.tab:focus-visible,
+.card:focus-visible,
+.enemySlot:focus-visible,
+.phase:focus-visible,
+.modalClose:focus-visible,
+.tinyInfo summary:focus-visible {
+  outline: 3px solid rgba(120,160,255,.85);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 3px rgba(120,160,255,.25);
+}
+
+.primaryAction{
+  background: linear-gradient(135deg, rgba(120,160,255,.35), rgba(120,160,255,.2));
+  border-color: rgba(120,160,255,.55);
+}
+
+.tinyInfo{
+  margin-top:8px;
+  border:1px solid var(--line);
+  border-radius:12px;
+  background: rgba(255,255,255,.02);
+  padding:8px 10px;
+}
+.tinyInfo summary{
+  cursor:pointer;
+  color: var(--muted);
+  font-size:12px;
+  font-weight:800;
+}
+.tinyInfo .tinyNote,
+.tinyInfo .secSub{
+  margin-top:8px;
+}
+
+@media (max-width: 680px){
+  .panelHead .controls{
+    width:100%;
+  }
+  .panelHead .controls .primaryAction,
+  .panelHead .controls .select{
+    width:100%;
+  }
+  .draftResult{
+    border-top:1px solid var(--line);
+    background: rgba(255,255,255,.02);
+  }
+}
