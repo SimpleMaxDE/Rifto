@@ -96,6 +96,7 @@
   let localizationDb = { items: {}, runes: {}, summonerSpells: {} };
   let championAbilityDb = {};
   let championModelDb = {};
+  let championModelVersion = "–";
 
   const WR_ALIAS_TO_EN_CHAMPION = {
     sunwukong: "Wukong",
@@ -1047,6 +1048,10 @@
     return Object.values(stats).some((v) => Number(v) > 0);
   }
 
+  function itemHasEffectData(item = {}) {
+    return Array.isArray(item?.effects) && item.effects.length > 0;
+  }
+
   function getChampionModel(champName) {
     return championModelDb?.[String(champName || "").trim()] || null;
   }
@@ -1076,6 +1081,283 @@
     return Number.isFinite(Number(v)) ? String(v) : "N/A (no data)";
   }
 
+  function itemMissingFields(item = {}) {
+    const fields = ["price", "ad", "hp", "armor", "magicBlock", "attackSpeed", "magicAttack", "cd", "from", "effects"];
+    const missing = [];
+    for (const f of fields) {
+      const v = item?.[f];
+      if (f === "from") {
+        if (!Array.isArray(v)) missing.push(f);
+      } else if (f === "effects") {
+        if (!Array.isArray(v) || !v.length) missing.push(f);
+      } else if (v === undefined || v === null || v === "") {
+        missing.push(f);
+      }
+    }
+    return missing;
+  }
+
+  function championMissingFields(model = {}) {
+    const missing = [];
+    const s = model?.stats || {};
+    const requiredStats = ["hp", "armor", "mr", "ad", "attack_speed", "move_speed"];
+    for (const key of requiredStats) {
+      const v = s?.[key];
+      if (!Number.isFinite(Number(v))) missing.push(`stats.${key}`);
+    }
+    const abilities = Array.isArray(model?.abilities) ? model.abilities : [];
+    if (!abilities.length) missing.push("abilities");
+    if (!Array.isArray(model?.passive?.effects) || !model.passive.effects.length) missing.push("passive.effects");
+    for (const slot of ["Q", "W", "E", "R"]) {
+      const ab = abilities.find((x) => x?.slot === slot);
+      if (!ab) {
+        missing.push(`ability.${slot}`);
+        continue;
+      }
+      if (!Array.isArray(ab?.cooldown) || !ab.cooldown.length) missing.push(`ability.${slot}.cooldown`);
+      if (!Array.isArray(ab?.ratios)) missing.push(`ability.${slot}.ratios`);
+      if (!Array.isArray(ab?.effects) || !ab.effects.length) missing.push(`ability.${slot}.effects`);
+    }
+    return missing;
+  }
+
+  function effectScoreContributions(effects = [], enemyTypesRaw = []) {
+    const enemy = new Set(enemyTypesRaw || []);
+    const out = [];
+    for (const fx of (Array.isArray(effects) ? effects : [])) {
+      if (!fx || typeof fx !== "object") continue;
+      let score = 0;
+      const t = String(fx.effect_type || "");
+      if (t === "damage") score += 8;
+      if (t === "healing" || t === "shield") score += 7;
+      if (t === "anti_heal") score += enemy.has("sustain") ? 16 : 8;
+      if (t === "penetration") score += enemy.has("tank") ? 14 : 7;
+      if (t === "tenacity") score += (enemy.has("hard_cc") || enemy.has("pointclick_cc")) ? 14 : 6;
+      if (t === "cc") score += 6;
+      if (String(fx.trigger || "").toLowerCase().includes("onhit")) score += 2;
+      if (fx.damage_type === "true") score += 5;
+      if (Array.isArray(fx.conditions) && fx.conditions.includes("vs_low_hp")) score += 3;
+      out.push({
+        name: String(fx.name || fx.source_line || "effect"),
+        trigger: String(fx.trigger || ""),
+        effectType: t || "modifier",
+        value: Math.round(score)
+      });
+    }
+    return out.sort((a, b) => b.value - a.value);
+  }
+
+  function buildCoverageReport() {
+    const items = Array.isArray(liveItemDb) ? liveItemDb : [];
+    const champs = Object.entries(championModelDb || {});
+    const itemReasons = {};
+    const champReasons = {};
+
+    const itemFullStats = items.filter((it) => hasItemNumericData(it)).length;
+    const itemWithBuildPath = items.filter((it) => Array.isArray(it?.from) && it.from.length > 0).length;
+    const itemWithEffects = items.filter((it) => itemHasEffectData(it)).length;
+    const itemWithAutoEffects = items.filter((it) => itemHasEffectData(it) && String(it?.effectSource || it?.effect_source || "") === "auto").length;
+
+    const top50 = items.slice(0, 50);
+    const top50Effects = top50.filter((it) => itemHasEffectData(it)).length;
+    const coreTokens = ["死亡之舞", "神圣分离者", "斯特拉克", "冰脉", "荆棘之甲", "黑色切割者"];
+    const core = items.filter((it) => coreTokens.some((t) => String(it?.nativeName || it?.name || "").includes(t)));
+    const coreEffects = core.filter((it) => itemHasEffectData(it)).length;
+    const autoExamples = items
+      .filter((it) => itemHasEffectData(it) && String(it?.effectSource || it?.effect_source || "") === "auto")
+      .slice(0, 3)
+      .map((it) => translatedItemName(it?.nativeName || it?.name));
+
+    for (const it of items) {
+      for (const reason of itemMissingFields(it)) itemReasons[reason] = (itemReasons[reason] || 0) + 1;
+      if (it?.effect_parse_status && it.effect_parse_status !== "ok" && it.effect_parse_status !== "override") {
+        const k = `item_parse:${it.effect_parse_status}`;
+        itemReasons[k] = (itemReasons[k] || 0) + 1;
+      }
+    }
+
+    let champStatsComplete = 0;
+    let champAbilitiesComplete = 0;
+    let champEffectsComplete = 0;
+    for (const [, model] of champs) {
+      const missing = championMissingFields(model);
+      if (!missing.some((x) => x.startsWith("stats."))) champStatsComplete += 1;
+      if (!missing.some((x) => x.startsWith("ability") || x === "abilities")) champAbilitiesComplete += 1;
+      if (!missing.some((x) => x.includes(".effects") || x === "passive.effects")) champEffectsComplete += 1;
+      for (const reason of missing) champReasons[reason] = (champReasons[reason] || 0) + 1;
+      if (model?.passive?.effect_parse_status && model.passive.effect_parse_status !== "ok") {
+        const k = `champ_parse:${model.passive.effect_parse_status}`;
+        champReasons[k] = (champReasons[k] || 0) + 1;
+      }
+    }
+
+    const top30 = champs.slice(0, 30);
+    const top30Effects = top30.filter(([, model]) => !championMissingFields(model).some((x) => x.includes(".effects") || x === "passive.effects")).length;
+
+    const topItemMissing = Object.entries(itemReasons).sort((a, b) => b[1] - a[1]).slice(0, 5);
+    const topChampMissing = Object.entries(champReasons).sort((a, b) => b[1] - a[1]).slice(0, 5);
+
+    return {
+      items: {
+        total: items.length,
+        fullStats: itemFullStats,
+        buildPathReady: itemWithBuildPath,
+        withEffects: itemWithEffects,
+        withAutoEffects: itemWithAutoEffects,
+        top50WithEffects: top50Effects,
+        coreWithEffects: coreEffects,
+        coreTotal: core.length,
+        autoExamples,
+      },
+      champions: {
+        total: champs.length,
+        statsReady: champStatsComplete,
+        abilitiesReady: champAbilitiesComplete,
+        effectsReady: champEffectsComplete,
+        top30EffectsReady: top30Effects,
+      },
+      topMissingReasons: {
+        items: topItemMissing,
+        champions: topChampMissing,
+      }
+    };
+  }
+
+  function findChampionByNameLoose(name) {
+    const n = normalizeText(name);
+    return allChamps.find((c) => normalizeText(c?.name) === n)
+      || allChamps.find((c) => normalizeText(c?.name).includes(n) || n.includes(normalizeText(c?.name)));
+  }
+
+  function runGoldenMatchupsReport() {
+    const golden = [
+      { my: "Amumu", enemy: "Dr. Mundo", lane: "Jungle", enemySwap: "Master Yi" },
+      { my: "Yasuo", enemy: "Annie", lane: "Mid", enemySwap: "Galio" },
+      { my: "Jinx", enemy: "Leona", lane: "ADC", enemySwap: "Lulu" }
+    ];
+    return golden.map((g) => {
+      const my = findChampionByNameLoose(g.my);
+      const enemy = findChampionByNameLoose(g.enemy);
+      const swap = findChampionByNameLoose(g.enemySwap);
+      if (!my || !enemy || !swap) {
+        return { ...g, status: "fail", reason: "Champion mapping failed" };
+      }
+      const myTypesRaw = champTypes(my.name);
+      const enemyTypesRaw = champTypes(enemy.name);
+      const swapTypesRaw = champTypes(swap.name);
+
+      const build900 = matchupFullItemBuild(my, g.lane, myTypesRaw, enemy, enemyTypesRaw, 900);
+      const build2400 = matchupFullItemBuild(my, g.lane, myTypesRaw, enemy, enemyTypesRaw, 2400);
+      const buildSwap = matchupFullItemBuild(my, g.lane, myTypesRaw, swap, swapTypesRaw, 1400);
+
+      const cards = [build900?.scoredTier?.best, build900?.scoredTier?.alternative, build900?.scoredTier?.situational].filter(Boolean);
+      const hasNA = cards.some((x) => !Number.isFinite(Number(x?.categories?.offensive)));
+      const nextBuyShift = (build900?.nextBuy?.component?.itemId || build900?.nextBuy?.item?.itemId || build900?.nextBuy?.item?.name) !== (build2400?.nextBuy?.component?.itemId || build2400?.nextBuy?.item?.itemId || build2400?.nextBuy?.item?.name);
+      const matchupShift = (build900?.scoredTier?.best?.nativeName || build900?.scoredTier?.best?.name) !== (buildSwap?.scoredTier?.best?.nativeName || buildSwap?.scoredTier?.best?.name);
+
+      return {
+        ...g,
+        resolved: `${my.name} vs ${enemy.name}`,
+        status: (!hasNA && nextBuyShift && matchupShift) ? "ok" : "fail",
+        reason: hasNA
+          ? "Contains N/A score card"
+          : (!nextBuyShift ? "Next-buy did not change across gold states" : (!matchupShift ? "Best choice not matchup-sensitive" : "All checks passed"))
+      };
+    });
+  }
+
+  function renderDebugPanel(itemBuild, myChamp, enemyChamp) {
+    const report = buildCoverageReport();
+    const golden = runGoldenMatchupsReport();
+    const allItems = [itemBuild.starter, ...(itemBuild.coreItems || []), ...(itemBuild.finalBuild || []), itemBuild.boots, itemBuild.enchant]
+      .filter(Boolean)
+      .map((it) => findWildRiftItem([it.nativeName || it.name]))
+      .filter(Boolean);
+    const uniqueItems = Array.from(new Map(allItems.map((x) => [x.itemId || x.name, x])).values());
+
+    const champRows = [myChamp, enemyChamp].map((c) => {
+      const model = getChampionModel(c?.name);
+      const miss = championMissingFields(model);
+      return `<li><b>${c?.name}</b> • src: champion_models.json@${championModelVersion} • missing_fields: ${miss.length ? miss.join(", ") : "none"}</li>`;
+    }).join("");
+
+    const itemRows = uniqueItems.map((it) => {
+      const miss = itemMissingFields(it);
+      const st = statProfileFromItem(it);
+      const effectCount = Array.isArray(it?.effects) ? it.effects.length : 0;
+      return `<li><b>${translatedItemName(it?.nativeName || it?.name)}</b> • src: live_catalog/equip patch ${liveItemPatch} • price=${toNumber(it?.price)} • ad=${st.ad} ap=${st.ap} hp=${st.hp} armor=${st.armor} mr=${st.mr} haste=${st.haste} as=${st.attackSpeed} • effects=${effectCount} • build_from=${Array.isArray(it?.from) ? it.from.join("/") : "-"} • missing_fields: ${miss.length ? miss.join(", ") : "none"}</li>`;
+    }).join("");
+
+    const topFx = [itemBuild.scoredTier?.best, itemBuild.scoredTier?.alternative, itemBuild.scoredTier?.situational]
+      .filter(Boolean)
+      .flatMap((x) => (Array.isArray(x.effectContrib) ? x.effectContrib : []).map((fx) => ({ ...fx, item: x.name })))
+      .sort((a, b) => b.value - a.value)
+      .slice(0, 5);
+
+    const dd = (Array.isArray(liveItemDb) ? liveItemDb : []).find((x) => /死亡之舞|death's dance/i.test(String(x?.nativeName || x?.name || "")));
+    const ddProof = Array.isArray(dd?.effects) ? dd.effects.slice(0, 4) : [];
+    const amumuModel = getChampionModel("Amumu") || getChampionModel(findChampionByNameLoose("Amumu")?.name);
+    const amumuQ = (amumuModel?.abilities || []).find((x) => x?.slot === "Q");
+    const amumuR = (amumuModel?.abilities || []).find((x) => x?.slot === "R");
+
+    return `
+      <details class="debugPanel">
+        <summary>Show Data Used / Coverage Debug</summary>
+        <div class="debugGrid">
+          <div>
+            <h4>Sources</h4>
+            <ul>
+              <li>Effect Strategy: <b>Hybrid</b> (Auto-Import + Curated Effect Library for high-impact/core items)</li>
+              <li>Items: Tencent WR equip.js / live_catalog.json (patch ${liveItemPatch})</li>
+              <li>Champions: champion_models.json (version ${championModelVersion})</li>
+              <li>Patch Intel: patch_notes_live.json (${patchContext})</li>
+            </ul>
+            <h4>Champion Data Used</h4>
+            <ul>${champRows}</ul>
+            <h4>Item Data Used</h4>
+            <ul>${itemRows || "<li>none</li>"}</ul>
+          </div>
+          <div>
+            <h4>Coverage Report</h4>
+            <ul>
+              <li>Items full stats: ${report.items.fullStats}/${report.items.total}</li>
+              <li>Items build path ready: ${report.items.buildPathReady}/${report.items.total}</li>
+              <li>Items with effects ≥1: ${report.items.withEffects}/${report.items.total}</li>
+              <li>Auto-filled effects coverage: ${report.items.withAutoEffects}/${report.items.total} (ohne curated)</li>
+              <li>Core items with effects: ${report.items.coreWithEffects}/${report.items.coreTotal} (target 100%)</li>
+              <li>Top50 items with effects: ${report.items.top50WithEffects}/50 (target ≥95%)</li>
+              <li>Champ stats ready: ${report.champions.statsReady}/${report.champions.total}</li>
+              <li>Champ abilities ready: ${report.champions.abilitiesReady}/${report.champions.total}</li>
+              <li>Champ ability+passive effects: ${report.champions.effectsReady}/${report.champions.total}</li>
+              <li>Top30 champs effect-ready: ${report.champions.top30EffectsReady}/30 (target ≥95%)</li>
+            </ul>
+            <h4>Top Missing Reasons</h4>
+            <div class="tinyNote">Items: ${report.topMissingReasons.items.map(([k, v]) => `${k}(${v})`).join(", ") || "none"}</div>
+            <div class="tinyNote">Champs: ${report.topMissingReasons.champions.map(([k, v]) => `${k}(${v})`).join(", ") || "none"}</div>
+            <div class="tinyNote">Auto-filled examples (3): ${report.items.autoExamples.join(", ") || "none"}</div>
+            <h4>Top Effect Contributors (Fight Window)</h4>
+            <ul>
+              ${topFx.map((f) => `<li>${f.item}: ${f.name} [${f.trigger}/${f.effectType}] +${f.value}</li>`).join("") || "<li>none</li>"}
+            </ul>
+            <h4>Proof: Death's Dance Effect Blocks</h4>
+            <ul>
+              ${ddProof.map((e) => `<li>${e.name} | trigger=${e.trigger} | values=${(e.values || []).join("/")} | cd=${e.cooldown ?? "-"} | cond=${(e.conditions || []).join("/") || "none"}</li>`).join("") || "<li>not found</li>"}
+            </ul>
+            <h4>Proof: Amumu Q/R Ability Data</h4>
+            <ul>
+              ${amumuQ ? `<li>Q: base=${amumuQ.base_damage || "-"} ratio=${JSON.stringify(amumuQ.ratios || [])} cd=${(amumuQ.cooldown || []).join('/')} cc=${amumuQ.cc_duration ?? '-'} dtype=${amumuQ.damage_type || '-'}</li>` : "<li>Q missing</li>"}
+              ${amumuR ? `<li>R: base=${amumuR.base_damage || "-"} ratio=${JSON.stringify(amumuR.ratios || [])} cd=${(amumuR.cooldown || []).join('/')} cc=${amumuR.cc_duration ?? '-'} dtype=${amumuR.damage_type || '-'}</li>` : "<li>R missing</li>"}
+            </ul>
+            <h4>Golden Matchups (must be non-N/A)</h4>
+            <ul>
+              ${golden.map((g) => `<li class="${g.status === "ok" ? "debugOk" : "debugFail"}">${g.my}/${g.enemy} (${g.lane}): ${g.status.toUpperCase()} – ${g.reason}</li>`).join("")}
+            </ul>
+          </div>
+        </div>
+      </details>
+    `;
+  }
+
   function scoreItemCategories(item, profile, myRole, myTypesRaw, enemyTypesRaw, myChamp, enemyChamp) {
     const decision = scoreItemForMatchup(item, profile, myRole, myTypesRaw, enemyTypesRaw, myChamp, enemyChamp);
     const sig = decision.debug?.sig || itemSignals(item);
@@ -1084,11 +1366,12 @@
     const mySet = new Set(myTypesRaw || []);
     const price = Math.max(1, toNumber(item?.price));
     const itemDataReady = hasItemNumericData(item);
+    const effectDataReady = itemHasEffectData(item);
     const myCombat = championCombatProfile(getChampionModel(myChamp?.name));
     const enemyCombat = championCombatProfile(getChampionModel(enemyChamp?.name));
     const championDataReady = Boolean(myCombat && enemyCombat);
 
-    if (!itemDataReady || !championDataReady) {
+    if (!itemDataReady || !championDataReady || !effectDataReady) {
       return {
         categories: {
           offensive: null,
@@ -1101,12 +1384,19 @@
         total: null,
         reasons: ["N/A (no data)"],
         dataReady: false,
+        effectContrib: [],
         dataMissing: {
           itemStats: !itemDataReady,
-          championStats: !championDataReady
+          championStats: !championDataReady,
+          itemEffects: !effectDataReady
         }
       };
     }
+
+    const effectContrib = effectScoreContributions(item?.effects || [], enemyTypesRaw);
+    const effectOff = effectContrib.filter((x) => x.effectType === "damage" || x.effectType === "penetration").reduce((n, x) => n + x.value, 0);
+    const effectDef = effectContrib.filter((x) => x.effectType === "healing" || x.effectType === "shield" || x.effectType === "tenacity").reduce((n, x) => n + x.value, 0);
+    const effectCounter = effectContrib.filter((x) => x.effectType === "anti_heal" || x.effectType === "penetration" || x.effectType === "cc").reduce((n, x) => n + x.value, 0);
 
     const offensiveRaw =
       (sig.ad + sig.ap + sig.attackSpeed + sig.crit + sig.armorPen + sig.magicPen) * 3.1
@@ -1115,7 +1405,8 @@
       + (statProfile.armorPenFlat * 0.3) + (statProfile.armorPenPct * 0.8)
       + (statProfile.magicPenFlat * 0.3) + (statProfile.magicPenPct * 0.8)
       + (myCombat.offense * 0.22)
-      + (enemyCombat.durability > 0 ? (myCombat.offense / enemyCombat.durability) * 12 : 0);
+      + (enemyCombat.durability > 0 ? (myCombat.offense / enemyCombat.durability) * 12 : 0)
+      + (effectOff * 0.9);
 
     const defensiveRaw =
       (sig.hp + sig.armor + sig.mr + sig.shield + sig.heal) * 3
@@ -1123,14 +1414,16 @@
       + (statProfile.hpRegen * 1.8)
       + (enemy.has("assassin_burst") ? statProfile.hp * 0.007 : 0)
       + (enemy.has("mage_burst") ? statProfile.mr * 0.25 : 0)
-      + (enemy.has("fighter") || enemy.has("anti_auto") ? statProfile.armor * 0.25 : 0);
+      + (enemy.has("fighter") || enemy.has("anti_auto") ? statProfile.armor * 0.25 : 0)
+      + (effectDef * 0.75);
 
     const counterRaw =
       (sig.grievous * 8) + (sig.tenacity * 10) + (sig.antiShield * 7)
       + (enemy.has("tank") ? (sig.percentDamage + sig.armorPen + sig.magicPen) * 4.5 : 0)
       + ((enemy.has("hard_cc") || enemy.has("pointclick_cc")) ? sig.tenacity * 8 : 0)
       + (enemy.has("mage_burst") ? sig.mr * 4 : 0)
-      + (enemy.has("assassin_burst") ? (sig.armor + sig.hp + sig.shield) * 2 : 0);
+      + (enemy.has("assassin_burst") ? (sig.armor + sig.hp + sig.shield) * 2 : 0)
+      + (effectCounter * 0.85);
 
     const synergyRaw =
       (decision.score * 0.32)
@@ -1169,6 +1462,7 @@
       total,
       reasons: decision.reasons || [],
       dataReady: true,
+      effectContrib: effectContrib.slice(0, 5),
       dataMissing: { itemStats: false, championStats: false }
     };
   }
@@ -1498,11 +1792,14 @@
           score: Number.isFinite(Number(scorePack.total)) ? scorePack.total : fallbackDecision.score,
           reasons: scorePack.reasons?.length ? scorePack.reasons : fallbackDecision.reasons,
           categories: scorePack.categories,
+          effectContrib: scorePack.effectContrib || [],
+          effectReady: itemHasEffectData(item),
           dataReady: scorePack.dataReady,
           dataMissing: scorePack.dataMissing
         };
       })
       .filter((x) => x.score > 12)
+      .filter((x) => x.effectReady)
       .sort((a, b) => b.score - a.score);
 
     const selected = [];
@@ -1524,6 +1821,7 @@
         stats: row.item?.description || "",
         score: Math.round(row.score),
         categories: row.categories,
+        effectContrib: row.effectContrib || [],
         dataReady: row.dataReady,
         dataMissing: row.dataMissing
       });
@@ -1531,7 +1829,8 @@
       if (selected.length >= 5) break;
     }
 
-    return selected.length >= 5 ? selected : fallbackTemplateBuild(profile);
+    if (selected.length >= 5) return selected;
+    return fallbackTemplateBuild(profile).map((x) => ({ ...x, partialData: true, categories: { offensive: null, defensive: null, counter: null, synergy: null, goldEfficiency: null, spikeTiming: null }, effectContrib: [] }));
   }
 
 
@@ -1660,8 +1959,10 @@
     try {
       const data = await loadJson(`./data/champion_models.json?ts=${ts}`);
       championModelDb = data?.champions || {};
+      championModelVersion = data?.version || "–";
     } catch {
       championModelDb = {};
+      championModelVersion = "–";
     }
   }
 
@@ -1714,6 +2015,8 @@
         price: raw?.price || prev.price || 0,
         from: Array.isArray(raw?.from) ? raw.from : (prev.from || []),
         into: raw?.into || prev.into || "",
+        effects: Array.isArray(raw?.effects) ? raw.effects : (prev.effects || []),
+        effectSource: raw?.effectSource || raw?.effect_source || prev.effectSource || "auto",
         ad: toNumber(raw?.ad ?? raw?.stats?.ad ?? prev.ad),
         hp: toNumber(raw?.hp ?? raw?.stats?.hp ?? prev.hp),
         armor: toNumber(raw?.armor ?? raw?.stats?.armor ?? prev.armor),
@@ -1895,10 +2198,12 @@
             ` : ""}
 
             <div class="itemScoringRow">
-              ${itemBuild.scoredTier.best ? `<div class="itemScoreCard"><h4>Best Choice</h4><div>${itemBuild.scoredTier.best.name}</div><small>Off ${scoreLabel(itemBuild.scoredTier.best.categories?.offensive)} • Def ${scoreLabel(itemBuild.scoredTier.best.categories?.defensive)} • Counter ${scoreLabel(itemBuild.scoredTier.best.categories?.counter)}</small></div>` : ""}
-              ${itemBuild.scoredTier.alternative ? `<div class="itemScoreCard"><h4>Alternative</h4><div>${itemBuild.scoredTier.alternative.name}</div><small>Synergy ${scoreLabel(itemBuild.scoredTier.alternative.categories?.synergy)} • Gold ${scoreLabel(itemBuild.scoredTier.alternative.categories?.goldEfficiency)}</small></div>` : ""}
-              ${itemBuild.scoredTier.situational ? `<div class="itemScoreCard"><h4>Situational</h4><div>${itemBuild.scoredTier.situational.name}</div><small>Spike ${scoreLabel(itemBuild.scoredTier.situational.categories?.spikeTiming)}</small></div>` : ""}
+              ${itemBuild.scoredTier.best ? `<div class="itemScoreCard"><h4>Best Choice</h4><div>${itemBuild.scoredTier.best.name}${itemBuild.scoredTier.best.partialData ? " <em>(partial data)</em>" : ""}</div><small>Off ${scoreLabel(itemBuild.scoredTier.best.categories?.offensive)} • Def ${scoreLabel(itemBuild.scoredTier.best.categories?.defensive)} • Counter ${scoreLabel(itemBuild.scoredTier.best.categories?.counter)}</small></div>` : ""}
+              ${itemBuild.scoredTier.alternative ? `<div class="itemScoreCard"><h4>Alternative</h4><div>${itemBuild.scoredTier.alternative.name}${itemBuild.scoredTier.alternative.partialData ? " <em>(partial data)</em>" : ""}</div><small>Synergy ${scoreLabel(itemBuild.scoredTier.alternative.categories?.synergy)} • Gold ${scoreLabel(itemBuild.scoredTier.alternative.categories?.goldEfficiency)}</small></div>` : ""}
+              ${itemBuild.scoredTier.situational ? `<div class="itemScoreCard"><h4>Situational</h4><div>${itemBuild.scoredTier.situational.name}${itemBuild.scoredTier.situational.partialData ? " <em>(partial data)</em>" : ""}</div><small>Spike ${scoreLabel(itemBuild.scoredTier.situational.categories?.spikeTiming)}</small></div>` : ""}
             </div>
+
+            ${renderDebugPanel(itemBuild, myChamp, enemyChamp)}
 
             <div class="itemPhaseGrid">
               <div class="itemPhaseCard">

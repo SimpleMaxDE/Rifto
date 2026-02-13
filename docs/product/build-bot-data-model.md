@@ -16,6 +16,18 @@
 
 Alle Quellen werden per GitHub Actions zyklisch aktualisiert.
 
+## 1.1 Verbindlicher Ansatz für Effekte
+
+- **Strategie B (Hybrid, verbindlich):**
+  - **Auto-Import** aus Live-Quellen (Parser auf Description-Text)
+  - **Curated Effect Library** für High-Impact/Core-Items (Override), wenn Auto-Parsing nicht zuverlässig alle Trigger/Werte/CD/Conditions liefert.
+- Pro Item/Rune wird `effect_source` gespeichert:
+  - `auto` = parser-basiert
+  - `curated` = manuell kuratierter Override
+- KPI im Debug/Coverage:
+  - `auto-filled effects coverage` (ohne curated)
+  - plus Gesamt-Coverage mit Effekten.
+
 ## 2) Item-Schema (Beispiel)
 
 ```json

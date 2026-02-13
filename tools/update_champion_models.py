@@ -52,6 +52,68 @@ def infer_keywords(champ: dict) -> list[str]:
     return sorted(out)
 
 
+def ability_effect_blocks(description: str, ratios: list[dict], cooldown: list) -> list[dict]:
+    text = strip_html(description)
+    chunks = [x.strip() for x in re.split(r"[.;]", text) if x.strip()]
+    out = []
+    for c in chunks:
+        low = c.lower()
+        trigger = "onCast"
+        if any(k in low for k in ["on hit", "hits", "damages", "deals damage"]):
+            trigger = "onSpellHit"
+        if any(k in low for k in ["passive"]):
+            trigger = "passive_always"
+
+        effect_type = "modifier"
+        damage_type = None
+        if "magic damage" in low:
+            effect_type = "damage"
+            damage_type = "magic"
+        elif "physical damage" in low:
+            effect_type = "damage"
+            damage_type = "physical"
+        elif "true damage" in low:
+            effect_type = "damage"
+            damage_type = "true"
+        elif "heal" in low:
+            effect_type = "healing"
+        elif "shield" in low:
+            effect_type = "shield"
+        elif any(k in low for k in ["stun", "root", "slow", "airborne", "fear", "charm", "taunt"]):
+            effect_type = "cc"
+
+        vals = re.findall(r"\d+(?:\.\d+)?%?", c)
+        out.append(
+            {
+                "name": c[:64],
+                "trigger": trigger,
+                "effect_type": effect_type,
+                "values": vals,
+                "scaling": [
+                    {"source": str(r.get("link") or ""), "ratio": r.get("coeff")}
+                    for r in ratios if isinstance(r, dict)
+                ],
+                "cooldown": cooldown,
+                "duration": None,
+                "caps": None,
+                "conditions": [
+                    flag for flag in ["vs_low_hp", "vs_immobilized", "execute"]
+                    if ((flag == "vs_low_hp" and "below" in low)
+                        or (flag == "vs_immobilized" and "immobil" in low)
+                        or (flag == "execute" and "execute" in low))
+                ],
+                "damage_type": damage_type,
+                "flags": {
+                    "applies_on_hit": "on-hit" in low,
+                    "can_crit": "crit" in low,
+                    "aoe": any(k in low for k in ["area", "nearby", "around"]),
+                },
+                "source_line": c,
+            }
+        )
+    return out
+
+
 def spell_model(slot: str, spell: dict) -> dict:
     ratios = []
     for var in spell.get("vars", []) if isinstance(spell.get("vars"), list) else []:
@@ -71,15 +133,28 @@ def spell_model(slot: str, spell: dict) -> dict:
             continue
         effects.append({"index": idx, "values": str(effect)})
 
+    description = strip_html(str(spell.get("description") or ""))
+    base_damage = next((x.get("values") for x in effects if x.get("index") == 1), "0")
+    damage_type = "magic" if "magic damage" in description.lower() else ("physical" if "physical damage" in description.lower() else ("true" if "true damage" in description.lower() else None))
+    cc_duration = None
+    m = re.search(r"(\d+(?:\.\d+)?)\s*second", description, re.I)
+    if m:
+        cc_duration = float(m.group(1))
+    effect_blocks = ability_effect_blocks(description, ratios, spell.get("cooldown") or [])
     return {
         "slot": slot,
         "name": str(spell.get("name") or ""),
         "cooldown": spell.get("cooldown") or [],
         "cost": spell.get("cost") or [],
         "range": spell.get("range") or [],
+        "base_damage": str(base_damage),
+        "damage_type": damage_type,
+        "cc_duration": cc_duration,
         "damage_effects": effects,
         "ratios": ratios,
-        "description": strip_html(str(spell.get("description") or "")),
+        "effects": effect_blocks,
+        "effect_parse_status": "ok" if effect_blocks else "parser_could_not_extract_values",
+        "description": description,
     }
 
 
@@ -101,6 +176,7 @@ def build_payload() -> dict:
         spells = champ.get("spells", []) if isinstance(champ.get("spells"), list) else []
         passive = champ.get("passive", {}) if isinstance(champ.get("passive"), dict) else {}
 
+        passive_effects = ability_effect_blocks(str(passive.get("description") or ""), [], [])
         out[name] = {
             "id": str(champ.get("id") or ""),
             "title": str(champ.get("title") or ""),
@@ -125,6 +201,8 @@ def build_payload() -> dict:
             "passive": {
                 "name": str(passive.get("name") or ""),
                 "description": strip_html(str(passive.get("description") or "")),
+                "effects": passive_effects,
+                "effect_parse_status": "ok" if passive_effects else "parser_could_not_extract_values",
             },
             "abilities": [
                 spell_model("Q", spells[0]) if len(spells) > 0 and isinstance(spells[0], dict) else {},
