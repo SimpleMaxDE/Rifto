@@ -696,6 +696,29 @@ body{
 .itemSwaps{display:flex; flex-wrap:wrap; gap:6px; margin-top:8px;}
 .itemSwaps span{font-size:10px; padding:3px 8px; border-radius:999px; border:1px solid rgba(132,165,229,.28); background:rgba(67,101,177,.18); color:#dbe7ff;}
 
+
+.matchupControls .input{
+  min-width:140px;
+  height:54px;
+  border-radius:14px;
+  border:1px solid rgba(129,163,232,.34);
+  background:linear-gradient(180deg, rgba(18,34,66,.98), rgba(13,26,51,.98));
+  color:#e9f0ff;
+  font-weight:700;
+}
+
+.matchupGoldField .input{padding:0 12px;}
+
+.nextBuyCard{border:1px solid rgba(120,181,151,.32); border-radius:11px; background:rgba(69,142,108,.12); padding:8px; margin-top:8px;}
+.nextBuyRow{display:flex; gap:10px; align-items:center;}
+.nextBuyMeta{display:grid; gap:2px; font-size:10px; color:#daf5e8;}
+.itemScoringRow{display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:6px; margin-top:8px;}
+.itemScoreCard{border:1px solid rgba(132,165,229,.28); border-radius:10px; background:rgba(56,86,156,.18); padding:7px;}
+.itemScoreCard h4{margin:0 0 4px 0; font-size:10px; color:#bdd1ff; text-transform:uppercase; letter-spacing:.04em;}
+.itemScoreCard div{font-size:11px; font-weight:800; color:#ecf3ff;}
+.itemScoreCard small{display:block; margin-top:4px; font-size:9px; color:#bed0f5; line-height:1.2;}
+
+
 .mbStats{display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:8px;}
 .muStat{border:1px solid rgba(128,154,206,.24); border-radius:12px; padding:8px; background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.015)); min-height:74px;}
 .muStatLabel{font-size:10px; color:var(--muted);}
@@ -720,6 +743,8 @@ body{
   .mbStats{grid-template-columns:repeat(2, minmax(0,1fr));}
   .itemBubble{width:54px;}
   .itemBubble img{width:31px; height:31px;}
+  .itemScoringRow{grid-template-columns:1fr;}
+  .nextBuyRow{align-items:flex-start; flex-direction:column;}
 }
 
 .highlightRow{

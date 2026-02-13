@@ -59,6 +59,7 @@
   const matchupLane = $("matchupLane");
   const matchupChampA = $("matchupChampA");
   const matchupChampB = $("matchupChampB");
+  const matchupGold = $("matchupGold");
   const matchupAnalyse = $("matchupAnalyse");
   const matchupResults = $("matchupResults");
   const tierlistRole = $("tierlistRole");
@@ -94,6 +95,7 @@
   let liveCatalogData = null;
   let localizationDb = { items: {}, runes: {}, summonerSpells: {} };
   let championAbilityDb = {};
+  let championModelDb = {};
 
   const WR_ALIAS_TO_EN_CHAMPION = {
     sunwukong: "Wukong",
@@ -917,6 +919,11 @@
     return "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10001.png";
   }
 
+  function toNumber(v) {
+    const n = Number(v);
+    return Number.isFinite(n) ? n : 0;
+  }
+
   function normalizeText(v) {
     return String(v || "").trim().toLowerCase();
   }
@@ -1009,6 +1016,227 @@
       why,
       stats: found?.description || ""
     };
+  }
+
+  function statProfileFromItem(item = {}) {
+    return {
+      ad: toNumber(item?.ad),
+      ap: toNumber(item?.magicAttack),
+      hp: toNumber(item?.hp),
+      armor: toNumber(item?.armor),
+      mr: toNumber(item?.magicBlock),
+      haste: toNumber(item?.cd),
+      attackSpeed: toNumber(item?.attackSpeed),
+      crit: toNumber(item?.critRate),
+      armorPenFlat: toNumber(item?.armorPene),
+      armorPenPct: toNumber(item?.armorPeneRate),
+      magicPenFlat: toNumber(item?.magicPene),
+      magicPenPct: toNumber(item?.magicPeneRate),
+      moveFlat: toNumber(item?.moveSpeed),
+      movePct: toNumber(item?.moveRate),
+      hpRegen: toNumber(item?.hpRegen) + toNumber(item?.hpRegenRate),
+      mana: toNumber(item?.mp),
+      manaRegen: toNumber(item?.mpRegen),
+      lifesteal: toNumber(item?.healthPerAttack),
+      spellvamp: toNumber(item?.healthPerMagic)
+    };
+  }
+
+  function hasItemNumericData(item = {}) {
+    const stats = statProfileFromItem(item);
+    return Object.values(stats).some((v) => Number(v) > 0);
+  }
+
+  function getChampionModel(champName) {
+    return championModelDb?.[String(champName || "").trim()] || null;
+  }
+
+  function championCombatProfile(model) {
+    if (!model?.stats) return null;
+    const st = model.stats;
+    const abilities = Array.isArray(model.abilities) ? model.abilities : [];
+    const cooldownPressure = abilities.reduce((acc, ab) => {
+      const cds = Array.isArray(ab?.cooldown) ? ab.cooldown : [];
+      const nums = cds.map((x) => Number(x)).filter((n) => Number.isFinite(n) && n > 0);
+      const low = nums.length ? Math.min(...nums) : 0;
+      return acc + (low > 0 ? (12 / low) : 0);
+    }, 0);
+    const ratioPressure = abilities.reduce((acc, ab) => {
+      const ratios = Array.isArray(ab?.ratios) ? ab.ratios : [];
+      return acc + ratios.reduce((sum, row) => sum + (Array.isArray(row?.coeff) ? row.coeff.reduce((n, x) => n + (Number(x) || 0), 0) : 0), 0);
+    }, 0);
+    return {
+      offense: (toNumber(st.ad) * 0.7) + (cooldownPressure * 8) + (ratioPressure * 5),
+      durability: (toNumber(st.hp) * 0.08) + (toNumber(st.armor) * 1.3) + (toNumber(st.mr) * 1.3),
+      keywords: new Set(Array.isArray(model.keywords) ? model.keywords : [])
+    };
+  }
+
+  function scoreLabel(v) {
+    return Number.isFinite(Number(v)) ? String(v) : "N/A (no data)";
+  }
+
+  function scoreItemCategories(item, profile, myRole, myTypesRaw, enemyTypesRaw, myChamp, enemyChamp) {
+    const decision = scoreItemForMatchup(item, profile, myRole, myTypesRaw, enemyTypesRaw, myChamp, enemyChamp);
+    const sig = decision.debug?.sig || itemSignals(item);
+    const statProfile = statProfileFromItem(item);
+    const enemy = new Set(enemyTypesRaw || []);
+    const mySet = new Set(myTypesRaw || []);
+    const price = Math.max(1, toNumber(item?.price));
+    const itemDataReady = hasItemNumericData(item);
+    const myCombat = championCombatProfile(getChampionModel(myChamp?.name));
+    const enemyCombat = championCombatProfile(getChampionModel(enemyChamp?.name));
+    const championDataReady = Boolean(myCombat && enemyCombat);
+
+    if (!itemDataReady || !championDataReady) {
+      return {
+        categories: {
+          offensive: null,
+          defensive: null,
+          counter: null,
+          synergy: null,
+          goldEfficiency: null,
+          spikeTiming: null
+        },
+        total: null,
+        reasons: ["N/A (no data)"],
+        dataReady: false,
+        dataMissing: {
+          itemStats: !itemDataReady,
+          championStats: !championDataReady
+        }
+      };
+    }
+
+    const offensiveRaw =
+      (sig.ad + sig.ap + sig.attackSpeed + sig.crit + sig.armorPen + sig.magicPen) * 3.1
+      + (statProfile.ad * 0.07) + (statProfile.ap * 0.055)
+      + (statProfile.attackSpeed * 0.2) + (statProfile.crit * 0.3)
+      + (statProfile.armorPenFlat * 0.3) + (statProfile.armorPenPct * 0.8)
+      + (statProfile.magicPenFlat * 0.3) + (statProfile.magicPenPct * 0.8)
+      + (myCombat.offense * 0.22)
+      + (enemyCombat.durability > 0 ? (myCombat.offense / enemyCombat.durability) * 12 : 0);
+
+    const defensiveRaw =
+      (sig.hp + sig.armor + sig.mr + sig.shield + sig.heal) * 3
+      + (statProfile.hp * 0.02) + (statProfile.armor * 0.2) + (statProfile.mr * 0.2)
+      + (statProfile.hpRegen * 1.8)
+      + (enemy.has("assassin_burst") ? statProfile.hp * 0.007 : 0)
+      + (enemy.has("mage_burst") ? statProfile.mr * 0.25 : 0)
+      + (enemy.has("fighter") || enemy.has("anti_auto") ? statProfile.armor * 0.25 : 0);
+
+    const counterRaw =
+      (sig.grievous * 8) + (sig.tenacity * 10) + (sig.antiShield * 7)
+      + (enemy.has("tank") ? (sig.percentDamage + sig.armorPen + sig.magicPen) * 4.5 : 0)
+      + ((enemy.has("hard_cc") || enemy.has("pointclick_cc")) ? sig.tenacity * 8 : 0)
+      + (enemy.has("mage_burst") ? sig.mr * 4 : 0)
+      + (enemy.has("assassin_burst") ? (sig.armor + sig.hp + sig.shield) * 2 : 0);
+
+    const synergyRaw =
+      (decision.score * 0.32)
+      + ((profile === "marksman") ? (sig.ad + sig.attackSpeed + sig.crit) * 1.5 : 0)
+      + ((profile === "mage") ? (sig.ap + sig.haste + sig.magicPen) * 1.55 : 0)
+      + ((profile === "fighter") ? (sig.ad + sig.hp + sig.haste) * 1.25 : 0)
+      + ((profile === "tank" || profile === "tank_support") ? (sig.hp + sig.armor + sig.mr + sig.haste) * 1.3 : 0)
+      + ((profile === "enchanter") ? (sig.heal + sig.shield + sig.haste + sig.mana) * 1.5 : 0)
+      + (mySet.has("true_damage") && (sig.haste > 0 || sig.attackSpeed > 0) ? 3 : 0)
+      + (myCombat.keywords.has("burst") && sig.ap > 0 ? 4 : 0)
+      + (myCombat.keywords.has("dps") && sig.attackSpeed > 0 ? 4 : 0)
+      + (enemyCombat.keywords.has("sustain") && sig.grievous > 0 ? 5 : 0)
+      + (enemyCombat.keywords.has("engage") && (sig.armor > 0 || sig.mr > 0) ? 3 : 0);
+
+    const goldEfficiencyRaw = Math.max(0, ((offensiveRaw * 0.8) + defensiveRaw + counterRaw + synergyRaw) / price * 100);
+    const spikeTimingRaw = Math.max(0, (decision.score * 1.2) + (price <= 1300 ? 18 : price <= 2200 ? 12 : 6) + (sig.activePlaymaking > 0 ? 3 : 0));
+
+    const categories = {
+      offensive: Math.round(Math.max(0, offensiveRaw)),
+      defensive: Math.round(Math.max(0, defensiveRaw)),
+      counter: Math.round(Math.max(0, counterRaw)),
+      synergy: Math.round(Math.max(0, synergyRaw)),
+      goldEfficiency: Math.round(Math.max(0, goldEfficiencyRaw)),
+      spikeTiming: Math.round(Math.max(0, spikeTimingRaw))
+    };
+    const total =
+      (categories.offensive * 0.24)
+      + (categories.defensive * 0.17)
+      + (categories.counter * 0.2)
+      + (categories.synergy * 0.2)
+      + (categories.goldEfficiency * 0.11)
+      + (categories.spikeTiming * 0.08);
+
+    return {
+      categories,
+      total,
+      reasons: decision.reasons || [],
+      dataReady: true,
+      dataMissing: { itemStats: false, championStats: false }
+    };
+  }
+
+
+  function componentOptionsForItem(item) {
+    if (!item) return [];
+    const from = Array.isArray(item.from) ? item.from : [];
+    return from
+      .map((id) => findWildRiftItem([String(id)]))
+      .filter(Boolean)
+      .filter((x) => toNumber(x?.price) > 0);
+  }
+
+  function nextBuyDecision(itemBuild, gold) {
+    const budget = Math.max(0, toNumber(gold));
+    const progression = [itemBuild.starter, ...(itemBuild.coreItems || []), itemBuild.boots, itemBuild.enchant]
+      .filter(Boolean)
+      .map((it) => findWildRiftItem([it.nativeName || it.name, it.itemId]))
+      .filter(Boolean);
+
+    let fallback = null;
+    for (const item of progression) {
+      const cost = toNumber(item?.price);
+      if (!fallback && cost > 0) fallback = item;
+      if (!cost) continue;
+      if (cost <= budget) {
+        const efficiency = cost ? Math.round((cost / Math.max(1, budget)) * 100) : 0;
+        return {
+          type: "complete",
+          item,
+          efficiency,
+          reason: `Direkter Powerspike (${cost} Gold) ist innerhalb deines Budgets.`
+        };
+      }
+
+      const components = componentOptionsForItem(item)
+        .filter((c) => toNumber(c?.price) <= budget);
+      if (components.length) {
+        const comp = components
+          .map((c) => {
+            const cp = statProfileFromItem(c);
+            const immediateValue = (cp.ad * 0.8) + (cp.ap * 0.7) + (cp.hp * 0.22) + (cp.armor * 1.4) + (cp.mr * 1.4) + (cp.attackSpeed * 0.9) + (cp.haste * 1.1);
+            const goldEff = immediateValue / Math.max(1, toNumber(c?.price));
+            return { c, goldEff };
+          })
+          .sort((a, b) => b.goldEff - a.goldEff)[0]?.c;
+        if (!comp) continue;
+        const progress = Math.round((toNumber(comp?.price) / Math.max(1, cost)) * 100);
+        return {
+          type: "component",
+          item,
+          component: comp,
+          efficiency: progress,
+          reason: `Beste Komponente für sofortigen Value und ${progress}% Fortschritt Richtung ${translatedItemName(item?.nativeName || item?.name)}.`
+        };
+      }
+    }
+
+    if (fallback) {
+      return {
+        type: "save",
+        item: fallback,
+        efficiency: Math.round((budget / Math.max(1, toNumber(fallback?.price))) * 100),
+        reason: `Noch keine sinnvolle Komponente verfügbar – Gold für ${translatedItemName(fallback?.nativeName || fallback?.name)} halten.`
+      };
+    }
+    return null;
   }
 
   function chooseBootsByMatchup(enemyTypesRaw, profile) {
@@ -1263,8 +1491,16 @@
     const pool = liveItemDb.filter((item) => item?.name && !isBootOrEnchantItem(item));
     const scored = pool
       .map((item) => {
-        const decision = scoreItemForMatchup(item, profile, myRole, myTypesRaw, enemyTypesRaw, myChamp, enemyChamp);
-        return { item, score: decision.score, reasons: decision.reasons, debug: decision.debug };
+        const scorePack = scoreItemCategories(item, profile, myRole, myTypesRaw, enemyTypesRaw, myChamp, enemyChamp);
+        const fallbackDecision = scoreItemForMatchup(item, profile, myRole, myTypesRaw, enemyTypesRaw, myChamp, enemyChamp);
+        return {
+          item,
+          score: Number.isFinite(Number(scorePack.total)) ? scorePack.total : fallbackDecision.score,
+          reasons: scorePack.reasons?.length ? scorePack.reasons : fallbackDecision.reasons,
+          categories: scorePack.categories,
+          dataReady: scorePack.dataReady,
+          dataMissing: scorePack.dataMissing
+        };
       })
       .filter((x) => x.score > 12)
       .sort((a, b) => b.score - a.score);
@@ -1275,7 +1511,7 @@
       const name = String(row.item?.name || "");
       if (!name || seen.has(name)) continue;
 
-      const sig = row.debug?.sig || {};
+      const sig = itemSignals(row.item);
       const offProfileRisk = (sig.ap >= 2 && profile === "marksman") || (sig.crit >= 2 && (profile === "mage" || profile === "enchanter"));
       if (offProfileRisk && selected.length < 4) continue;
       if (row.score < 18 && selected.length < 3) continue;
@@ -1285,7 +1521,11 @@
         nativeName: name,
         icon: row.item?.iconPath || fallbackItemIcon(),
         why: `Vs ${enemyChamp.name}: ${row.reasons.join(" + ") || "Matchup-Wert"} (${Math.round(row.score)})`,
-        stats: row.item?.description || ""
+        stats: row.item?.description || "",
+        score: Math.round(row.score),
+        categories: row.categories,
+        dataReady: row.dataReady,
+        dataMissing: row.dataMissing
       });
       seen.add(name);
       if (selected.length >= 5) break;
@@ -1341,7 +1581,7 @@
     return "Standard";
   }
 
-  function matchupFullItemBuild(myChamp, myRole, myTypesRaw, enemyChamp, enemyTypesRaw) {
+  function matchupFullItemBuild(myChamp, myRole, myTypesRaw, enemyChamp, enemyTypesRaw, gold = 0) {
     const profile = inferChampProfile(myChamp, myRole, myTypesRaw);
     const starter = startingItemForProfile(profile, myRole);
     const boots = chooseBootsByMatchup(enemyTypesRaw, profile);
@@ -1351,6 +1591,15 @@
     const coreItems = coreTemplate.slice(0, 3);
     const finalBuild = [...coreItems, ...coreTemplate.slice(3, 5), boots, enchant].slice(0, 6);
     const situational = adaptBuildToEnemy(enemyTypesRaw, profile, myRole).slice(0, 3);
+
+    const scoredCandidates = coreTemplate.slice(0, 7);
+    const scoredTier = {
+      best: scoredCandidates[0] || null,
+      alternative: scoredCandidates[1] || null,
+      situational: scoredCandidates[2] || situational[0] || null
+    };
+
+    const nextBuy = nextBuyDecision({ starter, coreItems, boots, enchant }, gold);
 
     return {
       profile,
@@ -1362,6 +1611,8 @@
       coreItems,
       finalBuild,
       situational,
+      scoredTier,
+      nextBuy,
       summary: `${myChamp.name}: ${myRole || profile} Build vs ${enemyChamp.name} (Start → Core → Boots/Enchant → Final).`
     };
   }
@@ -1402,6 +1653,15 @@
       championAbilityDb = data?.champions || {};
     } catch {
       championAbilityDb = {};
+    }
+  }
+
+  async function loadChampionModels(ts) {
+    try {
+      const data = await loadJson(`./data/champion_models.json?ts=${ts}`);
+      championModelDb = data?.champions || {};
+    } catch {
+      championModelDb = {};
     }
   }
 
@@ -1451,7 +1711,29 @@
         iconPath: raw?.iconPath || raw?.icon || prev.iconPath || fallbackItemIcon(),
         description: raw?.description || prev.description || "",
         labels: raw?.labels || prev.labels || [],
-        price: raw?.price || prev.price || 0
+        price: raw?.price || prev.price || 0,
+        from: Array.isArray(raw?.from) ? raw.from : (prev.from || []),
+        into: raw?.into || prev.into || "",
+        ad: toNumber(raw?.ad ?? raw?.stats?.ad ?? prev.ad),
+        hp: toNumber(raw?.hp ?? raw?.stats?.hp ?? prev.hp),
+        armor: toNumber(raw?.armor ?? raw?.stats?.armor ?? prev.armor),
+        magicBlock: toNumber(raw?.magicBlock ?? raw?.stats?.mr ?? prev.magicBlock),
+        attackSpeed: toNumber(raw?.attackSpeed ?? raw?.stats?.attack_speed ?? prev.attackSpeed),
+        critRate: toNumber(raw?.critRate ?? raw?.stats?.crit_rate ?? prev.critRate),
+        magicAttack: toNumber(raw?.magicAttack ?? raw?.stats?.ap ?? prev.magicAttack),
+        magicPene: toNumber(raw?.magicPene ?? raw?.stats?.magic_pen_flat ?? prev.magicPene),
+        magicPeneRate: toNumber(raw?.magicPeneRate ?? raw?.stats?.magic_pen_pct ?? prev.magicPeneRate),
+        armorPene: toNumber(raw?.armorPene ?? raw?.stats?.armor_pen_flat ?? prev.armorPene),
+        armorPeneRate: toNumber(raw?.armorPeneRate ?? raw?.stats?.armor_pen_pct ?? prev.armorPeneRate),
+        cd: toNumber(raw?.cd ?? raw?.stats?.ability_haste ?? prev.cd),
+        moveSpeed: toNumber(raw?.moveSpeed ?? raw?.stats?.move_speed_flat ?? prev.moveSpeed),
+        moveRate: toNumber(raw?.moveRate ?? raw?.stats?.move_speed_pct ?? prev.moveRate),
+        hpRegen: toNumber(raw?.hpRegen ?? raw?.stats?.hp_regen ?? prev.hpRegen),
+        hpRegenRate: toNumber(raw?.hpRegenRate ?? raw?.stats?.hp_regen_pct ?? prev.hpRegenRate),
+        mp: toNumber(raw?.mp ?? raw?.stats?.mana ?? prev.mp),
+        mpRegen: toNumber(raw?.mpRegen ?? raw?.stats?.mana_regen ?? prev.mpRegen),
+        healthPerAttack: toNumber(raw?.healthPerAttack ?? raw?.stats?.lifesteal ?? prev.healthPerAttack),
+        healthPerMagic: toNumber(raw?.healthPerMagic ?? raw?.stats?.spell_vamp ?? prev.healthPerMagic)
       };
       byKey.set(key, merged);
       registerItemLookup(merged, [merged.nativeName, merged.name, merged.itemId]);
@@ -1555,7 +1837,8 @@
 
     const guide = guideByEnemyTypes(enemyTypesRaw, myChamp, enemyChamp, delta);
     const timelinePlan = buildTimelinePlan(guide, myChamp, enemyChamp, myRole, difficulty);
-    const itemBuild = matchupFullItemBuild(myChamp, myRole, myTypesRaw, enemyChamp, enemyTypesRaw);
+    const goldNow = Math.max(0, toNumber(matchupGold?.value));
+    const itemBuild = matchupFullItemBuild(myChamp, myRole, myTypesRaw, enemyChamp, enemyTypesRaw, goldNow);
     const myAdvantageLabel = favored === myChamp.name ? "Besser" : "Schwer";
     const enemyAdvantageLabel = favored === enemyChamp.name ? "Besser" : "Schwer";
 
@@ -1595,6 +1878,27 @@
           <article class="mbCol mbItems">
             <div class="mbTitle">Konkrete Item-Antwort gegen ${enemyChamp.name}</div>
             <div class="tinyNote">Rolle: ${itemBuild.roleLabel} • ${itemBuild.summary}</div>
+            <div class="tinyNote">Patch: ${liveItemPatch} • Gold Input: ${goldNow > 0 ? `${goldNow}g` : "nicht gesetzt"}</div>
+
+            ${itemBuild.nextBuy ? `
+              <div class="nextBuyCard">
+                <div class="itemPhaseTitle">Next Buy (gold-optimiert)</div>
+                <div class="nextBuyRow">
+                  ${itemBuild.nextBuy.component ? `<div class="itemBubble"><img src="${itemBuild.nextBuy.component.iconPath || fallbackItemIcon()}" alt="${translatedItemName(itemBuild.nextBuy.component.nativeName || itemBuild.nextBuy.component.name)}" loading="lazy" /><span>${translatedItemName(itemBuild.nextBuy.component.nativeName || itemBuild.nextBuy.component.name)}</span></div>` : `<div class="itemBubble"><img src="${itemBuild.nextBuy.item.iconPath || fallbackItemIcon()}" alt="${translatedItemName(itemBuild.nextBuy.item.nativeName || itemBuild.nextBuy.item.name)}" loading="lazy" /><span>${translatedItemName(itemBuild.nextBuy.item.nativeName || itemBuild.nextBuy.item.name)}</span></div>`}
+                  <div class="nextBuyMeta">
+                    <b>${itemBuild.nextBuy.type === "component" ? "Komponente" : itemBuild.nextBuy.type === "complete" ? "Complete Item" : "Save Gold"}</b>
+                    <span>${itemBuild.nextBuy.reason}</span>
+                    <span>Effizienz: ${itemBuild.nextBuy.efficiency}%</span>
+                  </div>
+                </div>
+              </div>
+            ` : ""}
+
+            <div class="itemScoringRow">
+              ${itemBuild.scoredTier.best ? `<div class="itemScoreCard"><h4>Best Choice</h4><div>${itemBuild.scoredTier.best.name}</div><small>Off ${scoreLabel(itemBuild.scoredTier.best.categories?.offensive)} • Def ${scoreLabel(itemBuild.scoredTier.best.categories?.defensive)} • Counter ${scoreLabel(itemBuild.scoredTier.best.categories?.counter)}</small></div>` : ""}
+              ${itemBuild.scoredTier.alternative ? `<div class="itemScoreCard"><h4>Alternative</h4><div>${itemBuild.scoredTier.alternative.name}</div><small>Synergy ${scoreLabel(itemBuild.scoredTier.alternative.categories?.synergy)} • Gold ${scoreLabel(itemBuild.scoredTier.alternative.categories?.goldEfficiency)}</small></div>` : ""}
+              ${itemBuild.scoredTier.situational ? `<div class="itemScoreCard"><h4>Situational</h4><div>${itemBuild.scoredTier.situational.name}</div><small>Spike ${scoreLabel(itemBuild.scoredTier.situational.categories?.spikeTiming)}</small></div>` : ""}
+            </div>
 
             <div class="itemPhaseGrid">
               <div class="itemPhaseCard">
@@ -2125,6 +2429,7 @@
   matchupLane?.addEventListener("change", renderMatchupView);
   matchupChampA?.addEventListener("change", renderMatchupView);
   matchupChampB?.addEventListener("change", renderMatchupView);
+  matchupGold?.addEventListener("input", renderMatchupView);
   matchupAnalyse?.addEventListener("click", ()=>renderMatchupView({ animate:true }));
   tierlistRole?.addEventListener("change", renderTierlistView);
   tierlistSort?.addEventListener("change", renderTierlistView);
@@ -2169,7 +2474,8 @@
       await loadLiveCatalog(ts);
       await Promise.all([
         loadLocalizationEn(ts),
-        loadChampionAbilities(ts)
+        loadChampionAbilities(ts),
+        loadChampionModels(ts)
       ]);
       mergeAllChampionsFromHeroDb();
 
