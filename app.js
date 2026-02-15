@@ -100,6 +100,8 @@
   let championAbilityDb = {};
   let championModelDb = {};
   let championModelVersion = "–";
+  let matchupItemDb = [];
+  let matchupChampionDb = {};
 
   const WR_ALIAS_TO_EN_CHAMPION = {
     sunwukong: "Wukong",
@@ -1081,7 +1083,7 @@
   }
 
   function scoreLabel(v) {
-    return Number.isFinite(Number(v)) ? String(v) : "N/A (no data)";
+    return Number.isFinite(Number(v)) ? String(v) : "0";
   }
 
   function itemMissingFields(item = {}) {
@@ -1710,6 +1712,98 @@
     ];
   }
 
+  function normalizeStructuredItem(row = {}) {
+    const st = row?.stats || {};
+    return {
+      itemId: row.item_id || "",
+      nativeName: row.native_name || row.name || "",
+      name: row.name || row.native_name || "",
+      iconPath: row.icon || fallbackItemIcon(),
+      description: `Category: ${row.shop_category || ""}`,
+      labels: [],
+      price: Number(row.total_cost || 0),
+      from: Array.isArray(row?.build_path?.from) ? row.build_path.from : [],
+      into: Array.isArray(row?.build_path?.into) ? row.build_path.into.join(",") : "",
+      effects: Array.isArray(row.effects) ? row.effects : [],
+      recommendationTags: [],
+      effectSource: "truth",
+      ad: toNumber(st.ad),
+      hp: toNumber(st.hp),
+      armor: toNumber(st.armor),
+      magicBlock: toNumber(st.mr),
+      attackSpeed: toNumber(st.attack_speed),
+      critRate: toNumber(st.crit_chance),
+      magicAttack: toNumber(st.ap),
+      magicPene: toNumber(st.magic_pen_flat),
+      magicPeneRate: toNumber(st.magic_pen_percent),
+      armorPene: toNumber(st.armor_pen_flat),
+      armorPeneRate: toNumber(st.armor_pen_percent),
+      cd: toNumber(st.ability_haste),
+      moveSpeed: toNumber(st.move_speed),
+      moveRate: toNumber(st.move_speed_percent),
+      hpRegen: toNumber(st.hp_regen),
+      hpRegenRate: toNumber(st.hp_regen_percent),
+      mp: toNumber(st.mana),
+      mpRegen: toNumber(st.mana_regen),
+      healthPerAttack: toNumber(st.lifesteal),
+      healthPerMagic: toNumber(st.omnivamp)
+    };
+  }
+
+  function normalizeStructuredChampion(row = {}) {
+    const st = row?.base_stats || {};
+    const abilities = Array.isArray(row?.abilities) ? row.abilities : [];
+    return {
+      id: row.champion_id || row.name,
+      stats: {
+        hp: toNumber(st.hp),
+        hp_per_level: toNumber(st.hp_per_level),
+        armor: toNumber(st.armor),
+        armor_per_level: toNumber(st.armor_per_level),
+        mr: toNumber(st.mr),
+        mr_per_level: toNumber(st.mr_per_level),
+        ad: toNumber(st.ad),
+        ad_per_level: toNumber(st.ad_per_level),
+        ap: toNumber(st.ap),
+        attack_speed: toNumber(st.as),
+        attack_speed_per_level: toNumber(st.as_per_level),
+        move_speed: toNumber(st.move_speed)
+      },
+      passive: { effects: abilities.filter((x) => x?.slot === "P") },
+      abilities: abilities.filter((x) => x?.slot !== "P").map((ab) => ({
+        slot: ab.slot,
+        name: ab.name,
+        cooldown: Array.isArray(ab.cooldowns) ? ab.cooldowns : [],
+        base_damage: Array.isArray(ab.base_damage) ? ab.base_damage.join("/") : "0",
+        damage_type: ab.damage_type || "none",
+        cc_duration: Array.isArray(ab.cc_durations) && ab.cc_durations.length ? ab.cc_durations[0] : null,
+        ratios: Array.isArray(ab.ratios) ? ab.ratios : [],
+        effects: [{ effect_type: ab.damage_type === "none" ? "utility" : "damage", values: ab.base_damage || [] }]
+      })),
+      keywords: Array.isArray(row.keywords) ? row.keywords : []
+    };
+  }
+
+  async function loadStructuredMatchupData(ts) {
+    const [itemData, champData] = await Promise.all([
+      loadJson(`./data/items_7_0c.json?ts=${ts}`),
+      loadJson(`./data/champions_7_0c.json?ts=${ts}`)
+    ]);
+    matchupItemDb = Array.isArray(itemData?.items) ? itemData.items : [];
+    matchupChampionDb = {};
+    for (const ch of (Array.isArray(champData?.champions) ? champData.champions : [])) {
+      matchupChampionDb[ch.name] = ch;
+    }
+    liveItemDb = matchupItemDb.map(normalizeStructuredItem);
+    liveItemLookup = new Map();
+    for (const item of liveItemDb) registerItemLookup(item, [item.nativeName, item.name, item.itemId]);
+    championModelDb = Object.fromEntries(
+      Object.entries(matchupChampionDb).map(([name, row]) => [name, normalizeStructuredChampion(row)])
+    );
+    championModelVersion = "7.0C";
+    liveItemPatch = "7.0C";
+  }
+
   function scoreItemForMatchup(item, profile, myRole, myTypesRaw, enemyTypesRaw, myChamp, enemyChamp) {
     const sig = itemSignals(item);
     const text = sig.text;
@@ -1800,7 +1894,7 @@
   }
 
   function smartCoreBuild(myChamp, myRole, profile, myTypesRaw, enemyChamp, enemyTypesRaw) {
-    if (!liveItemDb?.length) return fallbackTemplateBuild(profile);
+    if (!liveItemDb?.length) return [];
     const pool = liveItemDb.filter((item) => item?.name && !isBootOrEnchantItem(item));
     const scored = pool
       .map((item) => {
@@ -1849,7 +1943,18 @@
     }
 
     if (selected.length >= 5) return selected;
-    return fallbackTemplateBuild(profile).map((x) => ({ ...x, partialData: true, categories: { offensive: null, defensive: null, counter: null, synergy: null, goldEfficiency: null, spikeTiming: null }, effectContrib: [] }));
+    return scored.slice(0, 5).map((row) => ({
+      name: localizedName("items", row.item?.name, row.item?.nativeName || row.item?.name),
+      nativeName: row.item?.name || row.item?.nativeName || "",
+      icon: row.item?.iconPath || fallbackItemIcon(),
+      why: `Vs ${enemyChamp.name}: ${row.reasons.join(" + ") || "Matchup-Wert"} (${Math.round(row.score)})`,
+      stats: row.item?.description || "",
+      score: Math.round(row.score),
+      categories: row.categories,
+      effectContrib: row.effectContrib || [],
+      dataReady: true,
+      dataMissing: {}
+    }));
   }
 
 
@@ -2034,6 +2139,10 @@
   }
 
   async function loadLiveItemData() {
+    if (matchupItemDb.length) {
+      liveItemPatch = "7.0C";
+      return;
+    }
     liveItemLookup = new Map();
     const byKey = new Map();
     let patchFromCatalog = null;
@@ -2249,12 +2358,10 @@
             ` : ""}
 
             <div class="itemScoringRow">
-              ${itemBuild.scoredTier.best ? `<div class="itemScoreCard"><h4>Best Choice</h4><div>${itemBuild.scoredTier.best.name}${itemBuild.scoredTier.best.partialData ? " <em>(partial data)</em>" : ""}</div><small>Off ${scoreLabel(itemBuild.scoredTier.best.categories?.offensive)} • Def ${scoreLabel(itemBuild.scoredTier.best.categories?.defensive)} • Counter ${scoreLabel(itemBuild.scoredTier.best.categories?.counter)}</small></div>` : ""}
-              ${itemBuild.scoredTier.alternative ? `<div class="itemScoreCard"><h4>Alternative</h4><div>${itemBuild.scoredTier.alternative.name}${itemBuild.scoredTier.alternative.partialData ? " <em>(partial data)</em>" : ""}</div><small>Synergy ${scoreLabel(itemBuild.scoredTier.alternative.categories?.synergy)} • Gold ${scoreLabel(itemBuild.scoredTier.alternative.categories?.goldEfficiency)}</small></div>` : ""}
-              ${itemBuild.scoredTier.situational ? `<div class="itemScoreCard"><h4>Situational</h4><div>${itemBuild.scoredTier.situational.name}${itemBuild.scoredTier.situational.partialData ? " <em>(partial data)</em>" : ""}</div><small>Spike ${scoreLabel(itemBuild.scoredTier.situational.categories?.spikeTiming)}</small></div>` : ""}
+              ${itemBuild.scoredTier.best ? `<div class="itemScoreCard"><h4>Best Choice</h4><div>${itemBuild.scoredTier.best.name}</div><small>Off ${scoreLabel(itemBuild.scoredTier.best.categories?.offensive)} • Def ${scoreLabel(itemBuild.scoredTier.best.categories?.defensive)} • Counter ${scoreLabel(itemBuild.scoredTier.best.categories?.counter)}</small></div>` : ""}
+              ${itemBuild.scoredTier.alternative ? `<div class="itemScoreCard"><h4>Alternative</h4><div>${itemBuild.scoredTier.alternative.name}</div><small>Synergy ${scoreLabel(itemBuild.scoredTier.alternative.categories?.synergy)} • Gold ${scoreLabel(itemBuild.scoredTier.alternative.categories?.goldEfficiency)}</small></div>` : ""}
+              ${itemBuild.scoredTier.situational ? `<div class="itemScoreCard"><h4>Situational</h4><div>${itemBuild.scoredTier.situational.name}</div><small>Spike ${scoreLabel(itemBuild.scoredTier.situational.categories?.spikeTiming)}</small></div>` : ""}
             </div>
-
-            ${renderDebugPanel(itemBuild, myChamp, enemyChamp)}
 
             <div class="itemPhaseGrid">
               <div class="itemPhaseCard">
@@ -2834,6 +2941,7 @@
         loadChampionAbilities(ts),
         loadChampionModels(ts)
       ]);
+      await loadStructuredMatchupData(ts);
       mergeAllChampionsFromHeroDb();
 
       try {
