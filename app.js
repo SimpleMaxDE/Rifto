@@ -93,6 +93,9 @@
   let liveRuneDb = [];
   let liveSkillDb = [];
   let liveCatalogData = null;
+  let patchTruthData = null;
+  let patchTruthItemByName = new Map();
+  let patchTruthChampionByName = new Map();
   let localizationDb = { items: {}, runes: {}, summonerSpells: {} };
   let championAbilityDb = {};
   let championModelDb = {};
@@ -1285,7 +1288,8 @@
       const miss = itemMissingFields(it);
       const st = statProfileFromItem(it);
       const effectCount = Array.isArray(it?.effects) ? it.effects.length : 0;
-      return `<li><b>${translatedItemName(it?.nativeName || it?.name)}</b> • src: live_catalog/equip patch ${liveItemPatch} • price=${toNumber(it?.price)} • ad=${st.ad} ap=${st.ap} hp=${st.hp} armor=${st.armor} mr=${st.mr} haste=${st.haste} as=${st.attackSpeed} • effects=${effectCount} • build_from=${Array.isArray(it?.from) ? it.from.join("/") : "-"} • missing_fields: ${miss.length ? miss.join(", ") : "none"}</li>`;
+      const src = `live_catalog/equip patch ${liveItemPatch} + ${it?.effectSource || "auto"}`;
+      return `<li><b>${translatedItemName(it?.nativeName || it?.name)}</b> • src: ${src} • price=${toNumber(it?.price)} • ad=${st.ad} ap=${st.ap} hp=${st.hp} armor=${st.armor} mr=${st.mr} haste=${st.haste} as=${st.attackSpeed} • effects=${effectCount} • build_from=${Array.isArray(it?.from) ? it.from.join("/") : "-"} • missing_fields: ${miss.length ? miss.join(", ") : "none"}</li>`;
     }).join("");
 
     const topFx = [itemBuild.scoredTier?.best, itemBuild.scoredTier?.alternative, itemBuild.scoredTier?.situational]
@@ -1639,6 +1643,7 @@
   function itemSignals(item) {
     const text = itemText(item);
     const n = numericSignalsFromText(text);
+    const truthTags = new Set(Array.isArray(item?.recommendationTags) ? item.recommendationTags : []);
     return {
       text,
       ad: scoreByKeywords(text, ["攻击力", "ad", "attack damage", "物理"]),
@@ -1646,13 +1651,13 @@
       crit: scoreByKeywords(text, ["暴击", "critical"]),
       atkspd: scoreByKeywords(text, ["攻速", "attack speed"]),
       haste: scoreByKeywords(text, ["技能急速", "冷却", "ability haste", "cooldown"]),
-      pen: scoreByKeywords(text, ["穿透", "破甲", "法术穿透", "lethality", "penetration"]),
+      pen: scoreByKeywords(text, ["穿透", "破甲", "法术穿透", "lethality", "penetration"]) + (truthTags.has("vs_armor_stack") || truthTags.has("vs_magic_resist") ? 1 : 0),
       hp: scoreByKeywords(text, ["生命值", "health", "hp"]),
-      armor: scoreByKeywords(text, ["护甲", "armor"]),
-      mr: scoreByKeywords(text, ["魔法抗性", "magic resist", "mr"]),
+      armor: scoreByKeywords(text, ["护甲", "armor"]) + (truthTags.has("anti_physical") ? 1 : 0),
+      mr: scoreByKeywords(text, ["魔法抗性", "magic resist", "mr"]) + (truthTags.has("anti_magic") ? 1 : 0),
       healShield: scoreByKeywords(text, ["治疗", "护盾", "回复", "heal", "shield"]),
       mana: scoreByKeywords(text, ["法力", "mana"]),
-      antiHeal: scoreByKeywords(text, ["重伤", "grievous"]),
+      antiHeal: scoreByKeywords(text, ["重伤", "grievous"]) + (truthTags.has("anti_heal") ? 2 : 0),
       ccleanse: scoreByKeywords(text, ["净化", "解控", "免疫", "quicksilver", "stasis"]),
       trueDamage: scoreByKeywords(text, ["真实伤害", "true damage"]),
       onHit: scoreByKeywords(text, ["on-hit", "普攻", "每次攻击", "attack applies"]),
@@ -1933,6 +1938,28 @@
     patchContext = patchNotesData.patch || DEFAULT_PATCH_NOTES.patch;
   }
 
+
+  async function loadPatchTruth(ts) {
+    try {
+      const truth = await loadJson(`./data/patch_7_0c_truth.json?ts=${ts}`);
+      patchTruthData = truth && typeof truth === "object" ? truth : null;
+      patchTruthItemByName = new Map();
+      patchTruthChampionByName = new Map();
+      for (const it of (patchTruthData?.items || [])) {
+        const key = normalizeLookupKey(it?.name || "");
+        if (key) patchTruthItemByName.set(key, it);
+      }
+      for (const ch of (patchTruthData?.champions || [])) {
+        const key = normalizeLookupKey(ch?.name || "");
+        if (key) patchTruthChampionByName.set(key, ch);
+      }
+    } catch {
+      patchTruthData = null;
+      patchTruthItemByName = new Map();
+      patchTruthChampionByName = new Map();
+    }
+  }
+
   async function loadLocalizationEn(ts) {
     try {
       const localized = await loadJson(`./data/localization_en.json?ts=${ts}`);
@@ -2005,18 +2032,23 @@
       if (!key) return;
 
       const prev = byKey.get(key) || {};
+      const translated = translatedItemName(nativeName || prev.nativeName || "Unknown Item");
+      const truth = patchTruthItemByName.get(normalizeLookupKey(translated)) || patchTruthItemByName.get(normalizeLookupKey(nativeName));
+      const truthEffects = Array.isArray(truth?.effects) ? truth.effects : [];
+      const truthText = String(truth?.ocr_text_raw || "");
       const merged = {
         itemId: itemId || prev.itemId || "",
         nativeName: nativeName || prev.nativeName || "",
-        name: translatedItemName(nativeName || prev.nativeName || "Unknown Item"),
+        name: translated,
         iconPath: raw?.iconPath || raw?.icon || prev.iconPath || fallbackItemIcon(),
-        description: raw?.description || prev.description || "",
+        description: [raw?.description || prev.description || "", truthText].filter(Boolean).join("\n"),
         labels: raw?.labels || prev.labels || [],
         price: raw?.price || prev.price || 0,
         from: Array.isArray(raw?.from) ? raw.from : (prev.from || []),
         into: raw?.into || prev.into || "",
-        effects: Array.isArray(raw?.effects) ? raw.effects : (prev.effects || []),
-        effectSource: raw?.effectSource || raw?.effect_source || prev.effectSource || "auto",
+        effects: truthEffects.length ? truthEffects : (Array.isArray(raw?.effects) ? raw.effects : (prev.effects || [])),
+        recommendationTags: Array.isArray(truth?.recommendation_tags) ? truth.recommendation_tags : (prev.recommendationTags || []),
+        effectSource: truthEffects.length ? "truth" : (raw?.effectSource || raw?.effect_source || prev.effectSource || "auto"),
         ad: toNumber(raw?.ad ?? raw?.stats?.ad ?? prev.ad),
         hp: toNumber(raw?.hp ?? raw?.stats?.hp ?? prev.hp),
         armor: toNumber(raw?.armor ?? raw?.stats?.armor ?? prev.armor),
@@ -2083,11 +2115,14 @@
           const icon = String(champ?.icon || buildHeroIconById(heroId));
 
           const existingHero = heroDb[heroId] || {};
+          const displayName = championDisplayName(champ, existingChamp?.name || existingHero?.name || "");
+          const truthChamp = patchTruthChampionByName.get(normalizeLookupKey(displayName));
+          const truthLanes = Array.isArray(truthChamp?.lanes_detected_by_text) ? truthChamp.lanes_detected_by_text : [];
           heroDb[heroId] = {
             hero_id: heroId,
-            name: championDisplayName(champ, existingChamp?.name || existingHero?.name || ""),
+            name: displayName,
             title: champ?.title || existingHero?.title || "",
-            lane: champ?.lane || existingHero?.lane || "",
+            lane: champ?.lane || existingHero?.lane || (truthLanes[0] || ""),
             roles: Array.isArray(champ?.roles) ? champ.roles : (existingHero?.roles || []),
             icon
           };
@@ -2776,6 +2811,7 @@
         heroDb = (heroList && heroList.heroList) ? heroList.heroList : {};
       } catch { heroDb = {}; }
 
+      await loadPatchTruth(ts);
       await loadLiveCatalog(ts);
       await Promise.all([
         loadLocalizationEn(ts),
