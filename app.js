@@ -1288,7 +1288,8 @@
       const miss = itemMissingFields(it);
       const st = statProfileFromItem(it);
       const effectCount = Array.isArray(it?.effects) ? it.effects.length : 0;
-      return `<li><b>${translatedItemName(it?.nativeName || it?.name)}</b> • src: live_catalog/equip patch ${liveItemPatch} • price=${toNumber(it?.price)} • ad=${st.ad} ap=${st.ap} hp=${st.hp} armor=${st.armor} mr=${st.mr} haste=${st.haste} as=${st.attackSpeed} • effects=${effectCount} • build_from=${Array.isArray(it?.from) ? it.from.join("/") : "-"} • missing_fields: ${miss.length ? miss.join(", ") : "none"}</li>`;
+      const src = `live_catalog/equip patch ${liveItemPatch} + ${it?.effectSource || "auto"}`;
+      return `<li><b>${translatedItemName(it?.nativeName || it?.name)}</b> • src: ${src} • price=${toNumber(it?.price)} • ad=${st.ad} ap=${st.ap} hp=${st.hp} armor=${st.armor} mr=${st.mr} haste=${st.haste} as=${st.attackSpeed} • effects=${effectCount} • build_from=${Array.isArray(it?.from) ? it.from.join("/") : "-"} • missing_fields: ${miss.length ? miss.join(", ") : "none"}</li>`;
     }).join("");
 
     const topFx = [itemBuild.scoredTier?.best, itemBuild.scoredTier?.alternative, itemBuild.scoredTier?.situational]
@@ -2033,8 +2034,8 @@
       const prev = byKey.get(key) || {};
       const translated = translatedItemName(nativeName || prev.nativeName || "Unknown Item");
       const truth = patchTruthItemByName.get(normalizeLookupKey(translated)) || patchTruthItemByName.get(normalizeLookupKey(nativeName));
-      const truthEffects = Array.isArray(truth?.effects_detected) ? truth.effects_detected : [];
-      const truthText = truthEffects.join("\n");
+      const truthEffects = Array.isArray(truth?.effects) ? truth.effects : [];
+      const truthText = String(truth?.ocr_text_raw || "");
       const merged = {
         itemId: itemId || prev.itemId || "",
         nativeName: nativeName || prev.nativeName || "",
@@ -2045,9 +2046,9 @@
         price: raw?.price || prev.price || 0,
         from: Array.isArray(raw?.from) ? raw.from : (prev.from || []),
         into: raw?.into || prev.into || "",
-        effects: Array.isArray(raw?.effects) ? raw.effects : (prev.effects || []),
+        effects: truthEffects.length ? truthEffects : (Array.isArray(raw?.effects) ? raw.effects : (prev.effects || [])),
         recommendationTags: Array.isArray(truth?.recommendation_tags) ? truth.recommendation_tags : (prev.recommendationTags || []),
-        effectSource: raw?.effectSource || raw?.effect_source || prev.effectSource || (truth ? "ocr+auto" : "auto"),
+        effectSource: truthEffects.length ? "truth" : (raw?.effectSource || raw?.effect_source || prev.effectSource || "auto"),
         ad: toNumber(raw?.ad ?? raw?.stats?.ad ?? prev.ad),
         hp: toNumber(raw?.hp ?? raw?.stats?.hp ?? prev.hp),
         armor: toNumber(raw?.armor ?? raw?.stats?.armor ?? prev.armor),

@@ -1,9 +1,5 @@
 #!/usr/bin/env python3
-"""Create a high-detail structured truth dataset for patch 7.0C from OCR baseline.
-
-Input: data/baseline_patch_7_0c.json (full-folder OCR output)
-Output: data/patch_7_0c_truth.json
-"""
+"""Create structured patch 7.0C truth data with normalized effects schema."""
 from __future__ import annotations
 
 import json
@@ -21,23 +17,6 @@ LIVE_CATALOG = ROOT / "data" / "live_catalog.json"
 LOCALIZATION = ROOT / "data" / "localization_en.json"
 WR_CHAMPIONS = ROOT / "wr_champions.json"
 CHAMPION_MODELS = ROOT / "data" / "champion_models.json"
-
-STAT_PATTERNS = {
-    "ability_power": [r"ability\s*power", r"\bap\b"],
-    "attack_damage": [r"attack\s*damage", r"\bad\b"],
-    "ability_haste": [r"ability\s*haste", r"\bhaste\b"],
-    "armor": [r"\barmor\b"],
-    "magic_resist": [r"magic\s*resist", r"\bmr\b"],
-    "max_health": [r"max\s*health", r"\bhp\b", r"health"],
-    "max_mana": [r"max\s*mana", r"\bmana\b"],
-    "attack_speed_pct": [r"attack\s*speed"],
-    "critical_rate_pct": [r"critical\s*(rate|strike)", r"\bcrit\b"],
-    "armor_pen_pct": [r"armor\s*penetration", r"armor\s*pen"],
-    "magic_pen_pct": [r"magic\s*penetration", r"magic\s*pen"],
-    "move_speed_pct": [r"movement\s*speed", r"move\s*speed"],
-    "lifesteal_pct": [r"lifesteal"],
-    "omnivamp_pct": [r"omnivamp"],
-}
 
 ROLE_KEYWORDS = {
     "baron": ["baron", "solo"],
@@ -62,15 +41,9 @@ def tokenize(s: str) -> list[str]:
     return [x for x in re.split(r"[^a-z0-9]+", str(s).lower()) if x]
 
 
-def extract_num(s: str) -> float | None:
-    m = re.search(r"([+\-]?\d+(?:\.\d+)?)", s)
-    return float(m.group(1)) if m else None
-
-
 def best_match(text: str, candidates: list[str]) -> Match:
     tnorm = norm(text)
-    best_name = None
-    best_score = 0.0
+    best_name, best_score = None, 0.0
     for c in candidates:
         cn = norm(c)
         if not cn:
@@ -78,10 +51,10 @@ def best_match(text: str, candidates: list[str]) -> Match:
         if cn in tnorm:
             score = 1.0
         else:
-            score = SequenceMatcher(None, tnorm[:400], cn).ratio()
+            score = SequenceMatcher(None, tnorm[:600], cn).ratio()
             for tok in tokenize(c):
                 if len(tok) >= 4 and tok in tnorm:
-                    score = max(score, 0.75)
+                    score = max(score, 0.78)
         if score > best_score:
             best_name, best_score = c, score
     return Match(best_name, best_score)
@@ -89,51 +62,166 @@ def best_match(text: str, candidates: list[str]) -> Match:
 
 def infer_lane(text: str) -> list[str]:
     low = text.lower()
-    lanes: list[str] = []
+    lanes = []
     for lane, kws in ROLE_KEYWORDS.items():
         if any(k in low for k in kws):
             lanes.append(lane)
     return sorted(set(lanes))
 
 
-def parse_stat_line(line: str) -> tuple[str, float] | None:
-    low = line.lower().replace("%", " % ")
-    value = extract_num(low)
-    if value is None:
+def _first_num(text: str) -> float | None:
+    m = re.search(r"([+\-]?\d+(?:\.\d+)?)", text)
+    return float(m.group(1)) if m else None
+
+
+def _first_pct(text: str) -> float | None:
+    m = re.search(r"([+\-]?\d+(?:\.\d+)?)\s*%", text)
+    return float(m.group(1)) if m else None
+
+
+def parse_effect_line(line: str) -> dict | None:
+    raw = line.strip()
+    if not raw:
         return None
-    for key, pats in STAT_PATTERNS.items():
-        if any(re.search(p, low) for p in pats):
-            return key, value
-    return None
+    low = raw.lower()
+    if not re.search(r"\d|passive|active|damage|heal|shield|grievous|cooldown|stack|trigger|immobil|slow|stun", low):
+        return None
+
+    trigger = "passive_always"
+    if any(k in low for k in ["active", "on activation"]):
+        trigger = "active_cast"
+    elif any(k in low for k in ["on hit", "every attack", "basic attack"]):
+        trigger = "on_hit"
+    elif any(k in low for k in ["spell", "ability"]):
+        trigger = "on_spell"
+    elif any(k in low for k in ["takedown", "kill", "assist"]):
+        trigger = "on_takedown"
+
+    effect_type = "modifier"
+    if "damage" in low:
+        effect_type = "damage"
+    elif any(k in low for k in ["heal", "restore", "regen"]):
+        effect_type = "healing"
+    elif "shield" in low:
+        effect_type = "shield"
+    elif "grievous" in low:
+        effect_type = "anti_heal"
+    elif any(k in low for k in ["penetration", "pen"]):
+        effect_type = "penetration"
+    elif any(k in low for k in ["slow", "stun", "immobil", "root", "fear", "charm"]):
+        effect_type = "cc"
+
+    damage_type = None
+    if "magic" in low:
+        damage_type = "magic"
+    elif "physical" in low:
+        damage_type = "physical"
+    elif "true damage" in low:
+        damage_type = "true"
+
+    scaling_type, scaling_ratio = None, None
+    if any(k in low for k in ["ability power", " ap", "ap "]):
+        scaling_type, scaling_ratio = "AP", _first_num(low)
+    elif any(k in low for k in ["attack damage", " ad", "ad "]):
+        scaling_type, scaling_ratio = "AD", _first_num(low)
+    elif "max health" in low:
+        scaling_type, scaling_ratio = "MaxHP", _first_pct(low)
+
+    duration = None
+    m_dur = re.search(r"(\d+(?:\.\d+)?)\s*(seconds?|s)", low)
+    if m_dur:
+        duration = float(m_dur.group(1))
+
+    cooldown = {"value": None, "scope": "global"}
+    m_cd = re.search(r"(?:cooldown|cd)\s*(?:of)?\s*(\d+(?:\.\d+)?)", low)
+    if m_cd:
+        cooldown["value"] = float(m_cd.group(1))
+    if "per target" in low:
+        cooldown["scope"] = "per_target"
+
+    max_stacks = None
+    m_stack = re.search(r"(?:max(?:imum)?\s*)?(\d+)\s*stacks?", low)
+    if m_stack:
+        max_stacks = int(m_stack.group(1))
+
+    cond = []
+    if "only" in low or "cannot" in low:
+        cond.append(raw)
+
+    return {
+        "effect_name": raw[:80],
+        "trigger": trigger,
+        "effect_type": effect_type,
+        "base_value": _first_num(low),
+        "scaling_ratio": scaling_ratio,
+        "scaling_type": scaling_type,
+        "duration": duration,
+        "cooldown": cooldown,
+        "stacks": bool(max_stacks),
+        "max_stacks": max_stacks,
+        "conditions": cond,
+        "limitations": cond,
+        "damage_type": damage_type,
+    }
 
 
-def recommendation_tags(lines: list[str], stats: dict[str, dict]) -> list[str]:
-    text = "\n".join(lines).lower()
+def normalize_effect_schema(effect: dict) -> dict:
+    # map catalog/live effect entries into required schema fields
+    vals = effect.get("values") if isinstance(effect.get("values"), list) else []
+    base_val = None
+    for v in vals:
+        n = _first_num(str(v))
+        if n is not None:
+            base_val = n
+            break
+    scaling = effect.get("scaling") if isinstance(effect.get("scaling"), list) else []
+    scaling_ratio = None
+    scaling_type = None
+    if scaling:
+        s0 = scaling[0] if isinstance(scaling[0], dict) else {}
+        scaling_ratio = s0.get("ratio") if isinstance(s0.get("ratio"), (int, float)) else _first_num(str(s0.get("ratio", "")))
+        scaling_type = str(s0.get("source", "")).upper() or None
+
+    max_stacks = None
+    caps = effect.get("caps")
+    if isinstance(caps, dict) and isinstance(caps.get("max_stacks"), int):
+        max_stacks = caps.get("max_stacks")
+
+    cd = effect.get("cooldown")
+    cd_value = cd if isinstance(cd, (int, float)) else _first_num(str(cd or ""))
+
+    cond = effect.get("conditions") if isinstance(effect.get("conditions"), list) else []
+    return {
+        "effect_name": str(effect.get("name") or effect.get("source_line") or "effect")[:80],
+        "trigger": str(effect.get("trigger") or "passive_always"),
+        "effect_type": str(effect.get("effect_type") or "modifier"),
+        "base_value": base_val,
+        "scaling_ratio": scaling_ratio,
+        "scaling_type": scaling_type,
+        "duration": effect.get("duration") if isinstance(effect.get("duration"), (int, float)) else _first_num(str(effect.get("duration", ""))),
+        "cooldown": {"value": cd_value, "scope": "global"},
+        "stacks": bool(max_stacks),
+        "max_stacks": max_stacks,
+        "conditions": cond,
+        "limitations": cond,
+        "damage_type": effect.get("damage_type") if isinstance(effect.get("damage_type"), str) else None,
+    }
+
+
+def recommendation_tags(text: str) -> list[str]:
+    low = text.lower()
     tags = set()
-    if "grievous" in text or "anti-heal" in text:
+    if "grievous" in low:
         tags.add("anti_heal")
-    if "magic resist" in text or "mr" in text:
+    if "magic resist" in low or "mr" in low:
         tags.add("anti_magic")
-    if "armor" in text:
+    if "armor" in low:
         tags.add("anti_physical")
-    if "magic penetration" in text:
+    if "magic penetration" in low:
         tags.add("vs_magic_resist")
-    if "armor penetration" in text:
+    if "armor penetration" in low:
         tags.add("vs_armor_stack")
-    if "shield" in text:
-        tags.add("anti_burst_or_shield")
-    if "mana" in text and ("ability_haste" in stats or "ability_power" in stats):
-        tags.add("mana_scaling_mage")
-    if "lifesteal" in text or "omnivamp" in text:
-        tags.add("sustain")
     return sorted(tags)
-
-def is_effect_line(line: str) -> bool:
-    low = line.lower()
-    return any(k in low for k in [
-        "passive", "active", "damage", "shield", "heal", "cooldown", "grievous",
-        "immobil", "slow", "stun", "mana charge", "awe", "stack", "triggers"
-    ])
 
 
 def main() -> None:
@@ -150,140 +238,105 @@ def main() -> None:
     champ_name_pool = sorted({*champ_names, *(x.get("name", "") for x in catalog_champs if isinstance(x, dict))})
 
     records = [*baseline.get("items", []), *baseline.get("champions", []), *baseline.get("unknown", [])]
-
     items: dict[str, dict] = {}
     champions: dict[str, dict] = {}
-    unmatched: list[dict] = []
 
     for rec in records:
         lines = rec.get("ocr_lines", []) if isinstance(rec, dict) else []
-        text = "\n".join(lines)
-        if not text.strip():
+        raw_text = str(rec.get("ocr_text_raw") or "\n".join(lines))
+        if not raw_text.strip():
             continue
-        imatch = best_match(text, item_name_pool)
-        cmatch = best_match(text, champ_name_pool)
-
-        # classify with confidence + hints
-        hint_item = sum(1 for k in ["ability power", "armor", "mana", "gold", "passive", "cost"] if k in text.lower())
-        hint_champ = sum(1 for k in ["difficulty", "fighter", "marksman", "mage", "assassin", "support", "tank"] if k in text.lower())
+        im = best_match(raw_text, item_name_pool)
+        cm = best_match(raw_text, champ_name_pool)
 
         kind = "unknown"
-        if imatch.score >= 0.85 and imatch.score >= cmatch.score:
+        if im.score >= 0.84 and im.score >= cm.score:
             kind = "item"
-        elif cmatch.score >= 0.80 and cmatch.score > imatch.score:
-            kind = "champion"
-        elif hint_item > hint_champ:
-            kind = "item"
-        elif hint_champ >= hint_item and hint_champ > 0:
+        elif cm.score >= 0.8 and cm.score > im.score:
             kind = "champion"
 
-        if kind == "item" and imatch.name:
-            key = imatch.name
-            row = items.setdefault(key, {
-                "name": imatch.name,
-                "aliases_detected": set(),
-                "images": [],
-                "stats_detected": defaultdict(list),
-                "effects_detected": set(),
-                "raw_lines": [],
-                "max_match_score": 0.0,
-            })
-            if rec.get("detected_name"):
-                row["aliases_detected"].add(str(rec["detected_name"]))
+        if kind == "item" and im.name:
+            row = items.setdefault(im.name, {"name": im.name, "images": [], "ocr_texts": [], "match": 0.0})
             row["images"].append(rec.get("source_image"))
-            row["raw_lines"].extend(lines)
-            row["max_match_score"] = max(row["max_match_score"], imatch.score)
-            for line in lines:
-                parsed = parse_stat_line(line)
-                if parsed:
-                    stat, value = parsed
-                    row["stats_detected"][stat].append(value)
-                if is_effect_line(line):
-                    row["effects_detected"].add(line.strip())
-        elif kind == "champion" and cmatch.name:
-            key = cmatch.name
-            row = champions.setdefault(key, {
-                "name": cmatch.name,
-                "images": [],
-                "lanes_detected_by_text": set(),
-                "roles_detected_by_text": set(),
-                "raw_lines": [],
-                "max_match_score": 0.0,
-            })
+            row["ocr_texts"].append(raw_text)
+            row["match"] = max(row["match"], im.score)
+        elif kind == "champion" and cm.name:
+            row = champions.setdefault(cm.name, {"name": cm.name, "images": [], "texts": [], "match": 0.0, "lanes": set(), "roles": set()})
             row["images"].append(rec.get("source_image"))
-            row["raw_lines"].extend(lines)
-            row["max_match_score"] = max(row["max_match_score"], cmatch.score)
-            for lane in infer_lane(text):
-                row["lanes_detected_by_text"].add(lane)
+            row["texts"].append(raw_text)
+            row["match"] = max(row["match"], cm.score)
+            for lane in infer_lane(raw_text):
+                row["lanes"].add(lane)
             for role in ["fighter", "mage", "assassin", "marksman", "support", "tank"]:
-                if role in text.lower():
-                    row["roles_detected_by_text"].add(role)
-        else:
-            unmatched.append({
-                "source_image": rec.get("source_image"),
-                "detected_name": rec.get("detected_name"),
-                "item_match": {"name": imatch.name, "score": round(imatch.score, 3)},
-                "champion_match": {"name": cmatch.name, "score": round(cmatch.score, 3)},
-            })
+                if role in raw_text.lower():
+                    row["roles"].add(role)
 
-    # finalize + compare against live catalog (names/icons/values)
     catalog_item_by_name = {str(x.get("name", "")): x for x in catalog_items if isinstance(x, dict)}
-    catalog_champ_by_name = {str(x.get("name", "")): x for x in catalog_champs if isinstance(x, dict)}
-
     item_rows = []
-    for name, row in sorted(items.items(), key=lambda kv: (-len(kv[1]["images"]), kv[0])):
+
+    # ensure full item coverage from catalog too
+    for name in sorted(set(list(items.keys()) + list(catalog_item_by_name.keys()))):
+        row = items.get(name, {"name": name, "images": [], "ocr_texts": [], "match": 0.0})
         cat = catalog_item_by_name.get(name, {})
         if not cat:
             zh = en_to_zh_item.get(name, "")
             if zh:
                 cat = catalog_item_by_name.get(zh, {})
-        stats_summary = {}
-        for sk, vals in row["stats_detected"].items():
-            vals_sorted = sorted(vals)
-            stats_summary[sk] = {
-                "min": vals_sorted[0],
-                "max": vals_sorted[-1],
-                "samples": vals_sorted[:15],
-                "count": len(vals_sorted),
-            }
-        tags = recommendation_tags(row["raw_lines"], stats_summary)
+
+        ocr_blob = "\n".join(row.get("ocr_texts", []))
+        effects = []
+        for ln in [x for x in ocr_blob.splitlines() if x.strip()]:
+            fx = parse_effect_line(ln)
+            if fx:
+                effects.append(fx)
+
+        if isinstance(cat, dict) and isinstance(cat.get("effects"), list):
+            for fx in cat["effects"]:
+                if isinstance(fx, dict):
+                    effects.append(normalize_effect_schema(fx))
+
+        # dedupe by effect_name
+        uniq = {}
+        for fx in effects:
+            key = (fx.get("effect_name"), fx.get("trigger"), fx.get("effect_type"))
+            if key not in uniq:
+                uniq[key] = fx
+        effects = list(uniq.values())
+
         item_rows.append({
             "name": name,
-            "aliases_detected": sorted(row["aliases_detected"]),
-            "image_count": len(row["images"]),
-            "images": sorted(set([x for x in row["images"] if x])),
-            "match_confidence": round(row["max_match_score"], 3),
-            "stats_detected": stats_summary,
-            "effects_detected": sorted(row["effects_detected"]),
-            "recommendation_tags": tags,
+            "image_count": len(row.get("images", [])),
+            "images": sorted(set([x for x in row.get("images", []) if x])),
+            "match_confidence": round(float(row.get("match", 0.0)), 3),
+            "ocr_text_raw": ocr_blob,
+            "effects": effects,
+            "recommendation_tags": recommendation_tags(ocr_blob),
             "catalog_compare": {
                 "exists_in_live_catalog": bool(cat),
                 "item_id": str(cat.get("item_id", "")) if isinstance(cat, dict) else "",
                 "icon_available": bool(cat.get("icon")) if isinstance(cat, dict) else False,
                 "price": cat.get("price", None) if isinstance(cat, dict) else None,
-                "catalog_stats": cat.get("stats", {}) if isinstance(cat, dict) else {},
             },
         })
 
+    catalog_champ_by_name = {str(x.get("name", "")): x for x in catalog_champs if isinstance(x, dict)}
     champ_rows = []
     for name, row in sorted(champions.items(), key=lambda kv: (-len(kv[1]["images"]), kv[0])):
         cat = catalog_champ_by_name.get(name, {})
-        in_models = bool(champion_models.get(name))
-        in_wr_list = name in set(champ_names)
         champ_rows.append({
             "name": name,
             "image_count": len(row["images"]),
             "images": sorted(set([x for x in row["images"] if x])),
-            "match_confidence": round(row["max_match_score"], 3),
-            "lanes_detected_by_text": sorted(row["lanes_detected_by_text"]),
-            "roles_detected_by_text": sorted(row["roles_detected_by_text"]),
+            "match_confidence": round(row["match"], 3),
+            "lanes_detected_by_text": sorted(row["lanes"]),
+            "roles_detected_by_text": sorted(row["roles"]),
             "catalog_compare": {
                 "exists_in_live_catalog_name_match": bool(cat),
                 "lane_from_catalog": cat.get("lane", "") if isinstance(cat, dict) else "",
                 "roles_from_catalog": cat.get("roles", []) if isinstance(cat, dict) else [],
                 "icon_available_live_catalog": bool(cat.get("icon")) if isinstance(cat, dict) else False,
-                "exists_in_wr_champion_list": in_wr_list,
-                "exists_in_champion_models": in_models,
+                "exists_in_wr_champion_list": name in set(champ_names),
+                "exists_in_champion_models": bool(champion_models.get(name)),
             },
         })
 
@@ -297,21 +350,18 @@ def main() -> None:
             "source_image_count": baseline.get("source_image_count"),
         },
         "summary": {
-            "matched_item_entities": len(item_rows),
+            "matched_item_entities": sum(1 for x in item_rows if x["image_count"] > 0),
+            "catalog_item_entities": len(item_rows),
             "matched_champion_entities": len(champ_rows),
-            "unmatched_screenshots": len(unmatched),
+            "items_with_effects": sum(1 for x in item_rows if len(x.get("effects", [])) > 0),
             "items_with_icon_in_catalog": sum(1 for x in item_rows if x["catalog_compare"]["icon_available"]),
-            "champions_with_icon_in_catalog": sum(1 for x in champ_rows if x["catalog_compare"]["icon_available_live_catalog"]),
-            "champions_with_wr_name_match": sum(1 for x in champ_rows if x["catalog_compare"]["exists_in_wr_champion_list"]),
-            "champions_with_model_match": sum(1 for x in champ_rows if x["catalog_compare"]["exists_in_champion_models"]),
         },
         "items": item_rows,
         "champions": champ_rows,
-        "unmatched": unmatched,
     }
 
     OUT.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
-    print(f"Wrote {OUT} | items={len(item_rows)} champions={len(champ_rows)} unmatched={len(unmatched)}")
+    print(f"Wrote {OUT} | items={len(item_rows)} champs={len(champ_rows)} items_with_effects={payload['summary']['items_with_effects']}")
 
 
 if __name__ == "__main__":
