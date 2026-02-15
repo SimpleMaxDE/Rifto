@@ -2071,9 +2071,6 @@
       score: Math.round(row.score),
       categories: row.categories,
       effectContrib: row.effectContrib || [],
-      enemyTarget: row.enemyTarget,
-      championSynergy: row.championSynergy,
-      topContributors: row.topContributors || [],
       dataReady: true,
       dataMissing: {}
     }));
@@ -2501,31 +2498,6 @@
               ${itemBuild.scoredTier.alternative ? `<div class="itemScoreCard"><h4>Alternative</h4><div>${itemBuild.scoredTier.alternative.name}</div><small>Synergy ${scoreLabel(itemBuild.scoredTier.alternative.categories?.synergy)} • Gold ${scoreLabel(itemBuild.scoredTier.alternative.categories?.goldEfficiency)}</small></div>` : ""}
               ${itemBuild.scoredTier.situational ? `<div class="itemScoreCard"><h4>Situational</h4><div>${itemBuild.scoredTier.situational.name}</div><small>Spike ${scoreLabel(itemBuild.scoredTier.situational.categories?.spikeTiming)}</small></div>` : ""}
             </div>
-
-            <details class="debugPanel" open>
-              <summary>Matchup Engine Debug (Warum diese Items)</summary>
-              <div class="debugGrid">
-                <div>
-                  <h4>Enemy Profil</h4>
-                  <ul>
-                    <li>Damage Split: P ${Math.round((itemBuild.enemyMatchupProfile?.damageSplit?.physical || 0) * 100)}% / M ${Math.round((itemBuild.enemyMatchupProfile?.damageSplit?.magic || 0) * 100)}% / T ${Math.round((itemBuild.enemyMatchupProfile?.damageSplit?.true || 0) * 100)}%</li>
-                    <li>Sustain: ${itemBuild.enemyMatchupProfile?.sustainLevel || 0} • Tank: ${itemBuild.enemyMatchupProfile?.tankLevel || 0} • CC: ${itemBuild.enemyMatchupProfile?.ccLevel || 0}</li>
-                    <li>Fight Window: ${itemBuild.enemyMatchupProfile?.fightWindow || "unknown"} • Scaling: ${itemBuild.enemyMatchupProfile?.scalingFocus || "unknown"}</li>
-                  </ul>
-                </div>
-                <div>
-                  <h4>My Profil</h4>
-                  <ul>
-                    <li>Damage Type: ${itemBuild.myMatchupProfile?.primaryDamage || "mixed"} • Scaling: ${itemBuild.myMatchupProfile?.scalingType || "mixed"}</li>
-                    <li>Fight Window: ${itemBuild.myMatchupProfile?.fightWindow || "unknown"} • Core Synergy: ${(itemBuild.myMatchupProfile?.coreSynergies || []).join(", ") || "none"}</li>
-                  </ul>
-                </div>
-              </div>
-              <h4>Item Begründung (Top 3 Beiträge)</h4>
-              <ul>
-                ${(itemBuild.explanations || []).map((ex) => `<li><b>${ex.name}</b> → Gegnerziel: ${ex.enemyTarget} • Synergie: ${ex.championSynergy} • Beiträge: ${(ex.topContributors || []).map((c) => `${c.label} (${c.value})`).join(", ") || "none"}</li>`).join("")}
-              </ul>
-            </details>
 
             <div class="itemPhaseGrid">
               <div class="itemPhaseCard">
