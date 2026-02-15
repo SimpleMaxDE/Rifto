@@ -1409,6 +1409,9 @@
         reasons: [`fallback_scoring_missing_data:${Object.entries(missing).filter(([,v])=>v).map(([k])=>k).join('|') || 'none'}`],
         dataReady: false,
         effectContrib: [],
+        enemyTarget: "insufficient_data",
+        championSynergy: "insufficient_data",
+        topContributors: [{ label: "fallback", value: Math.round(fallbackBase) }],
         dataMissing: missing
       };
     }
@@ -1477,12 +1480,28 @@
       + (categories.goldEfficiency * 0.11)
       + (categories.spikeTiming * 0.08);
 
+    const enemyTarget = decision?.debug?.enemyMatchup?.sustainLevel >= 2
+      ? "enemy_sustain"
+      : decision?.debug?.enemyMatchup?.tankLevel >= 3
+        ? "enemy_tank"
+        : decision?.debug?.enemyMatchup?.ccLevel >= 2
+          ? "enemy_cc"
+          : "enemy_damage";
+    const championSynergy = decision?.debug?.myMatchup?.scalingType === "ap"
+      ? "ap_scaling"
+      : decision?.debug?.myMatchup?.scalingType === "ad"
+        ? "ad_scaling"
+        : "mixed_scaling";
+
     return {
       categories,
       total,
       reasons: decision.reasons || [],
       dataReady: true,
       effectContrib: effectContrib.slice(0, 5),
+      enemyTarget,
+      championSynergy,
+      topContributors: (decision?.debug?.topContributors || []).slice(0, 3),
       dataMissing: { itemStats: false, championStats: false }
     };
   }
@@ -1497,7 +1516,7 @@
       .filter((x) => toNumber(x?.price) > 0);
   }
 
-  function nextBuyDecision(itemBuild, gold) {
+  function nextBuyDecision(itemBuild, gold, myMatchupProfile = {}, enemyMatchupProfile = {}) {
     const budget = Math.max(0, toNumber(gold));
     const progression = [itemBuild.starter, ...(itemBuild.coreItems || []), itemBuild.boots, itemBuild.enchant]
       .filter(Boolean)
@@ -1526,7 +1545,12 @@
           .map((c) => {
             const cp = statProfileFromItem(c);
             const immediateValue = (cp.ad * 0.8) + (cp.ap * 0.7) + (cp.hp * 0.22) + (cp.armor * 1.4) + (cp.mr * 1.4) + (cp.attackSpeed * 0.9) + (cp.haste * 1.1);
-            const goldEff = immediateValue / Math.max(1, toNumber(c?.price));
+            const synergy =
+              (myMatchupProfile?.scalingType === "ap" ? cp.ap * 0.9 : cp.ad * 0.9)
+              + (myMatchupProfile?.fightWindow === "extended" ? (cp.attackSpeed * 0.7 + cp.haste * 0.8) : (cp.ad * 0.4 + cp.ap * 0.4))
+              + ((enemyMatchupProfile?.tankLevel || 0) >= 3 ? (cp.armorPenFlat * 0.6 + cp.magicPenFlat * 0.6) : 0)
+              + ((enemyMatchupProfile?.ccLevel || 0) >= 3 ? (cp.mr * 0.5 + cp.hp * 0.12) : 0);
+            const goldEff = (immediateValue + synergy) / Math.max(1, toNumber(c?.price));
             return { c, goldEff };
           })
           .sort((a, b) => b.goldEff - a.goldEff)[0]?.c;
@@ -1547,7 +1571,7 @@
         type: "save",
         item: fallback,
         efficiency: Math.round((budget / Math.max(1, toNumber(fallback?.price))) * 100),
-        reason: `Noch keine sinnvolle Komponente verfügbar – Gold für ${translatedItemName(fallback?.nativeName || fallback?.name)} halten.`
+        reason: `Kein sinnvoller Sofortkauf: günstigste Komponente überschreitet Budget oder bringt keinen unmittelbaren Spike. Spare auf ${translatedItemName(fallback?.nativeName || fallback?.name)}.`
       };
     }
     return null;
@@ -1627,6 +1651,69 @@
       poke: byKw(["range", "projectile", "poke", "long range", "远程", "消耗"]),
       manaNeed: byKw(["mana", "法力"]) + (spellCooldownAvg <= 7 ? 1 : 0),
       numericDepth: n.numberCount + Math.min(4, Math.round(n.avgPercent / 10))
+    };
+  }
+
+  function buildChampionMatchupProfile(champ, role = "", champTypesRaw = []) {
+    const model = getChampionModel(champ?.name);
+    const ability = championAbilityProfile(champ?.name || "");
+    const stats = model?.stats || {};
+    const abilities = Array.isArray(model?.abilities) ? model.abilities : [];
+    let phys = 0;
+    let magic = 0;
+    let trueD = 0;
+    let hardCcSeconds = 0;
+    let sustainHits = 0;
+    for (const ab of abilities) {
+      const dt = String(ab?.damage_type || "none").toLowerCase();
+      if (dt === "physical") phys += 1;
+      else if (dt === "magic") magic += 1;
+      else if (dt === "true") trueD += 1;
+      const cc = Number(ab?.cc_duration);
+      if (Number.isFinite(cc) && cc > 0) hardCcSeconds += cc;
+      const effects = Array.isArray(ab?.effects) ? ab.effects : [];
+      for (const fx of effects) {
+        const t = String(fx?.effect_type || "").toLowerCase();
+        if (t.includes("heal") || t.includes("shield")) sustainHits += 1;
+      }
+    }
+    const totalDmg = Math.max(1, phys + magic + trueD);
+    const dmgSplit = {
+      physical: phys / totalDmg,
+      magic: magic / totalDmg,
+      true: trueD / totalDmg
+    };
+    const hpBase = toNumber(stats.hp);
+    const resistScale = toNumber(stats.armor_per_level) + toNumber(stats.mr_per_level);
+    const tankLevel = Math.min(5, Math.round((hpBase / 180) + (resistScale / 2.6)));
+    const sustainLevel = Math.min(5, Math.round((sustainHits + ability.tankiness + ability.sustained) / 3));
+    const ccLevel = Math.min(5, Math.round((hardCcSeconds / 1.2) + (ability.cc / 2)));
+    const burstBias = ability.burst + (ability.cooldownAvg <= 7 ? 2 : 0);
+    const extendedBias = ability.sustained + (ability.cooldownAvg > 7 ? 1 : 0) + sustainLevel;
+    const fightWindow = burstBias >= extendedBias ? "burst" : "extended";
+    const scalingRaw = (toNumber(stats.hp_per_level) * 0.15) + (toNumber(stats.ad_per_level) * 2) + resistScale;
+    const scalingFocus = scalingRaw >= 28 ? "late" : scalingRaw >= 18 ? "mid" : "early";
+    const primaryDamage = dmgSplit.magic > dmgSplit.physical ? "magic" : (dmgSplit.physical > dmgSplit.magic ? "physical" : "mixed");
+    const scalingType = ability.apScaling >= ability.adScaling ? "ap" : "ad";
+    const roleSet = new Set(champTypesRaw || []);
+    const coreSynergies = [];
+    if (scalingType === "ap") coreSynergies.push("ap");
+    if (scalingType === "ad") coreSynergies.push("ad");
+    if (fightWindow === "extended") coreSynergies.push("ability_haste", "sustained_damage");
+    if (fightWindow === "burst") coreSynergies.push("penetration", "burst_window");
+    if (role === "Jungle" || roleSet.has("hard_engage")) coreSynergies.push("engage");
+    if (tankLevel >= 3) coreSynergies.push("frontline");
+
+    return {
+      damageSplit: dmgSplit,
+      sustainLevel,
+      tankLevel,
+      fightWindow,
+      ccLevel,
+      scalingFocus,
+      primaryDamage,
+      scalingType,
+      coreSynergies
     };
   }
 
@@ -1811,14 +1898,18 @@
     const mine = new Set(myTypesRaw || []);
     const myAbilities = championAbilityProfile(myChamp?.name || "");
     const enemyAbilities = championAbilityProfile(enemyChamp?.name || "");
+    const myMatchup = buildChampionMatchupProfile(myChamp, myRole, myTypesRaw);
+    const enemyMatchup = buildChampionMatchupProfile(enemyChamp, "", enemyTypesRaw);
     const runeMeta = runeMetaProfile(profile, myRole);
 
     let score = 0;
     const reasons = [];
+    const contributors = [];
 
-    const push = (points, reason) => {
+    const push = (points, reason, bucket = "general") => {
       score += points;
       if (reason && points !== 0) reasons.push(reason);
+      if (points !== 0) contributors.push({ label: reason || bucket, value: Math.round(points), bucket });
     };
 
     const profileNeeds = {
@@ -1889,8 +1980,30 @@
     if (sig.avgPercent >= 6) push(2, "Percent-Value");
     if (sig.cooldownAvg > 0 && sig.cooldownAvg <= 20 && sig.activePlaymaking > 0) push(2, "Active-Timing-Value");
 
+    if (enemyMatchup.sustainLevel >= 2) {
+      push((sig.antiHeal * 5) + (sig.pen * 1.5), "Counter enemy sustain", "counter");
+    }
+    if (enemyMatchup.tankLevel >= 3) {
+      push((sig.pen * 4) + (sig.trueDamage * 4) + (sig.onHit * 2), "Break frontline resistances", "counter");
+    }
+    if (enemyMatchup.ccLevel >= 2) {
+      push((sig.tenacity * 4) + (sig.ccleanse * 5) + (sig.hp * 1.5) + (sig.mr * 1.2), "Survive enemy CC chain", "defense");
+    }
+    if (enemyMatchup.damageSplit.magic >= 0.45) {
+      push((sig.mr * 3.2) + (sig.hp * 1.2), "Mitigate magic-heavy matchup", "defense");
+    }
+    if (enemyMatchup.damageSplit.physical >= 0.45) {
+      push((sig.armor * 3.2) + (sig.hp * 1.2), "Mitigate physical-heavy matchup", "defense");
+    }
+
+    if (myMatchup.scalingType === "ap") push((sig.ap * 4) + (sig.haste * 2) + (sig.pen * 1.4), "Champion AP scaling synergy", "synergy");
+    if (myMatchup.scalingType === "ad") push((sig.ad * 4) + (sig.pen * 1.8) + (sig.crit * 1.4), "Champion AD scaling synergy", "synergy");
+    if (myMatchup.fightWindow === "extended") push((sig.atkspd * 2.5) + (sig.onHit * 3) + (sig.omnivamp * 2) + (sig.haste * 1.5), "Extended fight value", "offense");
+    if (myMatchup.fightWindow === "burst") push((sig.pen * 2.5) + (sig.activePlaymaking * 2.2) + (sig.ap + sig.ad), "Burst window value", "offense");
+
     const uniqueReasons = Array.from(new Set(reasons));
-    return { score, reasons: uniqueReasons.slice(0, 4), debug: { sig, myAbilities, enemyAbilities, runeMeta } };
+    const topContributors = contributors.sort((a, b) => Math.abs(b.value) - Math.abs(a.value)).slice(0, 5);
+    return { score, reasons: uniqueReasons.slice(0, 6), debug: { sig, myAbilities, enemyAbilities, myMatchup, enemyMatchup, runeMeta, topContributors } };
   }
 
   function smartCoreBuild(myChamp, myRole, profile, myTypesRaw, enemyChamp, enemyTypesRaw) {
@@ -1906,6 +2019,9 @@
           reasons: scorePack.reasons?.length ? scorePack.reasons : fallbackDecision.reasons,
           categories: scorePack.categories,
           effectContrib: scorePack.effectContrib || [],
+          enemyTarget: scorePack.enemyTarget || "enemy_damage",
+          championSynergy: scorePack.championSynergy || "mixed_scaling",
+          topContributors: scorePack.topContributors || [],
           effectReady: itemHasEffectData(item),
           dataReady: scorePack.dataReady,
           dataMissing: scorePack.dataMissing
@@ -1935,6 +2051,9 @@
         score: Math.round(row.score),
         categories: row.categories,
         effectContrib: row.effectContrib || [],
+        enemyTarget: row.enemyTarget,
+        championSynergy: row.championSynergy,
+        topContributors: row.topContributors || [],
         dataReady: row.dataReady,
         dataMissing: row.dataMissing
       });
@@ -2006,14 +2125,23 @@
 
   function matchupFullItemBuild(myChamp, myRole, myTypesRaw, enemyChamp, enemyTypesRaw, gold = 0) {
     const profile = inferChampProfile(myChamp, myRole, myTypesRaw);
+    const myMatchupProfile = buildChampionMatchupProfile(myChamp, myRole, myTypesRaw);
+    const enemyMatchupProfile = buildChampionMatchupProfile(enemyChamp, "", enemyTypesRaw);
     const starter = startingItemForProfile(profile, myRole);
     const boots = chooseBootsByMatchup(enemyTypesRaw, profile);
     const enchant = chooseBootEnchant(enemyTypesRaw, profile);
 
-    const coreTemplate = smartCoreBuild(myChamp, myRole, profile, myTypesRaw, enemyChamp, enemyTypesRaw);
+    let coreTemplate = smartCoreBuild(myChamp, myRole, profile, myTypesRaw, enemyChamp, enemyTypesRaw);
+    if (coreTemplate.length < 5) {
+      const fallback = fallbackTemplateBuild(profile);
+      coreTemplate = [...coreTemplate, ...fallback].slice(0, 5);
+    }
     const coreItems = coreTemplate.slice(0, 3);
     const finalBuild = [...coreItems, ...coreTemplate.slice(3, 5), boots, enchant].slice(0, 6);
-    const situational = adaptBuildToEnemy(enemyTypesRaw, profile, myRole).slice(0, 3);
+    const situational = [
+      ...coreTemplate.slice(3, 5),
+      ...adaptBuildToEnemy(enemyTypesRaw, profile, myRole)
+    ].filter(Boolean).slice(0, 2);
 
     const scoredCandidates = coreTemplate.slice(0, 7);
     const scoredTier = {
@@ -2022,7 +2150,7 @@
       situational: scoredCandidates[2] || situational[0] || null
     };
 
-    const nextBuy = nextBuyDecision({ starter, coreItems, boots, enchant }, gold);
+    const nextBuy = nextBuyDecision({ starter, coreItems, boots, enchant }, gold, myMatchupProfile, enemyMatchupProfile);
 
     return {
       profile,
@@ -2036,6 +2164,14 @@
       situational,
       scoredTier,
       nextBuy,
+      myMatchupProfile,
+      enemyMatchupProfile,
+      explanations: coreItems.map((it) => ({
+        name: it.name,
+        enemyTarget: it.enemyTarget || "enemy_damage",
+        championSynergy: it.championSynergy || "mixed_scaling",
+        topContributors: Array.isArray(it.topContributors) ? it.topContributors.slice(0, 3) : []
+      })),
       summary: `${myChamp.name}: ${myRole || profile} Build vs ${enemyChamp.name} (Start → Core → Boots/Enchant → Final).`
     };
   }
