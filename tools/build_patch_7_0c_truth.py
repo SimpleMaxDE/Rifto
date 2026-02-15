@@ -41,6 +41,11 @@ def tokenize(s: str) -> list[str]:
     return [x for x in re.split(r"[^a-z0-9]+", str(s).lower()) if x]
 
 
+def slugify(text: str) -> str:
+    toks = tokenize(text)
+    return "_".join(toks[:6]) if toks else "effect"
+
+
 def best_match(text: str, candidates: list[str]) -> Match:
     tnorm = norm(text)
     best_name, best_score = None, 0.0
@@ -84,7 +89,9 @@ def parse_effect_line(line: str) -> dict | None:
     if not raw:
         return None
     low = raw.lower()
-    if not re.search(r"\d|passive|active|damage|heal|shield|grievous|cooldown|stack|trigger|immobil|slow|stun", low):
+    if not re.search(r"passive|active|damage|heal|shield|grievous|cooldown|stack|trigger|immobil|slow|stun|penetration|resist|haste|mana|health", low):
+        return None
+    if re.fullmatch(r"[0-9/ .:+%-]+", low):
         return None
 
     trigger = "passive_always"
@@ -132,12 +139,12 @@ def parse_effect_line(line: str) -> dict | None:
     if m_dur:
         duration = float(m_dur.group(1))
 
-    cooldown = {"value": None, "scope": "global"}
+    cooldown = None
     m_cd = re.search(r"(?:cooldown|cd)\s*(?:of)?\s*(\d+(?:\.\d+)?)", low)
     if m_cd:
-        cooldown["value"] = float(m_cd.group(1))
-    if "per target" in low:
-        cooldown["scope"] = "per_target"
+        cooldown = {"value": float(m_cd.group(1)), "scope": "global"}
+    elif "per target" in low:
+        cooldown = {"value": None, "scope": "per_target"}
 
     max_stacks = None
     m_stack = re.search(r"(?:max(?:imum)?\s*)?(\d+)\s*stacks?", low)
@@ -149,7 +156,8 @@ def parse_effect_line(line: str) -> dict | None:
         cond.append(raw)
 
     return {
-        "effect_name": raw[:80],
+        "effect_id": slugify(raw),
+        "effect_name": (raw[:80] or "effect"),
         "trigger": trigger,
         "effect_type": effect_type,
         "base_value": _first_num(low),
@@ -189,17 +197,20 @@ def normalize_effect_schema(effect: dict) -> dict:
 
     cd = effect.get("cooldown")
     cd_value = cd if isinstance(cd, (int, float)) else _first_num(str(cd or ""))
+    cd_obj = {"value": cd_value, "scope": "global"} if cd_value is not None else None
 
     cond = effect.get("conditions") if isinstance(effect.get("conditions"), list) else []
+    eff_name = str(effect.get("name") or effect.get("source_line") or "effect")[:80] or "effect"
     return {
-        "effect_name": str(effect.get("name") or effect.get("source_line") or "effect")[:80],
+        "effect_id": slugify(eff_name),
+        "effect_name": eff_name,
         "trigger": str(effect.get("trigger") or "passive_always"),
         "effect_type": str(effect.get("effect_type") or "modifier"),
         "base_value": base_val,
         "scaling_ratio": scaling_ratio,
         "scaling_type": scaling_type,
         "duration": effect.get("duration") if isinstance(effect.get("duration"), (int, float)) else _first_num(str(effect.get("duration", ""))),
-        "cooldown": {"value": cd_value, "scope": "global"},
+        "cooldown": cd_obj,
         "stacks": bool(max_stacks),
         "max_stacks": max_stacks,
         "conditions": cond,
@@ -236,6 +247,15 @@ def main() -> None:
     item_name_pool = sorted({*(x.get("name", "") for x in catalog_items if isinstance(x, dict)), *loc.get("items", {}).keys(), *loc.get("items", {}).values()})
     en_to_zh_item = {v: k for k, v in (loc.get("items", {}) or {}).items() if isinstance(v, str) and isinstance(k, str)}
     champ_name_pool = sorted({*champ_names, *(x.get("name", "") for x in catalog_champs if isinstance(x, dict))})
+    catalog_item_by_name = {str(x.get("name", "")): x for x in catalog_items if isinstance(x, dict)}
+
+    def canonical_item_name(name: str) -> str:
+        if name in catalog_item_by_name:
+            return name
+        zh = en_to_zh_item.get(name, "")
+        if zh:
+            return zh
+        return name
 
     records = [*baseline.get("items", []), *baseline.get("champions", []), *baseline.get("unknown", [])]
     items: dict[str, dict] = {}
@@ -256,7 +276,8 @@ def main() -> None:
             kind = "champion"
 
         if kind == "item" and im.name:
-            row = items.setdefault(im.name, {"name": im.name, "images": [], "ocr_texts": [], "match": 0.0})
+            canon = canonical_item_name(im.name)
+            row = items.setdefault(canon, {"name": canon, "images": [], "ocr_texts": [], "match": 0.0})
             row["images"].append(rec.get("source_image"))
             row["ocr_texts"].append(raw_text)
             row["match"] = max(row["match"], im.score)
@@ -271,7 +292,6 @@ def main() -> None:
                 if role in raw_text.lower():
                     row["roles"].add(role)
 
-    catalog_item_by_name = {str(x.get("name", "")): x for x in catalog_items if isinstance(x, dict)}
     item_rows = []
 
     # ensure full item coverage from catalog too
@@ -285,20 +305,27 @@ def main() -> None:
 
         ocr_blob = "\n".join(row.get("ocr_texts", []))
         effects = []
+        ocr_effects = []
+        catalog_effects = []
         for ln in [x for x in ocr_blob.splitlines() if x.strip()]:
             fx = parse_effect_line(ln)
             if fx:
+                fx["source"] = "ocr"
                 effects.append(fx)
+                ocr_effects.append(fx)
 
         if isinstance(cat, dict) and isinstance(cat.get("effects"), list):
             for fx in cat["effects"]:
                 if isinstance(fx, dict):
-                    effects.append(normalize_effect_schema(fx))
+                    nfx = normalize_effect_schema(fx)
+                    nfx["source"] = "catalog"
+                    effects.append(nfx)
+                    catalog_effects.append(nfx)
 
         # dedupe by effect_name
         uniq = {}
         for fx in effects:
-            key = (fx.get("effect_name"), fx.get("trigger"), fx.get("effect_type"))
+            key = (fx.get("effect_id"), fx.get("trigger"), fx.get("effect_type"))
             if key not in uniq:
                 uniq[key] = fx
         effects = list(uniq.values())
@@ -310,6 +337,8 @@ def main() -> None:
             "match_confidence": round(float(row.get("match", 0.0)), 3),
             "ocr_text_raw": ocr_blob,
             "effects": effects,
+            "effects_ocr_count": len(ocr_effects),
+            "effects_catalog_count": len(catalog_effects),
             "recommendation_tags": recommendation_tags(ocr_blob),
             "catalog_compare": {
                 "exists_in_live_catalog": bool(cat),
@@ -354,6 +383,7 @@ def main() -> None:
             "catalog_item_entities": len(item_rows),
             "matched_champion_entities": len(champ_rows),
             "items_with_effects": sum(1 for x in item_rows if len(x.get("effects", [])) > 0),
+            "items_with_ocr_effects": sum(1 for x in item_rows if x.get("effects_ocr_count", 0) > 0),
             "items_with_icon_in_catalog": sum(1 for x in item_rows if x["catalog_compare"]["icon_available"]),
         },
         "items": item_rows,

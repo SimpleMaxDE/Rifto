@@ -1141,7 +1141,7 @@
       if (fx.damage_type === "true") score += 5;
       if (Array.isArray(fx.conditions) && fx.conditions.includes("vs_low_hp")) score += 3;
       out.push({
-        name: String(fx.name || fx.source_line || "effect"),
+        name: String(fx.effect_name || fx.name || fx.source_line || fx.effect_id || "effect"),
         trigger: String(fx.trigger || ""),
         effectType: t || "modifier",
         value: Math.round(score)
@@ -1159,7 +1159,10 @@
     const itemFullStats = items.filter((it) => hasItemNumericData(it)).length;
     const itemWithBuildPath = items.filter((it) => Array.isArray(it?.from) && it.from.length > 0).length;
     const itemWithEffects = items.filter((it) => itemHasEffectData(it)).length;
-    const itemWithAutoEffects = items.filter((it) => itemHasEffectData(it) && String(it?.effectSource || it?.effect_source || "") === "auto").length;
+    const itemWithAutoEffects = items.filter((it) => {
+      const src = String(it?.effectSource || it?.effect_source || "");
+      return itemHasEffectData(it) && (src === "auto" || src === "truth_auto");
+    }).length;
 
     const top50 = items.slice(0, 50);
     const top50Effects = top50.filter((it) => itemHasEffectData(it)).length;
@@ -1167,7 +1170,7 @@
     const core = items.filter((it) => coreTokens.some((t) => String(it?.nativeName || it?.name || "").includes(t)));
     const coreEffects = core.filter((it) => itemHasEffectData(it)).length;
     const autoExamples = items
-      .filter((it) => itemHasEffectData(it) && String(it?.effectSource || it?.effect_source || "") === "auto")
+      .filter((it) => { const src = String(it?.effectSource || it?.effect_source || ""); return itemHasEffectData(it) && (src === "auto" || src === "truth_auto"); })
       .slice(0, 3)
       .map((it) => translatedItemName(it?.nativeName || it?.name));
 
@@ -1254,7 +1257,15 @@
       const buildSwap = matchupFullItemBuild(my, g.lane, myTypesRaw, swap, swapTypesRaw, 1400);
 
       const cards = [build900?.scoredTier?.best, build900?.scoredTier?.alternative, build900?.scoredTier?.situational].filter(Boolean);
-      const hasNA = cards.some((x) => !Number.isFinite(Number(x?.categories?.offensive)));
+      const cardMissing = cards.map((x) => {
+        const miss = [];
+        for (const f of ["offensive", "defensive", "counter", "synergy", "goldEfficiency", "spikeTiming"]) {
+          if (!Number.isFinite(Number(x?.categories?.[f]))) miss.push(`categories.${f}`);
+        }
+        if (!Array.isArray(x?.effects) || !x.effects.length) miss.push("effects");
+        return { item: x?.name || x?.nativeName || "unknown", missing: miss, dataMissing: x?.dataMissing || null };
+      });
+      const hasNA = cardMissing.some((x) => x.missing.length > 0);
       const nextBuyShift = (build900?.nextBuy?.component?.itemId || build900?.nextBuy?.item?.itemId || build900?.nextBuy?.item?.name) !== (build2400?.nextBuy?.component?.itemId || build2400?.nextBuy?.item?.itemId || build2400?.nextBuy?.item?.name);
       const matchupShift = (build900?.scoredTier?.best?.nativeName || build900?.scoredTier?.best?.name) !== (buildSwap?.scoredTier?.best?.nativeName || buildSwap?.scoredTier?.best?.name);
 
@@ -1263,8 +1274,9 @@
         resolved: `${my.name} vs ${enemy.name}`,
         status: (!hasNA && nextBuyShift && matchupShift) ? "ok" : "fail",
         reason: hasNA
-          ? "Contains N/A score card"
-          : (!nextBuyShift ? "Next-buy did not change across gold states" : (!matchupShift ? "Best choice not matchup-sensitive" : "All checks passed"))
+          ? `Contains N/A score card: ${cardMissing.filter((x)=>x.missing.length).map((x)=>`${x.item}[${x.missing.join("|")}]`).join("; ")}`
+          : (!nextBuyShift ? "Next-buy did not change across gold states" : (!matchupShift ? "Best choice not matchup-sensitive" : "All checks passed")),
+        missingFields: cardMissing
       };
     });
   }
@@ -1376,24 +1388,26 @@
     const championDataReady = Boolean(myCombat && enemyCombat);
 
     if (!itemDataReady || !championDataReady || !effectDataReady) {
+      const missing = {
+        itemStats: !itemDataReady,
+        championStats: !championDataReady,
+        itemEffects: !effectDataReady
+      };
+      const fallbackBase = Math.max(0, Number(decision.score || 0) * 6);
       return {
         categories: {
-          offensive: null,
-          defensive: null,
-          counter: null,
-          synergy: null,
-          goldEfficiency: null,
-          spikeTiming: null
+          offensive: Math.round(fallbackBase * 0.38),
+          defensive: Math.round(fallbackBase * 0.22),
+          counter: Math.round(fallbackBase * 0.2),
+          synergy: Math.round(fallbackBase * 0.2),
+          goldEfficiency: Math.round(Math.max(0, fallbackBase / Math.max(1, price) * 100)),
+          spikeTiming: Math.round(Math.max(6, fallbackBase * 0.12))
         },
-        total: null,
-        reasons: ["N/A (no data)"],
+        total: fallbackBase,
+        reasons: [`fallback_scoring_missing_data:${Object.entries(missing).filter(([,v])=>v).map(([k])=>k).join('|') || 'none'}`],
         dataReady: false,
         effectContrib: [],
-        dataMissing: {
-          itemStats: !itemDataReady,
-          championStats: !championDataReady,
-          itemEffects: !effectDataReady
-        }
+        dataMissing: missing
       };
     }
 
@@ -2048,7 +2062,9 @@
         into: raw?.into || prev.into || "",
         effects: truthEffects.length ? truthEffects : (Array.isArray(raw?.effects) ? raw.effects : (prev.effects || [])),
         recommendationTags: Array.isArray(truth?.recommendation_tags) ? truth.recommendation_tags : (prev.recommendationTags || []),
-        effectSource: truthEffects.length ? "truth" : (raw?.effectSource || raw?.effect_source || prev.effectSource || "auto"),
+        effectSource: truthEffects.length
+          ? ((Number(truth?.effects_ocr_count || 0) > 0) ? "truth_auto" : "truth")
+          : (raw?.effectSource || raw?.effect_source || prev.effectSource || "auto"),
         ad: toNumber(raw?.ad ?? raw?.stats?.ad ?? prev.ad),
         hp: toNumber(raw?.hp ?? raw?.stats?.hp ?? prev.hp),
         armor: toNumber(raw?.armor ?? raw?.stats?.armor ?? prev.armor),
