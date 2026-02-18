@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-02-18T14:35:04.061813+00:00",
-  "source": "https://ddragon.leagueoflegends.com/cdn/16.3.1/data/en_US/championFull.json",
-  "version": "16.3.1",
+  "generatedAt": "2026-02-18T20:01:00.040458+00:00",
+  "source": "https://ddragon.leagueoflegends.com/cdn/16.4.1/data/en_US/championFull.json",
+  "version": "16.4.1",
   "champions": {
     "Aatrox": {
       "id": "Aatrox",
@@ -4507,10 +4507,10 @@
           "slot": "E",
           "name": "Molten Shield",
           "cooldown": [
-            12,
-            11.5,
-            11,
-            10.5,
+            10,
+            10,
+            10,
+            10,
             10
           ],
           "cost": [
@@ -4581,10 +4581,10 @@
               "values": [],
               "scaling": [],
               "cooldown": [
-                12,
-                11.5,
-                11,
-                10.5,
+                10,
+                10,
+                10,
+                10,
                 10
               ],
               "duration": null,
@@ -10428,9 +10428,9 @@
           "slot": "R",
           "name": "Glacial Fissure",
           "cooldown": [
-            120,
-            100,
-            80
+            130,
+            115,
+            100
           ],
           "cost": [
             100,
@@ -10496,9 +10496,9 @@
               "values": [],
               "scaling": [],
               "cooldown": [
-                120,
-                100,
-                80
+                130,
+                115,
+                100
               ],
               "duration": null,
               "caps": null,
@@ -10518,9 +10518,9 @@
               "values": [],
               "scaling": [],
               "cooldown": [
-                120,
-                100,
-                80
+                130,
+                115,
+                100
               ],
               "duration": null,
               "caps": null,
@@ -25240,8 +25240,8 @@
           "slot": "R",
           "name": "Spiraling Despair",
           "cooldown": [
-            140,
-            115,
+            120,
+            100,
             80
           ],
           "cost": [
@@ -25308,8 +25308,8 @@
               "values": [],
               "scaling": [],
               "cooldown": [
-                140,
-                115,
+                120,
+                100,
                 80
               ],
               "duration": null,
@@ -25330,8 +25330,8 @@
               "values": [],
               "scaling": [],
               "cooldown": [
-                140,
-                115,
+                120,
+                100,
                 80
               ],
               "duration": null,
@@ -25352,8 +25352,8 @@
               "values": [],
               "scaling": [],
               "cooldown": [
-                140,
-                115,
+                120,
+                100,
                 80
               ],
               "duration": null,
@@ -30021,7 +30021,7 @@
         "mp": 260,
         "mp_per_level": 50,
         "armor": 26,
-        "armor_per_level": 4.7,
+        "armor_per_level": 4.2,
         "mr": 30,
         "mr_per_level": 1.3,
         "ad": 59,
@@ -32681,7 +32681,7 @@
       "resource": "Mana",
       "stats": {
         "hp": 646,
-        "hp_per_level": 119,
+        "hp_per_level": 113,
         "mp": 400,
         "mp_per_level": 87,
         "armor": 21,
@@ -33002,7 +33002,7 @@
             },
             {
               "index": 2,
-              "values": "50/60/70/80/90"
+              "values": "50/55/60/65/70"
             },
             {
               "index": 3,
@@ -35059,8 +35059,8 @@
           "name": "Slicing Maelstrom",
           "cooldown": [
             120,
-            100,
-            80
+            120,
+            120
           ],
           "cost": [
             0,
@@ -35127,8 +35127,8 @@
               "scaling": [],
               "cooldown": [
                 120,
-                100,
-                80
+                120,
+                120
               ],
               "duration": null,
               "caps": null,
@@ -39175,7 +39175,7 @@
               "source_line": "Iron Will: Lee Sin's intense training allows him to thrive in battle"
             },
             {
-              "name": "Lee Sin gains Life Steal and Spell Vamp",
+              "name": "Lee Sin gains Omnivamp",
               "trigger": "onCast",
               "effect_type": "modifier",
               "values": [],
@@ -39196,11 +39196,11 @@
                 "can_crit": false,
                 "aoe": false
               },
-              "source_line": "Lee Sin gains Life Steal and Spell Vamp"
+              "source_line": "Lee Sin gains Omnivamp"
             }
           ],
           "effect_parse_status": "ok",
-          "description": "Safeguard: Lee Sin rushes to target ally, shielding himself from damage. If the ally is a champion, they are also shielded. After using Safeguard, Lee Sin can cast Iron Will. Iron Will: Lee Sin's intense training allows him to thrive in battle. Lee Sin gains Life Steal and Spell Vamp."
+          "description": "Safeguard: Lee Sin rushes to target ally, shielding himself from damage. If the ally is a champion, they are also shielded. After using Safeguard, Lee Sin can cast Iron Will. Iron Will: Lee Sin's intense training allows him to thrive in battle. Lee Sin gains Omnivamp."
         },
         {
           "slot": "E",
@@ -42245,7 +42245,7 @@
       "stats": {
         "hp": 580,
         "hp_per_level": 99,
-        "mp": 480,
+        "mp": 440,
         "mp_per_level": 23.5,
         "armor": 21,
         "armor_per_level": 5.2,
@@ -42307,11 +42307,11 @@
           "slot": "Q",
           "name": "Light Binding",
           "cooldown": [
-            11,
-            10.5,
             10,
-            9.5,
-            9
+            10,
+            10,
+            10,
+            10
           ],
           "cost": [
             50,
@@ -42327,17 +42327,17 @@
             1175,
             1175
           ],
-          "base_damage": "80/120/160/200/240",
+          "base_damage": "0",
           "damage_type": null,
           "cc_duration": null,
           "damage_effects": [
             {
               "index": 1,
-              "values": "80/120/160/200/240"
+              "values": "0"
             },
             {
               "index": 2,
-              "values": "50"
+              "values": "0"
             },
             {
               "index": 3,
@@ -42381,11 +42381,11 @@
               "values": [],
               "scaling": [],
               "cooldown": [
-                11,
-                10.5,
                 10,
-                9.5,
-                9
+                10,
+                10,
+                10,
+                10
               ],
               "duration": null,
               "caps": null,
@@ -42406,10 +42406,10 @@
           "slot": "W",
           "name": "Prismatic Barrier",
           "cooldown": [
-            14,
-            13,
             12,
+            11.5,
             11,
+            10.5,
             10
           ],
           "cost": [
@@ -42436,7 +42436,7 @@
             },
             {
               "index": 2,
-              "values": "40/55/70/85/100"
+              "values": "0"
             },
             {
               "index": 3,
@@ -42480,10 +42480,10 @@
               "values": [],
               "scaling": [],
               "cooldown": [
-                14,
-                13,
                 12,
+                11.5,
                 11,
+                10.5,
                 10
               ],
               "duration": null,
@@ -44850,7 +44850,7 @@
       "resource": "Mana",
       "stats": {
         "hp": 630,
-        "hp_per_level": 93,
+        "hp_per_level": 99,
         "mp": 480,
         "mp_per_level": 28,
         "armor": 21,
@@ -47918,8 +47918,8 @@
         "attack_speed": 0.663,
         "attack_speed_per_level": 2.1,
         "move_speed": 340,
-        "hp_regen": 7.5,
-        "hp_regen_per_level": 0.7
+        "hp_regen": 6.25,
+        "hp_regen_per_level": 0.6
       },
       "passive": {
         "name": "We Are More",
@@ -47958,11 +47958,11 @@
             7
           ],
           "cost": [
-            55,
+            50,
             60,
-            65,
             70,
-            75
+            80,
+            90
           ],
           "range": [
             900,
@@ -48180,11 +48180,11 @@
             7
           ],
           "cost": [
-            35,
-            35,
-            35,
-            35,
-            35
+            40,
+            40,
+            40,
+            40,
+            40
           ],
           "range": [
             450,
@@ -55706,7 +55706,7 @@
       "resource": "Mana",
       "stats": {
         "hp": 590,
-        "hp_per_level": 121,
+        "hp_per_level": 115,
         "mp": 375,
         "mp_per_level": 60,
         "armor": 31,
@@ -60991,7 +60991,7 @@
       "title": "the Mechanized Menace",
       "resource": "Heat",
       "stats": {
-        "hp": 655,
+        "hp": 640,
         "hp_per_level": 105,
         "mp": 150,
         "mp_per_level": 0,
@@ -77151,11 +77151,11 @@
       "resource": "Mana",
       "stats": {
         "hp": 630,
-        "hp_per_level": 104,
+        "hp_per_level": 98,
         "mp": 300,
         "mp_per_level": 40,
         "armor": 27,
-        "armor_per_level": 4.2,
+        "armor_per_level": 4,
         "mr": 30,
         "mr_per_level": 1.3,
         "ad": 59,
@@ -84714,11 +84714,11 @@
             8
           ],
           "cost": [
-            50,
-            50,
-            50,
-            50,
-            50
+            35,
+            35,
+            35,
+            35,
+            35
           ],
           "range": [
             400,
@@ -84806,11 +84806,11 @@
           "slot": "W",
           "name": "Deadly Plumage",
           "cooldown": [
-            20,
-            19,
             18,
             17,
-            16
+            16,
+            15,
+            14
           ],
           "cost": [
             60,
@@ -84880,11 +84880,11 @@
               "values": [],
               "scaling": [],
               "cooldown": [
-                20,
-                19,
                 18,
                 17,
-                16
+                16,
+                15,
+                14
               ],
               "duration": null,
               "caps": null,
@@ -84912,11 +84912,11 @@
             8
           ],
           "cost": [
-            30,
-            30,
-            30,
-            30,
-            30
+            20,
+            20,
+            20,
+            20,
+            20
           ],
           "range": [
             2000,
@@ -89658,13 +89658,13 @@
             800,
             800
           ],
-          "base_damage": "40/55/70/85/100",
+          "base_damage": "0",
           "damage_type": null,
           "cc_duration": null,
           "damage_effects": [
             {
               "index": 1,
-              "values": "40/55/70/85/100"
+              "values": "0"
             },
             {
               "index": 2,
@@ -89973,13 +89973,13 @@
             300,
             300
           ],
-          "base_damage": "150/250/350",
+          "base_damage": "0",
           "damage_type": null,
           "cc_duration": null,
           "damage_effects": [
             {
               "index": 1,
-              "values": "150/250/350"
+              "values": "0"
             },
             {
               "index": 2,
