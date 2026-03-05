@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-03-05T07:56:20.994602+00:00",
+  "generatedAt": "2026-03-05T14:31:16.335724+00:00",
   "sources": {
     "heroes": "https://game.gtimg.cn/images/lgamem/act/lrlib/js/heroList/hero_list.js",
     "items": "https://game.gtimg.cn/images/lgamem/act/lrlib/js/equip/equip.js",
@@ -5122,7 +5122,7 @@
       "item_id": "2251",
       "name": "卢安娜的飓风",
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/EquipIcons/lol_lanj.png",
-      "price": "3000",
+      "price": "2900",
       "description": [
         "暴击率 +25% 暴击率\n攻击速度 +35% 攻击速度\n\n风怒：普攻命中时，会朝2个附近的目标发射微型弩箭，每支弩箭造成55%攻击力物理伤害。这些弩箭能够产生暴击，并对目标施加普攻特效。\n\n风刃：普通攻击命中时，对目标造成额外15物理伤害。\n\n"
       ],
@@ -9774,7 +9774,7 @@
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/EquipIcons/lol_jxjts.png",
       "price": "3000",
       "description": [
-        "生命值 +450 最大生命值\n\n巨像：获得15+2.5%额外的攻击力。\n顺劈：每过1.75秒，下一次攻击造成额外 25+3%额外的物理伤害（该伤害可作用于防御塔），并形成一道冲击波来对目标身后的敌人造成 80+10%额外的物理伤害。（远程英雄造成75%伤害）\n\n"
+        "生命值 +450 最大生命值\n攻击力 +40 攻击力\n\n顺劈：每过1.75秒，下一次攻击造成额外 25+3%额外的物理伤害（该伤害可作用于防御塔），并形成一道冲击波来对目标身后的敌人造成 80+10%额外的物理伤害。（远程英雄造成75%伤害）\n\n"
       ],
       "labels": [],
       "from": [
@@ -9792,7 +9792,7 @@
         "hp": "4500000",
         "armor": "0",
         "mr": "0",
-        "ad": "0",
+        "ad": "400000",
         "ap": "0",
         "ability_haste": "0",
         "attack_speed": "0",
@@ -9837,17 +9837,16 @@
           "source_line": "生命值 +450 最大生命值"
         },
         {
-          "name": "巨像：获得15+2.5%额外的攻击力",
+          "name": "攻击力 +40 攻击力",
           "trigger": "passive_always",
           "effect_type": "modifier",
           "values": [
-            "15",
-            "2.5%"
+            "40"
           ],
           "scaling": [
             {
               "source": "ad",
-              "ratio": 15.0
+              "ratio": 40.0
             }
           ],
           "cooldown": null,
@@ -9860,7 +9859,7 @@
             "applies_on_hit": false,
             "unique": false
           },
-          "source_line": "巨像：获得15+2.5%额外的攻击力"
+          "source_line": "攻击力 +40 攻击力"
         },
         {
           "name": "顺劈：每过1.75秒，下一次攻击造成额外 25+3%额外的物理伤害（该伤害可作用于防御塔），并形成一道冲击波来对目标身后的敌人造",
@@ -14452,6 +14451,164 @@
       "effect_source": "auto"
     },
     {
+      "item_id": "2803",
+      "name": "无终恨意",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/EquipIcons/lol_wzhy.png",
+      "price": "3000",
+      "description": [
+        "生命值 +200 最大生命值\n护甲 +45 护甲\n魔法抗性 +45 魔法抗性\n\n苦楚：在与英雄的战斗状态下，每隔4秒对附近英雄造成3%自身最大生命值的魔法伤害，并治疗自身相当于250%已造成伤害的生命值。苦楚不受装备技能急速影响。\n\n"
+      ],
+      "labels": [],
+      "from": [
+        "2302",
+        "2305",
+        "2309"
+      ],
+      "into": "",
+      "tags": "",
+      "combine_cost": "0",
+      "slot_rules": {
+        "unique_passive": false,
+        "stackable": false
+      },
+      "stats": {
+        "hp": "2000000",
+        "armor": "450000",
+        "mr": "450000",
+        "ad": "0",
+        "ap": "0",
+        "ability_haste": "0",
+        "attack_speed": "0",
+        "crit_rate": "0",
+        "armor_pen_flat": "0",
+        "armor_pen_pct": "0",
+        "magic_pen_flat": "0",
+        "magic_pen_pct": "0",
+        "move_speed_flat": "0",
+        "move_speed_pct": "0",
+        "hp_regen": "0",
+        "hp_regen_pct": "0",
+        "mana": "0",
+        "mana_regen": "0",
+        "lifesteal": "0",
+        "spell_vamp": "0"
+      },
+      "effects": [
+        {
+          "name": "生命值 +200 最大生命值",
+          "trigger": "passive_always",
+          "effect_type": "modifier",
+          "values": [
+            "200"
+          ],
+          "scaling": [
+            {
+              "source": "target_max_hp",
+              "ratio": 200.0
+            }
+          ],
+          "cooldown": null,
+          "duration": null,
+          "caps": null,
+          "conditions": [],
+          "damage_type": null,
+          "flags": {
+            "can_crit": false,
+            "applies_on_hit": false,
+            "unique": false
+          },
+          "source_line": "生命值 +200 最大生命值"
+        },
+        {
+          "name": "护甲 +45 护甲",
+          "trigger": "passive_always",
+          "effect_type": "modifier",
+          "values": [
+            "45"
+          ],
+          "scaling": [],
+          "cooldown": null,
+          "duration": null,
+          "caps": null,
+          "conditions": [],
+          "damage_type": null,
+          "flags": {
+            "can_crit": false,
+            "applies_on_hit": false,
+            "unique": false
+          },
+          "source_line": "护甲 +45 护甲"
+        },
+        {
+          "name": "魔法抗性 +45 魔法抗性",
+          "trigger": "passive_always",
+          "effect_type": "modifier",
+          "values": [
+            "45"
+          ],
+          "scaling": [],
+          "cooldown": null,
+          "duration": null,
+          "caps": null,
+          "conditions": [],
+          "damage_type": null,
+          "flags": {
+            "can_crit": false,
+            "applies_on_hit": false,
+            "unique": false
+          },
+          "source_line": "魔法抗性 +45 魔法抗性"
+        },
+        {
+          "name": "苦楚：在与英雄的战斗状态下，每隔4秒对附近英雄造成3%自身最大生命值的魔法伤害，并治疗自身相当于250%已造成伤害的生命值",
+          "trigger": "periodic",
+          "effect_type": "healing",
+          "values": [
+            "4",
+            "3%",
+            "250%"
+          ],
+          "scaling": [
+            {
+              "source": "target_max_hp",
+              "ratio": 4.0
+            }
+          ],
+          "cooldown": 4.0,
+          "duration": 4.0,
+          "caps": null,
+          "conditions": [],
+          "damage_type": "magic",
+          "flags": {
+            "can_crit": false,
+            "applies_on_hit": false,
+            "unique": false
+          },
+          "source_line": "苦楚：在与英雄的战斗状态下，每隔4秒对附近英雄造成3%自身最大生命值的魔法伤害，并治疗自身相当于250%已造成伤害的生命值"
+        },
+        {
+          "name": "苦楚不受装备技能急速影响",
+          "trigger": "passive_always",
+          "effect_type": "modifier",
+          "values": [],
+          "scaling": [],
+          "cooldown": null,
+          "duration": null,
+          "caps": null,
+          "conditions": [],
+          "damage_type": null,
+          "flags": {
+            "can_crit": false,
+            "applies_on_hit": false,
+            "unique": false
+          },
+          "source_line": "苦楚不受装备技能急速影响"
+        }
+      ],
+      "effect_parse_status": "ok",
+      "effect_source": "auto"
+    },
+    {
       "item_id": "2158",
       "name": "无限法球",
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/EquipIcons/lol_InfinityOrb.png",
@@ -15598,7 +15755,7 @@
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/EquipIcons/Wits_End.png",
       "price": "2800",
       "description": [
-        "攻击速度 +45% 攻击速度\n魔法抗性 +45 魔法抗性\n\n智慧之末：普攻命中造成额外10-55魔法伤害。当生命值低于50%时，对敌方英雄造成伤害，即可治疗相当于所造成伤害（近战100%/远程33%）的生命值。\n\n"
+        "攻击速度 +45% 攻击速度\n魔法抗性 +45 魔法抗性\n\n智慧之末：普攻命中造成额外10-55魔法伤害。当生命值低于50%时，对敌方英雄造成伤害，即可治疗相当于所造成伤害（近战100%/远程66%）的生命值。\n\n"
       ],
       "labels": [],
       "from": [
@@ -15697,13 +15854,13 @@
           "source_line": "智慧之末：普攻命中造成额外10-55魔法伤害"
         },
         {
-          "name": "当生命值低于50%时，对敌方英雄造成伤害，即可治疗相当于所造成伤害（近战100%/远程33%）的生命值",
+          "name": "当生命值低于50%时，对敌方英雄造成伤害，即可治疗相当于所造成伤害（近战100%/远程66%）的生命值",
           "trigger": "passive_always",
           "effect_type": "healing",
           "values": [
             "50%",
             "100%",
-            "33%"
+            "66%"
           ],
           "scaling": [],
           "cooldown": null,
@@ -15718,7 +15875,7 @@
             "applies_on_hit": false,
             "unique": false
           },
-          "source_line": "当生命值低于50%时，对敌方英雄造成伤害，即可治疗相当于所造成伤害（近战100%/远程33%）的生命值"
+          "source_line": "当生命值低于50%时，对敌方英雄造成伤害，即可治疗相当于所造成伤害（近战100%/远程66%）的生命值"
         }
       ],
       "effect_parse_status": "ok",
@@ -15866,7 +16023,7 @@
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/EquipIcons/lol_sjzm.png",
       "price": "3100",
       "description": [
-        "生命值 +450 最大生命值\n攻击力 +45 攻击力\n\n龙之力量：获得25基础技能急速。\n\n专注意志：使用技能对野怪或敌方单位造成伤害后，使你的英雄技能和被动伤害提高3%，持续6秒。（叠加4次）\n\n"
+        "生命值 +450 最大生命值\n攻击力 +40 攻击力\n\n龙之力量：获得20基础技能急速。\n\n专注意志：使用技能对野怪或敌方单位造成伤害后，使你的英雄技能和被动伤害提高3%，持续6秒。（叠加4次）\n\n"
       ],
       "labels": [],
       "from": [
@@ -15884,7 +16041,7 @@
         "hp": "4500000",
         "armor": "0",
         "mr": "0",
-        "ad": "450000",
+        "ad": "400000",
         "ap": "0",
         "ability_haste": "0",
         "attack_speed": "0",
@@ -15929,16 +16086,16 @@
           "source_line": "生命值 +450 最大生命值"
         },
         {
-          "name": "攻击力 +45 攻击力",
+          "name": "攻击力 +40 攻击力",
           "trigger": "passive_always",
           "effect_type": "modifier",
           "values": [
-            "45"
+            "40"
           ],
           "scaling": [
             {
               "source": "ad",
-              "ratio": 45.0
+              "ratio": 40.0
             }
           ],
           "cooldown": null,
@@ -15951,14 +16108,14 @@
             "applies_on_hit": false,
             "unique": false
           },
-          "source_line": "攻击力 +45 攻击力"
+          "source_line": "攻击力 +40 攻击力"
         },
         {
-          "name": "龙之力量：获得25基础技能急速",
+          "name": "龙之力量：获得20基础技能急速",
           "trigger": "passive_always",
           "effect_type": "modifier",
           "values": [
-            "25"
+            "20"
           ],
           "scaling": [],
           "cooldown": null,
@@ -15971,7 +16128,7 @@
             "applies_on_hit": false,
             "unique": false
           },
-          "source_line": "龙之力量：获得25基础技能急速"
+          "source_line": "龙之力量：获得20基础技能急速"
         },
         {
           "name": "专注意志：使用技能对野怪或敌方单位造成伤害后，使你的英雄技能和被动伤害提高3%，持续6秒",
@@ -18195,7 +18352,7 @@
       "item_id": "2257",
       "name": "死亡之舞",
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/EquipIcons/lol_swzw.png",
-      "price": "3000",
+      "price": "3100",
       "description": [
         "攻击力 +35 攻击力\n护甲 +40 护甲\n冷却 +15 技能急速\n\n违抗：参与击败英雄，可净化无视痛苦的剩余存储伤害，并在2秒内为你恢复最大生命值的10%。\n\n无视痛苦：存储27%（远程使用者为12%）所受的物理伤害和魔法伤害，存储的伤害会在4秒内以真实伤害的形式持续扣除。\n\n"
       ],
@@ -18633,7 +18790,7 @@
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/EquipIcons/t3x_sysd.png",
       "price": "1300",
       "description": [
-        "移动速度 +45 移动速度\n\n流珠（主动）：移除英雄身上的所有控制效果，并免疫所有控制效果，持续0.75秒。\n坚韧（被动）：受到除击飞外的控制时间减少25%。在流珠效果结束后，获得30%韧性和30%减速抗性，持续1.5秒。（60秒冷却时间）\n受到击飞或击退期间无法使用。\n\n"
+        "移动速度 +45 移动速度\n\n流珠（主动）：移除英雄身上的所有控制效果，并免疫所有控制效果，持续0.25秒。\n坚韧（被动）：受到除击飞外的控制时间减少25%。在流珠效果结束后，获得30%韧性和30%减速抗性，持续1.5秒。（70秒冷却时间）\n受到击飞或击退期间无法使用。\n\n"
       ],
       "labels": [],
       "from": [],
@@ -18688,15 +18845,15 @@
           "source_line": "移动速度 +45 移动速度"
         },
         {
-          "name": "流珠（主动）：移除英雄身上的所有控制效果，并免疫所有控制效果，持续0.75秒",
+          "name": "流珠（主动）：移除英雄身上的所有控制效果，并免疫所有控制效果，持续0.25秒",
           "trigger": "passive_always",
           "effect_type": "modifier",
           "values": [
-            "0.75"
+            "0.25"
           ],
           "scaling": [],
-          "cooldown": 0.75,
-          "duration": 0.75,
+          "cooldown": 0.25,
+          "duration": 0.25,
           "caps": null,
           "conditions": [],
           "damage_type": null,
@@ -18705,7 +18862,7 @@
             "applies_on_hit": false,
             "unique": false
           },
-          "source_line": "流珠（主动）：移除英雄身上的所有控制效果，并免疫所有控制效果，持续0.75秒"
+          "source_line": "流珠（主动）：移除英雄身上的所有控制效果，并免疫所有控制效果，持续0.25秒"
         },
         {
           "name": "坚韧（被动）：受到除击飞外的控制时间减少25%",
@@ -18750,15 +18907,15 @@
           "source_line": "在流珠效果结束后，获得30%韧性和30%减速抗性，持续1.5秒"
         },
         {
-          "name": "（60秒冷却时间）",
+          "name": "（70秒冷却时间）",
           "trigger": "passive_always",
           "effect_type": "modifier",
           "values": [
-            "60"
+            "70"
           ],
           "scaling": [],
-          "cooldown": 60.0,
-          "duration": 60.0,
+          "cooldown": 70.0,
+          "duration": 70.0,
           "caps": null,
           "conditions": [],
           "damage_type": null,
@@ -18767,7 +18924,7 @@
             "applies_on_hit": false,
             "unique": false
           },
-          "source_line": "（60秒冷却时间）"
+          "source_line": "（70秒冷却时间）"
         },
         {
           "name": "受到击飞或击退期间无法使用",
@@ -18861,7 +19018,7 @@
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/EquipIcons/t3x_sysd.png",
       "price": "800",
       "description": [
-        "\n流珠（主动）：移除英雄身上的所有控制效果，并免疫所有控制效果，持续0.75秒。\n坚韧（被动）：受到除击飞外的控制时间减少25%。在流珠效果结束后，获得30%韧性和30%减速抗性，持续1.5秒。（60秒冷却时间）\n受到击飞或击退期间无法使用。\n\n"
+        "\n流珠（主动）：移除英雄身上的所有控制效果，并免疫所有控制效果，持续0.25秒。\n坚韧（被动）：受到除击飞外的控制时间减少25%。在流珠效果结束后，获得30%韧性和30%减速抗性，持续1.5秒。（70秒冷却时间）\n受到击飞或击退期间无法使用。\n\n"
       ],
       "labels": [],
       "from": [],
@@ -18896,15 +19053,15 @@
       },
       "effects": [
         {
-          "name": "流珠（主动）：移除英雄身上的所有控制效果，并免疫所有控制效果，持续0.75秒",
+          "name": "流珠（主动）：移除英雄身上的所有控制效果，并免疫所有控制效果，持续0.25秒",
           "trigger": "passive_always",
           "effect_type": "modifier",
           "values": [
-            "0.75"
+            "0.25"
           ],
           "scaling": [],
-          "cooldown": 0.75,
-          "duration": 0.75,
+          "cooldown": 0.25,
+          "duration": 0.25,
           "caps": null,
           "conditions": [],
           "damage_type": null,
@@ -18913,7 +19070,7 @@
             "applies_on_hit": false,
             "unique": false
           },
-          "source_line": "流珠（主动）：移除英雄身上的所有控制效果，并免疫所有控制效果，持续0.75秒"
+          "source_line": "流珠（主动）：移除英雄身上的所有控制效果，并免疫所有控制效果，持续0.25秒"
         },
         {
           "name": "坚韧（被动）：受到除击飞外的控制时间减少25%",
@@ -18958,15 +19115,15 @@
           "source_line": "在流珠效果结束后，获得30%韧性和30%减速抗性，持续1.5秒"
         },
         {
-          "name": "（60秒冷却时间）",
+          "name": "（70秒冷却时间）",
           "trigger": "passive_always",
           "effect_type": "modifier",
           "values": [
-            "60"
+            "70"
           ],
           "scaling": [],
-          "cooldown": 60.0,
-          "duration": 60.0,
+          "cooldown": 70.0,
+          "duration": 70.0,
           "caps": null,
           "conditions": [],
           "damage_type": null,
@@ -18975,7 +19132,7 @@
             "applies_on_hit": false,
             "unique": false
           },
-          "source_line": "（60秒冷却时间）"
+          "source_line": "（70秒冷却时间）"
         },
         {
           "name": "受到击飞或击退期间无法使用",
@@ -19005,7 +19162,7 @@
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/EquipIcons/t3x_sysd.png",
       "price": "2200",
       "description": [
-        "生命值 +150 最大生命值\n +150% 基础法力回复\n冷却 +20 技能急速\n移动速度 +45 移动速度\n\n召唤：召唤师技能冷却时间减少15%。\n互衡：无法力值英雄可获得75%基础生命回复。\n\n流珠（主动）：移除英雄身上的所有控制效果，并免疫所有控制效果，持续0.75秒。\n坚韧（被动）：受到除击飞外的控制时间减少25%。在流珠效果结束后，获得30%韧性和30%减速抗性，持续1.5秒。（60秒冷却时间）\n受到击飞或击退期间无法使用。\n\n"
+        "生命值 +150 最大生命值\n +150% 基础法力回复\n冷却 +20 技能急速\n移动速度 +45 移动速度\n\n召唤：召唤师技能冷却时间减少15%。\n互衡：无法力值英雄可获得75%基础生命回复。\n\n流珠（主动）：移除英雄身上的所有控制效果，并免疫所有控制效果，持续0.25秒。\n坚韧（被动）：受到除击飞外的控制时间减少25%。在流珠效果结束后，获得30%韧性和30%减速抗性，持续1.5秒。（70秒冷却时间）\n受到击飞或击退期间无法使用。\n\n"
       ],
       "labels": [],
       "from": [
@@ -19168,15 +19325,15 @@
           "source_line": "互衡：无法力值英雄可获得75%基础生命回复"
         },
         {
-          "name": "流珠（主动）：移除英雄身上的所有控制效果，并免疫所有控制效果，持续0.75秒",
+          "name": "流珠（主动）：移除英雄身上的所有控制效果，并免疫所有控制效果，持续0.25秒",
           "trigger": "passive_always",
           "effect_type": "modifier",
           "values": [
-            "0.75"
+            "0.25"
           ],
           "scaling": [],
-          "cooldown": 0.75,
-          "duration": 0.75,
+          "cooldown": 0.25,
+          "duration": 0.25,
           "caps": null,
           "conditions": [],
           "damage_type": null,
@@ -19185,7 +19342,7 @@
             "applies_on_hit": false,
             "unique": false
           },
-          "source_line": "流珠（主动）：移除英雄身上的所有控制效果，并免疫所有控制效果，持续0.75秒"
+          "source_line": "流珠（主动）：移除英雄身上的所有控制效果，并免疫所有控制效果，持续0.25秒"
         },
         {
           "name": "坚韧（被动）：受到除击飞外的控制时间减少25%",
@@ -19230,15 +19387,15 @@
           "source_line": "在流珠效果结束后，获得30%韧性和30%减速抗性，持续1.5秒"
         },
         {
-          "name": "（60秒冷却时间）",
+          "name": "（70秒冷却时间）",
           "trigger": "passive_always",
           "effect_type": "modifier",
           "values": [
-            "60"
+            "70"
           ],
           "scaling": [],
-          "cooldown": 60.0,
-          "duration": 60.0,
+          "cooldown": 70.0,
+          "duration": 70.0,
           "caps": null,
           "conditions": [],
           "damage_type": null,
@@ -19247,7 +19404,7 @@
             "applies_on_hit": false,
             "unique": false
           },
-          "source_line": "（60秒冷却时间）"
+          "source_line": "（70秒冷却时间）"
         },
         {
           "name": "受到击飞或击退期间无法使用",
@@ -19277,7 +19434,7 @@
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/EquipIcons/t3x_sysd.png",
       "price": "2150",
       "description": [
-        "生命值 +200 最大生命值\n +100% 基础生命回复\n魔法抗性 +35 魔法抗性\n移动速度 +45 移动速度\n\n化解：承受来自英雄的魔法伤害减少3%~10%（随等级成长）。\n\n流珠（主动）：移除英雄身上的所有控制效果，并免疫所有控制效果，持续0.75秒。\n坚韧（被动）：受到除击飞外的控制时间减少25%。在流珠效果结束后，获得30%韧性和30%减速抗性，持续1.5秒。（60秒冷却时间）\n受到击飞或击退期间无法使用。\n\n"
+        "生命值 +200 最大生命值\n +100% 基础生命回复\n魔法抗性 +35 魔法抗性\n移动速度 +45 移动速度\n\n化解：承受来自英雄的魔法伤害减少3%~10%（随等级成长）。\n\n流珠（主动）：移除英雄身上的所有控制效果，并免疫所有控制效果，持续0.25秒。\n坚韧（被动）：受到除击飞外的控制时间减少25%。在流珠效果结束后，获得30%韧性和30%减速抗性，持续1.5秒。（70秒冷却时间）\n受到击飞或击退期间无法使用。\n\n"
       ],
       "labels": [],
       "from": [
@@ -19421,15 +19578,15 @@
           "source_line": "化解：承受来自英雄的魔法伤害减少3%~10%（随等级成长）"
         },
         {
-          "name": "流珠（主动）：移除英雄身上的所有控制效果，并免疫所有控制效果，持续0.75秒",
+          "name": "流珠（主动）：移除英雄身上的所有控制效果，并免疫所有控制效果，持续0.25秒",
           "trigger": "passive_always",
           "effect_type": "modifier",
           "values": [
-            "0.75"
+            "0.25"
           ],
           "scaling": [],
-          "cooldown": 0.75,
-          "duration": 0.75,
+          "cooldown": 0.25,
+          "duration": 0.25,
           "caps": null,
           "conditions": [],
           "damage_type": null,
@@ -19438,7 +19595,7 @@
             "applies_on_hit": false,
             "unique": false
           },
-          "source_line": "流珠（主动）：移除英雄身上的所有控制效果，并免疫所有控制效果，持续0.75秒"
+          "source_line": "流珠（主动）：移除英雄身上的所有控制效果，并免疫所有控制效果，持续0.25秒"
         },
         {
           "name": "坚韧（被动）：受到除击飞外的控制时间减少25%",
@@ -19483,15 +19640,15 @@
           "source_line": "在流珠效果结束后，获得30%韧性和30%减速抗性，持续1.5秒"
         },
         {
-          "name": "（60秒冷却时间）",
+          "name": "（70秒冷却时间）",
           "trigger": "passive_always",
           "effect_type": "modifier",
           "values": [
-            "60"
+            "70"
           ],
           "scaling": [],
-          "cooldown": 60.0,
-          "duration": 60.0,
+          "cooldown": 70.0,
+          "duration": 70.0,
           "caps": null,
           "conditions": [],
           "damage_type": null,
@@ -19500,7 +19657,7 @@
             "applies_on_hit": false,
             "unique": false
           },
-          "source_line": "（60秒冷却时间）"
+          "source_line": "（70秒冷却时间）"
         },
         {
           "name": "受到击飞或击退期间无法使用",
@@ -19530,7 +19687,7 @@
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/EquipIcons/t3x_sysd.png",
       "price": "2200",
       "description": [
-        "法术强度 +45 法术强度\n +150% 基础法力回复\n移动速度 +45 移动速度\n\n破魔：增加法术穿透+8法术穿透。\n互衡：无法力值英雄可获得75%基础生命回复。\n\n恃强凌弱：普攻和主动技能对小兵造成额外18物理伤害。\n\n\n流珠（主动）：移除英雄身上的所有控制效果，并免疫所有控制效果，持续0.75秒。\n坚韧（被动）：受到除击飞外的控制时间减少25%。在流珠效果结束后，获得30%韧性和30%减速抗性，持续1.5秒。（60秒冷却时间）\n受到击飞或击退期间无法使用。\n\n"
+        "法术强度 +45 法术强度\n +150% 基础法力回复\n移动速度 +45 移动速度\n\n破魔：增加法术穿透+8法术穿透。\n互衡：无法力值英雄可获得75%基础生命回复。\n\n恃强凌弱：普攻和主动技能对小兵造成额外18物理伤害。\n\n\n流珠（主动）：移除英雄身上的所有控制效果，并免疫所有控制效果，持续0.25秒。\n坚韧（被动）：受到除击飞外的控制时间减少25%。在流珠效果结束后，获得30%韧性和30%减速抗性，持续1.5秒。（70秒冷却时间）\n受到击飞或击退期间无法使用。\n\n"
       ],
       "labels": [],
       "from": [
@@ -19688,15 +19845,15 @@
           "source_line": "恃强凌弱：普攻和主动技能对小兵造成额外18物理伤害"
         },
         {
-          "name": "流珠（主动）：移除英雄身上的所有控制效果，并免疫所有控制效果，持续0.75秒",
+          "name": "流珠（主动）：移除英雄身上的所有控制效果，并免疫所有控制效果，持续0.25秒",
           "trigger": "passive_always",
           "effect_type": "modifier",
           "values": [
-            "0.75"
+            "0.25"
           ],
           "scaling": [],
-          "cooldown": 0.75,
-          "duration": 0.75,
+          "cooldown": 0.25,
+          "duration": 0.25,
           "caps": null,
           "conditions": [],
           "damage_type": null,
@@ -19705,7 +19862,7 @@
             "applies_on_hit": false,
             "unique": false
           },
-          "source_line": "流珠（主动）：移除英雄身上的所有控制效果，并免疫所有控制效果，持续0.75秒"
+          "source_line": "流珠（主动）：移除英雄身上的所有控制效果，并免疫所有控制效果，持续0.25秒"
         },
         {
           "name": "坚韧（被动）：受到除击飞外的控制时间减少25%",
@@ -19750,15 +19907,15 @@
           "source_line": "在流珠效果结束后，获得30%韧性和30%减速抗性，持续1.5秒"
         },
         {
-          "name": "（60秒冷却时间）",
+          "name": "（70秒冷却时间）",
           "trigger": "passive_always",
           "effect_type": "modifier",
           "values": [
-            "60"
+            "70"
           ],
           "scaling": [],
-          "cooldown": 60.0,
-          "duration": 60.0,
+          "cooldown": 70.0,
+          "duration": 70.0,
           "caps": null,
           "conditions": [],
           "damage_type": null,
@@ -19767,7 +19924,7 @@
             "applies_on_hit": false,
             "unique": false
           },
-          "source_line": "（60秒冷却时间）"
+          "source_line": "（70秒冷却时间）"
         },
         {
           "name": "受到击飞或击退期间无法使用",
@@ -19797,7 +19954,7 @@
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/EquipIcons/t3x_sysd.png",
       "price": "2200",
       "description": [
-        "攻击力 +30 攻击力\n移动速度 +45 移动速度\n\n突袭：护甲穿透+8护甲穿透。\n\n流珠（主动）：移除英雄身上的所有控制效果，并免疫所有控制效果，持续0.75秒。\n坚韧（被动）：受到除击飞外的控制时间减少25%。在流珠效果结束后，获得30%韧性和30%减速抗性，持续1.5秒。（60秒冷却时间）\n受到击飞或击退期间无法使用。\n\n"
+        "攻击力 +30 攻击力\n移动速度 +45 移动速度\n\n突袭：护甲穿透+8护甲穿透。\n\n流珠（主动）：移除英雄身上的所有控制效果，并免疫所有控制效果，持续0.25秒。\n坚韧（被动）：受到除击飞外的控制时间减少25%。在流珠效果结束后，获得30%韧性和30%减速抗性，持续1.5秒。（70秒冷却时间）\n受到击飞或击退期间无法使用。\n\n"
       ],
       "labels": [],
       "from": [
@@ -19900,15 +20057,15 @@
           "source_line": "突袭：护甲穿透+8护甲穿透"
         },
         {
-          "name": "流珠（主动）：移除英雄身上的所有控制效果，并免疫所有控制效果，持续0.75秒",
+          "name": "流珠（主动）：移除英雄身上的所有控制效果，并免疫所有控制效果，持续0.25秒",
           "trigger": "passive_always",
           "effect_type": "modifier",
           "values": [
-            "0.75"
+            "0.25"
           ],
           "scaling": [],
-          "cooldown": 0.75,
-          "duration": 0.75,
+          "cooldown": 0.25,
+          "duration": 0.25,
           "caps": null,
           "conditions": [],
           "damage_type": null,
@@ -19917,7 +20074,7 @@
             "applies_on_hit": false,
             "unique": false
           },
-          "source_line": "流珠（主动）：移除英雄身上的所有控制效果，并免疫所有控制效果，持续0.75秒"
+          "source_line": "流珠（主动）：移除英雄身上的所有控制效果，并免疫所有控制效果，持续0.25秒"
         },
         {
           "name": "坚韧（被动）：受到除击飞外的控制时间减少25%",
@@ -19962,15 +20119,15 @@
           "source_line": "在流珠效果结束后，获得30%韧性和30%减速抗性，持续1.5秒"
         },
         {
-          "name": "（60秒冷却时间）",
+          "name": "（70秒冷却时间）",
           "trigger": "passive_always",
           "effect_type": "modifier",
           "values": [
-            "60"
+            "70"
           ],
           "scaling": [],
-          "cooldown": 60.0,
-          "duration": 60.0,
+          "cooldown": 70.0,
+          "duration": 70.0,
           "caps": null,
           "conditions": [],
           "damage_type": null,
@@ -19979,7 +20136,7 @@
             "applies_on_hit": false,
             "unique": false
           },
-          "source_line": "（60秒冷却时间）"
+          "source_line": "（70秒冷却时间）"
         },
         {
           "name": "受到击飞或击退期间无法使用",
@@ -20009,7 +20166,7 @@
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/EquipIcons/t3x_sysd.png",
       "price": "2200",
       "description": [
-        "攻击力 +15 攻击力\n攻击速度 +35% 攻击速度\n移动速度 +45 移动速度\n\n锋愈：每次普攻命中为自身回复10点生命值。\n\n\n流珠（主动）：移除英雄身上的所有控制效果，并免疫所有控制效果，持续0.75秒。\n坚韧（被动）：受到除击飞外的控制时间减少25%。在流珠效果结束后，获得30%韧性和30%减速抗性，持续1.5秒。（60秒冷却时间）\n受到击飞或击退期间无法使用。\n\n"
+        "攻击力 +15 攻击力\n攻击速度 +35% 攻击速度\n移动速度 +45 移动速度\n\n锋愈：每次普攻命中为自身回复10点生命值。\n\n\n流珠（主动）：移除英雄身上的所有控制效果，并免疫所有控制效果，持续0.25秒。\n坚韧（被动）：受到除击飞外的控制时间减少25%。在流珠效果结束后，获得30%韧性和30%减速抗性，持续1.5秒。（70秒冷却时间）\n受到击飞或击退期间无法使用。\n\n"
       ],
       "labels": [],
       "from": [
@@ -20132,15 +20289,15 @@
           "source_line": "锋愈：每次普攻命中为自身回复10点生命值"
         },
         {
-          "name": "流珠（主动）：移除英雄身上的所有控制效果，并免疫所有控制效果，持续0.75秒",
+          "name": "流珠（主动）：移除英雄身上的所有控制效果，并免疫所有控制效果，持续0.25秒",
           "trigger": "passive_always",
           "effect_type": "modifier",
           "values": [
-            "0.75"
+            "0.25"
           ],
           "scaling": [],
-          "cooldown": 0.75,
-          "duration": 0.75,
+          "cooldown": 0.25,
+          "duration": 0.25,
           "caps": null,
           "conditions": [],
           "damage_type": null,
@@ -20149,7 +20306,7 @@
             "applies_on_hit": false,
             "unique": false
           },
-          "source_line": "流珠（主动）：移除英雄身上的所有控制效果，并免疫所有控制效果，持续0.75秒"
+          "source_line": "流珠（主动）：移除英雄身上的所有控制效果，并免疫所有控制效果，持续0.25秒"
         },
         {
           "name": "坚韧（被动）：受到除击飞外的控制时间减少25%",
@@ -20194,15 +20351,15 @@
           "source_line": "在流珠效果结束后，获得30%韧性和30%减速抗性，持续1.5秒"
         },
         {
-          "name": "（60秒冷却时间）",
+          "name": "（70秒冷却时间）",
           "trigger": "passive_always",
           "effect_type": "modifier",
           "values": [
-            "60"
+            "70"
           ],
           "scaling": [],
-          "cooldown": 60.0,
-          "duration": 60.0,
+          "cooldown": 70.0,
+          "duration": 70.0,
           "caps": null,
           "conditions": [],
           "damage_type": null,
@@ -20211,7 +20368,7 @@
             "applies_on_hit": false,
             "unique": false
           },
-          "source_line": "（60秒冷却时间）"
+          "source_line": "（70秒冷却时间）"
         },
         {
           "name": "受到击飞或击退期间无法使用",
@@ -20241,7 +20398,7 @@
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/EquipIcons/t3x_sysd.png",
       "price": "2200",
       "description": [
-        "攻击力 +30 攻击力\n移动速度 +45 移动速度\n\n转化： +7%全能吸血。\n\n流珠（主动）：移除英雄身上的所有控制效果，并免疫所有控制效果，持续0.75秒。\n坚韧（被动）：受到除击飞外的控制时间减少25%。在流珠效果结束后，获得30%韧性和30%减速抗性，持续1.5秒。（60秒冷却时间）\n受到击飞或击退期间无法使用。\n\n"
+        "攻击力 +30 攻击力\n移动速度 +45 移动速度\n\n转化： +7%全能吸血。\n\n流珠（主动）：移除英雄身上的所有控制效果，并免疫所有控制效果，持续0.25秒。\n坚韧（被动）：受到除击飞外的控制时间减少25%。在流珠效果结束后，获得30%韧性和30%减速抗性，持续1.5秒。（70秒冷却时间）\n受到击飞或击退期间无法使用。\n\n"
       ],
       "labels": [],
       "from": [
@@ -20344,15 +20501,15 @@
           "source_line": "转化： +7%全能吸血"
         },
         {
-          "name": "流珠（主动）：移除英雄身上的所有控制效果，并免疫所有控制效果，持续0.75秒",
+          "name": "流珠（主动）：移除英雄身上的所有控制效果，并免疫所有控制效果，持续0.25秒",
           "trigger": "passive_always",
           "effect_type": "modifier",
           "values": [
-            "0.75"
+            "0.25"
           ],
           "scaling": [],
-          "cooldown": 0.75,
-          "duration": 0.75,
+          "cooldown": 0.25,
+          "duration": 0.25,
           "caps": null,
           "conditions": [],
           "damage_type": null,
@@ -20361,7 +20518,7 @@
             "applies_on_hit": false,
             "unique": false
           },
-          "source_line": "流珠（主动）：移除英雄身上的所有控制效果，并免疫所有控制效果，持续0.75秒"
+          "source_line": "流珠（主动）：移除英雄身上的所有控制效果，并免疫所有控制效果，持续0.25秒"
         },
         {
           "name": "坚韧（被动）：受到除击飞外的控制时间减少25%",
@@ -20406,15 +20563,15 @@
           "source_line": "在流珠效果结束后，获得30%韧性和30%减速抗性，持续1.5秒"
         },
         {
-          "name": "（60秒冷却时间）",
+          "name": "（70秒冷却时间）",
           "trigger": "passive_always",
           "effect_type": "modifier",
           "values": [
-            "60"
+            "70"
           ],
           "scaling": [],
-          "cooldown": 60.0,
-          "duration": 60.0,
+          "cooldown": 70.0,
+          "duration": 70.0,
           "caps": null,
           "conditions": [],
           "damage_type": null,
@@ -20423,7 +20580,7 @@
             "applies_on_hit": false,
             "unique": false
           },
-          "source_line": "（60秒冷却时间）"
+          "source_line": "（70秒冷却时间）"
         },
         {
           "name": "受到击飞或击退期间无法使用",
@@ -20453,7 +20610,7 @@
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/EquipIcons/t3x_sysd.png",
       "price": "2150",
       "description": [
-        "生命值 +150 最大生命值\n +100% 基础生命回复\n护甲 +35 护甲\n移动速度 +45 移动速度\n\n格挡：承受来自英雄的物理伤害减少3%~9%（随等级成长）。\n\n流珠（主动）：移除英雄身上的所有控制效果，并免疫所有控制效果，持续0.75秒。\n坚韧（被动）：受到除击飞外的控制时间减少25%。在流珠效果结束后，获得30%韧性和30%减速抗性，持续1.5秒。（60秒冷却时间）\n受到击飞或击退期间无法使用。\n\n"
+        "生命值 +150 最大生命值\n +100% 基础生命回复\n护甲 +35 护甲\n移动速度 +45 移动速度\n\n格挡：承受来自英雄的物理伤害减少3%~9%（随等级成长）。\n\n流珠（主动）：移除英雄身上的所有控制效果，并免疫所有控制效果，持续0.25秒。\n坚韧（被动）：受到除击飞外的控制时间减少25%。在流珠效果结束后，获得30%韧性和30%减速抗性，持续1.5秒。（70秒冷却时间）\n受到击飞或击退期间无法使用。\n\n"
       ],
       "labels": [],
       "from": [
@@ -20597,15 +20754,15 @@
           "source_line": "格挡：承受来自英雄的物理伤害减少3%~9%（随等级成长）"
         },
         {
-          "name": "流珠（主动）：移除英雄身上的所有控制效果，并免疫所有控制效果，持续0.75秒",
+          "name": "流珠（主动）：移除英雄身上的所有控制效果，并免疫所有控制效果，持续0.25秒",
           "trigger": "passive_always",
           "effect_type": "modifier",
           "values": [
-            "0.75"
+            "0.25"
           ],
           "scaling": [],
-          "cooldown": 0.75,
-          "duration": 0.75,
+          "cooldown": 0.25,
+          "duration": 0.25,
           "caps": null,
           "conditions": [],
           "damage_type": null,
@@ -20614,7 +20771,7 @@
             "applies_on_hit": false,
             "unique": false
           },
-          "source_line": "流珠（主动）：移除英雄身上的所有控制效果，并免疫所有控制效果，持续0.75秒"
+          "source_line": "流珠（主动）：移除英雄身上的所有控制效果，并免疫所有控制效果，持续0.25秒"
         },
         {
           "name": "坚韧（被动）：受到除击飞外的控制时间减少25%",
@@ -20659,15 +20816,15 @@
           "source_line": "在流珠效果结束后，获得30%韧性和30%减速抗性，持续1.5秒"
         },
         {
-          "name": "（60秒冷却时间）",
+          "name": "（70秒冷却时间）",
           "trigger": "passive_always",
           "effect_type": "modifier",
           "values": [
-            "60"
+            "70"
           ],
           "scaling": [],
-          "cooldown": 60.0,
-          "duration": 60.0,
+          "cooldown": 70.0,
+          "duration": 70.0,
           "caps": null,
           "conditions": [],
           "damage_type": null,
@@ -20676,7 +20833,7 @@
             "applies_on_hit": false,
             "unique": false
           },
-          "source_line": "（60秒冷却时间）"
+          "source_line": "（70秒冷却时间）"
         },
         {
           "name": "受到击飞或击退期间无法使用",
@@ -22586,6 +22743,188 @@
       "effect_source": "auto"
     },
     {
+      "item_id": "2806",
+      "name": "海克斯注力刚壁",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/EquipIcons/lol_zlgb.png",
+      "price": "3000",
+      "description": [
+        "生命值 +400 最大生命值\n攻击力 +35 攻击力\n攻击速度 +20% 攻击速度\n\n海克斯充能：获得20终极技能急速。\n\n过载：释放终极技能后，获得持续8秒的40%攻击速度（远程20%）和20%移动速度（远程10%）。（30秒冷却时间）\n\n"
+      ],
+      "labels": [],
+      "from": [
+        "2204",
+        "2227",
+        "2326"
+      ],
+      "into": "",
+      "tags": "",
+      "combine_cost": "0",
+      "slot_rules": {
+        "unique_passive": false,
+        "stackable": false
+      },
+      "stats": {
+        "hp": "4000000",
+        "armor": "0",
+        "mr": "0",
+        "ad": "350000",
+        "ap": "0",
+        "ability_haste": "0",
+        "attack_speed": "2000",
+        "crit_rate": "0",
+        "armor_pen_flat": "0",
+        "armor_pen_pct": "0",
+        "magic_pen_flat": "0",
+        "magic_pen_pct": "0",
+        "move_speed_flat": "0",
+        "move_speed_pct": "0",
+        "hp_regen": "0",
+        "hp_regen_pct": "0",
+        "mana": "0",
+        "mana_regen": "0",
+        "lifesteal": "0",
+        "spell_vamp": "0"
+      },
+      "effects": [
+        {
+          "name": "生命值 +400 最大生命值",
+          "trigger": "passive_always",
+          "effect_type": "modifier",
+          "values": [
+            "400"
+          ],
+          "scaling": [
+            {
+              "source": "target_max_hp",
+              "ratio": 400.0
+            }
+          ],
+          "cooldown": null,
+          "duration": null,
+          "caps": null,
+          "conditions": [],
+          "damage_type": null,
+          "flags": {
+            "can_crit": false,
+            "applies_on_hit": false,
+            "unique": false
+          },
+          "source_line": "生命值 +400 最大生命值"
+        },
+        {
+          "name": "攻击力 +35 攻击力",
+          "trigger": "passive_always",
+          "effect_type": "modifier",
+          "values": [
+            "35"
+          ],
+          "scaling": [
+            {
+              "source": "ad",
+              "ratio": 35.0
+            }
+          ],
+          "cooldown": null,
+          "duration": null,
+          "caps": null,
+          "conditions": [],
+          "damage_type": null,
+          "flags": {
+            "can_crit": false,
+            "applies_on_hit": false,
+            "unique": false
+          },
+          "source_line": "攻击力 +35 攻击力"
+        },
+        {
+          "name": "攻击速度 +20% 攻击速度",
+          "trigger": "passive_always",
+          "effect_type": "modifier",
+          "values": [
+            "20%"
+          ],
+          "scaling": [],
+          "cooldown": null,
+          "duration": null,
+          "caps": null,
+          "conditions": [],
+          "damage_type": null,
+          "flags": {
+            "can_crit": false,
+            "applies_on_hit": false,
+            "unique": false
+          },
+          "source_line": "攻击速度 +20% 攻击速度"
+        },
+        {
+          "name": "海克斯充能：获得20终极技能急速",
+          "trigger": "passive_always",
+          "effect_type": "modifier",
+          "values": [
+            "20"
+          ],
+          "scaling": [],
+          "cooldown": null,
+          "duration": null,
+          "caps": null,
+          "conditions": [],
+          "damage_type": null,
+          "flags": {
+            "can_crit": false,
+            "applies_on_hit": false,
+            "unique": false
+          },
+          "source_line": "海克斯充能：获得20终极技能急速"
+        },
+        {
+          "name": "过载：释放终极技能后，获得持续8秒的40%攻击速度（远程20%）和20%移动速度（远程10%）",
+          "trigger": "passive_always",
+          "effect_type": "modifier",
+          "values": [
+            "8",
+            "40%",
+            "20%",
+            "20%",
+            "10%"
+          ],
+          "scaling": [],
+          "cooldown": 8.0,
+          "duration": 8.0,
+          "caps": null,
+          "conditions": [],
+          "damage_type": null,
+          "flags": {
+            "can_crit": false,
+            "applies_on_hit": false,
+            "unique": false
+          },
+          "source_line": "过载：释放终极技能后，获得持续8秒的40%攻击速度（远程20%）和20%移动速度（远程10%）"
+        },
+        {
+          "name": "（30秒冷却时间）",
+          "trigger": "passive_always",
+          "effect_type": "modifier",
+          "values": [
+            "30"
+          ],
+          "scaling": [],
+          "cooldown": 30.0,
+          "duration": 30.0,
+          "caps": null,
+          "conditions": [],
+          "damage_type": null,
+          "flags": {
+            "can_crit": false,
+            "applies_on_hit": false,
+            "unique": false
+          },
+          "source_line": "（30秒冷却时间）"
+        }
+      ],
+      "effect_parse_status": "ok",
+      "effect_source": "auto"
+    },
+    {
       "item_id": "2136",
       "name": "海克斯科技发电机",
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/EquipIcons/lol_hkskjfdj.png",
@@ -22913,6 +23252,145 @@
             "unique": false
           },
           "source_line": "魔法抗性 +20 魔法抗性"
+        }
+      ],
+      "effect_parse_status": "ok",
+      "effect_source": "auto"
+    },
+    {
+      "item_id": "2292",
+      "name": "海妖杀手",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/EquipIcons/lol_KrakenSlayer.png",
+      "price": "3000",
+      "description": [
+        "攻击力 +40 攻击力\n攻击速度 +30% 攻击速度\n\n行云：移动速度+5%移动速度。\n\n放倒它：每第三次攻击造成120-160（随等级成长）（远程英雄110-150（随等级成长））额外物理伤害，这个伤害会基于目标的已损失生命值获得提升，目标每损失1%生命值伤害提升1%，最多提升50%。\n\n"
+      ],
+      "labels": [],
+      "from": [
+        "2201",
+        "2204",
+        "2233"
+      ],
+      "into": "",
+      "tags": "",
+      "combine_cost": "0",
+      "slot_rules": {
+        "unique_passive": false,
+        "stackable": false
+      },
+      "stats": {
+        "hp": "0",
+        "armor": "0",
+        "mr": "0",
+        "ad": "400000",
+        "ap": "0",
+        "ability_haste": "0",
+        "attack_speed": "3000",
+        "crit_rate": "0",
+        "armor_pen_flat": "0",
+        "armor_pen_pct": "0",
+        "magic_pen_flat": "0",
+        "magic_pen_pct": "0",
+        "move_speed_flat": "0",
+        "move_speed_pct": "0",
+        "hp_regen": "0",
+        "hp_regen_pct": "0",
+        "mana": "0",
+        "mana_regen": "0",
+        "lifesteal": "0",
+        "spell_vamp": "0"
+      },
+      "effects": [
+        {
+          "name": "攻击力 +40 攻击力",
+          "trigger": "passive_always",
+          "effect_type": "modifier",
+          "values": [
+            "40"
+          ],
+          "scaling": [
+            {
+              "source": "ad",
+              "ratio": 40.0
+            }
+          ],
+          "cooldown": null,
+          "duration": null,
+          "caps": null,
+          "conditions": [],
+          "damage_type": null,
+          "flags": {
+            "can_crit": false,
+            "applies_on_hit": false,
+            "unique": false
+          },
+          "source_line": "攻击力 +40 攻击力"
+        },
+        {
+          "name": "攻击速度 +30% 攻击速度",
+          "trigger": "passive_always",
+          "effect_type": "modifier",
+          "values": [
+            "30%"
+          ],
+          "scaling": [],
+          "cooldown": null,
+          "duration": null,
+          "caps": null,
+          "conditions": [],
+          "damage_type": null,
+          "flags": {
+            "can_crit": false,
+            "applies_on_hit": false,
+            "unique": false
+          },
+          "source_line": "攻击速度 +30% 攻击速度"
+        },
+        {
+          "name": "行云：移动速度+5%移动速度",
+          "trigger": "passive_always",
+          "effect_type": "modifier",
+          "values": [
+            "5%"
+          ],
+          "scaling": [],
+          "cooldown": null,
+          "duration": null,
+          "caps": null,
+          "conditions": [],
+          "damage_type": null,
+          "flags": {
+            "can_crit": false,
+            "applies_on_hit": false,
+            "unique": false
+          },
+          "source_line": "行云：移动速度+5%移动速度"
+        },
+        {
+          "name": "放倒它：每第三次攻击造成120-160（随等级成长）（远程英雄110-150（随等级成长））额外物理伤害，这个伤害会基于目标的已",
+          "trigger": "periodic",
+          "effect_type": "damage",
+          "values": [
+            "120",
+            "160",
+            "110",
+            "150",
+            "1%",
+            "1%",
+            "50%"
+          ],
+          "scaling": [],
+          "cooldown": null,
+          "duration": null,
+          "caps": null,
+          "conditions": [],
+          "damage_type": "physical",
+          "flags": {
+            "can_crit": false,
+            "applies_on_hit": false,
+            "unique": false
+          },
+          "source_line": "放倒它：每第三次攻击造成120-160（随等级成长）（远程英雄110-150（随等级成长））额外物理伤害，这个伤害会基于目标的已损失生命值获得提升，目标每损失1%生命值伤害提升1%，最多提升50%"
         }
       ],
       "effect_parse_status": "ok",
@@ -25306,7 +25784,7 @@
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/EquipIcons/lol_ablityPowerProjectorx_equip.png",
       "price": "3200",
       "description": [
-        "生命值 +300 最大生命值\n法术强度 +60 法术强度\n增加法术穿透 +7% 法术穿透\n冷却 +15 技能急速\n\n转换：获得5%额外生命值的法术强度。\n\n投射：拥有至少950额外生命值时，获得20% 法术强度的护甲和10% 法术强度的魔抗。（在400法强时达到上限）\n\n"
+        "生命值 +300 最大生命值\n法术强度 +60 法术强度\n增加法术穿透 +7% 法术穿透\n冷却 +15 技能急速\n\n转换：获得3.5%额外生命值的法术强度。\n\n投射：拥有至少950额外生命值时，获得20% 法术强度的护甲和10% 法术强度的魔抗。（在400法强时达到上限）\n\n"
       ],
       "labels": [],
       "from": [
@@ -25430,11 +25908,11 @@
           "source_line": "冷却 +15 技能急速"
         },
         {
-          "name": "转换：获得5%额外生命值的法术强度",
+          "name": "转换：获得3.5%额外生命值的法术强度",
           "trigger": "passive_always",
           "effect_type": "stat",
           "values": [
-            "5%"
+            "3.5%"
           ],
           "scaling": [],
           "cooldown": null,
@@ -25447,7 +25925,7 @@
             "applies_on_hit": false,
             "unique": false
           },
-          "source_line": "转换：获得5%额外生命值的法术强度"
+          "source_line": "转换：获得3.5%额外生命值的法术强度"
         },
         {
           "name": "投射：拥有至少950额外生命值时，获得20% 法术强度的护甲和10% 法术强度的魔抗",
@@ -29370,9 +29848,9 @@
       "item_id": "2285",
       "name": "界弓",
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/EquipIcons/lol_jg.png",
-      "price": "3400",
+      "price": "3300",
       "description": [
-        "攻击力 +35 攻击力\n攻击速度 +30% 攻击速度\n\n晦影：普通攻击命中时，对目标造成额外35魔法伤害。\n\n交相：每次攻击在光明特效和黑暗特效之间轮换，附带光明特效的攻击命中时提供持续5秒的5-8护甲和魔法抗性（随等级成长），附带黑暗特效的攻击命中时提供持续5秒的11%护甲穿透护甲穿透和11%增加法术穿透 法术穿透，两种攻击特效均最多叠加3层。\n持有此装备时，由装备提供的护甲穿透率护甲穿透和 法术穿透率增加法术穿透的上限为5%。\n\n"
+        "攻击力 +40 攻击力\n攻击速度 +30% 攻击速度\n\n晦影：普通攻击命中时，对目标造成额外35魔法伤害。\n\n交相：每次攻击在光明特效和黑暗特效之间轮换，附带光明特效的攻击命中时提供持续5秒的5-8护甲和魔法抗性（随等级成长），附带黑暗特效的攻击命中时提供持续5秒的11%护甲穿透护甲穿透和11%增加法术穿透 法术穿透，两种攻击特效均最多叠加3层。\n持有此装备时，由装备提供的护甲穿透率护甲穿透和 法术穿透率增加法术穿透的上限为5%。\n\n"
       ],
       "labels": [],
       "from": [
@@ -29390,7 +29868,7 @@
         "hp": "0",
         "armor": "0",
         "mr": "0",
-        "ad": "350000",
+        "ad": "400000",
         "ap": "0",
         "ability_haste": "0",
         "attack_speed": "3000",
@@ -29410,16 +29888,16 @@
       },
       "effects": [
         {
-          "name": "攻击力 +35 攻击力",
+          "name": "攻击力 +40 攻击力",
           "trigger": "passive_always",
           "effect_type": "modifier",
           "values": [
-            "35"
+            "40"
           ],
           "scaling": [
             {
               "source": "ad",
-              "ratio": 35.0
+              "ratio": 40.0
             }
           ],
           "cooldown": null,
@@ -29432,7 +29910,7 @@
             "applies_on_hit": false,
             "unique": false
           },
-          "source_line": "攻击力 +35 攻击力"
+          "source_line": "攻击力 +40 攻击力"
         },
         {
           "name": "攻击速度 +30% 攻击速度",
@@ -33501,7 +33979,7 @@
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/EquipIcons/lol_pbwzzr.png",
       "price": "3200",
       "description": [
-        "攻击力 +25 攻击力\n攻击速度 +35% 攻击速度\n\n饥渴： +10%全能吸血。\n\n破败打击：普攻命中时，会造成相当于目标当前生命值7%的额外物理伤害（近战攻击则为10%）。最少造成15伤害，对野怪最大伤害为60。\n\n汲取：普攻或技能3次命中同一位敌方英雄时，会对其造成30至100的额外魔法伤害，并将目标25%移动速度转移至自身，持续2秒。(60秒冷却时间)\n\n"
+        "攻击力 +25 攻击力\n攻击速度 +35% 攻击速度\n\n饥渴： +10%全能吸血。\n\n破败打击：普攻命中时，会造成相当于目标当前生命值8.5%的额外物理伤害（近战攻击则为10%）。最少造成15伤害，对野怪最大伤害为60。\n\n汲取：普攻或技能3次命中同一位敌方英雄时，会对其造成30至100的额外魔法伤害，并将目标25%移动速度转移至自身，持续2秒。(60秒冷却时间)\n\n"
       ],
       "labels": [],
       "from": [
@@ -33604,11 +34082,11 @@
           "source_line": "饥渴： +10%全能吸血"
         },
         {
-          "name": "破败打击：普攻命中时，会造成相当于目标当前生命值7%的额外物理伤害（近战攻击则为10%）",
+          "name": "破败打击：普攻命中时，会造成相当于目标当前生命值8.5%的额外物理伤害（近战攻击则为10%）",
           "trigger": "onHit",
           "effect_type": "damage",
           "values": [
-            "7%",
+            "8.5%",
             "10%"
           ],
           "scaling": [],
@@ -33622,7 +34100,7 @@
             "applies_on_hit": true,
             "unique": false
           },
-          "source_line": "破败打击：普攻命中时，会造成相当于目标当前生命值7%的额外物理伤害（近战攻击则为10%）"
+          "source_line": "破败打击：普攻命中时，会造成相当于目标当前生命值8.5%的额外物理伤害（近战攻击则为10%）"
         },
         {
           "name": "最少造成15伤害，对野怪最大伤害为60",
@@ -36647,7 +37125,7 @@
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/EquipIcons/lol_hymd.png",
       "price": "2850",
       "description": [
-        "生命值 +300 最大生命值\n护甲 +45 护甲\n冷却 +15 技能急速\n\n指引之光：释放终极技能时进入超凡入圣状态，自身获得10%最大生命值提升，持续6秒。在超凡入圣状态下，每秒为你和你周围1200范围内的所有友方英雄提供相当于你3%最大生命值的治疗效果。（60秒冷却时间）\n远程英雄使用时回复量减少50%。\n\n"
+        "生命值 +300 最大生命值\n护甲 +45 护甲\n冷却 +15 技能急速\n\n指引之光：释放终极技能时进入超凡入圣状态，自身获得10%最大生命值提升，持续6秒。在超凡入圣状态下，每秒为你和你周围1200范围内的所有友方英雄提供相当于你2.5%最大生命值的治疗效果。（60秒冷却时间）\n远程英雄使用时回复量减少50%。\n\n"
       ],
       "labels": [],
       "from": [
@@ -36776,12 +37254,12 @@
           "source_line": "指引之光：释放终极技能时进入超凡入圣状态，自身获得10%最大生命值提升，持续6秒"
         },
         {
-          "name": "在超凡入圣状态下，每秒为你和你周围1200范围内的所有友方英雄提供相当于你3%最大生命值的治疗效果",
+          "name": "在超凡入圣状态下，每秒为你和你周围1200范围内的所有友方英雄提供相当于你2.5%最大生命值的治疗效果",
           "trigger": "periodic",
           "effect_type": "healing",
           "values": [
             "1200",
-            "3%"
+            "2.5%"
           ],
           "scaling": [
             {
@@ -36799,7 +37277,7 @@
             "applies_on_hit": false,
             "unique": false
           },
-          "source_line": "在超凡入圣状态下，每秒为你和你周围1200范围内的所有友方英雄提供相当于你3%最大生命值的治疗效果"
+          "source_line": "在超凡入圣状态下，每秒为你和你周围1200范围内的所有友方英雄提供相当于你2.5%最大生命值的治疗效果"
         },
         {
           "name": "（60秒冷却时间）",
@@ -39186,6 +39664,175 @@
       "effect_source": "auto"
     },
     {
+      "item_id": "2378",
+      "name": "霸王血铠",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/EquipIcons/lol_3464.png",
+      "price": "3200",
+      "description": [
+        "生命值 +450 最大生命值\n攻击力 +30 攻击力\n\n专横：获得相当于你2.5%额外生命值的攻击力。\n\n报复：获得至多9%攻击力提升，基于你的百分比已损失生命值。\n报复的最大加成会在低于30%生命值时达到。\n\n"
+      ],
+      "labels": [],
+      "from": [
+        "2326",
+        "2326"
+      ],
+      "into": "",
+      "tags": "",
+      "combine_cost": "0",
+      "slot_rules": {
+        "unique_passive": false,
+        "stackable": false
+      },
+      "stats": {
+        "hp": "4500000",
+        "armor": "0",
+        "mr": "0",
+        "ad": "300000",
+        "ap": "0",
+        "ability_haste": "0",
+        "attack_speed": "0",
+        "crit_rate": "0",
+        "armor_pen_flat": "0",
+        "armor_pen_pct": "0",
+        "magic_pen_flat": "0",
+        "magic_pen_pct": "0",
+        "move_speed_flat": "0",
+        "move_speed_pct": "0",
+        "hp_regen": "0",
+        "hp_regen_pct": "0",
+        "mana": "0",
+        "mana_regen": "0",
+        "lifesteal": "0",
+        "spell_vamp": "0"
+      },
+      "effects": [
+        {
+          "name": "生命值 +450 最大生命值",
+          "trigger": "passive_always",
+          "effect_type": "modifier",
+          "values": [
+            "450"
+          ],
+          "scaling": [
+            {
+              "source": "target_max_hp",
+              "ratio": 450.0
+            }
+          ],
+          "cooldown": null,
+          "duration": null,
+          "caps": null,
+          "conditions": [],
+          "damage_type": null,
+          "flags": {
+            "can_crit": false,
+            "applies_on_hit": false,
+            "unique": false
+          },
+          "source_line": "生命值 +450 最大生命值"
+        },
+        {
+          "name": "攻击力 +30 攻击力",
+          "trigger": "passive_always",
+          "effect_type": "modifier",
+          "values": [
+            "30"
+          ],
+          "scaling": [
+            {
+              "source": "ad",
+              "ratio": 30.0
+            }
+          ],
+          "cooldown": null,
+          "duration": null,
+          "caps": null,
+          "conditions": [],
+          "damage_type": null,
+          "flags": {
+            "can_crit": false,
+            "applies_on_hit": false,
+            "unique": false
+          },
+          "source_line": "攻击力 +30 攻击力"
+        },
+        {
+          "name": "专横：获得相当于你2.5%额外生命值的攻击力",
+          "trigger": "passive_always",
+          "effect_type": "modifier",
+          "values": [
+            "2.5%"
+          ],
+          "scaling": [
+            {
+              "source": "ad",
+              "ratio": 2.5
+            }
+          ],
+          "cooldown": null,
+          "duration": null,
+          "caps": null,
+          "conditions": [],
+          "damage_type": null,
+          "flags": {
+            "can_crit": false,
+            "applies_on_hit": false,
+            "unique": false
+          },
+          "source_line": "专横：获得相当于你2.5%额外生命值的攻击力"
+        },
+        {
+          "name": "报复：获得至多9%攻击力提升，基于你的百分比已损失生命值",
+          "trigger": "passive_always",
+          "effect_type": "modifier",
+          "values": [
+            "9%"
+          ],
+          "scaling": [
+            {
+              "source": "ad",
+              "ratio": 9.0
+            }
+          ],
+          "cooldown": null,
+          "duration": null,
+          "caps": null,
+          "conditions": [],
+          "damage_type": null,
+          "flags": {
+            "can_crit": false,
+            "applies_on_hit": false,
+            "unique": false
+          },
+          "source_line": "报复：获得至多9%攻击力提升，基于你的百分比已损失生命值"
+        },
+        {
+          "name": "报复的最大加成会在低于30%生命值时达到",
+          "trigger": "passive_always",
+          "effect_type": "modifier",
+          "values": [
+            "30%"
+          ],
+          "scaling": [],
+          "cooldown": null,
+          "duration": null,
+          "caps": null,
+          "conditions": [
+            "vs_low_hp"
+          ],
+          "damage_type": null,
+          "flags": {
+            "can_crit": false,
+            "applies_on_hit": false,
+            "unique": false
+          },
+          "source_line": "报复的最大加成会在低于30%生命值时达到"
+        }
+      ],
+      "effect_parse_status": "ok",
+      "effect_source": "auto"
+    },
+    {
       "item_id": "2243",
       "name": "饮血剑",
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/EquipIcons/lol_yxj.png",
@@ -39388,6 +40035,177 @@
             "unique": false
           },
           "source_line": "击退周围敌人，并治疗己方英雄15%的最大生命值"
+        }
+      ],
+      "effect_parse_status": "ok",
+      "effect_source": "auto"
+    },
+    {
+      "item_id": "2379",
+      "name": "骑士之誓",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/EquipIcons/lol_KnightsVow.png",
+      "price": "2600",
+      "description": [
+        "生命值 +400 最大生命值\n +100% 基础生命回复\n护甲 +40 护甲\n冷却 +10 技能急速\n\n牺牲：当你的誓约者在附近时，将其所受的12%伤害转移到你身上，并为你提供相当于其对英雄的10%已造成伤害值的治疗效果。\n\n立誓：购买或再次购买此装备时指定一名友方英雄作为你的誓约者。\n\n"
+      ],
+      "labels": [],
+      "from": [
+        "2305",
+        "2306"
+      ],
+      "into": "",
+      "tags": "",
+      "combine_cost": "0",
+      "slot_rules": {
+        "unique_passive": false,
+        "stackable": false
+      },
+      "stats": {
+        "hp": "4000000",
+        "armor": "400000",
+        "mr": "0",
+        "ad": "0",
+        "ap": "0",
+        "ability_haste": "0",
+        "attack_speed": "0",
+        "crit_rate": "0",
+        "armor_pen_flat": "0",
+        "armor_pen_pct": "0",
+        "magic_pen_flat": "0",
+        "magic_pen_pct": "0",
+        "move_speed_flat": "0",
+        "move_speed_pct": "0",
+        "hp_regen": "10000",
+        "hp_regen_pct": "0",
+        "mana": "0",
+        "mana_regen": "0",
+        "lifesteal": "0",
+        "spell_vamp": "0"
+      },
+      "effects": [
+        {
+          "name": "生命值 +400 最大生命值",
+          "trigger": "passive_always",
+          "effect_type": "modifier",
+          "values": [
+            "400"
+          ],
+          "scaling": [
+            {
+              "source": "target_max_hp",
+              "ratio": 400.0
+            }
+          ],
+          "cooldown": null,
+          "duration": null,
+          "caps": null,
+          "conditions": [],
+          "damage_type": null,
+          "flags": {
+            "can_crit": false,
+            "applies_on_hit": false,
+            "unique": false
+          },
+          "source_line": "生命值 +400 最大生命值"
+        },
+        {
+          "name": "+100% 基础生命回复",
+          "trigger": "passive_always",
+          "effect_type": "modifier",
+          "values": [
+            "100%"
+          ],
+          "scaling": [],
+          "cooldown": null,
+          "duration": null,
+          "caps": null,
+          "conditions": [],
+          "damage_type": null,
+          "flags": {
+            "can_crit": false,
+            "applies_on_hit": false,
+            "unique": false
+          },
+          "source_line": "+100% 基础生命回复"
+        },
+        {
+          "name": "护甲 +40 护甲",
+          "trigger": "passive_always",
+          "effect_type": "modifier",
+          "values": [
+            "40"
+          ],
+          "scaling": [],
+          "cooldown": null,
+          "duration": null,
+          "caps": null,
+          "conditions": [],
+          "damage_type": null,
+          "flags": {
+            "can_crit": false,
+            "applies_on_hit": false,
+            "unique": false
+          },
+          "source_line": "护甲 +40 护甲"
+        },
+        {
+          "name": "冷却 +10 技能急速",
+          "trigger": "passive_always",
+          "effect_type": "modifier",
+          "values": [
+            "10"
+          ],
+          "scaling": [],
+          "cooldown": null,
+          "duration": null,
+          "caps": null,
+          "conditions": [],
+          "damage_type": null,
+          "flags": {
+            "can_crit": false,
+            "applies_on_hit": false,
+            "unique": false
+          },
+          "source_line": "冷却 +10 技能急速"
+        },
+        {
+          "name": "牺牲：当你的誓约者在附近时，将其所受的12%伤害转移到你身上，并为你提供相当于其对英雄的10%已造成伤害值的治疗效果",
+          "trigger": "passive_always",
+          "effect_type": "healing",
+          "values": [
+            "12%",
+            "10%"
+          ],
+          "scaling": [],
+          "cooldown": null,
+          "duration": null,
+          "caps": null,
+          "conditions": [],
+          "damage_type": null,
+          "flags": {
+            "can_crit": false,
+            "applies_on_hit": false,
+            "unique": false
+          },
+          "source_line": "牺牲：当你的誓约者在附近时，将其所受的12%伤害转移到你身上，并为你提供相当于其对英雄的10%已造成伤害值的治疗效果"
+        },
+        {
+          "name": "立誓：购买或再次购买此装备时指定一名友方英雄作为你的誓约者",
+          "trigger": "passive_always",
+          "effect_type": "modifier",
+          "values": [],
+          "scaling": [],
+          "cooldown": null,
+          "duration": null,
+          "caps": null,
+          "conditions": [],
+          "damage_type": null,
+          "flags": {
+            "can_crit": false,
+            "applies_on_hit": false,
+            "unique": false
+          },
+          "source_line": "立誓：购买或再次购买此装备时指定一名友方英雄作为你的誓约者"
         }
       ],
       "effect_parse_status": "ok",
@@ -42268,13 +43086,19 @@
   ],
   "diff": {
     "newChampions": [],
-    "newItems": [],
+    "newItems": [
+      "无终恨意",
+      "海克斯注力刚壁",
+      "海妖杀手",
+      "霸王血铠",
+      "骑士之誓"
+    ],
     "newRunes": [],
     "newSummonerSpells": []
   },
   "counts": {
     "champions": 135,
-    "items": 247,
+    "items": 252,
     "runes": 54,
     "summonerSpells": 11
   }
