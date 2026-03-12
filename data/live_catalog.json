@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-03-11T19:52:57.290014+00:00",
+  "generatedAt": "2026-03-12T05:06:35.215237+00:00",
   "sources": {
     "heroes": "https://game.gtimg.cn/images/lgamem/act/lrlib/js/heroList/hero_list.js",
     "items": "https://game.gtimg.cn/images/lgamem/act/lrlib/js/equip/equip.js",
@@ -1442,6 +1442,17 @@
         "射手"
       ],
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10138.png"
+    },
+    {
+      "hero_id": "10139",
+      "name": "梅尔",
+      "alias": "meier",
+      "title": "流光镜影",
+      "lane": "中路",
+      "roles": [
+        "法师"
+      ],
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10139.png"
     },
     {
       "hero_id": "10140",
@@ -43085,13 +43096,15 @@
     }
   ],
   "diff": {
-    "newChampions": [],
+    "newChampions": [
+      "梅尔"
+    ],
     "newItems": [],
     "newRunes": [],
     "newSummonerSpells": []
   },
   "counts": {
-    "champions": 135,
+    "champions": 136,
     "items": 252,
     "runes": 54,
     "summonerSpells": 11
