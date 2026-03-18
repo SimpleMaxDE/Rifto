@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-03-17T18:42:00.147259+00:00",
-  "source": "https://ddragon.leagueoflegends.com/cdn/16.5.1/data/en_US/championFull.json",
-  "version": "16.5.1",
+  "generatedAt": "2026-03-18T01:01:24.730060+00:00",
+  "source": "https://ddragon.leagueoflegends.com/cdn/16.6.1/data/en_US/championFull.json",
+  "version": "16.6.1",
   "champions": {
     "Aatrox": {
       "title": "the Darkin Blade",
@@ -2422,7 +2422,7 @@
         {
           "slot": "Q",
           "name": "Ice Shard",
-          "cooldown": "8/7/6/5/4",
+          "cooldown": "7/6/5/4/3",
           "description": "Throws a spear of ice that shatters when it hits an enemy, dealing magic damage and slowing Move Speed. Shards pass through the target, dealing the same damage to other enemies hi…"
         },
         {
@@ -3999,33 +3999,33 @@
     "Shyvana": {
       "title": "the Half-Dragon",
       "passive": {
-        "name": "Fury of the Dragonborn",
-        "description": "Shyvana deals bonus damage to dragons and gains Armor and Magic Resistance. As Shyvana and her allies slay more dragons, she gains more bonus Armor and Magic Resistance."
+        "name": "Scalemail",
+        "description": "Takedowns on enemy champions, large minions, and large monsters grant Shyvana Scalemail stacks, improving her defenses."
       },
       "spells": [
         {
           "slot": "Q",
-          "name": "Twin Bite",
-          "cooldown": "8/7.5/7/6.5/6",
-          "description": "Shyvana strikes twice on her next attack and grants herself Attack Speed for her next attacks. Basic attacks reduce the cooldown of Twin Bite by 0.5 seconds. Dragon Form: Twin Bit…"
+          "name": "Emberstrike",
+          "cooldown": "10/9/8/7/6",
+          "description": "Shyvana's next attack strikes both the target and the surrounding area. This Ability can be recast. While in Dragon Form, it gains an additional recast, dealing massive damage to…"
         },
         {
           "slot": "W",
-          "name": "Burnout",
-          "cooldown": "12",
-          "description": "Shyvana surrounds herself in fire, dealing magic damage per second to nearby enemies and moving faster for 3 seconds, part of this damage is applied again when Shyvana basic attac…"
+          "name": "Inferno Aegis",
+          "cooldown": "14/13.5/13/12.5/12",
+          "description": "Shyvana gains a shield, movement speed, and after a short delay, the area around her detonates. While in Dragon Form, the explosion will heal her if it strikes an enemy champion."
         },
         {
           "slot": "E",
-          "name": "Flame Breath",
-          "cooldown": "12/11/10/9/8",
-          "description": "Shyvana unleashes a fireball that deals damage to all enemies it encounters and leaves cinders on the target, marking them for 5 seconds. Shyvana's basic attacks on marked targets…"
+          "name": "Molten Burst",
+          "cooldown": "12/11.5/11/10.5/10",
+          "description": "Shyvana launches a fireball that explodes upon striking a large target and slows them. In Dragon Form, it passes through and explodes upon striking large enemies, leaving behind a…"
         },
         {
           "slot": "R",
           "name": "Dragon's Descent",
           "cooldown": "0",
-          "description": "Shyvana transforms into a dragon and takes flight to a target location. Enemies along her path take damage and are knocked toward her target location. Shyvana passively gains Fury…"
+          "description": "Shyvana transforms into a Dragon and leaps forward causing enemies along her path to flee. While in Dragon form she becomes larger and her basic abilities are empowered."
         }
       ]
     },
