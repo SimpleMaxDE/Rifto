@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-04-09T00:57:24.043007+00:00",
+  "generatedAt": "2026-04-09T07:06:03.881502+00:00",
   "sources": {
     "heroes": "https://game.gtimg.cn/images/lgamem/act/lrlib/js/heroList/hero_list.js",
     "items": "https://game.gtimg.cn/images/lgamem/act/lrlib/js/equip/equip.js",
@@ -9,7 +9,7 @@
   "versions": {
     "heroes": "7.1",
     "items": "7.1",
-    "runes": "7.0",
+    "runes": "7.1",
     "summonerSpells": "7.1"
   },
   "champions": [
@@ -40190,45 +40190,14 @@
       "effect_source": "auto"
     },
     {
-      "rune_id": "572117001",
-      "name": "余震",
-      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/RuneIcons/Keystone_Aftershock.png",
-      "description": "在定身一名敌方英雄后可获得防御属性，且稍后会在周围造成爆发性魔法伤害。",
-      "slot": "",
-      "effects": [
-        {
-          "name": "在定身一名敌方英雄后可获得防御属性，且稍后会在周围造成爆发性魔法伤害",
-          "trigger": "passive_always",
-          "effect_type": "damage",
-          "values": [],
-          "scaling": [],
-          "cooldown": null,
-          "duration": null,
-          "caps": null,
-          "conditions": [
-            "vs_immobilized"
-          ],
-          "damage_type": "magic",
-          "flags": {
-            "can_crit": false,
-            "applies_on_hit": false,
-            "unique": false
-          },
-          "source_line": "在定身一名敌方英雄后可获得防御属性，且稍后会在周围造成爆发性魔法伤害"
-        }
-      ],
-      "effect_parse_status": "parser_could_not_extract_values",
-      "effect_source": "auto"
-    },
-    {
       "rune_id": "572518001",
       "name": "僵尸守卫",
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/RuneIcons/Domination_ZombieWard.png",
-      "description": "参与清除敌方眼位后生成僵尸守卫获取视野。",
+      "description": "参与清除敌方眼位后生成僵尸守卫获取视野和自适应之力。",
       "slot": "",
       "effects": [
         {
-          "name": "参与清除敌方眼位后生成僵尸守卫获取视野",
+          "name": "参与清除敌方眼位后生成僵尸守卫获取视野和自适应之力",
           "trigger": "passive_always",
           "effect_type": "modifier",
           "values": [],
@@ -40243,7 +40212,7 @@
             "applies_on_hit": false,
             "unique": false
           },
-          "source_line": "参与清除敌方眼位后生成僵尸守卫获取视野"
+          "source_line": "参与清除敌方眼位后生成僵尸守卫获取视野和自适应之力"
         }
       ],
       "effect_parse_status": "parser_could_not_extract_values",
@@ -40328,14 +40297,14 @@
       "effect_source": "auto"
     },
     {
-      "rune_id": "572121001",
-      "name": "冰川增幅",
-      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/RuneIcons/Keystone_GlacialAugment.png",
-      "description": "定身敌方英雄后，发射射线减少其移动速度。",
+      "rune_id": "572127001",
+      "name": "冰霜领主",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/RuneIcons/Keystone_FrostLord.png",
+      "description": "定身一名敌方英雄时，发射射线，减少其移动速度。同时提高自身防御属性，且稍后对周围造成爆发性的魔法伤害。",
       "slot": "",
       "effects": [
         {
-          "name": "定身敌方英雄后，发射射线减少其移动速度",
+          "name": "定身一名敌方英雄时，发射射线，减少其移动速度",
           "trigger": "passive_always",
           "effect_type": "modifier",
           "values": [],
@@ -40352,7 +40321,25 @@
             "applies_on_hit": false,
             "unique": false
           },
-          "source_line": "定身敌方英雄后，发射射线减少其移动速度"
+          "source_line": "定身一名敌方英雄时，发射射线，减少其移动速度"
+        },
+        {
+          "name": "同时提高自身防御属性，且稍后对周围造成爆发性的魔法伤害",
+          "trigger": "passive_always",
+          "effect_type": "damage",
+          "values": [],
+          "scaling": [],
+          "cooldown": null,
+          "duration": null,
+          "caps": null,
+          "conditions": [],
+          "damage_type": "magic",
+          "flags": {
+            "can_crit": false,
+            "applies_on_hit": false,
+            "unique": false
+          },
+          "source_line": "同时提高自身防御属性，且稍后对周围造成爆发性的魔法伤害"
         }
       ],
       "effect_parse_status": "parser_could_not_extract_values",
@@ -40391,11 +40378,11 @@
       "rune_id": "572414001",
       "name": "凯旋",
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/RuneIcons/Offense_Triumph.png",
-      "description": "参与击败敌方英雄时，回复自身状态。",
+      "description": "参与击败敌方英雄时，回复自身状态并获得短时间的移速加成。",
       "slot": "",
       "effects": [
         {
-          "name": "参与击败敌方英雄时，回复自身状态",
+          "name": "参与击败敌方英雄时，回复自身状态并获得短时间的移速加成",
           "trigger": "passive_always",
           "effect_type": "modifier",
           "values": [],
@@ -40410,7 +40397,7 @@
             "applies_on_hit": false,
             "unique": false
           },
-          "source_line": "参与击败敌方英雄时，回复自身状态"
+          "source_line": "参与击败敌方英雄时，回复自身状态并获得短时间的移速加成"
         }
       ],
       "effect_parse_status": "parser_could_not_extract_values",
@@ -40469,37 +40456,6 @@
             "unique": false
           },
           "source_line": "自身生命越低，对敌方英雄造成伤害越高"
-        }
-      ],
-      "effect_parse_status": "parser_could_not_extract_values",
-      "effect_source": "auto"
-    },
-    {
-      "rune_id": "572316001",
-      "name": "坚韧",
-      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/RuneIcons/Defense_tenacity.png",
-      "description": "获得韧性，被定身时获得护甲与魔抗。",
-      "slot": "",
-      "effects": [
-        {
-          "name": "获得韧性，被定身时获得护甲与魔抗",
-          "trigger": "passive_always",
-          "effect_type": "tenacity",
-          "values": [],
-          "scaling": [],
-          "cooldown": null,
-          "duration": null,
-          "caps": null,
-          "conditions": [
-            "vs_immobilized"
-          ],
-          "damage_type": null,
-          "flags": {
-            "can_crit": false,
-            "applies_on_hit": false,
-            "unique": false
-          },
-          "source_line": "获得韧性，被定身时获得护甲与魔抗"
         }
       ],
       "effect_parse_status": "parser_could_not_extract_values",
@@ -40595,29 +40551,31 @@
       "effect_source": "auto"
     },
     {
-      "rune_id": "572212001",
-      "name": "巨人杀手",
-      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/RuneIcons/Offense_CutDown.png",
-      "description": "敌方英雄额外生命越多，对其造成伤害更高。",
+      "rune_id": "572129001",
+      "name": "守护者",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/RuneIcons/Keystone_Guardian.png",
+      "description": "为自身以及周围的队友提供短暂的护盾。",
       "slot": "",
       "effects": [
         {
-          "name": "敌方英雄额外生命越多，对其造成伤害更高",
+          "name": "为自身以及周围的队友提供短暂的护盾",
           "trigger": "passive_always",
-          "effect_type": "modifier",
+          "effect_type": "shield",
           "values": [],
           "scaling": [],
           "cooldown": null,
           "duration": null,
           "caps": null,
-          "conditions": [],
+          "conditions": [
+            "vs_shielded"
+          ],
           "damage_type": null,
           "flags": {
             "can_crit": false,
             "applies_on_hit": false,
             "unique": false
           },
-          "source_line": "敌方英雄额外生命越多，对其造成伤害更高"
+          "source_line": "为自身以及周围的队友提供短暂的护盾"
         }
       ],
       "effect_parse_status": "parser_could_not_extract_values",
@@ -40688,11 +40646,11 @@
       "rune_id": "572123001",
       "name": "强攻",
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/RuneIcons/Keystone_PresstheAttack.png",
-      "description": "对敌方进行三次连续的普攻，会使其受到的伤害增加。",
+      "description": "对敌方进行三次连续的普攻后，获得伤害增幅。",
       "slot": "",
       "effects": [
         {
-          "name": "对敌方进行三次连续的普攻，会使其受到的伤害增加",
+          "name": "对敌方进行三次连续的普攻后，获得伤害增幅",
           "trigger": "onHit",
           "effect_type": "modifier",
           "values": [],
@@ -40707,7 +40665,7 @@
             "applies_on_hit": true,
             "unique": false
           },
-          "source_line": "对敌方进行三次连续的普攻，会使其受到的伤害增加"
+          "source_line": "对敌方进行三次连续的普攻后，获得伤害增幅"
         }
       ],
       "effect_parse_status": "parser_could_not_extract_values",
@@ -40786,35 +40744,6 @@
       "effect_source": "auto"
     },
     {
-      "rune_id": "572317001",
-      "name": "忠诚",
-      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/RuneIcons/Defense_Loyalty.png",
-      "description": "自己与队友提升护甲与魔抗。",
-      "slot": "",
-      "effects": [
-        {
-          "name": "自己与队友提升护甲与魔抗",
-          "trigger": "passive_always",
-          "effect_type": "modifier",
-          "values": [],
-          "scaling": [],
-          "cooldown": null,
-          "duration": null,
-          "caps": null,
-          "conditions": [],
-          "damage_type": null,
-          "flags": {
-            "can_crit": false,
-            "applies_on_hit": false,
-            "unique": false
-          },
-          "source_line": "自己与队友提升护甲与魔抗"
-        }
-      ],
-      "effect_parse_status": "parser_could_not_extract_values",
-      "effect_source": "auto"
-    },
-    {
       "rune_id": "572515001",
       "name": "恶意中伤",
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/RuneIcons/Domination_CheapSho.png",
@@ -40844,31 +40773,58 @@
       "effect_source": "auto"
     },
     {
-      "rune_id": "572512001",
-      "name": "护盾猛击",
-      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/RuneIcons/Offense_ShieldBash.png",
-      "description": "强化获得护盾和治疗效果后对英雄的第一次普攻。",
+      "rune_id": "572225001",
+      "name": "战意",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/RuneIcons/Precision_572225001.png",
+      "description": "与敌方英雄战斗时，对敌方英雄的基础技能伤害获得增幅。",
       "slot": "",
       "effects": [
         {
-          "name": "强化获得护盾和治疗效果后对英雄的第一次普攻",
-          "trigger": "onHit",
-          "effect_type": "shield",
+          "name": "与敌方英雄战斗时，对敌方英雄的基础技能伤害获得增幅",
+          "trigger": "passive_always",
+          "effect_type": "modifier",
           "values": [],
           "scaling": [],
           "cooldown": null,
           "duration": null,
           "caps": null,
-          "conditions": [
-            "vs_shielded"
-          ],
+          "conditions": [],
           "damage_type": null,
           "flags": {
             "can_crit": false,
-            "applies_on_hit": true,
+            "applies_on_hit": false,
             "unique": false
           },
-          "source_line": "强化获得护盾和治疗效果后对英雄的第一次普攻"
+          "source_line": "与敌方英雄战斗时，对敌方英雄的基础技能伤害获得增幅"
+        }
+      ],
+      "effect_parse_status": "parser_could_not_extract_values",
+      "effect_source": "auto"
+    },
+    {
+      "rune_id": "572526001",
+      "name": "无情猎手",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/RuneIcons/Domination_RuthlessHunter.png",
+      "description": "参与击败英雄或史诗野怪获得永久的脱战移速加成。",
+      "slot": "",
+      "effects": [
+        {
+          "name": "参与击败英雄或史诗野怪获得永久的脱战移速加成",
+          "trigger": "passive_always",
+          "effect_type": "modifier",
+          "values": [],
+          "scaling": [],
+          "cooldown": null,
+          "duration": null,
+          "caps": null,
+          "conditions": [],
+          "damage_type": null,
+          "flags": {
+            "can_crit": false,
+            "applies_on_hit": false,
+            "unique": false
+          },
+          "source_line": "参与击败英雄或史诗野怪获得永久的脱战移速加成"
         }
       ],
       "effect_parse_status": "parser_could_not_extract_values",
@@ -40906,14 +40862,14 @@
       "effect_source": "auto"
     },
     {
-      "rune_id": "572423001",
-      "name": "未来市场",
-      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/RuneIcons/Utility_FuturesMarket.png",
-      "description": "可负债买装备。",
+      "rune_id": "572416001",
+      "name": "植物学家",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/RuneIcons/Utility_572416001.png",
+      "description": "击毁任意植物获得金币，并强化其功能效果。",
       "slot": "",
       "effects": [
         {
-          "name": "可负债买装备",
+          "name": "击毁任意植物获得金币，并强化其功能效果",
           "trigger": "passive_always",
           "effect_type": "modifier",
           "values": [],
@@ -40928,7 +40884,7 @@
             "applies_on_hit": false,
             "unique": false
           },
-          "source_line": "可负债买装备"
+          "source_line": "击毁任意植物获得金币，并强化其功能效果"
         }
       ],
       "effect_parse_status": "parser_could_not_extract_values",
@@ -41054,11 +41010,11 @@
       "rune_id": "572517001",
       "name": "灵性猎手",
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/RuneIcons/Domination_IngeniousHunter.png",
-      "description": "参与击败不同英雄获得装备技能急速。",
+      "description": "参与击败英雄或史诗野怪获得装备技能急速。",
       "slot": "",
       "effects": [
         {
-          "name": "参与击败不同英雄获得装备技能急速",
+          "name": "参与击败英雄或史诗野怪获得装备技能急速",
           "trigger": "passive_always",
           "effect_type": "modifier",
           "values": [],
@@ -41073,36 +41029,7 @@
             "applies_on_hit": false,
             "unique": false
           },
-          "source_line": "参与击败不同英雄获得装备技能急速"
-        }
-      ],
-      "effect_parse_status": "parser_could_not_extract_values",
-      "effect_source": "auto"
-    },
-    {
-      "rune_id": "572519001",
-      "name": "灵能震荡",
-      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/RuneIcons/Offense_ArcanePsionicTremor.png",
-      "description": "技能命中敌方英雄后的下一次普攻，或普攻命中敌方英雄后的下一次技能，造成小范围自适应爆炸伤害。",
-      "slot": "",
-      "effects": [
-        {
-          "name": "技能命中敌方英雄后的下一次普攻，或普攻命中敌方英雄后的下一次技能，造成小范围自适应爆炸伤害",
-          "trigger": "onHit",
-          "effect_type": "modifier",
-          "values": [],
-          "scaling": [],
-          "cooldown": null,
-          "duration": null,
-          "caps": null,
-          "conditions": [],
-          "damage_type": null,
-          "flags": {
-            "can_crit": false,
-            "applies_on_hit": true,
-            "unique": false
-          },
-          "source_line": "技能命中敌方英雄后的下一次普攻，或普攻命中敌方英雄后的下一次技能，造成小范围自适应爆炸伤害"
+          "source_line": "参与击败英雄或史诗野怪获得装备技能急速"
         }
       ],
       "effect_parse_status": "parser_could_not_extract_values",
@@ -41111,7 +41038,7 @@
     {
       "rune_id": "572213001",
       "name": "焦灼",
-      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/RuneIcons/Offense_Scorch.png",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/RuneIcons/Utility_Scorch.png",
       "description": "技能命中英雄时造成额外伤害。",
       "slot": "",
       "effects": [
@@ -41140,7 +41067,7 @@
     {
       "rune_id": "572415001",
       "name": "爆破",
-      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/RuneIcons/Utility_Demolish.png",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/RuneIcons/Defense_Demolish.png",
       "description": "靠近防御塔时自动蓄力，完成后下一次普攻对防御塔造成大量伤害。",
       "slot": "",
       "effects": [
@@ -41161,6 +41088,35 @@
             "unique": false
           },
           "source_line": "靠近防御塔时自动蓄力，完成后下一次普攻对防御塔造成大量伤害"
+        }
+      ],
+      "effect_parse_status": "parser_could_not_extract_values",
+      "effect_source": "auto"
+    },
+    {
+      "rune_id": "572527001",
+      "name": "狂妄",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/RuneIcons/Offense_Arrogant.png",
+      "description": "特定时间内击败英雄获得一定时间的适应之力。",
+      "slot": "",
+      "effects": [
+        {
+          "name": "特定时间内击败英雄获得一定时间的适应之力",
+          "trigger": "passive_always",
+          "effect_type": "modifier",
+          "values": [],
+          "scaling": [],
+          "cooldown": null,
+          "duration": null,
+          "caps": null,
+          "conditions": [],
+          "damage_type": null,
+          "flags": {
+            "can_crit": false,
+            "applies_on_hit": false,
+            "unique": false
+          },
+          "source_line": "特定时间内击败英雄获得一定时间的适应之力"
         }
       ],
       "effect_parse_status": "parser_could_not_extract_values",
@@ -41196,43 +41152,14 @@
       "effect_source": "auto"
     },
     {
-      "rune_id": "572416001",
-      "name": "甜食专家",
-      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/RuneIcons/Utility_SweetTooth.png",
-      "description": "拾取果实获得金币，且回复量更大。",
-      "slot": "",
-      "effects": [
-        {
-          "name": "拾取果实获得金币，且回复量更大",
-          "trigger": "passive_always",
-          "effect_type": "modifier",
-          "values": [],
-          "scaling": [],
-          "cooldown": null,
-          "duration": null,
-          "caps": null,
-          "conditions": [],
-          "damage_type": null,
-          "flags": {
-            "can_crit": false,
-            "applies_on_hit": false,
-            "unique": false
-          },
-          "source_line": "拾取果实获得金币，且回复量更大"
-        }
-      ],
-      "effect_parse_status": "parser_could_not_extract_values",
-      "effect_source": "auto"
-    },
-    {
       "rune_id": "572118001",
       "name": "生命源泉",
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/RuneIcons/Keystone_FontofLife.png",
-      "description": "标记敌方英雄，攻击获得治疗。",
+      "description": "攻击敌方英雄获得治疗。",
       "slot": "",
       "effects": [
         {
-          "name": "标记敌方英雄，攻击获得治疗",
+          "name": "攻击敌方英雄获得治疗",
           "trigger": "passive_always",
           "effect_type": "healing",
           "values": [],
@@ -41247,7 +41174,7 @@
             "applies_on_hit": false,
             "unique": false
           },
-          "source_line": "标记敌方英雄，攻击获得治疗"
+          "source_line": "攻击敌方英雄获得治疗"
         }
       ],
       "effect_parse_status": "parser_could_not_extract_values",
@@ -41315,11 +41242,11 @@
       "rune_id": "572516001",
       "name": "眼球收集器",
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/RuneIcons/Domination_EyeballCollection.png",
-      "description": "参与击败英雄获得适应之力。",
+      "description": "参与击败英雄或史诗野怪获得自适应之力。",
       "slot": "",
       "effects": [
         {
-          "name": "参与击败英雄获得适应之力",
+          "name": "参与击败英雄或史诗野怪获得自适应之力",
           "trigger": "passive_always",
           "effect_type": "modifier",
           "values": [],
@@ -41334,7 +41261,65 @@
             "applies_on_hit": false,
             "unique": false
           },
-          "source_line": "参与击败英雄获得适应之力"
+          "source_line": "参与击败英雄或史诗野怪获得自适应之力"
+        }
+      ],
+      "effect_parse_status": "parser_could_not_extract_values",
+      "effect_source": "auto"
+    },
+    {
+      "rune_id": "572212001",
+      "name": "砍倒",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/RuneIcons/Offense_CutDown.png",
+      "description": "当敌方英雄剩余较高生命值时，你的攻击对其造成额外自适应伤害。",
+      "slot": "",
+      "effects": [
+        {
+          "name": "当敌方英雄剩余较高生命值时，你的攻击对其造成额外自适应伤害",
+          "trigger": "passive_always",
+          "effect_type": "modifier",
+          "values": [],
+          "scaling": [],
+          "cooldown": null,
+          "duration": null,
+          "caps": null,
+          "conditions": [],
+          "damage_type": null,
+          "flags": {
+            "can_crit": false,
+            "applies_on_hit": false,
+            "unique": false
+          },
+          "source_line": "当敌方英雄剩余较高生命值时，你的攻击对其造成额外自适应伤害"
+        }
+      ],
+      "effect_parse_status": "parser_could_not_extract_values",
+      "effect_source": "auto"
+    },
+    {
+      "rune_id": "572427001",
+      "name": "绝对专注",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/RuneIcons/Utility_AbsoluteFocus.png",
+      "description": "自身高于一定生命值时，获得自适应加成。",
+      "slot": "",
+      "effects": [
+        {
+          "name": "自身高于一定生命值时，获得自适应加成",
+          "trigger": "passive_always",
+          "effect_type": "modifier",
+          "values": [],
+          "scaling": [],
+          "cooldown": null,
+          "duration": null,
+          "caps": null,
+          "conditions": [],
+          "damage_type": null,
+          "flags": {
+            "can_crit": false,
+            "applies_on_hit": false,
+            "unique": false
+          },
+          "source_line": "自身高于一定生命值时，获得自适应加成"
         }
       ],
       "effect_parse_status": "parser_could_not_extract_values",
@@ -41424,35 +41409,6 @@
             "unique": false
           },
           "source_line": "使用普攻和技能时，会派出艾黎，对敌方英雄造成伤害或为我方英雄套上护盾"
-        }
-      ],
-      "effect_parse_status": "parser_could_not_extract_values",
-      "effect_source": "auto"
-    },
-    {
-      "rune_id": "572422001",
-      "name": "装备打造",
-      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/RuneIcons/Utility_LivingForge.png",
-      "description": "付出额外金钱在泉水外购买装备。",
-      "slot": "",
-      "effects": [
-        {
-          "name": "付出额外金钱在泉水外购买装备",
-          "trigger": "passive_always",
-          "effect_type": "modifier",
-          "values": [],
-          "scaling": [],
-          "cooldown": null,
-          "duration": null,
-          "caps": null,
-          "conditions": [],
-          "damage_type": null,
-          "flags": {
-            "can_crit": false,
-            "applies_on_hit": false,
-            "unique": false
-          },
-          "source_line": "付出额外金钱在泉水外购买装备"
         }
       ],
       "effect_parse_status": "parser_could_not_extract_values",
@@ -41629,7 +41585,7 @@
     {
       "rune_id": "572215001",
       "name": "风暴聚集",
-      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/RuneIcons/Offense_GatheringStorm.png",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/RuneIcons/Utility_572215001.png",
       "description": "时间越久，输出能力越高。",
       "slot": "",
       "effects": [
@@ -41831,13 +41787,22 @@
   "diff": {
     "newChampions": [],
     "newItems": [],
-    "newRunes": [],
+    "newRunes": [
+      "冰霜领主",
+      "守护者",
+      "战意",
+      "无情猎手",
+      "植物学家",
+      "狂妄",
+      "砍倒",
+      "绝对专注"
+    ],
     "newSummonerSpells": []
   },
   "counts": {
     "champions": 137,
     "items": 252,
-    "runes": 54,
+    "runes": 52,
     "summonerSpells": 16
   }
 }
