@@ -1,101 +1,17 @@
 {
   "patch": "CN Live",
-  "lastUpdated": "2026-04-12 01:11",
+  "lastUpdated": "2026-04-12 07:00",
   "source": "Tencent hero_list.js (WR list + icons) + hero_rank_list_v2 (CN stats)",
   "champions": [
-    {
-      "hero_id": "10119",
-      "name": "Brand",
-      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10119.png",
-      "stats": {
-        "CN": {
-          "win": 52.9,
-          "pick": 8.97,
-          "ban": 4.05
-        }
-      }
-    },
-    {
-      "hero_id": "10038",
-      "name": "Ahri",
-      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10038.png",
-      "stats": {
-        "CN": {
-          "win": 52.73,
-          "pick": 4.91,
-          "ban": 0.08
-        }
-      }
-    },
-    {
-      "hero_id": "10126",
-      "name": "Swain",
-      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10126.png",
-      "stats": {
-        "CN": {
-          "win": 52.62,
-          "pick": 6.77,
-          "ban": 2.59
-        }
-      }
-    },
-    {
-      "hero_id": "10144",
-      "name": "Viktor",
-      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10144.png",
-      "stats": {
-        "CN": {
-          "win": 52.53,
-          "pick": 4.67,
-          "ban": 0.61
-        }
-      }
-    },
-    {
-      "hero_id": "10003",
-      "name": "Lux",
-      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10003.png",
-      "stats": {
-        "CN": {
-          "win": 52.19,
-          "pick": 10.36,
-          "ban": 13.57
-        }
-      }
-    },
-    {
-      "hero_id": "10061",
-      "name": "Kennen",
-      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10061.png",
-      "stats": {
-        "CN": {
-          "win": 53.79,
-          "pick": 3.16,
-          "ban": 0.23
-        }
-      }
-    },
-    {
-      "hero_id": "10028",
-      "name": "Morgana",
-      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10028.png",
-      "stats": {
-        "CN": {
-          "win": 52.1,
-          "pick": 6.75,
-          "ban": 16.79
-        }
-      }
-    },
     {
       "hero_id": "10046",
       "name": "Teemo",
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10046.png",
       "stats": {
         "CN": {
-          "win": 55.96,
-          "pick": 4.33,
-          "ban": 16.68
+          "win": 61.54,
+          "pick": 4.6,
+          "ban": 17.54
         }
       }
     },
@@ -105,9 +21,69 @@
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10063.png",
       "stats": {
         "CN": {
-          "win": 51.95,
-          "pick": 3.92,
-          "ban": 14.26
+          "win": 61.54,
+          "pick": 4.02,
+          "ban": 14.04
+        }
+      }
+    },
+    {
+      "hero_id": "10144",
+      "name": "Viktor",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10144.png",
+      "stats": {
+        "CN": {
+          "win": 52.92,
+          "pick": 4.64,
+          "ban": 0.7
+        }
+      }
+    },
+    {
+      "hero_id": "10119",
+      "name": "Brand",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10119.png",
+      "stats": {
+        "CN": {
+          "win": 56.25,
+          "pick": 9.19,
+          "ban": 4.56
+        }
+      }
+    },
+    {
+      "hero_id": "10003",
+      "name": "Lux",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10003.png",
+      "stats": {
+        "CN": {
+          "win": 52.72,
+          "pick": 11.15,
+          "ban": 14.92
+        }
+      }
+    },
+    {
+      "hero_id": "10028",
+      "name": "Morgana",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10028.png",
+      "stats": {
+        "CN": {
+          "win": 66.67,
+          "pick": 6.94,
+          "ban": 16.55
+        }
+      }
+    },
+    {
+      "hero_id": "10038",
+      "name": "Ahri",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10038.png",
+      "stats": {
+        "CN": {
+          "win": 52.16,
+          "pick": 5.05,
+          "ban": 0.09
         }
       }
     },
@@ -117,9 +93,21 @@
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10122.png",
       "stats": {
         "CN": {
-          "win": 51.92,
-          "pick": 10.17,
-          "ban": 8.43
+          "win": 54.84,
+          "pick": 11.03,
+          "ban": 9.12
+        }
+      }
+    },
+    {
+      "hero_id": "10061",
+      "name": "Kennen",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10061.png",
+      "stats": {
+        "CN": {
+          "win": 57.14,
+          "pick": 2.93,
+          "ban": 0.26
         }
       }
     },
@@ -129,33 +117,9 @@
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10137.png",
       "stats": {
         "CN": {
-          "win": 54.1,
-          "pick": 7.36,
-          "ban": 2.14
-        }
-      }
-    },
-    {
-      "hero_id": "10099",
-      "name": "Galio",
-      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10099.png",
-      "stats": {
-        "CN": {
-          "win": 55.75,
-          "pick": 10.03,
-          "ban": 0.97
-        }
-      }
-    },
-    {
-      "hero_id": "10036",
-      "name": "Annie",
-      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10036.png",
-      "stats": {
-        "CN": {
-          "win": 53.53,
-          "pick": 2.69,
-          "ban": 0.05
+          "win": 53.79,
+          "pick": 14.35,
+          "ban": 4.5
         }
       }
     },
@@ -165,33 +129,33 @@
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10012.png",
       "stats": {
         "CN": {
-          "win": 50.7,
-          "pick": 5.34,
+          "win": 51.4,
+          "pick": 5.97,
           "ban": 0.11
         }
       }
     },
     {
-      "hero_id": "10023",
-      "name": "Aurelion Sol",
-      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10023.png",
+      "hero_id": "10126",
+      "name": "Swain",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10126.png",
       "stats": {
         "CN": {
-          "win": 50.66,
-          "pick": 7.94,
-          "ban": 2.02
+          "win": 52.12,
+          "pick": 7.33,
+          "ban": 2.62
         }
       }
     },
     {
-      "hero_id": "10109",
-      "name": "Lissandra",
-      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10109.png",
+      "hero_id": "10099",
+      "name": "Galio",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10099.png",
       "stats": {
         "CN": {
-          "win": 50.58,
-          "pick": 6.12,
-          "ban": 3.79
+          "win": 53.39,
+          "pick": 10.16,
+          "ban": 1.04
         }
       }
     },
@@ -201,9 +165,33 @@
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10025.png",
       "stats": {
         "CN": {
-          "win": 52.4,
-          "pick": 6.76,
-          "ban": 0.16
+          "win": 52.03,
+          "pick": 9.32,
+          "ban": 0.14
+        }
+      }
+    },
+    {
+      "hero_id": "10023",
+      "name": "Aurelion Sol",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10023.png",
+      "stats": {
+        "CN": {
+          "win": 50.63,
+          "pick": 7.96,
+          "ban": 1.84
+        }
+      }
+    },
+    {
+      "hero_id": "10109",
+      "name": "Lissandra",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10109.png",
+      "stats": {
+        "CN": {
+          "win": 57.14,
+          "pick": 7.33,
+          "ban": 3.46
         }
       }
     },
@@ -213,33 +201,9 @@
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10024.png",
       "stats": {
         "CN": {
-          "win": 50.34,
-          "pick": 7.8,
-          "ban": 2.45
-        }
-      }
-    },
-    {
-      "hero_id": "10087",
-      "name": "Ziggs",
-      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10087.png",
-      "stats": {
-        "CN": {
-          "win": 50.12,
-          "pick": 5.41,
-          "ban": 1.09
-        }
-      }
-    },
-    {
-      "hero_id": "10103",
-      "name": "Kassadin",
-      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10103.png",
-      "stats": {
-        "CN": {
-          "win": 50.72,
-          "pick": 3.56,
-          "ban": 0.43
+          "win": 50.39,
+          "pick": 9.21,
+          "ban": 3.04
         }
       }
     },
@@ -249,9 +213,9 @@
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10141.png",
       "stats": {
         "CN": {
-          "win": 51.93,
-          "pick": 3.03,
-          "ban": 0.35
+          "win": 61.11,
+          "pick": 3.07,
+          "ban": 0.38
         }
       }
     },
@@ -261,33 +225,45 @@
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10039.png",
       "stats": {
         "CN": {
-          "win": 52.18,
-          "pick": 5.32,
-          "ban": 1.37
+          "win": 56.94,
+          "pick": 7.54,
+          "ban": 1.47
         }
       }
     },
     {
-      "hero_id": "10127",
-      "name": "Heimerdinger",
-      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10127.png",
+      "hero_id": "10087",
+      "name": "Ziggs",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10087.png",
       "stats": {
         "CN": {
-          "win": 50.38,
-          "pick": 1.4,
-          "ban": 0.73
+          "win": 49.79,
+          "pick": 5.53,
+          "ban": 1.16
         }
       }
     },
     {
-      "hero_id": "10045",
-      "name": "Tristana",
-      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10045.png",
+      "hero_id": "10036",
+      "name": "Annie",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10036.png",
       "stats": {
         "CN": {
-          "win": 49.37,
-          "pick": 10.83,
-          "ban": 0.15
+          "win": 51.93,
+          "pick": 2.32,
+          "ban": 0.05
+        }
+      }
+    },
+    {
+      "hero_id": "10103",
+      "name": "Kassadin",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10103.png",
+      "stats": {
+        "CN": {
+          "win": 58.33,
+          "pick": 3.77,
+          "ban": 0.52
         }
       }
     },
@@ -297,21 +273,9 @@
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10085.png",
       "stats": {
         "CN": {
-          "win": 49.65,
-          "pick": 6.83,
-          "ban": 5.6
-        }
-      }
-    },
-    {
-      "hero_id": "10101",
-      "name": "Jayce",
-      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10101.png",
-      "stats": {
-        "CN": {
-          "win": 53.06,
-          "pick": 4.18,
-          "ban": 0.52
+          "win": 50.36,
+          "pick": 10.79,
+          "ban": 6.7
         }
       }
     },
@@ -321,21 +285,21 @@
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10037.png",
       "stats": {
         "CN": {
-          "win": 49.42,
-          "pick": 11.41,
-          "ban": 13.09
+          "win": 48.95,
+          "pick": 11.47,
+          "ban": 21.15
         }
       }
     },
     {
-      "hero_id": "10069",
-      "name": "Yone",
-      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10069.png",
+      "hero_id": "10045",
+      "name": "Tristana",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10045.png",
       "stats": {
         "CN": {
-          "win": 49.1,
-          "pick": 5.74,
-          "ban": 3.85
+          "win": 48.71,
+          "pick": 11.23,
+          "ban": 0.18
         }
       }
     },
@@ -345,273 +309,21 @@
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10086.png",
       "stats": {
         "CN": {
-          "win": 49.56,
-          "pick": 3.19,
-          "ban": 2.39
+          "win": 60.0,
+          "pick": 3.87,
+          "ban": 2.77
         }
       }
     },
     {
-      "hero_id": "10090",
-      "name": "Vladimir",
-      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10090.png",
+      "hero_id": "10069",
+      "name": "Yone",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10069.png",
       "stats": {
         "CN": {
-          "win": 48.15,
-          "pick": 4.72,
-          "ban": 0.64
-        }
-      }
-    },
-    {
-      "hero_id": "10138",
-      "name": "Smolder",
-      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10138.png",
-      "stats": {
-        "CN": {
-          "win": 53.89,
-          "pick": 23.79,
-          "ban": 27.93
-        }
-      }
-    },
-    {
-      "hero_id": "10013",
-      "name": "Diana",
-      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10013.png",
-      "stats": {
-        "CN": {
-          "win": 48.1,
-          "pick": 1.44,
-          "ban": 0.06
-        }
-      }
-    },
-    {
-      "hero_id": "10094",
-      "name": "Irelia",
-      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10094.png",
-      "stats": {
-        "CN": {
-          "win": 52.15,
-          "pick": 3.1,
-          "ban": 0.85
-        }
-      }
-    },
-    {
-      "hero_id": "10095",
-      "name": "Katarina",
-      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10095.png",
-      "stats": {
-        "CN": {
-          "win": 48.23,
-          "pick": 2.85,
-          "ban": 0.24
-        }
-      }
-    },
-    {
-      "hero_id": "10060",
-      "name": "Corki",
-      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10060.png",
-      "stats": {
-        "CN": {
-          "win": 49.41,
-          "pick": 7.07,
-          "ban": 0.31
-        }
-      }
-    },
-    {
-      "hero_id": "10011",
-      "name": "Ekko",
-      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10011.png",
-      "stats": {
-        "CN": {
-          "win": 48.73,
-          "pick": 2.2,
-          "ban": 0.06
-        }
-      }
-    },
-    {
-      "hero_id": "10031",
-      "name": "Akali",
-      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10031.png",
-      "stats": {
-        "CN": {
-          "win": 46.9,
-          "pick": 4.53,
-          "ban": 0.39
-        }
-      }
-    },
-    {
-      "hero_id": "10014",
-      "name": "Zoe",
-      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10014.png",
-      "stats": {
-        "CN": {
-          "win": 47.46,
-          "pick": 3.26,
-          "ban": 0.78
-        }
-      }
-    },
-    {
-      "hero_id": "10010",
-      "name": "Vayne",
-      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10010.png",
-      "stats": {
-        "CN": {
-          "win": 55.52,
-          "pick": 16.91,
-          "ban": 12.32
-        }
-      }
-    },
-    {
-      "hero_id": "10082",
-      "name": "Ambessa",
-      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10082.png",
-      "stats": {
-        "CN": {
-          "win": 53.44,
-          "pick": 6.45,
-          "ban": 1.09
-        }
-      }
-    },
-    {
-      "hero_id": "10125",
-      "name": "Sion",
-      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10125.png",
-      "stats": {
-        "CN": {
-          "win": 53.41,
-          "pick": 5.37,
-          "ban": 0.2
-        }
-      }
-    },
-    {
-      "hero_id": "10001",
-      "name": "Garen",
-      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10001.png",
-      "stats": {
-        "CN": {
-          "win": 52.9,
-          "pick": 16.45,
-          "ban": 2.46
-        }
-      }
-    },
-    {
-      "hero_id": "10132",
-      "name": "Nautilus",
-      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10132.png",
-      "stats": {
-        "CN": {
-          "win": 53.22,
-          "pick": 14.92,
-          "ban": 2.51
-        }
-      }
-    },
-    {
-      "hero_id": "10118",
-      "name": "Shen",
-      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10118.png",
-      "stats": {
-        "CN": {
-          "win": 52.4,
-          "pick": 1.77,
-          "ban": 0.05
-        }
-      }
-    },
-    {
-      "hero_id": "10134",
-      "name": "Kalista",
-      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10134.png",
-      "stats": {
-        "CN": {
-          "win": 52.35,
-          "pick": 5.8,
-          "ban": 2.22
-        }
-      }
-    },
-    {
-      "hero_id": "10068",
-      "name": "Sett",
-      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10068.png",
-      "stats": {
-        "CN": {
-          "win": 52.38,
-          "pick": 14.91,
-          "ban": 0.79
-        }
-      }
-    },
-    {
-      "hero_id": "10076",
-      "name": "Poppy",
-      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10076.png",
-      "stats": {
-        "CN": {
-          "win": 51.82,
-          "pick": 2.91,
-          "ban": 0.16
-        }
-      }
-    },
-    {
-      "hero_id": "10140",
-      "name": "Rumble",
-      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10140.png",
-      "stats": {
-        "CN": {
-          "win": 51.59,
-          "pick": 2.69,
-          "ban": 0.45
-        }
-      }
-    },
-    {
-      "hero_id": "10121",
-      "name": "Renekton",
-      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10121.png",
-      "stats": {
-        "CN": {
-          "win": 51.59,
-          "pick": 8.8,
-          "ban": 1.67
-        }
-      }
-    },
-    {
-      "hero_id": "10083",
-      "name": "Malphite",
-      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10083.png",
-      "stats": {
-        "CN": {
-          "win": 52.7,
-          "pick": 9.95,
-          "ban": 12.84
-        }
-      }
-    },
-    {
-      "hero_id": "10062",
-      "name": "Dr. Mundo",
-      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10062.png",
-      "stats": {
-        "CN": {
-          "win": 53.06,
-          "pick": 4.17,
-          "ban": 0.57
+          "win": 60.87,
+          "pick": 5.74,
+          "ban": 3.79
         }
       }
     },
@@ -621,45 +333,285 @@
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10041.png",
       "stats": {
         "CN": {
-          "win": 50.55,
-          "pick": 2.8,
-          "ban": 0.38
+          "win": 50.66,
+          "pick": 2.97,
+          "ban": 0.42
         }
       }
     },
     {
-      "hero_id": "10078",
-      "name": "Gnar",
-      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10078.png",
+      "hero_id": "10127",
+      "name": "Heimerdinger",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10127.png",
       "stats": {
         "CN": {
-          "win": 50.45,
-          "pick": 3.25,
+          "win": 48.84,
+          "pick": 1.48,
+          "ban": 0.84
+        }
+      }
+    },
+    {
+      "hero_id": "10013",
+      "name": "Diana",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10013.png",
+      "stats": {
+        "CN": {
+          "win": 48.36,
+          "pick": 1.45,
+          "ban": 0.06
+        }
+      }
+    },
+    {
+      "hero_id": "10138",
+      "name": "Smolder",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10138.png",
+      "stats": {
+        "CN": {
+          "win": 57.14,
+          "pick": 28.59,
+          "ban": 28.59
+        }
+      }
+    },
+    {
+      "hero_id": "10090",
+      "name": "Vladimir",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10090.png",
+      "stats": {
+        "CN": {
+          "win": 48.22,
+          "pick": 4.21,
+          "ban": 0.64
+        }
+      }
+    },
+    {
+      "hero_id": "10101",
+      "name": "Jayce",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10101.png",
+      "stats": {
+        "CN": {
+          "win": 51.1,
+          "pick": 4.82,
+          "ban": 0.94
+        }
+      }
+    },
+    {
+      "hero_id": "10011",
+      "name": "Ekko",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10011.png",
+      "stats": {
+        "CN": {
+          "win": 61.9,
+          "pick": 2.2,
+          "ban": 0.31
+        }
+      }
+    },
+    {
+      "hero_id": "10060",
+      "name": "Corki",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10060.png",
+      "stats": {
+        "CN": {
+          "win": 49.26,
+          "pick": 6.07,
           "ban": 0.19
         }
       }
     },
     {
-      "hero_id": "10065",
-      "name": "Nasus",
-      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10065.png",
+      "hero_id": "10094",
+      "name": "Irelia",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10094.png",
       "stats": {
         "CN": {
-          "win": 51.14,
-          "pick": 5.41,
-          "ban": 1.76
+          "win": 68.57,
+          "pick": 3.66,
+          "ban": 0.94
         }
       }
     },
     {
-      "hero_id": "10015",
-      "name": "Tryndamere",
-      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10015.png",
+      "hero_id": "10095",
+      "name": "Katarina",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10095.png",
       "stats": {
         "CN": {
-          "win": 51.35,
-          "pick": 8.28,
-          "ban": 19.71
+          "win": 52.0,
+          "pick": 2.62,
+          "ban": 0.31
+        }
+      }
+    },
+    {
+      "hero_id": "10031",
+      "name": "Akali",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10031.png",
+      "stats": {
+        "CN": {
+          "win": 48.39,
+          "pick": 6.49,
+          "ban": 0.84
+        }
+      }
+    },
+    {
+      "hero_id": "10014",
+      "name": "Zoe",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10014.png",
+      "stats": {
+        "CN": {
+          "win": 66.67,
+          "pick": 2.83,
+          "ban": 0.52
+        }
+      }
+    },
+    {
+      "hero_id": "10010",
+      "name": "Vayne",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10010.png",
+      "stats": {
+        "CN": {
+          "win": 54.92,
+          "pick": 17.49,
+          "ban": 18.22
+        }
+      }
+    },
+    {
+      "hero_id": "10001",
+      "name": "Garen",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10001.png",
+      "stats": {
+        "CN": {
+          "win": 53.37,
+          "pick": 19.06,
+          "ban": 2.37
+        }
+      }
+    },
+    {
+      "hero_id": "10134",
+      "name": "Kalista",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10134.png",
+      "stats": {
+        "CN": {
+          "win": 53.3,
+          "pick": 6.16,
+          "ban": 2.59
+        }
+      }
+    },
+    {
+      "hero_id": "10125",
+      "name": "Sion",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10125.png",
+      "stats": {
+        "CN": {
+          "win": 52.86,
+          "pick": 7.54,
+          "ban": 0.19
+        }
+      }
+    },
+    {
+      "hero_id": "10082",
+      "name": "Ambessa",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10082.png",
+      "stats": {
+        "CN": {
+          "win": 65.22,
+          "pick": 7.23,
+          "ban": 4.71
+        }
+      }
+    },
+    {
+      "hero_id": "10132",
+      "name": "Nautilus",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10132.png",
+      "stats": {
+        "CN": {
+          "win": 69.23,
+          "pick": 14.89,
+          "ban": 2.55
+        }
+      }
+    },
+    {
+      "hero_id": "10068",
+      "name": "Sett",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10068.png",
+      "stats": {
+        "CN": {
+          "win": 53.03,
+          "pick": 14.12,
+          "ban": 0.83
+        }
+      }
+    },
+    {
+      "hero_id": "10118",
+      "name": "Shen",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10118.png",
+      "stats": {
+        "CN": {
+          "win": 51.78,
+          "pick": 1.58,
+          "ban": 0.04
+        }
+      }
+    },
+    {
+      "hero_id": "10121",
+      "name": "Renekton",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10121.png",
+      "stats": {
+        "CN": {
+          "win": 51.66,
+          "pick": 13.72,
+          "ban": 5.24
+        }
+      }
+    },
+    {
+      "hero_id": "10140",
+      "name": "Rumble",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10140.png",
+      "stats": {
+        "CN": {
+          "win": 69.23,
+          "pick": 2.65,
+          "ban": 0.43
+        }
+      }
+    },
+    {
+      "hero_id": "10076",
+      "name": "Poppy",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10076.png",
+      "stats": {
+        "CN": {
+          "win": 60.0,
+          "pick": 4.19,
+          "ban": 0.13
+        }
+      }
+    },
+    {
+      "hero_id": "10062",
+      "name": "Dr. Mundo",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10062.png",
+      "stats": {
+        "CN": {
+          "win": 53.01,
+          "pick": 4.56,
+          "ban": 0.68
         }
       }
     },
@@ -669,9 +621,33 @@
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10058.png",
       "stats": {
         "CN": {
-          "win": 50.26,
-          "pick": 4.35,
-          "ban": 1.95
+          "win": 50.72,
+          "pick": 4.34,
+          "ban": 2.16
+        }
+      }
+    },
+    {
+      "hero_id": "10065",
+      "name": "Nasus",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10065.png",
+      "stats": {
+        "CN": {
+          "win": 57.14,
+          "pick": 5.57,
+          "ban": 1.77
+        }
+      }
+    },
+    {
+      "hero_id": "10083",
+      "name": "Malphite",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10083.png",
+      "stats": {
+        "CN": {
+          "win": 56.52,
+          "pick": 10.21,
+          "ban": 13.16
         }
       }
     },
@@ -681,45 +657,33 @@
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10136.png",
       "stats": {
         "CN": {
-          "win": 51.68,
-          "pick": 3.56,
-          "ban": 0.12
+          "win": 52.91,
+          "pick": 3.05,
+          "ban": 0.16
         }
       }
     },
     {
-      "hero_id": "10002",
-      "name": "Aatrox",
-      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10002.png",
+      "hero_id": "10078",
+      "name": "Gnar",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10078.png",
       "stats": {
         "CN": {
-          "win": 50.54,
-          "pick": 8.05,
-          "ban": 4.05
+          "win": 50.47,
+          "pick": 3.29,
+          "ban": 0.2
         }
       }
     },
     {
-      "hero_id": "10055",
-      "name": "Camille",
-      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10055.png",
+      "hero_id": "10015",
+      "name": "Tryndamere",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10015.png",
       "stats": {
         "CN": {
-          "win": 50.87,
-          "pick": 4.36,
-          "ban": 0.12
-        }
-      }
-    },
-    {
-      "hero_id": "10071",
-      "name": "Darius",
-      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10071.png",
-      "stats": {
-        "CN": {
-          "win": 49.33,
-          "pick": 16.03,
-          "ban": 4.34
+          "win": 50.58,
+          "pick": 8.66,
+          "ban": 20.72
         }
       }
     },
@@ -729,45 +693,45 @@
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10054.png",
       "stats": {
         "CN": {
-          "win": 49.04,
-          "pick": 2.21,
-          "ban": 0.33
+          "win": 49.39,
+          "pick": 2.17,
+          "ban": 0.34
         }
       }
     },
     {
-      "hero_id": "10092",
-      "name": "Riven",
-      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10092.png",
+      "hero_id": "10002",
+      "name": "Aatrox",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10002.png",
       "stats": {
         "CN": {
-          "win": 51.04,
-          "pick": 3.25,
-          "ban": 1.23
+          "win": 49.58,
+          "pick": 9.53,
+          "ban": 4.28
         }
       }
     },
     {
-      "hero_id": "10035",
-      "name": "Mordekaiser",
-      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10035.png",
+      "hero_id": "10071",
+      "name": "Darius",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10071.png",
       "stats": {
         "CN": {
-          "win": 48.51,
-          "pick": 11.85,
-          "ban": 14.22
+          "win": 49.55,
+          "pick": 16.2,
+          "ban": 4.48
         }
       }
     },
     {
-      "hero_id": "10102",
-      "name": "Urgot",
-      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10102.png",
+      "hero_id": "10055",
+      "name": "Camille",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10055.png",
       "stats": {
         "CN": {
-          "win": 48.33,
-          "pick": 4.32,
-          "ban": 1.75
+          "win": 49.72,
+          "pick": 3.48,
+          "ban": 0.07
         }
       }
     },
@@ -777,9 +741,45 @@
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10032.png",
       "stats": {
         "CN": {
-          "win": 49.22,
-          "pick": 3.94,
-          "ban": 2.33
+          "win": 49.29,
+          "pick": 4.82,
+          "ban": 4.4
+        }
+      }
+    },
+    {
+      "hero_id": "10035",
+      "name": "Mordekaiser",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10035.png",
+      "stats": {
+        "CN": {
+          "win": 48.61,
+          "pick": 12.34,
+          "ban": 13.35
+        }
+      }
+    },
+    {
+      "hero_id": "10092",
+      "name": "Riven",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10092.png",
+      "stats": {
+        "CN": {
+          "win": 64.0,
+          "pick": 7.85,
+          "ban": 2.93
+        }
+      }
+    },
+    {
+      "hero_id": "10102",
+      "name": "Urgot",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10102.png",
+      "stats": {
+        "CN": {
+          "win": 47.6,
+          "pick": 4.23,
+          "ban": 1.77
         }
       }
     },
@@ -789,32 +789,8 @@
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10040.png",
       "stats": {
         "CN": {
-          "win": 46.41,
-          "pick": 4.81,
-          "ban": 0.22
-        }
-      }
-    },
-    {
-      "hero_id": "10066",
-      "name": "Miss Fortune",
-      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10066.png",
-      "stats": {
-        "CN": {
-          "win": 52.17,
-          "pick": 15.19,
-          "ban": 1.14
-        }
-      }
-    },
-    {
-      "hero_id": "10022",
-      "name": "Jhin",
-      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10022.png",
-      "stats": {
-        "CN": {
-          "win": 51.53,
-          "pick": 14.06,
+          "win": 51.85,
+          "pick": 5.27,
           "ban": 0.28
         }
       }
@@ -825,9 +801,21 @@
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10051.png",
       "stats": {
         "CN": {
-          "win": 51.52,
-          "pick": 7.21,
-          "ban": 0.12
+          "win": 52.23,
+          "pick": 6.33,
+          "ban": 0.11
+        }
+      }
+    },
+    {
+      "hero_id": "10066",
+      "name": "Miss Fortune",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10066.png",
+      "stats": {
+        "CN": {
+          "win": 51.98,
+          "pick": 15.81,
+          "ban": 1.22
         }
       }
     },
@@ -837,21 +825,21 @@
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10079.png",
       "stats": {
         "CN": {
-          "win": 51.22,
-          "pick": 11.11,
-          "ban": 0.18
+          "win": 51.56,
+          "pick": 11.87,
+          "ban": 0.22
         }
       }
     },
     {
-      "hero_id": "10098",
-      "name": "Ezreal",
-      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10098.png",
+      "hero_id": "10022",
+      "name": "Jhin",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10022.png",
       "stats": {
         "CN": {
-          "win": 50.78,
-          "pick": 9.09,
-          "ban": 0.16
+          "win": 52.71,
+          "pick": 15.83,
+          "ban": 0.35
         }
       }
     },
@@ -861,9 +849,9 @@
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10112.png",
       "stats": {
         "CN": {
-          "win": 49.58,
-          "pick": 25.6,
-          "ban": 2.65
+          "win": 52.78,
+          "pick": 25.51,
+          "ban": 2.85
         }
       }
     },
@@ -873,21 +861,9 @@
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10018.png",
       "stats": {
         "CN": {
-          "win": 49.4,
-          "pick": 12.64,
-          "ban": 0.25
-        }
-      }
-    },
-    {
-      "hero_id": "10077",
-      "name": "Draven",
-      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10077.png",
-      "stats": {
-        "CN": {
-          "win": 52.65,
-          "pick": 7.65,
-          "ban": 2.15
+          "win": 48.98,
+          "pick": 11.75,
+          "ban": 0.3
         }
       }
     },
@@ -897,9 +873,33 @@
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10107.png",
       "stats": {
         "CN": {
-          "win": 48.73,
-          "pick": 3.08,
+          "win": 48.72,
+          "pick": 3.32,
           "ban": 0.03
+        }
+      }
+    },
+    {
+      "hero_id": "10077",
+      "name": "Draven",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10077.png",
+      "stats": {
+        "CN": {
+          "win": 51.58,
+          "pick": 9.95,
+          "ban": 2.67
+        }
+      }
+    },
+    {
+      "hero_id": "10098",
+      "name": "Ezreal",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10098.png",
+      "stats": {
+        "CN": {
+          "win": 53.66,
+          "pick": 12.88,
+          "ban": 0.52
         }
       }
     },
@@ -909,21 +909,9 @@
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10104.png",
       "stats": {
         "CN": {
-          "win": 50.69,
-          "pick": 9.8,
-          "ban": 4.28
-        }
-      }
-    },
-    {
-      "hero_id": "10042",
-      "name": "Lucian",
-      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10042.png",
-      "stats": {
-        "CN": {
-          "win": 48.55,
-          "pick": 10.78,
-          "ban": 0.61
+          "win": 48.99,
+          "pick": 9.63,
+          "ban": 4.63
         }
       }
     },
@@ -933,33 +921,9 @@
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10026.png",
       "stats": {
         "CN": {
-          "win": 47.32,
-          "pick": 15.74,
-          "ban": 0.23
-        }
-      }
-    },
-    {
-      "hero_id": "10067",
-      "name": "Zeri",
-      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10067.png",
-      "stats": {
-        "CN": {
-          "win": 47.16,
-          "pick": 1.39,
-          "ban": 0.01
-        }
-      }
-    },
-    {
-      "hero_id": "10093",
-      "name": "Varus",
-      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10093.png",
-      "stats": {
-        "CN": {
-          "win": 46.67,
-          "pick": 6.44,
-          "ban": 0.31
+          "win": 47.74,
+          "pick": 15.29,
+          "ban": 0.52
         }
       }
     },
@@ -969,21 +933,33 @@
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10053.png",
       "stats": {
         "CN": {
-          "win": 46.08,
-          "pick": 3.69,
-          "ban": 0.1
+          "win": 47.24,
+          "pick": 3.45,
+          "ban": 0.11
         }
       }
     },
     {
-      "hero_id": "10080",
-      "name": "Zilean",
-      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10080.png",
+      "hero_id": "10042",
+      "name": "Lucian",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10042.png",
       "stats": {
         "CN": {
-          "win": 54.42,
-          "pick": 2.24,
-          "ban": 2.3
+          "win": 48.87,
+          "pick": 15.81,
+          "ban": 1.47
+        }
+      }
+    },
+    {
+      "hero_id": "10093",
+      "name": "Varus",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10093.png",
+      "stats": {
+        "CN": {
+          "win": 46.69,
+          "pick": 5.89,
+          "ban": 0.34
         }
       }
     },
@@ -993,9 +969,9 @@
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10123.png",
       "stats": {
         "CN": {
-          "win": 55.41,
-          "pick": 6.04,
-          "ban": 0.37
+          "win": 62.69,
+          "pick": 7.02,
+          "ban": 0.39
         }
       }
     },
@@ -1005,9 +981,21 @@
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10044.png",
       "stats": {
         "CN": {
-          "win": 53.38,
-          "pick": 9.74,
-          "ban": 3.4
+          "win": 53.21,
+          "pick": 10.14,
+          "ban": 3.72
+        }
+      }
+    },
+    {
+      "hero_id": "10080",
+      "name": "Zilean",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10080.png",
+      "stats": {
+        "CN": {
+          "win": 55.0,
+          "pick": 4.19,
+          "ban": 5.65
         }
       }
     },
@@ -1017,33 +1005,9 @@
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10074.png",
       "stats": {
         "CN": {
-          "win": 53.02,
-          "pick": 4.43,
-          "ban": 0.21
-        }
-      }
-    },
-    {
-      "hero_id": "10033",
-      "name": "Blitzcrank",
-      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10033.png",
-      "stats": {
-        "CN": {
-          "win": 53.51,
-          "pick": 7.8,
-          "ban": 1.46
-        }
-      }
-    },
-    {
-      "hero_id": "10021",
-      "name": "Braum",
-      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10021.png",
-      "stats": {
-        "CN": {
-          "win": 51.82,
-          "pick": 5.58,
-          "ban": 0.73
+          "win": 52.57,
+          "pick": 4.48,
+          "ban": 0.22
         }
       }
     },
@@ -1053,21 +1017,33 @@
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10116.png",
       "stats": {
         "CN": {
-          "win": 53.51,
-          "pick": 6.59,
-          "ban": 1.31
+          "win": 59.09,
+          "pick": 7.03,
+          "ban": 1.49
         }
       }
     },
     {
-      "hero_id": "10007",
-      "name": "Karma",
-      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10007.png",
+      "hero_id": "10021",
+      "name": "Braum",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10021.png",
       "stats": {
         "CN": {
-          "win": 51.11,
-          "pick": 8.71,
-          "ban": 0.23
+          "win": 51.79,
+          "pick": 5.33,
+          "ban": 0.76
+        }
+      }
+    },
+    {
+      "hero_id": "10033",
+      "name": "Blitzcrank",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10033.png",
+      "stats": {
+        "CN": {
+          "win": 55.07,
+          "pick": 8.05,
+          "ban": 1.72
         }
       }
     },
@@ -1077,21 +1053,9 @@
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10097.png",
       "stats": {
         "CN": {
-          "win": 50.56,
-          "pick": 4.54,
-          "ban": 0.93
-        }
-      }
-    },
-    {
-      "hero_id": "10075",
-      "name": "Janna",
-      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10075.png",
-      "stats": {
-        "CN": {
-          "win": 50.14,
-          "pick": 3.6,
-          "ban": 0.09
+          "win": 50.2,
+          "pick": 4.66,
+          "ban": 0.97
         }
       }
     },
@@ -1101,33 +1065,33 @@
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10091.png",
       "stats": {
         "CN": {
-          "win": 50.53,
-          "pick": 11.87,
-          "ban": 0.08
+          "win": 50.19,
+          "pick": 8.96,
+          "ban": 0.1
         }
       }
     },
     {
-      "hero_id": "10081",
-      "name": "Alistar",
-      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10081.png",
+      "hero_id": "10007",
+      "name": "Karma",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10007.png",
       "stats": {
         "CN": {
-          "win": 50.86,
-          "pick": 4.93,
-          "ban": 0.32
+          "win": 55.75,
+          "pick": 11.83,
+          "ban": 0.21
         }
       }
     },
     {
-      "hero_id": "10047",
-      "name": "Sona",
-      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10047.png",
+      "hero_id": "10075",
+      "name": "Janna",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10075.png",
       "stats": {
         "CN": {
-          "win": 49.93,
-          "pick": 2.79,
-          "ban": 0.03
+          "win": 49.78,
+          "pick": 5.76,
+          "ban": 0.21
         }
       }
     },
@@ -1137,9 +1101,21 @@
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10108.png",
       "stats": {
         "CN": {
-          "win": 49.45,
-          "pick": 11.29,
-          "ban": 5.4
+          "win": 49.76,
+          "pick": 10.99,
+          "ban": 6.6
+        }
+      }
+    },
+    {
+      "hero_id": "10081",
+      "name": "Alistar",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10081.png",
+      "stats": {
+        "CN": {
+          "win": 50.49,
+          "pick": 4.71,
+          "ban": 0.33
         }
       }
     },
@@ -1149,45 +1125,9 @@
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10048.png",
       "stats": {
         "CN": {
-          "win": 48.94,
-          "pick": 19.11,
-          "ban": 8.58
-        }
-      }
-    },
-    {
-      "hero_id": "10130",
-      "name": "Thresh",
-      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10130.png",
-      "stats": {
-        "CN": {
-          "win": 50.32,
-          "pick": 13.67,
-          "ban": 2.84
-        }
-      }
-    },
-    {
-      "hero_id": "10052",
-      "name": "Rakan",
-      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10052.png",
-      "stats": {
-        "CN": {
-          "win": 51.81,
-          "pick": 3.96,
-          "ban": 0.16
-        }
-      }
-    },
-    {
-      "hero_id": "10124",
-      "name": "Pyke",
-      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10124.png",
-      "stats": {
-        "CN": {
-          "win": 52.17,
-          "pick": 3.64,
-          "ban": 0.96
+          "win": 50.79,
+          "pick": 20.0,
+          "ban": 10.37
         }
       }
     },
@@ -1197,9 +1137,57 @@
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10034.png",
       "stats": {
         "CN": {
-          "win": 48.43,
-          "pick": 7.21,
-          "ban": 0.52
+          "win": 49.12,
+          "pick": 8.15,
+          "ban": 0.66
+        }
+      }
+    },
+    {
+      "hero_id": "10047",
+      "name": "Sona",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10047.png",
+      "stats": {
+        "CN": {
+          "win": 49.54,
+          "pick": 2.29,
+          "ban": 0.03
+        }
+      }
+    },
+    {
+      "hero_id": "10130",
+      "name": "Thresh",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10130.png",
+      "stats": {
+        "CN": {
+          "win": 49.57,
+          "pick": 14.87,
+          "ban": 3.06
+        }
+      }
+    },
+    {
+      "hero_id": "10124",
+      "name": "Pyke",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10124.png",
+      "stats": {
+        "CN": {
+          "win": 54.55,
+          "pick": 6.91,
+          "ban": 1.07
+        }
+      }
+    },
+    {
+      "hero_id": "10052",
+      "name": "Rakan",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10052.png",
+      "stats": {
+        "CN": {
+          "win": 50.35,
+          "pick": 3.24,
+          "ban": 0.18
         }
       }
     },
@@ -1209,9 +1197,9 @@
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10020.png",
       "stats": {
         "CN": {
-          "win": 43.8,
-          "pick": 16.3,
-          "ban": 22.7
+          "win": 44.09,
+          "pick": 13.75,
+          "ban": 23.98
         }
       }
     },
@@ -1221,8 +1209,8 @@
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10004.png",
       "stats": {
         "CN": {
-          "win": 58.46,
-          "pick": 3.53,
+          "win": 59.17,
+          "pick": 3.98,
           "ban": 0.09
         }
       }
@@ -1233,9 +1221,9 @@
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10064.png",
       "stats": {
         "CN": {
-          "win": 57.54,
-          "pick": 6.03,
-          "ban": 3.58
+          "win": 57.84,
+          "pick": 6.28,
+          "ban": 3.31
         }
       }
     },
@@ -1245,57 +1233,9 @@
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10049.png",
       "stats": {
         "CN": {
-          "win": 54.62,
-          "pick": 10.69,
-          "ban": 4.04
-        }
-      }
-    },
-    {
-      "hero_id": "10008",
-      "name": "Nunu & Willump",
-      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10008.png",
-      "stats": {
-        "CN": {
-          "win": 56.71,
-          "pick": 2.41,
-          "ban": 0.53
-        }
-      }
-    },
-    {
-      "hero_id": "10089",
-      "name": "Gragas",
-      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10089.png",
-      "stats": {
-        "CN": {
-          "win": 54.13,
-          "pick": 2.14,
-          "ban": 0.19
-        }
-      }
-    },
-    {
-      "hero_id": "10133",
-      "name": "Fiddlesticks",
-      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10133.png",
-      "stats": {
-        "CN": {
-          "win": 54.71,
-          "pick": 4.15,
-          "ban": 1.02
-        }
-      }
-    },
-    {
-      "hero_id": "10050",
-      "name": "Vi",
-      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10050.png",
-      "stats": {
-        "CN": {
-          "win": 52.63,
-          "pick": 6.95,
-          "ban": 0.31
+          "win": 54.65,
+          "pick": 10.68,
+          "ban": 4.34
         }
       }
     },
@@ -1305,21 +1245,57 @@
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10135.png",
       "stats": {
         "CN": {
-          "win": 52.57,
-          "pick": 4.09,
-          "ban": 0.6
+          "win": 53.74,
+          "pick": 3.8,
+          "ban": 0.73
         }
       }
     },
     {
-      "hero_id": "10056",
-      "name": "Jarvan IV",
-      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10056.png",
+      "hero_id": "10008",
+      "name": "Nunu & Willump",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10008.png",
       "stats": {
         "CN": {
-          "win": 52.18,
-          "pick": 6.14,
-          "ban": 0.22
+          "win": 55.21,
+          "pick": 4.08,
+          "ban": 2.51
+        }
+      }
+    },
+    {
+      "hero_id": "10133",
+      "name": "Fiddlesticks",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10133.png",
+      "stats": {
+        "CN": {
+          "win": 54.98,
+          "pick": 5.13,
+          "ban": 0.9
+        }
+      }
+    },
+    {
+      "hero_id": "10089",
+      "name": "Gragas",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10089.png",
+      "stats": {
+        "CN": {
+          "win": 56.52,
+          "pick": 3.35,
+          "ban": 0.63
+        }
+      }
+    },
+    {
+      "hero_id": "10050",
+      "name": "Vi",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10050.png",
+      "stats": {
+        "CN": {
+          "win": 61.8,
+          "pick": 9.32,
+          "ban": 0.84
         }
       }
     },
@@ -1329,21 +1305,21 @@
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10131.png",
       "stats": {
         "CN": {
-          "win": 52.07,
-          "pick": 5.76,
-          "ban": 1.24
+          "win": 52.29,
+          "pick": 5.86,
+          "ban": 1.78
         }
       }
     },
     {
-      "hero_id": "10029",
-      "name": "Evelynn",
-      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10029.png",
+      "hero_id": "10056",
+      "name": "Jarvan IV",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10056.png",
       "stats": {
         "CN": {
-          "win": 53.5,
-          "pick": 5.23,
-          "ban": 1.08
+          "win": 51.96,
+          "pick": 6.46,
+          "ban": 0.27
         }
       }
     },
@@ -1353,33 +1329,21 @@
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10016.png",
       "stats": {
         "CN": {
-          "win": 51.2,
-          "pick": 10.41,
+          "win": 52.63,
+          "pick": 10.32,
+          "ban": 1.06
+        }
+      }
+    },
+    {
+      "hero_id": "10029",
+      "name": "Evelynn",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10029.png",
+      "stats": {
+        "CN": {
+          "win": 52.35,
+          "pick": 6.28,
           "ban": 1.07
-        }
-      }
-    },
-    {
-      "hero_id": "10084",
-      "name": "Nidalee",
-      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10084.png",
-      "stats": {
-        "CN": {
-          "win": 56.36,
-          "pick": 3.76,
-          "ban": 3.27
-        }
-      }
-    },
-    {
-      "hero_id": "10070",
-      "name": "Master Yi",
-      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10070.png",
-      "stats": {
-        "CN": {
-          "win": 50.58,
-          "pick": 15.07,
-          "ban": 57.57
         }
       }
     },
@@ -1389,21 +1353,21 @@
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10057.png",
       "stats": {
         "CN": {
-          "win": 50.67,
-          "pick": 15.77,
-          "ban": 12.71
+          "win": 51.06,
+          "pick": 18.22,
+          "ban": 19.48
         }
       }
     },
     {
-      "hero_id": "10005",
-      "name": "Kayn",
-      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10005.png",
+      "hero_id": "10070",
+      "name": "Master Yi",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10070.png",
       "stats": {
         "CN": {
-          "win": 50.41,
-          "pick": 3.27,
-          "ban": 0.1
+          "win": 50.86,
+          "pick": 15.99,
+          "ban": 56.56
         }
       }
     },
@@ -1413,9 +1377,9 @@
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10030.png",
       "stats": {
         "CN": {
-          "win": 51.17,
-          "pick": 6.28,
-          "ban": 1.62
+          "win": 54.29,
+          "pick": 6.1,
+          "ban": 1.68
         }
       }
     },
@@ -1425,21 +1389,21 @@
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10151.png",
       "stats": {
         "CN": {
-          "win": 49.6,
-          "pick": 4.55,
-          "ban": 6.66
+          "win": 52.83,
+          "pick": 5.55,
+          "ban": 5.29
         }
       }
     },
     {
-      "hero_id": "10019",
-      "name": "Hecarim",
-      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10019.png",
+      "hero_id": "10005",
+      "name": "Kayn",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10005.png",
       "stats": {
         "CN": {
-          "win": 52.54,
-          "pick": 5.22,
-          "ban": 8.77
+          "win": 49.89,
+          "pick": 3.38,
+          "ban": 0.11
         }
       }
     },
@@ -1449,33 +1413,21 @@
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10106.png",
       "stats": {
         "CN": {
-          "win": 52.33,
-          "pick": 1.27,
-          "ban": 0.46
+          "win": 49.8,
+          "pick": 3.25,
+          "ban": 0.48
         }
       }
     },
     {
-      "hero_id": "10073",
-      "name": "Kindred",
-      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10073.png",
+      "hero_id": "10084",
+      "name": "Nidalee",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10084.png",
       "stats": {
         "CN": {
-          "win": 49.1,
-          "pick": 2.3,
-          "ban": 0.18
-        }
-      }
-    },
-    {
-      "hero_id": "10006",
-      "name": "Rengar",
-      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10006.png",
-      "stats": {
-        "CN": {
-          "win": 51.83,
-          "pick": 2.3,
-          "ban": 1.08
+          "win": 53.93,
+          "pick": 7.02,
+          "ban": 6.07
         }
       }
     },
@@ -1485,9 +1437,45 @@
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10017.png",
       "stats": {
         "CN": {
-          "win": 48.24,
-          "pick": 5.14,
-          "ban": 0.17
+          "win": 48.68,
+          "pick": 5.23,
+          "ban": 0.18
+        }
+      }
+    },
+    {
+      "hero_id": "10019",
+      "name": "Hecarim",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10019.png",
+      "stats": {
+        "CN": {
+          "win": 52.44,
+          "pick": 8.59,
+          "ban": 12.15
+        }
+      }
+    },
+    {
+      "hero_id": "10073",
+      "name": "Kindred",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10073.png",
+      "stats": {
+        "CN": {
+          "win": 57.69,
+          "pick": 2.72,
+          "ban": 0.31
+        }
+      }
+    },
+    {
+      "hero_id": "10006",
+      "name": "Rengar",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10006.png",
+      "stats": {
+        "CN": {
+          "win": 53.85,
+          "pick": 2.72,
+          "ban": 2.93
         }
       }
     },
@@ -1497,9 +1485,9 @@
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10072.png",
       "stats": {
         "CN": {
-          "win": 47.38,
-          "pick": 10.17,
-          "ban": 0.58
+          "win": 47.79,
+          "pick": 9.99,
+          "ban": 0.61
         }
       }
     },
@@ -1509,9 +1497,9 @@
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10128.png",
       "stats": {
         "CN": {
-          "win": 47.69,
-          "pick": 3.73,
-          "ban": 0.45
+          "win": 45.95,
+          "pick": 7.75,
+          "ban": 0.84
         }
       }
     },
@@ -1521,8 +1509,8 @@
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10100.png",
       "stats": {
         "CN": {
-          "win": 51.22,
-          "pick": 1.29,
+          "win": 47.71,
+          "pick": 1.07,
           "ban": 0.02
         }
       }
@@ -1533,9 +1521,21 @@
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10096.png",
       "stats": {
         "CN": {
-          "win": 56.2,
-          "pick": 2.13,
-          "ban": 0.17
+          "win": 69.23,
+          "pick": 5.76,
+          "ban": 0.21
+        }
+      }
+    },
+    {
+      "hero_id": "10067",
+      "name": "Zeri",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10067.png",
+      "stats": {
+        "CN": {
+          "win": 45.95,
+          "pick": 1.26,
+          "ban": 0
         }
       }
     },
@@ -1545,9 +1545,9 @@
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10105.png",
       "stats": {
         "CN": {
-          "win": 49.73,
-          "pick": 1.08,
-          "ban": 0.98
+          "win": 60.0,
+          "pick": 2.09,
+          "ban": 1.05
         }
       }
     },
@@ -1557,707 +1557,695 @@
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10027.png",
       "stats": {
         "CN": {
-          "win": 47.65,
-          "pick": 1.47,
-          "ban": 0.77
+          "win": 50.0,
+          "pick": 1.29,
+          "ban": 1.26
         }
       }
     }
   ],
   "statsByName": {
-    "Brand": {
-      "win": 52.9,
-      "pick": 8.97,
-      "ban": 4.05
-    },
-    "Ahri": {
-      "win": 52.73,
-      "pick": 4.91,
-      "ban": 0.08
-    },
-    "Swain": {
-      "win": 52.62,
-      "pick": 6.77,
-      "ban": 2.59
-    },
-    "Viktor": {
-      "win": 52.53,
-      "pick": 4.67,
-      "ban": 0.61
-    },
-    "Lux": {
-      "win": 52.19,
-      "pick": 10.36,
-      "ban": 13.57
-    },
-    "Kennen": {
-      "win": 53.79,
-      "pick": 3.16,
-      "ban": 0.23
-    },
-    "Morgana": {
-      "win": 52.1,
-      "pick": 6.75,
-      "ban": 16.79
-    },
     "Teemo": {
-      "win": 55.96,
-      "pick": 4.33,
-      "ban": 16.68
+      "win": 61.54,
+      "pick": 4.6,
+      "ban": 17.54
     },
     "Zyra": {
-      "win": 51.95,
-      "pick": 3.92,
-      "ban": 14.26
+      "win": 61.54,
+      "pick": 4.02,
+      "ban": 14.04
+    },
+    "Viktor": {
+      "win": 52.92,
+      "pick": 4.64,
+      "ban": 0.7
+    },
+    "Brand": {
+      "win": 56.25,
+      "pick": 9.19,
+      "ban": 4.56
+    },
+    "Lux": {
+      "win": 52.72,
+      "pick": 11.15,
+      "ban": 14.92
+    },
+    "Morgana": {
+      "win": 66.67,
+      "pick": 6.94,
+      "ban": 16.55
+    },
+    "Ahri": {
+      "win": 52.16,
+      "pick": 5.05,
+      "ban": 0.09
     },
     "Veigar": {
-      "win": 51.92,
-      "pick": 10.17,
-      "ban": 8.43
+      "win": 54.84,
+      "pick": 11.03,
+      "ban": 9.12
+    },
+    "Kennen": {
+      "win": 57.14,
+      "pick": 2.93,
+      "ban": 0.26
     },
     "Ryze": {
-      "win": 54.1,
-      "pick": 7.36,
-      "ban": 2.14
-    },
-    "Galio": {
-      "win": 55.75,
-      "pick": 10.03,
-      "ban": 0.97
-    },
-    "Annie": {
-      "win": 53.53,
-      "pick": 2.69,
-      "ban": 0.05
+      "win": 53.79,
+      "pick": 14.35,
+      "ban": 4.5
     },
     "Orianna": {
-      "win": 50.7,
-      "pick": 5.34,
+      "win": 51.4,
+      "pick": 5.97,
       "ban": 0.11
     },
-    "Aurelion Sol": {
-      "win": 50.66,
-      "pick": 7.94,
-      "ban": 2.02
+    "Swain": {
+      "win": 52.12,
+      "pick": 7.33,
+      "ban": 2.62
     },
-    "Lissandra": {
-      "win": 50.58,
-      "pick": 6.12,
-      "ban": 3.79
+    "Galio": {
+      "win": 53.39,
+      "pick": 10.16,
+      "ban": 1.04
     },
     "Twisted Fate": {
-      "win": 52.4,
-      "pick": 6.76,
-      "ban": 0.16
+      "win": 52.03,
+      "pick": 9.32,
+      "ban": 0.14
+    },
+    "Aurelion Sol": {
+      "win": 50.63,
+      "pick": 7.96,
+      "ban": 1.84
+    },
+    "Lissandra": {
+      "win": 57.14,
+      "pick": 7.33,
+      "ban": 3.46
     },
     "Syndra": {
-      "win": 50.34,
-      "pick": 7.8,
-      "ban": 2.45
-    },
-    "Ziggs": {
-      "win": 50.12,
-      "pick": 5.41,
-      "ban": 1.09
-    },
-    "Kassadin": {
-      "win": 50.72,
-      "pick": 3.56,
-      "ban": 0.43
+      "win": 50.39,
+      "pick": 9.21,
+      "ban": 3.04
     },
     "Vex": {
-      "win": 51.93,
-      "pick": 3.03,
-      "ban": 0.35
-    },
-    "Zed": {
-      "win": 52.18,
-      "pick": 5.32,
-      "ban": 1.37
-    },
-    "Heimerdinger": {
-      "win": 50.38,
-      "pick": 1.4,
-      "ban": 0.73
-    },
-    "Tristana": {
-      "win": 49.37,
-      "pick": 10.83,
-      "ban": 0.15
-    },
-    "Aurora": {
-      "win": 49.65,
-      "pick": 6.83,
-      "ban": 5.6
-    },
-    "Jayce": {
-      "win": 53.06,
-      "pick": 4.18,
-      "ban": 0.52
-    },
-    "Yasuo": {
-      "win": 49.42,
-      "pick": 11.41,
-      "ban": 13.09
-    },
-    "Yone": {
-      "win": 49.1,
-      "pick": 5.74,
-      "ban": 3.85
-    },
-    "Fizz": {
-      "win": 49.56,
-      "pick": 3.19,
-      "ban": 2.39
-    },
-    "Vladimir": {
-      "win": 48.15,
-      "pick": 4.72,
-      "ban": 0.64
-    },
-    "Smolder": {
-      "win": 53.89,
-      "pick": 23.79,
-      "ban": 27.93
-    },
-    "Diana": {
-      "win": 48.1,
-      "pick": 1.44,
-      "ban": 0.06
-    },
-    "Irelia": {
-      "win": 52.15,
-      "pick": 3.1,
-      "ban": 0.85
-    },
-    "Katarina": {
-      "win": 48.23,
-      "pick": 2.85,
-      "ban": 0.24
-    },
-    "Corki": {
-      "win": 49.41,
-      "pick": 7.07,
-      "ban": 0.31
-    },
-    "Ekko": {
-      "win": 48.73,
-      "pick": 2.2,
-      "ban": 0.06
-    },
-    "Akali": {
-      "win": 46.9,
-      "pick": 4.53,
-      "ban": 0.39
-    },
-    "Zoe": {
-      "win": 47.46,
-      "pick": 3.26,
-      "ban": 0.78
-    },
-    "Vayne": {
-      "win": 55.52,
-      "pick": 16.91,
-      "ban": 12.32
-    },
-    "Ambessa": {
-      "win": 53.44,
-      "pick": 6.45,
-      "ban": 1.09
-    },
-    "Sion": {
-      "win": 53.41,
-      "pick": 5.37,
-      "ban": 0.2
-    },
-    "Garen": {
-      "win": 52.9,
-      "pick": 16.45,
-      "ban": 2.46
-    },
-    "Nautilus": {
-      "win": 53.22,
-      "pick": 14.92,
-      "ban": 2.51
-    },
-    "Shen": {
-      "win": 52.4,
-      "pick": 1.77,
-      "ban": 0.05
-    },
-    "Kalista": {
-      "win": 52.35,
-      "pick": 5.8,
-      "ban": 2.22
-    },
-    "Sett": {
-      "win": 52.38,
-      "pick": 14.91,
-      "ban": 0.79
-    },
-    "Poppy": {
-      "win": 51.82,
-      "pick": 2.91,
-      "ban": 0.16
-    },
-    "Rumble": {
-      "win": 51.59,
-      "pick": 2.69,
-      "ban": 0.45
-    },
-    "Renekton": {
-      "win": 51.59,
-      "pick": 8.8,
-      "ban": 1.67
-    },
-    "Malphite": {
-      "win": 52.7,
-      "pick": 9.95,
-      "ban": 12.84
-    },
-    "Dr. Mundo": {
-      "win": 53.06,
-      "pick": 4.17,
-      "ban": 0.57
-    },
-    "Kayle": {
-      "win": 50.55,
-      "pick": 2.8,
+      "win": 61.11,
+      "pick": 3.07,
       "ban": 0.38
     },
-    "Gnar": {
-      "win": 50.45,
-      "pick": 3.25,
+    "Zed": {
+      "win": 56.94,
+      "pick": 7.54,
+      "ban": 1.47
+    },
+    "Ziggs": {
+      "win": 49.79,
+      "pick": 5.53,
+      "ban": 1.16
+    },
+    "Annie": {
+      "win": 51.93,
+      "pick": 2.32,
+      "ban": 0.05
+    },
+    "Kassadin": {
+      "win": 58.33,
+      "pick": 3.77,
+      "ban": 0.52
+    },
+    "Aurora": {
+      "win": 50.36,
+      "pick": 10.79,
+      "ban": 6.7
+    },
+    "Yasuo": {
+      "win": 48.95,
+      "pick": 11.47,
+      "ban": 21.15
+    },
+    "Tristana": {
+      "win": 48.71,
+      "pick": 11.23,
+      "ban": 0.18
+    },
+    "Fizz": {
+      "win": 60.0,
+      "pick": 3.87,
+      "ban": 2.77
+    },
+    "Yone": {
+      "win": 60.87,
+      "pick": 5.74,
+      "ban": 3.79
+    },
+    "Kayle": {
+      "win": 50.66,
+      "pick": 2.97,
+      "ban": 0.42
+    },
+    "Heimerdinger": {
+      "win": 48.84,
+      "pick": 1.48,
+      "ban": 0.84
+    },
+    "Diana": {
+      "win": 48.36,
+      "pick": 1.45,
+      "ban": 0.06
+    },
+    "Smolder": {
+      "win": 57.14,
+      "pick": 28.59,
+      "ban": 28.59
+    },
+    "Vladimir": {
+      "win": 48.22,
+      "pick": 4.21,
+      "ban": 0.64
+    },
+    "Jayce": {
+      "win": 51.1,
+      "pick": 4.82,
+      "ban": 0.94
+    },
+    "Ekko": {
+      "win": 61.9,
+      "pick": 2.2,
+      "ban": 0.31
+    },
+    "Corki": {
+      "win": 49.26,
+      "pick": 6.07,
       "ban": 0.19
     },
-    "Nasus": {
-      "win": 51.14,
-      "pick": 5.41,
-      "ban": 1.76
+    "Irelia": {
+      "win": 68.57,
+      "pick": 3.66,
+      "ban": 0.94
     },
-    "Tryndamere": {
-      "win": 51.35,
-      "pick": 8.28,
-      "ban": 19.71
+    "Katarina": {
+      "win": 52.0,
+      "pick": 2.62,
+      "ban": 0.31
+    },
+    "Akali": {
+      "win": 48.39,
+      "pick": 6.49,
+      "ban": 0.84
+    },
+    "Zoe": {
+      "win": 66.67,
+      "pick": 2.83,
+      "ban": 0.52
+    },
+    "Vayne": {
+      "win": 54.92,
+      "pick": 17.49,
+      "ban": 18.22
+    },
+    "Garen": {
+      "win": 53.37,
+      "pick": 19.06,
+      "ban": 2.37
+    },
+    "Kalista": {
+      "win": 53.3,
+      "pick": 6.16,
+      "ban": 2.59
+    },
+    "Sion": {
+      "win": 52.86,
+      "pick": 7.54,
+      "ban": 0.19
+    },
+    "Ambessa": {
+      "win": 65.22,
+      "pick": 7.23,
+      "ban": 4.71
+    },
+    "Nautilus": {
+      "win": 69.23,
+      "pick": 14.89,
+      "ban": 2.55
+    },
+    "Sett": {
+      "win": 53.03,
+      "pick": 14.12,
+      "ban": 0.83
+    },
+    "Shen": {
+      "win": 51.78,
+      "pick": 1.58,
+      "ban": 0.04
+    },
+    "Renekton": {
+      "win": 51.66,
+      "pick": 13.72,
+      "ban": 5.24
+    },
+    "Rumble": {
+      "win": 69.23,
+      "pick": 2.65,
+      "ban": 0.43
+    },
+    "Poppy": {
+      "win": 60.0,
+      "pick": 4.19,
+      "ban": 0.13
+    },
+    "Dr. Mundo": {
+      "win": 53.01,
+      "pick": 4.56,
+      "ban": 0.68
     },
     "Volibear": {
-      "win": 50.26,
-      "pick": 4.35,
-      "ban": 1.95
+      "win": 50.72,
+      "pick": 4.34,
+      "ban": 2.16
+    },
+    "Nasus": {
+      "win": 57.14,
+      "pick": 5.57,
+      "ban": 1.77
+    },
+    "Malphite": {
+      "win": 56.52,
+      "pick": 10.21,
+      "ban": 13.16
     },
     "Ornn": {
-      "win": 51.68,
-      "pick": 3.56,
-      "ban": 0.12
+      "win": 52.91,
+      "pick": 3.05,
+      "ban": 0.16
     },
-    "Aatrox": {
-      "win": 50.54,
-      "pick": 8.05,
-      "ban": 4.05
+    "Gnar": {
+      "win": 50.47,
+      "pick": 3.29,
+      "ban": 0.2
     },
-    "Camille": {
-      "win": 50.87,
-      "pick": 4.36,
-      "ban": 0.12
-    },
-    "Darius": {
-      "win": 49.33,
-      "pick": 16.03,
-      "ban": 4.34
+    "Tryndamere": {
+      "win": 50.58,
+      "pick": 8.66,
+      "ban": 20.72
     },
     "Gwen": {
-      "win": 49.04,
-      "pick": 2.21,
-      "ban": 0.33
+      "win": 49.39,
+      "pick": 2.17,
+      "ban": 0.34
     },
-    "Riven": {
-      "win": 51.04,
-      "pick": 3.25,
-      "ban": 1.23
+    "Aatrox": {
+      "win": 49.58,
+      "pick": 9.53,
+      "ban": 4.28
     },
-    "Mordekaiser": {
-      "win": 48.51,
-      "pick": 11.85,
-      "ban": 14.22
+    "Darius": {
+      "win": 49.55,
+      "pick": 16.2,
+      "ban": 4.48
     },
-    "Urgot": {
-      "win": 48.33,
-      "pick": 4.32,
-      "ban": 1.75
+    "Camille": {
+      "win": 49.72,
+      "pick": 3.48,
+      "ban": 0.07
     },
     "Fiora": {
-      "win": 49.22,
-      "pick": 3.94,
-      "ban": 2.33
+      "win": 49.29,
+      "pick": 4.82,
+      "ban": 4.4
+    },
+    "Mordekaiser": {
+      "win": 48.61,
+      "pick": 12.34,
+      "ban": 13.35
+    },
+    "Riven": {
+      "win": 64.0,
+      "pick": 7.85,
+      "ban": 2.93
+    },
+    "Urgot": {
+      "win": 47.6,
+      "pick": 4.23,
+      "ban": 1.77
     },
     "Jax": {
-      "win": 46.41,
-      "pick": 4.81,
-      "ban": 0.22
-    },
-    "Miss Fortune": {
-      "win": 52.17,
-      "pick": 15.19,
-      "ban": 1.14
-    },
-    "Jhin": {
-      "win": 51.53,
-      "pick": 14.06,
+      "win": 51.85,
+      "pick": 5.27,
       "ban": 0.28
     },
     "Xayah": {
-      "win": 51.52,
-      "pick": 7.21,
-      "ban": 0.12
+      "win": 52.23,
+      "pick": 6.33,
+      "ban": 0.11
+    },
+    "Miss Fortune": {
+      "win": 51.98,
+      "pick": 15.81,
+      "ban": 1.22
     },
     "Ashe": {
-      "win": 51.22,
-      "pick": 11.11,
-      "ban": 0.18
+      "win": 51.56,
+      "pick": 11.87,
+      "ban": 0.22
     },
-    "Ezreal": {
-      "win": 50.78,
-      "pick": 9.09,
-      "ban": 0.16
+    "Jhin": {
+      "win": 52.71,
+      "pick": 15.83,
+      "ban": 0.35
     },
     "Caitlyn": {
-      "win": 49.58,
-      "pick": 25.6,
-      "ban": 2.65
+      "win": 52.78,
+      "pick": 25.51,
+      "ban": 2.85
     },
     "Jinx": {
-      "win": 49.4,
-      "pick": 12.64,
-      "ban": 0.25
-    },
-    "Draven": {
-      "win": 52.65,
-      "pick": 7.65,
-      "ban": 2.15
+      "win": 48.98,
+      "pick": 11.75,
+      "ban": 0.3
     },
     "Sivir": {
-      "win": 48.73,
-      "pick": 3.08,
+      "win": 48.72,
+      "pick": 3.32,
       "ban": 0.03
     },
-    "Samira": {
-      "win": 50.69,
-      "pick": 9.8,
-      "ban": 4.28
+    "Draven": {
+      "win": 51.58,
+      "pick": 9.95,
+      "ban": 2.67
     },
-    "Lucian": {
-      "win": 48.55,
-      "pick": 10.78,
-      "ban": 0.61
-    },
-    "Kai'Sa": {
-      "win": 47.32,
-      "pick": 15.74,
-      "ban": 0.23
-    },
-    "Zeri": {
-      "win": 47.16,
-      "pick": 1.39,
-      "ban": 0.01
-    },
-    "Varus": {
-      "win": 46.67,
-      "pick": 6.44,
-      "ban": 0.31
-    },
-    "Twitch": {
-      "win": 46.08,
-      "pick": 3.69,
-      "ban": 0.1
-    },
-    "Zilean": {
-      "win": 54.42,
-      "pick": 2.24,
-      "ban": 2.3
-    },
-    "Senna": {
-      "win": 55.41,
-      "pick": 6.04,
-      "ban": 0.37
-    },
-    "Leona": {
-      "win": 53.38,
-      "pick": 9.74,
-      "ban": 3.4
-    },
-    "Maokai": {
-      "win": 53.02,
-      "pick": 4.43,
-      "ban": 0.21
-    },
-    "Blitzcrank": {
-      "win": 53.51,
-      "pick": 7.8,
-      "ban": 1.46
-    },
-    "Braum": {
-      "win": 51.82,
-      "pick": 5.58,
-      "ban": 0.73
-    },
-    "Rell": {
-      "win": 53.51,
-      "pick": 6.59,
-      "ban": 1.31
-    },
-    "Karma": {
-      "win": 51.11,
-      "pick": 8.71,
-      "ban": 0.23
-    },
-    "Soraka": {
-      "win": 50.56,
-      "pick": 4.54,
-      "ban": 0.93
-    },
-    "Janna": {
-      "win": 50.14,
-      "pick": 3.6,
-      "ban": 0.09
-    },
-    "Nami": {
-      "win": 50.53,
-      "pick": 11.87,
-      "ban": 0.08
-    },
-    "Alistar": {
-      "win": 50.86,
-      "pick": 4.93,
-      "ban": 0.32
-    },
-    "Sona": {
-      "win": 49.93,
-      "pick": 2.79,
-      "ban": 0.03
-    },
-    "Milio": {
-      "win": 49.45,
-      "pick": 11.29,
-      "ban": 5.4
-    },
-    "Lulu": {
-      "win": 48.94,
-      "pick": 19.11,
-      "ban": 8.58
-    },
-    "Thresh": {
-      "win": 50.32,
-      "pick": 13.67,
-      "ban": 2.84
-    },
-    "Rakan": {
-      "win": 51.81,
-      "pick": 3.96,
-      "ban": 0.16
-    },
-    "Pyke": {
-      "win": 52.17,
-      "pick": 3.64,
-      "ban": 0.96
-    },
-    "Seraphine": {
-      "win": 48.43,
-      "pick": 7.21,
+    "Ezreal": {
+      "win": 53.66,
+      "pick": 12.88,
       "ban": 0.52
     },
+    "Samira": {
+      "win": 48.99,
+      "pick": 9.63,
+      "ban": 4.63
+    },
+    "Kai'Sa": {
+      "win": 47.74,
+      "pick": 15.29,
+      "ban": 0.52
+    },
+    "Twitch": {
+      "win": 47.24,
+      "pick": 3.45,
+      "ban": 0.11
+    },
+    "Lucian": {
+      "win": 48.87,
+      "pick": 15.81,
+      "ban": 1.47
+    },
+    "Varus": {
+      "win": 46.69,
+      "pick": 5.89,
+      "ban": 0.34
+    },
+    "Senna": {
+      "win": 62.69,
+      "pick": 7.02,
+      "ban": 0.39
+    },
+    "Leona": {
+      "win": 53.21,
+      "pick": 10.14,
+      "ban": 3.72
+    },
+    "Zilean": {
+      "win": 55.0,
+      "pick": 4.19,
+      "ban": 5.65
+    },
+    "Maokai": {
+      "win": 52.57,
+      "pick": 4.48,
+      "ban": 0.22
+    },
+    "Rell": {
+      "win": 59.09,
+      "pick": 7.03,
+      "ban": 1.49
+    },
+    "Braum": {
+      "win": 51.79,
+      "pick": 5.33,
+      "ban": 0.76
+    },
+    "Blitzcrank": {
+      "win": 55.07,
+      "pick": 8.05,
+      "ban": 1.72
+    },
+    "Soraka": {
+      "win": 50.2,
+      "pick": 4.66,
+      "ban": 0.97
+    },
+    "Nami": {
+      "win": 50.19,
+      "pick": 8.96,
+      "ban": 0.1
+    },
+    "Karma": {
+      "win": 55.75,
+      "pick": 11.83,
+      "ban": 0.21
+    },
+    "Janna": {
+      "win": 49.78,
+      "pick": 5.76,
+      "ban": 0.21
+    },
+    "Milio": {
+      "win": 49.76,
+      "pick": 10.99,
+      "ban": 6.6
+    },
+    "Alistar": {
+      "win": 50.49,
+      "pick": 4.71,
+      "ban": 0.33
+    },
+    "Lulu": {
+      "win": 50.79,
+      "pick": 20.0,
+      "ban": 10.37
+    },
+    "Seraphine": {
+      "win": 49.12,
+      "pick": 8.15,
+      "ban": 0.66
+    },
+    "Sona": {
+      "win": 49.54,
+      "pick": 2.29,
+      "ban": 0.03
+    },
+    "Thresh": {
+      "win": 49.57,
+      "pick": 14.87,
+      "ban": 3.06
+    },
+    "Pyke": {
+      "win": 54.55,
+      "pick": 6.91,
+      "ban": 1.07
+    },
+    "Rakan": {
+      "win": 50.35,
+      "pick": 3.24,
+      "ban": 0.18
+    },
     "Yuumi": {
-      "win": 43.8,
-      "pick": 16.3,
-      "ban": 22.7
+      "win": 44.09,
+      "pick": 13.75,
+      "ban": 23.98
     },
     "Amumu": {
-      "win": 58.46,
-      "pick": 3.53,
+      "win": 59.17,
+      "pick": 3.98,
       "ban": 0.09
     },
     "Rammus": {
-      "win": 57.54,
-      "pick": 6.03,
-      "ban": 3.58
+      "win": 57.84,
+      "pick": 6.28,
+      "ban": 3.31
     },
     "Shyvana": {
-      "win": 54.62,
-      "pick": 10.69,
-      "ban": 4.04
-    },
-    "Nunu & Willump": {
-      "win": 56.71,
-      "pick": 2.41,
-      "ban": 0.53
-    },
-    "Gragas": {
-      "win": 54.13,
-      "pick": 2.14,
-      "ban": 0.19
-    },
-    "Fiddlesticks": {
-      "win": 54.71,
-      "pick": 4.15,
-      "ban": 1.02
-    },
-    "Vi": {
-      "win": 52.63,
-      "pick": 6.95,
-      "ban": 0.31
+      "win": 54.65,
+      "pick": 10.68,
+      "ban": 4.34
     },
     "Lillia": {
-      "win": 52.57,
-      "pick": 4.09,
-      "ban": 0.6
+      "win": 53.74,
+      "pick": 3.8,
+      "ban": 0.73
     },
-    "Jarvan IV": {
-      "win": 52.18,
-      "pick": 6.14,
-      "ban": 0.22
+    "Nunu & Willump": {
+      "win": 55.21,
+      "pick": 4.08,
+      "ban": 2.51
+    },
+    "Fiddlesticks": {
+      "win": 54.98,
+      "pick": 5.13,
+      "ban": 0.9
+    },
+    "Gragas": {
+      "win": 56.52,
+      "pick": 3.35,
+      "ban": 0.63
+    },
+    "Vi": {
+      "win": 61.8,
+      "pick": 9.32,
+      "ban": 0.84
     },
     "Warwick": {
-      "win": 52.07,
-      "pick": 5.76,
-      "ban": 1.24
+      "win": 52.29,
+      "pick": 5.86,
+      "ban": 1.78
     },
-    "Evelynn": {
-      "win": 53.5,
-      "pick": 5.23,
-      "ban": 1.08
+    "Jarvan IV": {
+      "win": 51.96,
+      "pick": 6.46,
+      "ban": 0.27
     },
     "Xin Zhao": {
-      "win": 51.2,
-      "pick": 10.41,
+      "win": 52.63,
+      "pick": 10.32,
+      "ban": 1.06
+    },
+    "Evelynn": {
+      "win": 52.35,
+      "pick": 6.28,
       "ban": 1.07
     },
-    "Nidalee": {
-      "win": 56.36,
-      "pick": 3.76,
-      "ban": 3.27
+    "Viego": {
+      "win": 51.06,
+      "pick": 18.22,
+      "ban": 19.48
     },
     "Master Yi": {
-      "win": 50.58,
-      "pick": 15.07,
-      "ban": 57.57
-    },
-    "Viego": {
-      "win": 50.67,
-      "pick": 15.77,
-      "ban": 12.71
-    },
-    "Kayn": {
-      "win": 50.41,
-      "pick": 3.27,
-      "ban": 0.1
+      "win": 50.86,
+      "pick": 15.99,
+      "ban": 56.56
     },
     "Pantheon": {
-      "win": 51.17,
-      "pick": 6.28,
-      "ban": 1.62
+      "win": 54.29,
+      "pick": 6.1,
+      "ban": 1.68
     },
     "Nocturne": {
-      "win": 49.6,
-      "pick": 4.55,
-      "ban": 6.66
+      "win": 52.83,
+      "pick": 5.55,
+      "ban": 5.29
     },
-    "Hecarim": {
-      "win": 52.54,
-      "pick": 5.22,
-      "ban": 8.77
+    "Kayn": {
+      "win": 49.89,
+      "pick": 3.38,
+      "ban": 0.11
     },
     "Olaf": {
-      "win": 52.33,
-      "pick": 1.27,
-      "ban": 0.46
+      "win": 49.8,
+      "pick": 3.25,
+      "ban": 0.48
     },
-    "Kindred": {
-      "win": 49.1,
-      "pick": 2.3,
-      "ban": 0.18
-    },
-    "Rengar": {
-      "win": 51.83,
-      "pick": 2.3,
-      "ban": 1.08
+    "Nidalee": {
+      "win": 53.93,
+      "pick": 7.02,
+      "ban": 6.07
     },
     "Kha'Zix": {
-      "win": 48.24,
-      "pick": 5.14,
-      "ban": 0.17
+      "win": 48.68,
+      "pick": 5.23,
+      "ban": 0.18
+    },
+    "Hecarim": {
+      "win": 52.44,
+      "pick": 8.59,
+      "ban": 12.15
+    },
+    "Kindred": {
+      "win": 57.69,
+      "pick": 2.72,
+      "ban": 0.31
+    },
+    "Rengar": {
+      "win": 53.85,
+      "pick": 2.72,
+      "ban": 2.93
     },
     "Graves": {
-      "win": 47.38,
-      "pick": 10.17,
-      "ban": 0.58
+      "win": 47.79,
+      "pick": 9.99,
+      "ban": 0.61
     },
     "Talon": {
-      "win": 47.69,
-      "pick": 3.73,
-      "ban": 0.45
+      "win": 45.95,
+      "pick": 7.75,
+      "ban": 0.84
     },
     "Akshan": {
-      "win": 51.22,
-      "pick": 1.29,
+      "win": 47.71,
+      "pick": 1.07,
       "ban": 0.02
     },
     "Singed": {
-      "win": 56.2,
-      "pick": 2.13,
-      "ban": 0.17
+      "win": 69.23,
+      "pick": 5.76,
+      "ban": 0.21
+    },
+    "Zeri": {
+      "win": 45.95,
+      "pick": 1.26,
+      "ban": 0
     },
     "Bard": {
-      "win": 49.73,
-      "pick": 1.08,
-      "ban": 0.98
+      "win": 60.0,
+      "pick": 2.09,
+      "ban": 1.05
     },
     "Nilah": {
-      "win": 47.65,
-      "pick": 1.47,
-      "ban": 0.77
+      "win": 50.0,
+      "pick": 1.29,
+      "ban": 1.26
     }
   },
   "debug": {
     "hero_list_total": 137,
     "hero_list_version": "7.1",
     "hero_list_fileTime": "2026-04-08 22:43:38",
-    "rank_rows_found": 353,
+    "rank_rows_found": 476,
     "wr_written": 130,
     "missing_en_name_from_poster": 0,
-    "filtered_not_in_wr_list": 23,
+    "filtered_not_in_wr_list": 30,
     "sample_written": [
       {
-        "hero_id": "10119",
-        "name": "Brand",
-        "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10119.png",
+        "hero_id": "10046",
+        "name": "Teemo",
+        "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10046.png",
         "stats": {
           "CN": {
-            "win": 52.9,
-            "pick": 8.97,
-            "ban": 4.05
+            "win": 61.54,
+            "pick": 4.6,
+            "ban": 17.54
           }
         }
       },
       {
-        "hero_id": "10038",
-        "name": "Ahri",
-        "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10038.png",
+        "hero_id": "10063",
+        "name": "Zyra",
+        "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10063.png",
         "stats": {
           "CN": {
-            "win": 52.73,
-            "pick": 4.91,
-            "ban": 0.08
-          }
-        }
-      },
-      {
-        "hero_id": "10126",
-        "name": "Swain",
-        "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10126.png",
-        "stats": {
-          "CN": {
-            "win": 52.62,
-            "pick": 6.77,
-            "ban": 2.59
+            "win": 61.54,
+            "pick": 4.02,
+            "ban": 14.04
           }
         }
       },
@@ -2267,9 +2255,21 @@
         "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10144.png",
         "stats": {
           "CN": {
-            "win": 52.53,
-            "pick": 4.67,
-            "ban": 0.61
+            "win": 52.92,
+            "pick": 4.64,
+            "ban": 0.7
+          }
+        }
+      },
+      {
+        "hero_id": "10119",
+        "name": "Brand",
+        "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10119.png",
+        "stats": {
+          "CN": {
+            "win": 56.25,
+            "pick": 9.19,
+            "ban": 4.56
           }
         }
       },
@@ -2279,9 +2279,9 @@
         "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10003.png",
         "stats": {
           "CN": {
-            "win": 52.19,
-            "pick": 10.36,
-            "ban": 13.57
+            "win": 52.72,
+            "pick": 11.15,
+            "ban": 14.92
           }
         }
       }
