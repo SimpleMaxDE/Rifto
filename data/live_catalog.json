@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-04-15T01:10:36.208274+00:00",
+  "generatedAt": "2026-04-15T07:13:56.683323+00:00",
   "sources": {
     "heroes": "https://game.gtimg.cn/images/lgamem/act/lrlib/js/heroList/hero_list.js",
     "items": "https://game.gtimg.cn/images/lgamem/act/lrlib/js/equip/equip.js",
@@ -40462,6 +40462,37 @@
       "effect_source": "auto"
     },
     {
+      "rune_id": "572316001",
+      "name": "坚韧",
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/RuneIcons/Defense_tenacity.png",
+      "description": "获得韧性，被定身时获得护甲与魔抗。",
+      "slot": "",
+      "effects": [
+        {
+          "name": "获得韧性，被定身时获得护甲与魔抗",
+          "trigger": "passive_always",
+          "effect_type": "tenacity",
+          "values": [],
+          "scaling": [],
+          "cooldown": null,
+          "duration": null,
+          "caps": null,
+          "conditions": [
+            "vs_immobilized"
+          ],
+          "damage_type": null,
+          "flags": {
+            "can_crit": false,
+            "applies_on_hit": false,
+            "unique": false
+          },
+          "source_line": "获得韧性，被定身时获得护甲与魔抗"
+        }
+      ],
+      "effect_parse_status": "parser_could_not_extract_values",
+      "effect_source": "auto"
+    },
+    {
       "rune_id": "572322001",
       "name": "复苏",
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/RuneIcons/Defencs_Revitalize.png",
@@ -41787,13 +41818,15 @@
   "diff": {
     "newChampions": [],
     "newItems": [],
-    "newRunes": [],
+    "newRunes": [
+      "坚韧"
+    ],
     "newSummonerSpells": []
   },
   "counts": {
     "champions": 137,
     "items": 252,
-    "runes": 52,
+    "runes": 53,
     "summonerSpells": 16
   }
 }
