@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-04-14T18:53:30.271789+00:00",
-  "source": "https://ddragon.leagueoflegends.com/cdn/16.7.1/data/en_US/championFull.json",
-  "version": "16.7.1",
+  "generatedAt": "2026-04-15T01:10:39.090074+00:00",
+  "source": "https://ddragon.leagueoflegends.com/cdn/16.8.1/data/en_US/championFull.json",
+  "version": "16.8.1",
   "champions": {
     "Aatrox": {
       "id": "Aatrox",
@@ -31604,7 +31604,7 @@
         "armor_per_level": 5,
         "mr": 30,
         "mr_per_level": 1.3,
-        "ad": 51,
+        "ad": 49,
         "ad_per_level": 0,
         "attack_speed": 0.625,
         "attack_speed_per_level": 2.3,
@@ -31919,11 +31919,11 @@
             8
           ],
           "cost": [
-            50,
-            55,
             60,
             65,
-            70
+            70,
+            75,
+            80
           ],
           "range": [
             800,
@@ -41437,17 +41437,17 @@
           "slot": "E",
           "name": "Relentless Pursuit",
           "cooldown": [
-            18,
-            17,
             16,
+            15.5,
             15,
+            14.5,
             14
           ],
           "cost": [
-            40,
-            30,
-            20,
-            10,
+            32,
+            24,
+            16,
+            8,
             0
           ],
           "range": [
@@ -41511,10 +41511,10 @@
               "values": [],
               "scaling": [],
               "cooldown": [
-                18,
-                17,
                 16,
+                15.5,
                 15,
+                14.5,
                 14
               ],
               "duration": null,
@@ -41535,10 +41535,10 @@
               "values": [],
               "scaling": [],
               "cooldown": [
-                18,
-                17,
                 16,
+                15.5,
                 15,
+                14.5,
                 14
               ],
               "duration": null,
@@ -45032,11 +45032,11 @@
           "slot": "W",
           "name": "Rebuttal",
           "cooldown": [
+            38,
             35,
-            32,
+            33,
             29,
-            26,
-            23
+            26
           ],
           "cost": [
             80,
@@ -45106,11 +45106,11 @@
               "values": [],
               "scaling": [],
               "cooldown": [
+                38,
                 35,
-                32,
+                33,
                 29,
-                26,
-                23
+                26
               ],
               "duration": null,
               "caps": null,
