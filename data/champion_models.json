@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-04-28T19:13:09.201174+00:00",
-  "source": "https://ddragon.leagueoflegends.com/cdn/16.8.1/data/en_US/championFull.json",
-  "version": "16.8.1",
+  "generatedAt": "2026-04-29T01:27:44.721236+00:00",
+  "source": "https://ddragon.leagueoflegends.com/cdn/16.9.1/data/en_US/championFull.json",
+  "version": "16.9.1",
   "champions": {
     "Aatrox": {
       "id": "Aatrox",
@@ -10553,7 +10553,7 @@
       "resource": "Fury",
       "stats": {
         "hp": 625,
-        "hp_per_level": 100,
+        "hp_per_level": 95,
         "mp": 0,
         "mp_per_level": 0,
         "armor": 30,
@@ -17343,7 +17343,7 @@
             },
             {
               "index": 5,
-              "values": "1.6/1.8/2/2.2/2.4"
+              "values": "0"
             },
             {
               "index": 6,
@@ -20241,25 +20241,25 @@
             275,
             275
           ],
-          "base_damage": "25/30/35/40/45",
+          "base_damage": "0",
           "damage_type": null,
           "cc_duration": null,
           "damage_effects": [
             {
               "index": 1,
-              "values": "25/30/35/40/45"
+              "values": "0"
             },
             {
               "index": 2,
-              "values": "2"
+              "values": "0"
             },
             {
               "index": 3,
-              "values": "15"
+              "values": "0"
             },
             {
               "index": 4,
-              "values": "0.5"
+              "values": "0"
             },
             {
               "index": 5,
@@ -20267,23 +20267,23 @@
             },
             {
               "index": 6,
-              "values": "1"
+              "values": "0"
             },
             {
               "index": 7,
-              "values": "1.5"
+              "values": "0"
             },
             {
               "index": 8,
-              "values": "2"
+              "values": "0"
             },
             {
               "index": 9,
-              "values": "1.25"
+              "values": "0"
             },
             {
               "index": 10,
-              "values": "4"
+              "values": "0"
             }
           ],
           "ratios": [],
@@ -27761,7 +27761,7 @@
             },
             {
               "index": 2,
-              "values": "10/14/18/22/26"
+              "values": "0"
             },
             {
               "index": 3,
@@ -27884,7 +27884,7 @@
             },
             {
               "index": 2,
-              "values": "15/20/25/30/35"
+              "values": "0"
             },
             {
               "index": 3,
@@ -27987,7 +27987,7 @@
             },
             {
               "index": 3,
-              "values": "20/22.5/25/27.5/30"
+              "values": "0"
             },
             {
               "index": 4,
@@ -34757,13 +34757,13 @@
             950,
             950
           ],
-          "base_damage": "75/125/175/225/275",
+          "base_damage": "0",
           "damage_type": null,
           "cc_duration": null,
           "damage_effects": [
             {
               "index": 1,
-              "values": "75/125/175/225/275"
+              "values": "0"
             },
             {
               "index": 2,
@@ -37341,15 +37341,15 @@
               "conditions": [],
               "damage_type": "magic",
               "flags": {
-                "applies_on_hit": false,
+                "applies_on_hit": true,
                 "can_crit": false,
                 "aoe": false
               },
-              "source_line": "Kog'Maw's attacks gain range and deal a percent of the target's maximum health as magic damage"
+              "source_line": "Kog'Maw's attacks gain range and deal a percent of the target's maximum health as magic damage %i:OnHit% On-Hit"
             }
           ],
           "effect_parse_status": "ok",
-          "description": "Kog'Maw's attacks gain range and deal a percent of the target's maximum health as magic damage."
+          "description": "Kog'Maw's attacks gain range and deal a percent of the target's maximum health as magic damage %i:OnHit% On-Hit ."
         },
         {
           "slot": "E",
@@ -51801,13 +51801,13 @@
             20,
             20
           ],
-          "base_damage": "60/70/80/90/100",
+          "base_damage": "30/35/40/45/50",
           "damage_type": null,
           "cc_duration": null,
           "damage_effects": [
             {
               "index": 1,
-              "values": "60/70/80/90/100"
+              "values": "30/35/40/45/50"
             },
             {
               "index": 2,
@@ -56369,7 +56369,7 @@
             },
             {
               "index": 3,
-              "values": "20/25/30/35/40"
+              "values": "0.2/0.25/0.3/0.35/0.4"
             },
             {
               "index": 4,
@@ -56478,13 +56478,13 @@
             675,
             675
           ],
-          "base_damage": "50",
+          "base_damage": "0.5",
           "damage_type": "physical",
           "cc_duration": null,
           "damage_effects": [
             {
               "index": 1,
-              "values": "50"
+              "values": "0.5"
             },
             {
               "index": 2,
@@ -65930,7 +65930,7 @@
         "mr_per_level": 2.05,
         "ad": 62,
         "ad_per_level": 0,
-        "attack_speed": 0.625,
+        "attack_speed": 0.638,
         "attack_speed_per_level": 2,
         "move_speed": 350,
         "hp_regen": 7,
@@ -66113,11 +66113,11 @@
           "slot": "W",
           "name": "Inferno Aegis",
           "cooldown": [
-            14,
-            13.5,
             13,
-            12.5,
-            12
+            12,
+            11,
+            10,
+            9
           ],
           "cost": [
             0,
@@ -66187,11 +66187,11 @@
               "values": [],
               "scaling": [],
               "cooldown": [
-                14,
-                13.5,
                 13,
-                12.5,
-                12
+                12,
+                11,
+                10,
+                9
               ],
               "duration": null,
               "caps": null,
@@ -66211,11 +66211,11 @@
               "values": [],
               "scaling": [],
               "cooldown": [
-                14,
-                13.5,
                 13,
-                12.5,
-                12
+                12,
+                11,
+                10,
+                9
               ],
               "duration": null,
               "caps": null,
@@ -66237,10 +66237,10 @@
           "name": "Molten Burst",
           "cooldown": [
             12,
-            11.5,
             11,
-            10.5,
-            10
+            10,
+            9,
+            8
           ],
           "cost": [
             0,
@@ -66311,10 +66311,10 @@
               "scaling": [],
               "cooldown": [
                 12,
-                11.5,
                 11,
-                10.5,
-                10
+                10,
+                9,
+                8
               ],
               "duration": null,
               "caps": null,
@@ -66335,10 +66335,10 @@
               "scaling": [],
               "cooldown": [
                 12,
-                11.5,
                 11,
-                10.5,
-                10
+                10,
+                9,
+                8
               ],
               "duration": null,
               "caps": null,
@@ -74324,7 +74324,7 @@
           "ratios": [],
           "effects": [
             {
-              "name": "Each of Teemo's attacks will poison the target, dealing damage o",
+              "name": "Each of Teemo's attacks will poison the target %i:OnHit% On-Hit ",
               "trigger": "onCast",
               "effect_type": "modifier",
               "values": [
@@ -74343,15 +74343,15 @@
               "conditions": [],
               "damage_type": null,
               "flags": {
-                "applies_on_hit": false,
+                "applies_on_hit": true,
                 "can_crit": false,
                 "aoe": false
               },
-              "source_line": "Each of Teemo's attacks will poison the target, dealing damage on impact and each second after for 4 seconds"
+              "source_line": "Each of Teemo's attacks will poison the target %i:OnHit% On-Hit , dealing damage on impact and each second after for 4 seconds"
             }
           ],
           "effect_parse_status": "ok",
-          "description": "Each of Teemo's attacks will poison the target, dealing damage on impact and each second after for 4 seconds."
+          "description": "Each of Teemo's attacks will poison the target %i:OnHit% On-Hit , dealing damage on impact and each second after for 4 seconds."
         },
         {
           "slot": "R",
@@ -75695,21 +75695,21 @@
             750,
             750
           ],
-          "base_damage": "20/28/36/44/52",
+          "base_damage": "0.2/0.28/0.36/0.44/0.52",
           "damage_type": null,
           "cc_duration": null,
           "damage_effects": [
             {
               "index": 1,
-              "values": "20/28/36/44/52"
+              "values": "0.2/0.28/0.36/0.44/0.52"
             },
             {
               "index": 2,
-              "values": "30/45/60/75/90"
+              "values": "0.3/0.45/0.6/0.75/0.9"
             },
             {
               "index": 3,
-              "values": "25"
+              "values": "0.25"
             },
             {
               "index": 4,
@@ -77023,10 +77023,10 @@
       },
       "passive": {
         "name": "Deadly Venom",
-        "description": "Twitch's basic attacks infect the target, dealing true damage each second.",
+        "description": "Twitch's basic attacks infect the target %i:OnHit% On-Hit , dealing true damage each second.",
         "effects": [
           {
-            "name": "Twitch's basic attacks infect the target, dealing true damage ea",
+            "name": "Twitch's basic attacks infect the target %i:OnHit% On-Hit , deal",
             "trigger": "onCast",
             "effect_type": "damage",
             "values": [],
@@ -77037,11 +77037,11 @@
             "conditions": [],
             "damage_type": "true",
             "flags": {
-              "applies_on_hit": false,
+              "applies_on_hit": true,
               "can_crit": false,
               "aoe": false
             },
-            "source_line": "Twitch's basic attacks infect the target, dealing true damage each second"
+            "source_line": "Twitch's basic attacks infect the target %i:OnHit% On-Hit , dealing true damage each second"
           }
         ],
         "effect_parse_status": "ok"
@@ -78702,11 +78702,11 @@
             },
             {
               "index": 3,
-              "values": "15"
+              "values": "0.15"
             },
             {
               "index": 4,
-              "values": "50"
+              "values": "0.5"
             },
             {
               "index": 5,
@@ -78718,7 +78718,7 @@
             },
             {
               "index": 7,
-              "values": "20"
+              "values": "-0.2"
             },
             {
               "index": 8,
@@ -78726,7 +78726,7 @@
             },
             {
               "index": 9,
-              "values": "33"
+              "values": "0.33"
             },
             {
               "index": 10,
@@ -85643,7 +85643,7 @@
             },
             {
               "index": 7,
-              "values": "1.5"
+              "values": "0"
             },
             {
               "index": 8,
@@ -85712,25 +85712,25 @@
             650,
             650
           ],
-          "base_damage": "50/75/100/125/150",
+          "base_damage": "0",
           "damage_type": null,
           "cc_duration": null,
           "damage_effects": [
             {
               "index": 1,
-              "values": "50/75/100/125/150"
+              "values": "0"
             },
             {
               "index": 2,
-              "values": "-0.3"
+              "values": "0"
             },
             {
               "index": 3,
-              "values": "40/50/60/70/80"
+              "values": "0"
             },
             {
               "index": 4,
-              "values": "5"
+              "values": "0"
             },
             {
               "index": 5,
@@ -85738,7 +85738,7 @@
             },
             {
               "index": 6,
-              "values": "0.5"
+              "values": "0"
             },
             {
               "index": 7,
@@ -90851,10 +90851,10 @@
           "slot": "E",
           "name": "Spark Surge",
           "cooldown": [
-            22,
+            24,
+            22.5,
             21,
-            20,
-            19,
+            19.5,
             18
           ],
           "cost": [
@@ -90919,18 +90919,16 @@
           "ratios": [],
           "effects": [
             {
-              "name": "Zeri dashes a short distance and energizes her next 3 shots of B",
+              "name": "Zeri dashes a short distance and energizes Burst Fire to pierce ",
               "trigger": "onCast",
               "effect_type": "modifier",
-              "values": [
-                "3"
-              ],
+              "values": [],
               "scaling": [],
               "cooldown": [
-                22,
+                24,
+                22.5,
                 21,
-                20,
-                19,
+                19.5,
                 18
               ],
               "duration": null,
@@ -90942,7 +90940,7 @@
                 "can_crit": false,
                 "aoe": false
               },
-              "source_line": "Zeri dashes a short distance and energizes her next 3 shots of Burst Fire, causing them to pierce through enemies"
+              "source_line": "Zeri dashes a short distance and energizes Burst Fire to pierce through enemies"
             },
             {
               "name": "She will vault and grind over any terrain she touches",
@@ -90951,10 +90949,10 @@
               "values": [],
               "scaling": [],
               "cooldown": [
-                22,
+                24,
+                22.5,
                 21,
-                20,
-                19,
+                19.5,
                 18
               ],
               "duration": null,
@@ -90970,7 +90968,7 @@
             }
           ],
           "effect_parse_status": "ok",
-          "description": "Zeri dashes a short distance and energizes her next 3 shots of Burst Fire, causing them to pierce through enemies. She will vault and grind over any terrain she touches."
+          "description": "Zeri dashes a short distance and energizes Burst Fire to pierce through enemies. She will vault and grind over any terrain she touches."
         },
         {
           "slot": "R",
@@ -91939,7 +91937,7 @@
             },
             {
               "index": 2,
-              "values": "10"
+              "values": "0"
             },
             {
               "index": 3,
@@ -92502,11 +92500,11 @@
           "slot": "E",
           "name": "Sleepy Trouble Bubble",
           "cooldown": [
+            18,
+            17,
             16,
             15,
-            14,
-            13,
-            12
+            14
           ],
           "cost": [
             80,
@@ -92576,11 +92574,11 @@
               "values": [],
               "scaling": [],
               "cooldown": [
+                18,
+                17,
                 16,
                 15,
-                14,
-                13,
-                12
+                14
               ],
               "duration": null,
               "caps": null,
@@ -92600,11 +92598,11 @@
               "values": [],
               "scaling": [],
               "cooldown": [
+                18,
+                17,
                 16,
                 15,
-                14,
-                13,
-                12
+                14
               ],
               "duration": null,
               "caps": null,
@@ -92624,11 +92622,11 @@
               "values": [],
               "scaling": [],
               "cooldown": [
+                18,
+                17,
                 16,
                 15,
-                14,
-                13,
-                12
+                14
               ],
               "duration": null,
               "caps": null,

@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-04-28T19:13:08.782013+00:00",
-  "source": "https://ddragon.leagueoflegends.com/cdn/16.8.1/data/en_US/championFull.json",
-  "version": "16.8.1",
+  "generatedAt": "2026-04-29T01:27:44.276419+00:00",
+  "source": "https://ddragon.leagueoflegends.com/cdn/16.9.1/data/en_US/championFull.json",
+  "version": "16.9.1",
   "champions": {
     "Aatrox": {
       "title": "the Darkin Blade",
@@ -2231,7 +2231,7 @@
           "slot": "W",
           "name": "Bio-Arcane Barrage",
           "cooldown": "17",
-          "description": "Kog'Maw's attacks gain range and deal a percent of the target's maximum health as magic damage."
+          "description": "Kog'Maw's attacks gain range and deal a percent of the target's maximum health as magic damage %i:OnHit% On-Hit ."
         },
         {
           "slot": "E",
@@ -4012,13 +4012,13 @@
         {
           "slot": "W",
           "name": "Inferno Aegis",
-          "cooldown": "14/13.5/13/12.5/12",
+          "cooldown": "13/12/11/10/9",
           "description": "Shyvana gains a shield, movement speed, and after a short delay, the area around her detonates. While in Dragon Form, the explosion will heal her if it strikes an enemy champion."
         },
         {
           "slot": "E",
           "name": "Molten Burst",
-          "cooldown": "12/11.5/11/10.5/10",
+          "cooldown": "12/11/10/9/8",
           "description": "Shyvana launches a fireball that explodes upon striking a large target and slows them. In Dragon Form, it passes through and explodes upon striking large enemies, leaving behind a…"
         },
         {
@@ -4514,7 +4514,7 @@
           "slot": "E",
           "name": "Toxic Shot",
           "cooldown": "0",
-          "description": "Each of Teemo's attacks will poison the target, dealing damage on impact and each second after for 4 seconds."
+          "description": "Each of Teemo's attacks will poison the target %i:OnHit% On-Hit , dealing damage on impact and each second after for 4 seconds."
         },
         {
           "slot": "R",
@@ -4693,7 +4693,7 @@
       "title": "the Plague Rat",
       "passive": {
         "name": "Deadly Venom",
-        "description": "Twitch's basic attacks infect the target, dealing true damage each second."
+        "description": "Twitch's basic attacks infect the target %i:OnHit% On-Hit , dealing true damage each second."
       },
       "spells": [
         {
@@ -5536,8 +5536,8 @@
         {
           "slot": "E",
           "name": "Spark Surge",
-          "cooldown": "22/21/20/19/18",
-          "description": "Zeri dashes a short distance and energizes her next 3 shots of Burst Fire, causing them to pierce through enemies. She will vault and grind over any terrain she touches."
+          "cooldown": "24/22.5/21/19.5/18",
+          "description": "Zeri dashes a short distance and energizes Burst Fire to pierce through enemies. She will vault and grind over any terrain she touches."
         },
         {
           "slot": "R",
@@ -5635,7 +5635,7 @@
         {
           "slot": "E",
           "name": "Sleepy Trouble Bubble",
-          "cooldown": "16/15/14/13/12",
+          "cooldown": "18/17/16/15/14",
           "description": "Causes the target to become drowsy, then fall asleep. While asleep, the target's Magic Resist is reduced. The first source of damage that breaks the sleep is doubled, up to a cap."
         },
         {
