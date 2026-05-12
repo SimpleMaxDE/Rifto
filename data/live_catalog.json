@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-12T08:15:20.960554+00:00",
+  "generatedAt": "2026-05-12T13:28:41.177358+00:00",
   "sources": {
     "heroes": "https://game.gtimg.cn/images/lgamem/act/lrlib/js/heroList/hero_list.js",
     "items": "https://game.gtimg.cn/images/lgamem/act/lrlib/js/equip/equip.js",
@@ -1486,6 +1486,17 @@
         "法师"
       ],
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10144.png"
+    },
+    {
+      "hero_id": "10146",
+      "name": "塔莉垭",
+      "alias": "taliya",
+      "title": "岩雀",
+      "lane": "中路;打野",
+      "roles": [
+        "法师"
+      ],
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_1014601.png"
     },
     {
       "hero_id": "10151",
@@ -41816,13 +41827,15 @@
     }
   ],
   "diff": {
-    "newChampions": [],
+    "newChampions": [
+      "塔莉垭"
+    ],
     "newItems": [],
     "newRunes": [],
     "newSummonerSpells": []
   },
   "counts": {
-    "champions": 137,
+    "champions": 138,
     "items": 252,
     "runes": 53,
     "summonerSpells": 16
