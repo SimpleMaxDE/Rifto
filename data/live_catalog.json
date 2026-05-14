@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-14T01:49:20.509291+00:00",
+  "generatedAt": "2026-05-14T08:20:45.171080+00:00",
   "sources": {
     "heroes": "https://game.gtimg.cn/images/lgamem/act/lrlib/js/heroList/hero_list.js",
     "items": "https://game.gtimg.cn/images/lgamem/act/lrlib/js/equip/equip.js",
@@ -1690,7 +1690,7 @@
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/EquipIcons/lol_sxzl.png",
       "price": "3333",
       "description": [
-        "生命值 +250 最大生命值\n攻击力 +30 攻击力\n攻击速度 +30% 攻击速度\n冷却 +25 技能急速\n\n热烈：移动速度+5%移动速度。\n\n英勇：每次普攻命中单位获得20移动速度，击败单位后获得60移动速度，效果持续2秒。移速加成不可叠加，且远程英雄所获得的加成效果减半。\n\n咒刃：施放技能后，10秒内再次发起普攻，会造成相当于200%基础攻击力的额外物理伤害。（1.5秒冷却时间）对建筑伤害降低。\n\n"
+        "生命值 +333 最大生命值\n攻击力 +30 攻击力\n攻击速度 +30% 攻击速度\n冷却 +20 技能急速\n\n热烈：移动速度+5%移动速度。\n\n英勇：每次普攻命中单位获得20移动速度，效果持续2秒。移速加成不可叠加，且远程英雄所获得的加成效果减半。\n\n咒刃：施放技能后，10秒内再次发起普攻，会造成相当于200%基础攻击力的额外物理伤害。（1.5秒冷却时间）对建筑伤害降低。\n\n"
       ],
       "labels": [],
       "from": [
@@ -1706,7 +1706,7 @@
         "stackable": false
       },
       "stats": {
-        "hp": "2500000",
+        "hp": "3330000",
         "armor": "0",
         "mr": "0",
         "ad": "300000",
@@ -1729,16 +1729,16 @@
       },
       "effects": [
         {
-          "name": "生命值 +250 最大生命值",
+          "name": "生命值 +333 最大生命值",
           "trigger": "passive_always",
           "effect_type": "modifier",
           "values": [
-            "250"
+            "333"
           ],
           "scaling": [
             {
               "source": "target_max_hp",
-              "ratio": 250.0
+              "ratio": 333.0
             }
           ],
           "cooldown": null,
@@ -1751,7 +1751,7 @@
             "applies_on_hit": false,
             "unique": false
           },
-          "source_line": "生命值 +250 最大生命值"
+          "source_line": "生命值 +333 最大生命值"
         },
         {
           "name": "攻击力 +30 攻击力",
@@ -1799,11 +1799,11 @@
           "source_line": "攻击速度 +30% 攻击速度"
         },
         {
-          "name": "冷却 +25 技能急速",
+          "name": "冷却 +20 技能急速",
           "trigger": "passive_always",
           "effect_type": "modifier",
           "values": [
-            "25"
+            "20"
           ],
           "scaling": [],
           "cooldown": null,
@@ -1816,7 +1816,7 @@
             "applies_on_hit": false,
             "unique": false
           },
-          "source_line": "冷却 +25 技能急速"
+          "source_line": "冷却 +20 技能急速"
         },
         {
           "name": "热烈：移动速度+5%移动速度",
@@ -1839,12 +1839,11 @@
           "source_line": "热烈：移动速度+5%移动速度"
         },
         {
-          "name": "英勇：每次普攻命中单位获得20移动速度，击败单位后获得60移动速度，效果持续2秒",
+          "name": "英勇：每次普攻命中单位获得20移动速度，效果持续2秒",
           "trigger": "onHit",
           "effect_type": "modifier",
           "values": [
             "20",
-            "60",
             "2"
           ],
           "scaling": [],
@@ -1858,7 +1857,7 @@
             "applies_on_hit": true,
             "unique": false
           },
-          "source_line": "英勇：每次普攻命中单位获得20移动速度，击败单位后获得60移动速度，效果持续2秒"
+          "source_line": "英勇：每次普攻命中单位获得20移动速度，效果持续2秒"
         },
         {
           "name": "移速加成不可叠加，且远程英雄所获得的加成效果减半",
@@ -2122,7 +2121,7 @@
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/EquipIcons/t3x_zysl.png",
       "price": "1900",
       "description": [
-        "生命值 +100 最大生命值\n冷却 +15 技能急速\n移动速度 +45 移动速度\n\n召唤：召唤师技能冷却时间减少15%。\n\n凝滞（主动）：使用后2.5秒内对伤害免疫且无法被选定，但无法移动、发起普攻、施放技能或再使用装备。（120秒冷却时间）\n\n"
+        "生命值 +100 最大生命值\n +50% 基础法力回复\n冷却 +15 技能急速\n移动速度 +45 移动速度\n\n召唤：召唤师技能冷却时间减少15%。\n\n凝滞（主动）：使用后2.5秒内对伤害免疫且无法被选定，但无法移动、发起普攻、施放技能或再使用装备。（120秒冷却时间）\n\n"
       ],
       "labels": [],
       "from": [
@@ -2154,7 +2153,7 @@
         "hp_regen": "0",
         "hp_regen_pct": "0",
         "mana": "0",
-        "mana_regen": "0",
+        "mana_regen": "5000",
         "lifesteal": "0",
         "spell_vamp": "0"
       },
@@ -2183,6 +2182,26 @@
             "unique": false
           },
           "source_line": "生命值 +100 最大生命值"
+        },
+        {
+          "name": "+50% 基础法力回复",
+          "trigger": "passive_always",
+          "effect_type": "modifier",
+          "values": [
+            "50%"
+          ],
+          "scaling": [],
+          "cooldown": null,
+          "duration": null,
+          "caps": null,
+          "conditions": [],
+          "damage_type": null,
+          "flags": {
+            "can_crit": false,
+            "applies_on_hit": false,
+            "unique": false
+          },
+          "source_line": "+50% 基础法力回复"
         },
         {
           "name": "冷却 +15 技能急速",
@@ -3818,7 +3837,7 @@
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/EquipIcons/lol_ldzz.png",
       "price": "2800",
       "description": [
-        "生命值 +400 最大生命值\n护甲 +75 护甲\n\n逆流：每次受到物理暴击伤害时，都会获得1层逆流，每层逆流提供5%移动速度和5%减速抗性，至多叠加4层。\n\n复原力：自身受到的物理暴击伤害降低20%。\n\n"
+        "生命值 +400 最大生命值\n护甲 +75 护甲\n\n逆流：每次受到物理暴击伤害时，都会获得1层逆流，每层逆流提供5%移动速度和5%减速抗性，至多叠加4层。\n\n复原力：自身受到的物理暴击伤害降低30%。\n\n"
       ],
       "labels": [],
       "from": [
@@ -3924,11 +3943,11 @@
           "source_line": "逆流：每次受到物理暴击伤害时，都会获得1层逆流，每层逆流提供5%移动速度和5%减速抗性，至多叠加4层"
         },
         {
-          "name": "复原力：自身受到的物理暴击伤害降低20%",
+          "name": "复原力：自身受到的物理暴击伤害降低30%",
           "trigger": "passive_always",
           "effect_type": "modifier",
           "values": [
-            "20%"
+            "30%"
           ],
           "scaling": [],
           "cooldown": null,
@@ -3941,7 +3960,7 @@
             "applies_on_hit": false,
             "unique": false
           },
-          "source_line": "复原力：自身受到的物理暴击伤害降低20%"
+          "source_line": "复原力：自身受到的物理暴击伤害降低30%"
         }
       ],
       "effect_parse_status": "ok",
@@ -5585,7 +5604,7 @@
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/EquipIcons/lol_zlld.png",
       "price": "2600",
       "description": [
-        "生命值 +100 最大生命值\n法术强度 +50 法术强度\n法力值 +300 最大法力值\n冷却 +10 技能急速\n\n和声：移动与施放技能会提高和谐值。和谐值达到100点时，对我方英雄施放的下一个治疗或护盾技能会额外为目标回复120-180（随等级成长）+15%法术强度生命值。当目标生命值低于30%时，提供强化治疗效果，治疗效率为平时的150%。\n\n"
+        "生命值 +100 最大生命值\n法术强度 +50 法术强度\n法力值 +300 最大法力值\n +50% 基础法力回复\n冷却 +10 技能急速\n\n和声：移动与施放技能会提高和谐值。和谐值达到100点时，对我方英雄施放的下一个治疗或护盾技能会额外为目标回复120-180（随等级成长）+15%法术强度生命值。当目标生命值低于30%时，提供强化治疗效果，治疗效率为平时的150%。\n\n"
       ],
       "labels": [],
       "from": [
@@ -5618,7 +5637,7 @@
         "hp_regen": "0",
         "hp_regen_pct": "0",
         "mana": "3000000",
-        "mana_regen": "0",
+        "mana_regen": "5000",
         "lifesteal": "0",
         "spell_vamp": "0"
       },
@@ -5687,6 +5706,26 @@
             "unique": false
           },
           "source_line": "法力值 +300 最大法力值"
+        },
+        {
+          "name": "+50% 基础法力回复",
+          "trigger": "passive_always",
+          "effect_type": "modifier",
+          "values": [
+            "50%"
+          ],
+          "scaling": [],
+          "cooldown": null,
+          "duration": null,
+          "caps": null,
+          "conditions": [],
+          "damage_type": null,
+          "flags": {
+            "can_crit": false,
+            "applies_on_hit": false,
+            "unique": false
+          },
+          "source_line": "+50% 基础法力回复"
         },
         {
           "name": "冷却 +10 技能急速",
@@ -5894,7 +5933,7 @@
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/EquipIcons/lol_ymsz.png",
       "price": "1400",
       "description": [
-        "生命值 +100 最大生命值\n冷却 +15 技能急速\n移动速度 +45 移动速度\n\n召唤：召唤师技能冷却时间减少15%。\n\n还梦使者：每6秒获得两个美梦泡泡。主动为队友提供治疗或护盾时，两个泡泡都会飞向对方，为其赋能3秒。两个泡泡可令下一次命中增加15-90（随等级成长）的额外魔法伤害并获得15%-30%的移速加成，持续3秒。\n\n"
+        "生命值 +100 最大生命值\n +50% 基础法力回复\n冷却 +15 技能急速\n移动速度 +45 移动速度\n\n召唤：召唤师技能冷却时间减少15%。\n\n还梦使者：每6秒获得两个美梦泡泡。主动为队友提供治疗或护盾时，两个泡泡都会飞向对方，为其赋能3秒。两个泡泡可令下一次命中增加15-90（随等级成长）的额外魔法伤害并获得15%-30%的移速加成，持续3秒。\n\n"
       ],
       "labels": [],
       "from": [
@@ -5926,7 +5965,7 @@
         "hp_regen": "0",
         "hp_regen_pct": "0",
         "mana": "0",
-        "mana_regen": "0",
+        "mana_regen": "5000",
         "lifesteal": "0",
         "spell_vamp": "0"
       },
@@ -5955,6 +5994,26 @@
             "unique": false
           },
           "source_line": "生命值 +100 最大生命值"
+        },
+        {
+          "name": "+50% 基础法力回复",
+          "trigger": "passive_always",
+          "effect_type": "modifier",
+          "values": [
+            "50%"
+          ],
+          "scaling": [],
+          "cooldown": null,
+          "duration": null,
+          "caps": null,
+          "conditions": [],
+          "damage_type": null,
+          "flags": {
+            "can_crit": false,
+            "applies_on_hit": false,
+            "unique": false
+          },
+          "source_line": "+50% 基础法力回复"
         },
         {
           "name": "冷却 +15 技能急速",
@@ -12068,7 +12127,7 @@
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/EquipIcons/lol_tjphz.png",
       "price": "1400",
       "description": [
-        "生命值 +100 最大生命值\n冷却 +15 技能急速\n移动速度 +45 移动速度\n\n召唤：召唤师技能冷却时间减少15%。\n\n破阵冲击波（主动）：主动使用后，向前方位移一小段距离并且对周围造成120%攻击力物理伤害，命中后使敌方减速30%，持续3秒。（冷却时间35秒）\n\n"
+        "生命值 +100 最大生命值\n +50% 基础法力回复\n冷却 +15 技能急速\n移动速度 +45 移动速度\n\n召唤：召唤师技能冷却时间减少15%。\n\n破阵冲击波（主动）：主动使用后，向前方位移一小段距离并且对周围造成120%攻击力物理伤害，命中后使敌方减速30%，持续3秒。（冷却时间35秒）\n\n"
       ],
       "labels": [],
       "from": [
@@ -12100,7 +12159,7 @@
         "hp_regen": "0",
         "hp_regen_pct": "0",
         "mana": "0",
-        "mana_regen": "0",
+        "mana_regen": "5000",
         "lifesteal": "0",
         "spell_vamp": "0"
       },
@@ -12129,6 +12188,26 @@
             "unique": false
           },
           "source_line": "生命值 +100 最大生命值"
+        },
+        {
+          "name": "+50% 基础法力回复",
+          "trigger": "passive_always",
+          "effect_type": "modifier",
+          "values": [
+            "50%"
+          ],
+          "scaling": [],
+          "cooldown": null,
+          "duration": null,
+          "caps": null,
+          "conditions": [],
+          "damage_type": null,
+          "flags": {
+            "can_crit": false,
+            "applies_on_hit": false,
+            "unique": false
+          },
+          "source_line": "+50% 基础法力回复"
         },
         {
           "name": "冷却 +15 技能急速",
@@ -14896,7 +14975,7 @@
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/EquipIcons/lol_mlzx.png",
       "price": "900",
       "description": [
-        "生命值 +100 最大生命值\n冷却 +15 技能急速\n移动速度 +45 移动速度\n\n召唤：召唤师技能冷却时间减少15%。\n\n"
+        "生命值 +100 最大生命值\n +50% 基础法力回复\n冷却 +15 技能急速\n移动速度 +45 移动速度\n\n召唤：召唤师技能冷却时间减少15%。\n\n"
       ],
       "labels": [],
       "from": [
@@ -14927,7 +15006,7 @@
         "hp_regen": "0",
         "hp_regen_pct": "0",
         "mana": "0",
-        "mana_regen": "0",
+        "mana_regen": "5000",
         "lifesteal": "0",
         "spell_vamp": "0"
       },
@@ -14956,6 +15035,26 @@
             "unique": false
           },
           "source_line": "生命值 +100 最大生命值"
+        },
+        {
+          "name": "+50% 基础法力回复",
+          "trigger": "passive_always",
+          "effect_type": "modifier",
+          "values": [
+            "50%"
+          ],
+          "scaling": [],
+          "cooldown": null,
+          "duration": null,
+          "caps": null,
+          "conditions": [],
+          "damage_type": null,
+          "flags": {
+            "can_crit": false,
+            "applies_on_hit": false,
+            "unique": false
+          },
+          "source_line": "+50% 基础法力回复"
         },
         {
           "name": "冷却 +15 技能急速",
@@ -16326,7 +16425,7 @@
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/EquipIcons/t3x_zyry.png",
       "price": "1400",
       "description": [
-        "生命值 +100 最大生命值\n冷却 +15 技能急速\n移动速度 +45 移动速度\n\n召唤：召唤师技能冷却时间减少15%。\n\n荣耀（主动）：提高30%移动速度，持续4秒后或贴近一名敌方英雄时，释放一道冲击波，对命中的敌方英雄降低60%移动速度，持续2秒。同时自身获得20%韧性和20%减速抗性，持续4秒。（45秒冷却时间）\n\n"
+        "生命值 +100 最大生命值\n +50% 基础法力回复\n冷却 +15 技能急速\n移动速度 +45 移动速度\n\n召唤：召唤师技能冷却时间减少15%。\n\n荣耀（主动）：提高30%移动速度，持续4秒后或贴近一名敌方英雄时，释放一道冲击波，对命中的敌方英雄降低60%移动速度，持续2秒。同时自身获得20%韧性和20%减速抗性，持续4秒。（45秒冷却时间）\n\n"
       ],
       "labels": [],
       "from": [
@@ -16358,7 +16457,7 @@
         "hp_regen": "0",
         "hp_regen_pct": "0",
         "mana": "0",
-        "mana_regen": "0",
+        "mana_regen": "5000",
         "lifesteal": "0",
         "spell_vamp": "0"
       },
@@ -16387,6 +16486,26 @@
             "unique": false
           },
           "source_line": "生命值 +100 最大生命值"
+        },
+        {
+          "name": "+50% 基础法力回复",
+          "trigger": "passive_always",
+          "effect_type": "modifier",
+          "values": [
+            "50%"
+          ],
+          "scaling": [],
+          "cooldown": null,
+          "duration": null,
+          "caps": null,
+          "conditions": [],
+          "damage_type": null,
+          "flags": {
+            "can_crit": false,
+            "applies_on_hit": false,
+            "unique": false
+          },
+          "source_line": "+50% 基础法力回复"
         },
         {
           "name": "冷却 +15 技能急速",
@@ -18682,7 +18801,7 @@
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/EquipIcons/t3x_sysd.png",
       "price": "1700",
       "description": [
-        "生命值 +100 最大生命值\n冷却 +15 技能急速\n移动速度 +45 移动速度\n\n召唤：召唤师技能冷却时间减少15%。\n\n流珠（主动）：移除英雄身上的所有控制效果，并免疫所有控制效果，持续0.25秒。\n坚韧（被动）：受到除击飞外的控制时间减少25%。在流珠效果结束后，获得30%韧性和30%减速抗性，持续1.5秒。（70秒冷却时间）\n受到击飞或击退期间无法使用。\n\n"
+        "生命值 +100 最大生命值\n +50% 基础法力回复\n冷却 +15 技能急速\n移动速度 +45 移动速度\n\n召唤：召唤师技能冷却时间减少15%。\n\n流珠（主动）：移除英雄身上的所有控制效果，并免疫所有控制效果，持续0.25秒。\n坚韧（被动）：受到除击飞外的控制时间减少25%。在流珠效果结束后，获得30%韧性和30%减速抗性，持续1.5秒。（70秒冷却时间）\n受到击飞或击退期间无法使用。\n\n"
       ],
       "labels": [],
       "from": [
@@ -18714,7 +18833,7 @@
         "hp_regen": "0",
         "hp_regen_pct": "0",
         "mana": "0",
-        "mana_regen": "0",
+        "mana_regen": "5000",
         "lifesteal": "0",
         "spell_vamp": "0"
       },
@@ -18743,6 +18862,26 @@
             "unique": false
           },
           "source_line": "生命值 +100 最大生命值"
+        },
+        {
+          "name": "+50% 基础法力回复",
+          "trigger": "passive_always",
+          "effect_type": "modifier",
+          "values": [
+            "50%"
+          ],
+          "scaling": [],
+          "cooldown": null,
+          "duration": null,
+          "caps": null,
+          "conditions": [],
+          "damage_type": null,
+          "flags": {
+            "can_crit": false,
+            "applies_on_hit": false,
+            "unique": false
+          },
+          "source_line": "+50% 基础法力回复"
         },
         {
           "name": "冷却 +15 技能急速",
@@ -20574,7 +20713,7 @@
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/EquipIcons/Staff_Of_Flowing_Waters.png",
       "price": "2600",
       "description": [
-        "生命值 +100 最大生命值\n法术强度 +45 法术强度\n冷却 +20 技能急速\n\n湍流：为一名队友提供治疗或护盾会让你及该队友获得10技能急速以及20-40 法术强度（基于目标的等级）法术强度，持续6秒。\n\n"
+        "生命值 +100 最大生命值\n法术强度 +45 法术强度\n +50% 基础法力回复\n冷却 +20 技能急速\n\n湍流：为一名队友提供治疗或护盾会让你及该队友获得10技能急速以及20-40 法术强度（基于目标的等级）法术强度，持续6秒。\n\n"
       ],
       "labels": [],
       "from": [
@@ -20606,7 +20745,7 @@
         "hp_regen": "0",
         "hp_regen_pct": "0",
         "mana": "0",
-        "mana_regen": "0",
+        "mana_regen": "5000",
         "lifesteal": "0",
         "spell_vamp": "0"
       },
@@ -20655,6 +20794,26 @@
             "unique": false
           },
           "source_line": "法术强度 +45 法术强度"
+        },
+        {
+          "name": "+50% 基础法力回复",
+          "trigger": "passive_always",
+          "effect_type": "modifier",
+          "values": [
+            "50%"
+          ],
+          "scaling": [],
+          "cooldown": null,
+          "duration": null,
+          "caps": null,
+          "conditions": [],
+          "damage_type": null,
+          "flags": {
+            "can_crit": false,
+            "applies_on_hit": false,
+            "unique": false
+          },
+          "source_line": "+50% 基础法力回复"
         },
         {
           "name": "冷却 +20 技能急速",
@@ -20711,7 +20870,7 @@
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/EquipIcons/t3x_hjyd.png",
       "price": "1400",
       "description": [
-        "生命值 +100 最大生命值\n冷却 +15 技能急速\n移动速度 +45 移动速度\n\n召唤：召唤师技能冷却时间减少15%。\n\n火箭弹（主动）：向前冲刺并释放呈锥形的火箭弹，对命中目标造成70魔法伤害，并降低目标12%魔法抗性持续3秒，释放结束之后获得3秒持续衰减的20%移速加成。（50秒冷却时间）\n若英雄或野怪被一枚以上的火箭弹命中，后续火箭弹仅会造成10%伤害。\n\n"
+        "生命值 +100 最大生命值\n +50% 基础法力回复\n冷却 +15 技能急速\n移动速度 +45 移动速度\n\n召唤：召唤师技能冷却时间减少15%。\n\n火箭弹（主动）：向前冲刺并释放呈锥形的火箭弹，对命中目标造成70魔法伤害，并降低目标12%魔法抗性持续3秒，释放结束之后获得3秒持续衰减的20%移速加成。（50秒冷却时间）\n若英雄或野怪被一枚以上的火箭弹命中，后续火箭弹仅会造成10%伤害。\n\n"
       ],
       "labels": [],
       "from": [
@@ -20743,7 +20902,7 @@
         "hp_regen": "0",
         "hp_regen_pct": "0",
         "mana": "0",
-        "mana_regen": "0",
+        "mana_regen": "5000",
         "lifesteal": "0",
         "spell_vamp": "0"
       },
@@ -20772,6 +20931,26 @@
             "unique": false
           },
           "source_line": "生命值 +100 最大生命值"
+        },
+        {
+          "name": "+50% 基础法力回复",
+          "trigger": "passive_always",
+          "effect_type": "modifier",
+          "values": [
+            "50%"
+          ],
+          "scaling": [],
+          "cooldown": null,
+          "duration": null,
+          "caps": null,
+          "conditions": [],
+          "damage_type": null,
+          "flags": {
+            "can_crit": false,
+            "applies_on_hit": false,
+            "unique": false
+          },
+          "source_line": "+50% 基础法力回复"
         },
         {
           "name": "冷却 +15 技能急速",
@@ -22566,9 +22745,9 @@
       "item_id": "2292",
       "name": "海妖杀手",
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/EquipIcons/lol_KrakenSlayer.png",
-      "price": "3000",
+      "price": "2800",
       "description": [
-        "攻击力 +40 攻击力\n攻击速度 +30% 攻击速度\n\n行云：移动速度+5%移动速度。\n\n放倒它：每第三次攻击造成120-160（随等级成长）（远程英雄110-150（随等级成长））额外物理伤害，这个伤害会基于目标的已损失生命值获得提升，目标每损失1%生命值伤害提升1%，最多提升50%。\n\n"
+        "攻击力 +40 攻击力\n攻击速度 +30% 攻击速度\n\n行云：移动速度+5%移动速度。\n\n放倒它：每第三次攻击造成120-160（随等级成长）（远程英雄110-150（随等级成长））额外物理伤害，这个伤害会基于目标的已损失生命值获得提升，目标每损失1%生命值伤害提升1%，最多提升70%。\n\n"
       ],
       "labels": [],
       "from": [
@@ -22682,7 +22861,7 @@
             "150",
             "1%",
             "1%",
-            "50%"
+            "70%"
           ],
           "scaling": [],
           "cooldown": null,
@@ -22695,7 +22874,7 @@
             "applies_on_hit": false,
             "unique": false
           },
-          "source_line": "放倒它：每第三次攻击造成120-160（随等级成长）（远程英雄110-150（随等级成长））额外物理伤害，这个伤害会基于目标的已损失生命值获得提升，目标每损失1%生命值伤害提升1%，最多提升50%"
+          "source_line": "放倒它：每第三次攻击造成120-160（随等级成长）（远程英雄110-150（随等级成长））额外物理伤害，这个伤害会基于目标的已损失生命值获得提升，目标每损失1%生命值伤害提升1%，最多提升70%"
         }
       ],
       "effect_parse_status": "ok",
@@ -23160,7 +23339,7 @@
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/EquipIcons/lol_kxzf.png",
       "price": "1400",
       "description": [
-        "生命值 +100 最大生命值\n冷却 +15 技能急速\n移动速度 +45 移动速度\n\n召唤：召唤师技能冷却时间减少15%。\n\n饥渴斩击（主动）：对附近的敌人造成230%基础攻击力物理伤害。每命中—个敌方英雄回复（20%攻击力+12%已损失）。（15秒冷却时间）\n\n"
+        "生命值 +100 最大生命值\n +50% 基础法力回复\n冷却 +15 技能急速\n移动速度 +45 移动速度\n\n召唤：召唤师技能冷却时间减少15%。\n\n饥渴斩击（主动）：对附近的敌人造成230%基础攻击力物理伤害。每命中—个敌方英雄回复（20%攻击力+12%已损失）。（15秒冷却时间）\n\n"
       ],
       "labels": [],
       "from": [
@@ -23192,7 +23371,7 @@
         "hp_regen": "0",
         "hp_regen_pct": "0",
         "mana": "0",
-        "mana_regen": "0",
+        "mana_regen": "5000",
         "lifesteal": "0",
         "spell_vamp": "0"
       },
@@ -23221,6 +23400,26 @@
             "unique": false
           },
           "source_line": "生命值 +100 最大生命值"
+        },
+        {
+          "name": "+50% 基础法力回复",
+          "trigger": "passive_always",
+          "effect_type": "modifier",
+          "values": [
+            "50%"
+          ],
+          "scaling": [],
+          "cooldown": null,
+          "duration": null,
+          "caps": null,
+          "conditions": [],
+          "damage_type": null,
+          "flags": {
+            "can_crit": false,
+            "applies_on_hit": false,
+            "unique": false
+          },
+          "source_line": "+50% 基础法力回复"
         },
         {
           "name": "冷却 +15 技能急速",
@@ -25780,7 +25979,7 @@
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/EquipIcons/lol_crxl.png",
       "price": "2700",
       "description": [
-        "生命值 +250 最大生命值\n法术强度 +35 法术强度\n冷却 +20 技能急速\n\n炽热：移动速度+5%移动速度。\n\n香炉：每当你为一名除自身外的我方英雄回复生命或提供护盾时，该英雄会获得15%~40%攻击速度，并且普攻附带16~30的额外魔法伤害，该伤害可以触发暴击，持续6秒。\n\n"
+        "生命值 +250 最大生命值\n法术强度 +35 法术强度\n +50% 基础法力回复\n冷却 +20 技能急速\n\n炽热：移动速度+5%移动速度。\n\n香炉：每当你为一名除自身外的我方英雄回复生命或提供护盾时，该英雄会获得15%~40%攻击速度，并且普攻附带16~30的额外魔法伤害，该伤害可以触发暴击，持续6秒。\n\n"
       ],
       "labels": [],
       "from": [
@@ -25813,7 +26012,7 @@
         "hp_regen": "0",
         "hp_regen_pct": "0",
         "mana": "0",
-        "mana_regen": "0",
+        "mana_regen": "5000",
         "lifesteal": "0",
         "spell_vamp": "0"
       },
@@ -25862,6 +26061,26 @@
             "unique": false
           },
           "source_line": "法术强度 +35 法术强度"
+        },
+        {
+          "name": "+50% 基础法力回复",
+          "trigger": "passive_always",
+          "effect_type": "modifier",
+          "values": [
+            "50%"
+          ],
+          "scaling": [],
+          "cooldown": null,
+          "duration": null,
+          "caps": null,
+          "conditions": [],
+          "damage_type": null,
+          "flags": {
+            "can_crit": false,
+            "applies_on_hit": false,
+            "unique": false
+          },
+          "source_line": "+50% 基础法力回复"
         },
         {
           "name": "冷却 +20 技能急速",
@@ -26097,7 +26316,7 @@
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/EquipIcons/lol_ft.png",
       "price": "2900",
       "description": [
-        "生命值 +300 最大生命值\n攻击力 +40 攻击力\n冷却 +15 技能急速\n\n光盾打击：对敌方英雄的第一次普通攻击将必定暴击，造成160%伤害（每个目标6秒冷却时间），同时治疗自身（125%基础攻击力+5%已损失生命值）。\n\n"
+        "生命值 +350 最大生命值\n攻击力 +40 攻击力\n冷却 +15 技能急速\n\n光盾打击：对敌方英雄的第一次普通攻击将必定暴击，造成160%伤害（每个目标6秒冷却时间），同时治疗自身（125%基础攻击力+6%已损失生命值）。\n\n"
       ],
       "labels": [],
       "from": [
@@ -26112,7 +26331,7 @@
         "stackable": false
       },
       "stats": {
-        "hp": "3000000",
+        "hp": "3500000",
         "armor": "0",
         "mr": "0",
         "ad": "400000",
@@ -26135,16 +26354,16 @@
       },
       "effects": [
         {
-          "name": "生命值 +300 最大生命值",
+          "name": "生命值 +350 最大生命值",
           "trigger": "passive_always",
           "effect_type": "modifier",
           "values": [
-            "300"
+            "350"
           ],
           "scaling": [
             {
               "source": "target_max_hp",
-              "ratio": 300.0
+              "ratio": 350.0
             }
           ],
           "cooldown": null,
@@ -26157,7 +26376,7 @@
             "applies_on_hit": false,
             "unique": false
           },
-          "source_line": "生命值 +300 最大生命值"
+          "source_line": "生命值 +350 最大生命值"
         },
         {
           "name": "攻击力 +40 攻击力",
@@ -26205,14 +26424,14 @@
           "source_line": "冷却 +15 技能急速"
         },
         {
-          "name": "光盾打击：对敌方英雄的第一次普通攻击将必定暴击，造成160%伤害（每个目标6秒冷却时间），同时治疗自身（125%基础攻击力+5%",
+          "name": "光盾打击：对敌方英雄的第一次普通攻击将必定暴击，造成160%伤害（每个目标6秒冷却时间），同时治疗自身（125%基础攻击力+6%",
           "trigger": "periodic",
           "effect_type": "healing",
           "values": [
             "160%",
             "6",
             "125%",
-            "5%"
+            "6%"
           ],
           "scaling": [
             {
@@ -26230,7 +26449,7 @@
             "applies_on_hit": false,
             "unique": false
           },
-          "source_line": "光盾打击：对敌方英雄的第一次普通攻击将必定暴击，造成160%伤害（每个目标6秒冷却时间），同时治疗自身（125%基础攻击力+5%已损失生命值）"
+          "source_line": "光盾打击：对敌方英雄的第一次普通攻击将必定暴击，造成160%伤害（每个目标6秒冷却时间），同时治疗自身（125%基础攻击力+6%已损失生命值）"
         }
       ],
       "effect_parse_status": "ok",
@@ -26976,7 +27195,7 @@
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/EquipIcons/lol_kfzl.png",
       "price": "1400",
       "description": [
-        "生命值 +100 最大生命值\n冷却 +15 技能急速\n移动速度 +45 移动速度\n\n召唤：召唤师技能冷却时间减少15%。\n\n暴雨（主动）：向指定方向位移一段距离并对终点附近生命值最低的敌方单位发射3个弹体，优先选择英雄，共造成40-120（随等级成长） +35%额外攻击力的物理伤害。（50秒冷却时间）\n\n"
+        "生命值 +100 最大生命值\n +50% 基础法力回复\n冷却 +15 技能急速\n移动速度 +45 移动速度\n\n召唤：召唤师技能冷却时间减少15%。\n\n暴雨（主动）：向指定方向位移一段距离并对终点附近生命值最低的敌方单位发射3个弹体，优先选择英雄，共造成40-120（随等级成长） +35%额外攻击力的物理伤害。（50秒冷却时间）\n\n"
       ],
       "labels": [],
       "from": [
@@ -27008,7 +27227,7 @@
         "hp_regen": "0",
         "hp_regen_pct": "0",
         "mana": "0",
-        "mana_regen": "0",
+        "mana_regen": "5000",
         "lifesteal": "0",
         "spell_vamp": "0"
       },
@@ -27037,6 +27256,26 @@
             "unique": false
           },
           "source_line": "生命值 +100 最大生命值"
+        },
+        {
+          "name": "+50% 基础法力回复",
+          "trigger": "passive_always",
+          "effect_type": "modifier",
+          "values": [
+            "50%"
+          ],
+          "scaling": [],
+          "cooldown": null,
+          "duration": null,
+          "caps": null,
+          "conditions": [],
+          "damage_type": null,
+          "flags": {
+            "can_crit": false,
+            "applies_on_hit": false,
+            "unique": false
+          },
+          "source_line": "+50% 基础法力回复"
         },
         {
           "name": "冷却 +15 技能急速",
@@ -29244,7 +29483,7 @@
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/EquipIcons/t3x_bhms.png",
       "price": "1400",
       "description": [
-        "生命值 +100 最大生命值\n冷却 +15 技能急速\n移动速度 +45 移动速度\n\n召唤：召唤师技能冷却时间减少15%。\n\n面纱（主动）：为附近我方英雄提供一道可阻挡下一个敌方技能的法术护盾，持续3秒。（60秒冷却时间）\n\n"
+        "生命值 +100 最大生命值\n +50% 基础法力回复\n冷却 +15 技能急速\n移动速度 +45 移动速度\n\n召唤：召唤师技能冷却时间减少15%。\n\n面纱（主动）：为附近我方英雄提供一道可阻挡下一个敌方技能的法术护盾，持续3秒。（60秒冷却时间）\n\n"
       ],
       "labels": [],
       "from": [
@@ -29276,7 +29515,7 @@
         "hp_regen": "0",
         "hp_regen_pct": "0",
         "mana": "0",
-        "mana_regen": "0",
+        "mana_regen": "5000",
         "lifesteal": "0",
         "spell_vamp": "0"
       },
@@ -29305,6 +29544,26 @@
             "unique": false
           },
           "source_line": "生命值 +100 最大生命值"
+        },
+        {
+          "name": "+50% 基础法力回复",
+          "trigger": "passive_always",
+          "effect_type": "modifier",
+          "values": [
+            "50%"
+          ],
+          "scaling": [],
+          "cooldown": null,
+          "duration": null,
+          "caps": null,
+          "conditions": [],
+          "damage_type": null,
+          "flags": {
+            "can_crit": false,
+            "applies_on_hit": false,
+            "unique": false
+          },
+          "source_line": "+50% 基础法力回复"
         },
         {
           "name": "冷却 +15 技能急速",
@@ -30496,7 +30755,7 @@
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/EquipIcons/t3x_sxg.png",
       "price": "1400",
       "description": [
-        "生命值 +100 最大生命值\n冷却 +15 技能急速\n移动速度 +45 移动速度\n\n召唤：召唤师技能冷却时间减少15%。\n\n石板甲（主动）：获得最大生命值15%的基础护盾，自身每1点额外护甲/魔抗提升0.1%，护盾最多提升至28%，4秒内不断衰减。（60秒冷却时间）\n当附近每有一个敌人，可额外获得最大生命值5%的护盾，自身每1点额外护甲/魔抗提升0.1%，最多提升10%，3个敌人时达到上限。自己造成的伤害减少40%，持续4秒。\n\n"
+        "生命值 +100 最大生命值\n +50% 基础法力回复\n冷却 +15 技能急速\n移动速度 +45 移动速度\n\n召唤：召唤师技能冷却时间减少15%。\n\n石板甲（主动）：获得最大生命值15%的基础护盾，自身每1点额外护甲/魔抗提升0.1%，护盾最多提升至28%，4秒内不断衰减。（60秒冷却时间）\n当附近每有一个敌人，可额外获得最大生命值5%的护盾，自身每1点额外护甲/魔抗提升0.1%，最多提升10%，3个敌人时达到上限。自己造成的伤害减少40%，持续4秒。\n\n"
       ],
       "labels": [],
       "from": [
@@ -30528,7 +30787,7 @@
         "hp_regen": "0",
         "hp_regen_pct": "0",
         "mana": "0",
-        "mana_regen": "0",
+        "mana_regen": "5000",
         "lifesteal": "0",
         "spell_vamp": "0"
       },
@@ -30557,6 +30816,26 @@
             "unique": false
           },
           "source_line": "生命值 +100 最大生命值"
+        },
+        {
+          "name": "+50% 基础法力回复",
+          "trigger": "passive_always",
+          "effect_type": "modifier",
+          "values": [
+            "50%"
+          ],
+          "scaling": [],
+          "cooldown": null,
+          "duration": null,
+          "caps": null,
+          "conditions": [],
+          "damage_type": null,
+          "flags": {
+            "can_crit": false,
+            "applies_on_hit": false,
+            "unique": false
+          },
+          "source_line": "+50% 基础法力回复"
         },
         {
           "name": "冷却 +15 技能急速",
@@ -33192,7 +33471,7 @@
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/EquipIcons/lol_jjdx.png",
       "price": "900",
       "description": [
-        "生命值 +100 最大生命值\n冷却 +10 技能急速\n\n"
+        "生命值 +100 最大生命值\n +25% 基础法力回复\n冷却 +10 技能急速\n\n"
       ],
       "labels": [],
       "from": [
@@ -33223,7 +33502,7 @@
         "hp_regen": "0",
         "hp_regen_pct": "0",
         "mana": "0",
-        "mana_regen": "0",
+        "mana_regen": "2500",
         "lifesteal": "0",
         "spell_vamp": "0"
       },
@@ -33252,6 +33531,26 @@
             "unique": false
           },
           "source_line": "生命值 +100 最大生命值"
+        },
+        {
+          "name": "+25% 基础法力回复",
+          "trigger": "passive_always",
+          "effect_type": "modifier",
+          "values": [
+            "25%"
+          ],
+          "scaling": [],
+          "cooldown": null,
+          "duration": null,
+          "caps": null,
+          "conditions": [],
+          "damage_type": null,
+          "flags": {
+            "can_crit": false,
+            "applies_on_hit": false,
+            "unique": false
+          },
+          "source_line": "+25% 基础法力回复"
         },
         {
           "name": "冷却 +10 技能急速",
@@ -33624,7 +33923,7 @@
       "item_id": "2151",
       "name": "纳什之牙",
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/EquipIcons/lol_nszy.png",
-      "price": "3000",
+      "price": "2800",
       "description": [
         "攻击速度 +45% 攻击速度\n冷却 +20 技能急速\n\n魔牙：获得25攻击力或50法术强度（自适应）。\n\n啃噬：普攻命中目标时，造成15+20%额外攻击力+30%额外法术强度自适应伤害。\n\n"
       ],
@@ -33764,14 +34063,15 @@
       "item_id": "2271",
       "name": "纳沃利迅刃",
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/EquipIcons/lol_xr_new.png",
-      "price": "3000",
+      "price": "2800",
       "description": [
-        "攻击力 +40 攻击力\n暴击率 +25% 暴击率\n攻击速度 +15% 攻击速度\n\n灵巧打击：暴击会让非终极技能的剩余冷却时间缩短15%。\n\n无常：你的技能可基于暴击率至多提升9%的伤害。\n\n"
+        "暴击率 +25% 暴击率\n攻击速度 +45% 攻击速度\n移动速度 +5% 移动速度\n\n灵巧打击：你的攻击会让非终极技能的剩余冷却时间缩短15%。\n\n"
       ],
       "labels": [],
       "from": [
-        "2208",
-        "2233"
+        "2204",
+        "2204",
+        "2222"
       ],
       "into": "",
       "tags": "",
@@ -33784,17 +34084,17 @@
         "hp": "0",
         "armor": "0",
         "mr": "0",
-        "ad": "400000",
+        "ad": "0",
         "ap": "0",
         "ability_haste": "0",
-        "attack_speed": "1500",
+        "attack_speed": "4500",
         "crit_rate": "2500",
         "armor_pen_flat": "0",
         "armor_pen_pct": "0",
         "magic_pen_flat": "0",
         "magic_pen_pct": "0",
         "move_speed_flat": "0",
-        "move_speed_pct": "0",
+        "move_speed_pct": "500",
         "hp_regen": "0",
         "hp_regen_pct": "0",
         "mana": "0",
@@ -33803,31 +34103,6 @@
         "spell_vamp": "0"
       },
       "effects": [
-        {
-          "name": "攻击力 +40 攻击力",
-          "trigger": "passive_always",
-          "effect_type": "modifier",
-          "values": [
-            "40"
-          ],
-          "scaling": [
-            {
-              "source": "ad",
-              "ratio": 40.0
-            }
-          ],
-          "cooldown": null,
-          "duration": null,
-          "caps": null,
-          "conditions": [],
-          "damage_type": null,
-          "flags": {
-            "can_crit": false,
-            "applies_on_hit": false,
-            "unique": false
-          },
-          "source_line": "攻击力 +40 攻击力"
-        },
         {
           "name": "暴击率 +25% 暴击率",
           "trigger": "passive_always",
@@ -33849,7 +34124,47 @@
           "source_line": "暴击率 +25% 暴击率"
         },
         {
-          "name": "攻击速度 +15% 攻击速度",
+          "name": "攻击速度 +45% 攻击速度",
+          "trigger": "passive_always",
+          "effect_type": "modifier",
+          "values": [
+            "45%"
+          ],
+          "scaling": [],
+          "cooldown": null,
+          "duration": null,
+          "caps": null,
+          "conditions": [],
+          "damage_type": null,
+          "flags": {
+            "can_crit": false,
+            "applies_on_hit": false,
+            "unique": false
+          },
+          "source_line": "攻击速度 +45% 攻击速度"
+        },
+        {
+          "name": "移动速度 +5% 移动速度",
+          "trigger": "passive_always",
+          "effect_type": "modifier",
+          "values": [
+            "5%"
+          ],
+          "scaling": [],
+          "cooldown": null,
+          "duration": null,
+          "caps": null,
+          "conditions": [],
+          "damage_type": null,
+          "flags": {
+            "can_crit": false,
+            "applies_on_hit": false,
+            "unique": false
+          },
+          "source_line": "移动速度 +5% 移动速度"
+        },
+        {
+          "name": "灵巧打击：你的攻击会让非终极技能的剩余冷却时间缩短15%",
           "trigger": "passive_always",
           "effect_type": "modifier",
           "values": [
@@ -33866,47 +34181,7 @@
             "applies_on_hit": false,
             "unique": false
           },
-          "source_line": "攻击速度 +15% 攻击速度"
-        },
-        {
-          "name": "灵巧打击：暴击会让非终极技能的剩余冷却时间缩短15%",
-          "trigger": "passive_always",
-          "effect_type": "modifier",
-          "values": [
-            "15%"
-          ],
-          "scaling": [],
-          "cooldown": null,
-          "duration": null,
-          "caps": null,
-          "conditions": [],
-          "damage_type": null,
-          "flags": {
-            "can_crit": true,
-            "applies_on_hit": false,
-            "unique": false
-          },
-          "source_line": "灵巧打击：暴击会让非终极技能的剩余冷却时间缩短15%"
-        },
-        {
-          "name": "无常：你的技能可基于暴击率至多提升9%的伤害",
-          "trigger": "passive_always",
-          "effect_type": "modifier",
-          "values": [
-            "9%"
-          ],
-          "scaling": [],
-          "cooldown": null,
-          "duration": null,
-          "caps": null,
-          "conditions": [],
-          "damage_type": null,
-          "flags": {
-            "can_crit": true,
-            "applies_on_hit": false,
-            "unique": false
-          },
-          "source_line": "无常：你的技能可基于暴击率至多提升9%的伤害"
+          "source_line": "灵巧打击：你的攻击会让非终极技能的剩余冷却时间缩短15%"
         }
       ],
       "effect_parse_status": "ok",
@@ -36392,7 +36667,7 @@
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/EquipIcons/t3x_gtly.png",
       "price": "1400",
       "description": [
-        "生命值 +100 最大生命值\n冷却 +15 技能急速\n移动速度 +45 移动速度\n\n召唤：召唤师技能冷却时间减少15%。\n\n贯日（主动）：为自己和附近的队友提供一道可吸收60-330伤害的护盾，持续2.5秒。（60秒冷却时间）\n若该目标在过去20秒内受到过另一道贯日的影响，此效果将减半。\n\n"
+        "生命值 +100 最大生命值\n +50% 基础法力回复\n冷却 +15 技能急速\n移动速度 +45 移动速度\n\n召唤：召唤师技能冷却时间减少15%。\n\n贯日（主动）：为自己和附近的队友提供一道可吸收60-330伤害的护盾，持续2.5秒。（60秒冷却时间）\n若该目标在过去20秒内受到过另一道贯日的影响，此效果将减半。\n\n"
       ],
       "labels": [],
       "from": [
@@ -36424,7 +36699,7 @@
         "hp_regen": "0",
         "hp_regen_pct": "0",
         "mana": "0",
-        "mana_regen": "0",
+        "mana_regen": "5000",
         "lifesteal": "0",
         "spell_vamp": "0"
       },
@@ -36453,6 +36728,26 @@
             "unique": false
           },
           "source_line": "生命值 +100 最大生命值"
+        },
+        {
+          "name": "+50% 基础法力回复",
+          "trigger": "passive_always",
+          "effect_type": "modifier",
+          "values": [
+            "50%"
+          ],
+          "scaling": [],
+          "cooldown": null,
+          "duration": null,
+          "caps": null,
+          "conditions": [],
+          "damage_type": null,
+          "flags": {
+            "can_crit": false,
+            "applies_on_hit": false,
+            "unique": false
+          },
+          "source_line": "+50% 基础法力回复"
         },
         {
           "name": "冷却 +15 技能急速",
