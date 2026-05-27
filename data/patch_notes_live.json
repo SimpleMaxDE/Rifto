@@ -1,40 +1,47 @@
 {
-  "patch": "7.1e",
-  "sourceUrl": "https://wildrift.leagueoflegends.com/en-gb/news/game-updates/wild-rift-patch-notes-7-1e",
-  "generatedAt": "2026-05-27T04:49:36.727711+00:00",
+  "patch": "7.1f",
+  "sourceUrl": "https://wildrift.leagueoflegends.com/en-gb/news/game-updates/wild-rift-patch-notes-7-1f",
+  "generatedAt": "2026-05-27T10:29:51.496139+00:00",
   "championBuffs": [
     {
-      "name": "Smolder",
-      "delta": 1.0,
-      "note": "Automatisch erkannt: Buff/Verbesserung im Patchtext."
-    },
-    {
-      "name": "Shyvana",
-      "delta": 1.0,
-      "note": "Automatisch erkannt: Buff/Verbesserung im Patchtext."
-    },
-    {
-      "name": "Bard",
-      "delta": 1.0,
-      "note": "Automatisch erkannt: Buff/Verbesserung im Patchtext."
-    },
-    {
       "name": "Ashe",
+      "delta": 1.0,
+      "note": "Automatisch erkannt: Buff/Verbesserung im Patchtext."
+    },
+    {
+      "name": "Sett",
+      "delta": 1.0,
+      "note": "Automatisch erkannt: Buff/Verbesserung im Patchtext."
+    },
+    {
+      "name": "Sion",
+      "delta": 1.0,
+      "note": "Automatisch erkannt: Buff/Verbesserung im Patchtext."
+    },
+    {
+      "name": "Zed",
       "delta": 1.0,
       "note": "Automatisch erkannt: Buff/Verbesserung im Patchtext."
     }
   ],
   "championNerfs": [
     {
-      "name": "Graves",
-      "delta": -1.0,
-      "note": "Automatisch erkannt: Nerf/Abschwächung im Patchtext."
-    },
-    {
-      "name": "Kayn",
+      "name": "Vi",
       "delta": -1.0,
       "note": "Automatisch erkannt: Nerf/Abschwächung im Patchtext."
     }
   ],
-  "itemChanges": []
+  "itemChanges": [
+    {
+      "name": "Blade of the Ruined King",
+      "direction": "changed",
+      "impactTags": [
+        "marksman",
+        "fighter",
+        "anti_tank"
+      ],
+      "delta": 0.6,
+      "note": "Automatisch erkannt aus den offiziellen Patchnotes."
+    }
+  ]
 }
