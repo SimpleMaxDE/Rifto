@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-05-27T14:46:21.101645+00:00",
-  "source": "https://ddragon.leagueoflegends.com/cdn/16.10.1/data/en_US/championFull.json",
-  "version": "16.10.1",
+  "generatedAt": "2026-05-27T19:53:36.712091+00:00",
+  "source": "https://ddragon.leagueoflegends.com/cdn/16.11.1/data/en_US/championFull.json",
+  "version": "16.11.1",
   "champions": {
     "Aatrox": {
       "id": "Aatrox",
@@ -9337,7 +9337,7 @@
         "hp_per_level": 105,
         "mp": 469,
         "mp_per_level": 21,
-        "armor": 27,
+        "armor": 24,
         "armor_per_level": 4.2,
         "mr": 30,
         "mr_per_level": 1.3,
@@ -22483,7 +22483,7 @@
             },
             {
               "index": 2,
-              "values": "1"
+              "values": "0"
             },
             {
               "index": 3,
@@ -32726,11 +32726,11 @@
           "slot": "Q",
           "name": "Null Sphere",
           "cooldown": [
-            10,
-            9.5,
             9,
             8.5,
-            8
+            8,
+            7.5,
+            7
           ],
           "cost": [
             60,
@@ -32800,11 +32800,11 @@
               "values": [],
               "scaling": [],
               "cooldown": [
-                10,
-                9.5,
                 9,
                 8.5,
-                8
+                8,
+                7.5,
+                7
               ],
               "duration": null,
               "caps": null,
@@ -32824,11 +32824,11 @@
               "values": [],
               "scaling": [],
               "cooldown": [
-                10,
-                9.5,
                 9,
                 8.5,
-                8
+                8,
+                7.5,
+                7
               ],
               "duration": null,
               "caps": null,
@@ -32879,7 +32879,7 @@
             },
             {
               "index": 2,
-              "values": "20"
+              "values": "25"
             },
             {
               "index": 3,
@@ -49181,7 +49181,7 @@
             },
             {
               "index": 2,
-              "values": "30/35/40/45/50"
+              "values": "-0.3/-0.35/-0.4/-0.45/-0.5"
             },
             {
               "index": 3,
@@ -56190,10 +56190,10 @@
       },
       "passive": {
         "name": "Harrier",
-        "description": "Valor, Quinn's Demacian eagle, periodically marks enemies as Vulnerable . Quinn's first basic attack against Vulnerable targets will deal bonus physical damage.",
+        "description": "Valor, Quinn's Demacian eagle, periodically marks enemies with Harrier . Quinn's first basic attack against Harrier targets will deal bonus physical damage.",
         "effects": [
           {
-            "name": "Valor, Quinn's Demacian eagle, periodically marks enemies as Vul",
+            "name": "Valor, Quinn's Demacian eagle, periodically marks enemies with H",
             "trigger": "onCast",
             "effect_type": "modifier",
             "values": [],
@@ -56208,10 +56208,10 @@
               "can_crit": false,
               "aoe": false
             },
-            "source_line": "Valor, Quinn's Demacian eagle, periodically marks enemies as Vulnerable"
+            "source_line": "Valor, Quinn's Demacian eagle, periodically marks enemies with Harrier"
           },
           {
-            "name": "Quinn's first basic attack against Vulnerable targets will deal ",
+            "name": "Quinn's first basic attack against Harrier targets will deal bon",
             "trigger": "onCast",
             "effect_type": "damage",
             "values": [],
@@ -56226,7 +56226,7 @@
               "can_crit": false,
               "aoe": false
             },
-            "source_line": "Quinn's first basic attack against Vulnerable targets will deal bonus physical damage"
+            "source_line": "Quinn's first basic attack against Harrier targets will deal bonus physical damage"
           }
         ],
         "effect_parse_status": "ok"
@@ -56424,7 +56424,7 @@
                 "can_crit": false,
                 "aoe": false
               },
-              "source_line": "Passively grants Quinn Attack Speed and Move Speed after she attacks a Vulnerable target"
+              "source_line": "Passively grants Quinn Attack Speed and Move Speed after she attacks a Harrier target"
             },
             {
               "name": "Activate to have Valor reveal a large area nearby",
@@ -56452,7 +56452,7 @@
             }
           ],
           "effect_parse_status": "ok",
-          "description": "Passively grants Quinn Attack Speed and Move Speed after she attacks a Vulnerable target. Activate to have Valor reveal a large area nearby."
+          "description": "Passively grants Quinn Attack Speed and Move Speed after she attacks a Harrier target. Activate to have Valor reveal a large area nearby."
         },
         {
           "slot": "E",
@@ -56684,11 +56684,11 @@
                 "can_crit": false,
                 "aoe": true
               },
-              "source_line": "Ending the ability casts Skystrike, which deals damage to nearby enemies and marks champions as Vulnerable"
+              "source_line": "Ending the ability casts Skystrike, which deals damage to nearby enemies and marks champions with Harrier"
             }
           ],
           "effect_parse_status": "ok",
-          "description": "Quinn and Valor team up to fly around at great speed. Ending the ability casts Skystrike, which deals damage to nearby enemies and marks champions as Vulnerable."
+          "description": "Quinn and Valor team up to fly around at great speed. Ending the ability casts Skystrike, which deals damage to nearby enemies and marks champions with Harrier."
         }
       ],
       "keywords": [
@@ -68539,7 +68539,7 @@
         "armor_per_level": 4,
         "mr": 30,
         "mr_per_level": 1.3,
-        "ad": 60,
+        "ad": 58,
         "ad_per_level": 0,
         "attack_speed": 0.638,
         "attack_speed_per_level": 4,
@@ -73957,7 +73957,7 @@
         "mp": 334,
         "mp_per_level": 25,
         "armor": 24,
-        "armor_per_level": 4.95,
+        "armor_per_level": 4.5,
         "mr": 30,
         "mr_per_level": 1.3,
         "ad": 54,
@@ -85512,17 +85512,17 @@
             375,
             375
           ],
-          "base_damage": "15/30/45/60/75",
+          "base_damage": "0",
           "damage_type": null,
           "cc_duration": null,
           "damage_effects": [
             {
               "index": 1,
-              "values": "15/30/45/60/75"
+              "values": "0"
             },
             {
               "index": 2,
-              "values": "0.75"
+              "values": "0"
             },
             {
               "index": 3,

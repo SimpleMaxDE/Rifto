@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-05-27T14:46:20.723070+00:00",
-  "source": "https://ddragon.leagueoflegends.com/cdn/16.10.1/data/en_US/championFull.json",
-  "version": "16.10.1",
+  "generatedAt": "2026-05-27T19:53:36.269498+00:00",
+  "source": "https://ddragon.leagueoflegends.com/cdn/16.11.1/data/en_US/championFull.json",
+  "version": "16.11.1",
   "champions": {
     "Aatrox": {
       "title": "the Darkin Blade",
@@ -1960,7 +1960,7 @@
         {
           "slot": "Q",
           "name": "Null Sphere",
-          "cooldown": "10/9.5/9/8.5/8",
+          "cooldown": "9/8.5/8/7.5/7",
           "description": "Kassadin fires an orb of void energy at a target, dealing damage and interrupting channels. The excess energy forms around himself, granting a temporary shield that absorbs magic…"
         },
         {
@@ -3406,7 +3406,7 @@
       "title": "Demacia's Wings",
       "passive": {
         "name": "Harrier",
-        "description": "Valor, Quinn's Demacian eagle, periodically marks enemies as Vulnerable . Quinn's first basic attack against Vulnerable targets will deal bonus physical damage."
+        "description": "Valor, Quinn's Demacian eagle, periodically marks enemies with Harrier . Quinn's first basic attack against Harrier targets will deal bonus physical damage."
       },
       "spells": [
         {
@@ -3419,7 +3419,7 @@
           "slot": "W",
           "name": "Heightened Senses",
           "cooldown": "50/45/40/35/30",
-          "description": "Passively grants Quinn Attack Speed and Move Speed after she attacks a Vulnerable target. Activate to have Valor reveal a large area nearby."
+          "description": "Passively grants Quinn Attack Speed and Move Speed after she attacks a Harrier target. Activate to have Valor reveal a large area nearby."
         },
         {
           "slot": "E",
@@ -3431,7 +3431,7 @@
           "slot": "R",
           "name": "Behind Enemy Lines",
           "cooldown": "3",
-          "description": "Quinn and Valor team up to fly around at great speed. Ending the ability casts Skystrike, which deals damage to nearby enemies and marks champions as Vulnerable."
+          "description": "Quinn and Valor team up to fly around at great speed. Ending the ability casts Skystrike, which deals damage to nearby enemies and marks champions with Harrier."
         }
       ]
     },
