@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-06-09T14:11:18.059816+00:00",
-  "source": "https://ddragon.leagueoflegends.com/cdn/16.11.1/data/en_US/championFull.json",
-  "version": "16.11.1",
+  "generatedAt": "2026-06-09T19:50:22.617246+00:00",
+  "source": "https://ddragon.leagueoflegends.com/cdn/16.12.1/data/en_US/championFull.json",
+  "version": "16.12.1",
   "champions": {
     "Aatrox": {
       "id": "Aatrox",
@@ -25117,11 +25117,11 @@
           "slot": "E",
           "name": "Subject: Torment",
           "cooldown": [
-            13,
-            12.5,
             12,
             11.5,
-            11
+            11,
+            10.5,
+            10
           ],
           "cost": [
             50,
@@ -25191,11 +25191,11 @@
               "values": [],
               "scaling": [],
               "cooldown": [
-                13,
-                12.5,
                 12,
                 11.5,
-                11
+                11,
+                10.5,
+                10
               ],
               "duration": null,
               "caps": null,
@@ -25215,11 +25215,11 @@
               "values": [],
               "scaling": [],
               "cooldown": [
-                13,
-                12.5,
                 12,
                 11.5,
-                11
+                11,
+                10.5,
+                10
               ],
               "duration": null,
               "caps": null,
@@ -28254,11 +28254,11 @@
             6
           ],
           "cost": [
-            65,
-            65,
-            65,
-            65,
-            65
+            50,
+            50,
+            50,
+            50,
+            50
           ],
           "range": [
             700,
@@ -51688,7 +51688,7 @@
             },
             {
               "index": 2,
-              "values": "65/110/155/200/245"
+              "values": "65/105/145/185/225"
             },
             {
               "index": 3,
@@ -53109,7 +53109,7 @@
       "title": "the Lady of Clockwork",
       "resource": "Mana",
       "stats": {
-        "hp": 585,
+        "hp": 565,
         "hp_per_level": 110,
         "mp": 418,
         "mp_per_level": 25,
@@ -61577,7 +61577,7 @@
       "title": "the Rune Mage",
       "resource": "Mana",
       "stats": {
-        "hp": 645,
+        "hp": 620,
         "hp_per_level": 124,
         "mp": 300,
         "mp_per_level": 70,
@@ -61585,7 +61585,7 @@
         "armor_per_level": 4.2,
         "mr": 32,
         "mr_per_level": 1.3,
-        "ad": 58,
+        "ad": 55,
         "ad_per_level": 0,
         "attack_speed": 0.658,
         "attack_speed_per_level": 2.11,
@@ -71201,7 +71201,7 @@
       "title": "the Dark Sovereign",
       "resource": "Mana",
       "stats": {
-        "hp": 563,
+        "hp": 583,
         "hp_per_level": 100,
         "mp": 480,
         "mp_per_level": 40,
@@ -75070,11 +75070,11 @@
             16
           ],
           "cost": [
+            15,
+            20,
+            25,
             30,
-            35,
-            40,
-            45,
-            50
+            35
           ],
           "range": [
             20,
@@ -85601,10 +85601,10 @@
           ],
           "cost": [
             60,
-            55,
-            50,
-            45,
-            40
+            60,
+            60,
+            60,
+            60
           ],
           "range": [
             1000,
@@ -85699,11 +85699,11 @@
             11
           ],
           "cost": [
-            50,
-            50,
-            50,
-            50,
-            50
+            60,
+            60,
+            60,
+            60,
+            60
           ],
           "range": [
             650,
