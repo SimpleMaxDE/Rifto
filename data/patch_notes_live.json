@@ -1,8 +1,23 @@
 {
   "patch": "7.1f",
-  "sourceUrl": "https://wildrift.leagueoflegends.com/en-gb/news/game-updates/wild-rift-patch-notes-7-1f",
-  "generatedAt": "2026-06-10T04:49:15.759922+00:00",
+  "sourceUrl": "https://wildrift.leagueoflegends.com/en-gb/news/game-updates/wild-rift-patch-notes-7-1g",
+  "generatedAt": "2026-06-10T10:32:59.227308+00:00",
   "championBuffs": [
+    {
+      "name": "Heimerdinger",
+      "delta": 1.0,
+      "note": "Automatisch erkannt: Buff/Verbesserung im Patchtext."
+    },
+    {
+      "name": "Blitzcrank",
+      "delta": 1.0,
+      "note": "Automatisch erkannt: Buff/Verbesserung im Patchtext."
+    },
+    {
+      "name": "Samira",
+      "delta": 1.0,
+      "note": "Automatisch erkannt: Buff/Verbesserung im Patchtext."
+    },
     {
       "name": "Ashe",
       "delta": 1.0,
@@ -19,28 +34,20 @@
       "note": "Automatisch erkannt: Buff/Verbesserung im Patchtext."
     },
     {
-      "name": "Zed",
+      "name": "Shen",
       "delta": 1.0,
       "note": "Automatisch erkannt: Buff/Verbesserung im Patchtext."
     }
   ],
-  "championNerfs": [
-    {
-      "name": "Vi",
-      "delta": -1.0,
-      "note": "Automatisch erkannt: Nerf/Abschwächung im Patchtext."
-    }
-  ],
+  "championNerfs": [],
   "itemChanges": [
     {
-      "name": "Blade of the Ruined King",
-      "direction": "changed",
+      "name": "Infinity Edge",
+      "direction": "buff",
       "impactTags": [
-        "marksman",
-        "fighter",
-        "anti_tank"
+        "marksman"
       ],
-      "delta": 0.6,
+      "delta": 1.0,
       "note": "Automatisch erkannt aus den offiziellen Patchnotes."
     }
   ]
