@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-11T02:07:16.018309+00:00",
+  "generatedAt": "2026-06-11T09:56:23.870734+00:00",
   "sources": {
     "heroes": "https://game.gtimg.cn/images/lgamem/act/lrlib/js/heroList/hero_list.js",
     "items": "https://game.gtimg.cn/images/lgamem/act/lrlib/js/equip/equip.js",
@@ -1224,6 +1224,17 @@
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10116.png"
     },
     {
+      "hero_id": "10117",
+      "name": "斯卡纳",
+      "alias": "sikana",
+      "title": "上古领主",
+      "lane": "单人路;打野",
+      "roles": [
+        "战士"
+      ],
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10117.png"
+    },
+    {
       "hero_id": "10118",
       "name": "慎",
       "alias": "shen",
@@ -1496,7 +1507,7 @@
       "roles": [
         "法师"
       ],
-      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_1014601.png"
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10146.png"
     },
     {
       "hero_id": "10151",
@@ -1518,7 +1529,7 @@
       "roles": [
         "战士"
       ],
-      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_1015201.png"
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10152.png"
     },
     {
       "hero_id": "10166",
@@ -14003,7 +14014,7 @@
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/EquipIcons/lol_wjzr.png",
       "price": "3400",
       "description": [
-        "攻击力 +60 攻击力\n暴击率 +25% 暴击率\n\n无尽：暴击伤害从175%提升到205%。\n\n破限：当你从装备获取的暴击率大于100%时，每溢出1%暴击率会提供额外0.6%暴击伤害。\n\n"
+        "攻击力 +65 攻击力\n暴击率 +25% 暴击率\n\n无尽：暴击伤害从175%提升到205%。\n\n破限：当你从装备获取的暴击率大于100%时，每溢出1%暴击率会提供额外0.6%暴击伤害。\n\n"
       ],
       "labels": [],
       "from": [
@@ -14021,7 +14032,7 @@
         "hp": "0",
         "armor": "0",
         "mr": "0",
-        "ad": "600000",
+        "ad": "650000",
         "ap": "0",
         "ability_haste": "0",
         "attack_speed": "0",
@@ -14041,16 +14052,16 @@
       },
       "effects": [
         {
-          "name": "攻击力 +60 攻击力",
+          "name": "攻击力 +65 攻击力",
           "trigger": "passive_always",
           "effect_type": "modifier",
           "values": [
-            "60"
+            "65"
           ],
           "scaling": [
             {
               "source": "ad",
-              "ratio": 60.0
+              "ratio": 65.0
             }
           ],
           "cooldown": null,
@@ -14063,7 +14074,7 @@
             "applies_on_hit": false,
             "unique": false
           },
-          "source_line": "攻击力 +60 攻击力"
+          "source_line": "攻击力 +65 攻击力"
         },
         {
           "name": "暴击率 +25% 暴击率",
@@ -40047,7 +40058,7 @@
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/EquipIcons/lol_hsqgz.png",
       "price": "3000",
       "description": [
-        "生命值 +400 最大生命值\n攻击力 +40 攻击力\n冷却 +20 技能急速\n\n斩断：对敌方英雄造成物理伤害的同时，还会对目标施加斩断效果，减少其6%护甲，持续6秒。斩断效果最多叠加4次，最高减少24%护甲。\n\n追击：造成物理伤害可获得20移动速度。在向拥有4层斩断效果的敌方英雄移动时可获得40移动速度。远程英雄所获得的加成效果减半。\n\n"
+        "生命值 +400 最大生命值\n攻击力 +40 攻击力\n冷却 +20 技能急速\n\n斩断：对敌方英雄造成物理伤害的同时，还会对目标施加斩断效果，减少其6%护甲，持续6秒。斩断效果最多叠加5次，最高减少30%护甲。\n\n追击：造成物理伤害可获得20移动速度。在向拥有5层斩断效果的敌方英雄移动时可获得40移动速度。远程英雄所获得的加成效果减半。\n\n"
       ],
       "labels": [],
       "from": [
@@ -42122,13 +42133,15 @@
     }
   ],
   "diff": {
-    "newChampions": [],
+    "newChampions": [
+      "斯卡纳"
+    ],
     "newItems": [],
     "newRunes": [],
     "newSummonerSpells": []
   },
   "counts": {
-    "champions": 138,
+    "champions": 139,
     "items": 252,
     "runes": 53,
     "summonerSpells": 16
