@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-06-23T14:11:47.696028+00:00",
-  "source": "https://ddragon.leagueoflegends.com/cdn/16.12.1/data/en_US/championFull.json",
-  "version": "16.12.1",
+  "generatedAt": "2026-06-23T19:44:48.981272+00:00",
+  "source": "https://ddragon.leagueoflegends.com/cdn/16.13.1/data/en_US/championFull.json",
+  "version": "16.13.1",
   "champions": {
     "Aatrox": {
       "title": "the Darkin Blade",
@@ -916,7 +916,7 @@
         {
           "slot": "E",
           "name": "Stand Aside",
-          "cooldown": "18/17/16/15/14",
+          "cooldown": "16/15/14/13/12",
           "description": "Draven throws his axes, dealing physical damage to targets hit and knocking them aside. Targets hit are slowed."
         },
         {
@@ -1834,7 +1834,7 @@
         {
           "slot": "W",
           "name": "Void Seeker",
-          "cooldown": "22/20/18/16/14",
+          "cooldown": "20/18.5/17/15.5/14",
           "description": "Kai'Sa shoots a long range missile, marking enemies with her passive. Living Weapon: Void Seeker is upgraded to apply more passive marks and reduce cooldown on champion hit."
         },
         {
@@ -2442,6 +2442,39 @@
           "name": "Frozen Tomb",
           "cooldown": "120/100/80",
           "description": "If cast on an enemy champion, the target is frozen solid, stunning it. If cast on Lissandra, she encases herself in dark ice, healing herself while becoming untargetable and invul…"
+        }
+      ]
+    },
+    "Locke": {
+      "title": "the Ashen Exorcist",
+      "passive": {
+        "name": "Silver Stake",
+        "description": "Locke's attacks deal additional magic damage On-Hit, increased based on enemy missing Health."
+      },
+      "spells": [
+        {
+          "slot": "Q",
+          "name": "Ritual Nails",
+          "cooldown": "10/9/8/7/6",
+          "description": "Locke readies a set of Soul Nails to throw, dealing damage to and marking enemies hit. Locke can consume the marks to deal bonus damage with his attacks."
+        },
+        {
+          "slot": "W",
+          "name": "Soul Ignition",
+          "cooldown": "18/17/16/15/14",
+          "description": "Locke ignites his soul, gaining Attack Speed and Move Speed, and dealing damage to himself. At the end of the duration, Locke will heal back a portion of the damage he takes durin…"
+        },
+        {
+          "slot": "E",
+          "name": "Ashen Pursuit",
+          "cooldown": "10",
+          "description": "Locke teleports to a location before dashing to attack his next target, dealing damage to enemies passed through."
+        },
+        {
+          "slot": "R",
+          "name": "Purgatory",
+          "cooldown": "120/100/80",
+          "description": "Locke throws a binding artifact that deals damage and potentially executes enemies hit. Locke gains additional power for sealing away enemy champions."
         }
       ]
     },
@@ -4942,7 +4975,7 @@
         {
           "slot": "E",
           "name": "Looming Darkness",
-          "cooldown": "13",
+          "cooldown": "12",
           "description": "Summon a damaging and slowing zone that applies Gloom to enemies."
         },
         {
@@ -5431,7 +5464,7 @@
         {
           "slot": "W",
           "name": "Dreaded Return",
-          "cooldown": "16/15/14/13/12",
+          "cooldown": "14/13.5/13/12.5/12",
           "description": "Zaahen stabs in a direction, damaging enemies hit, then pulls them toward him."
         },
         {

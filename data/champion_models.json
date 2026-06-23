@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-06-23T14:11:48.179617+00:00",
-  "source": "https://ddragon.leagueoflegends.com/cdn/16.12.1/data/en_US/championFull.json",
-  "version": "16.12.1",
+  "generatedAt": "2026-06-23T19:44:49.308554+00:00",
+  "source": "https://ddragon.leagueoflegends.com/cdn/16.13.1/data/en_US/championFull.json",
+  "version": "16.13.1",
   "champions": {
     "Aatrox": {
       "id": "Aatrox",
@@ -9693,10 +9693,10 @@
             9
           ],
           "cost": [
-            70,
-            75,
-            80,
-            85,
+            90,
+            90,
+            90,
+            90,
             90
           ],
           "range": [
@@ -12210,7 +12210,7 @@
       "resource": "Mana",
       "stats": {
         "hp": 630,
-        "hp_per_level": 104,
+        "hp_per_level": 98,
         "mp": 480,
         "mp_per_level": 40,
         "armor": 18,
@@ -15293,11 +15293,11 @@
           "slot": "E",
           "name": "Stand Aside",
           "cooldown": [
-            18,
-            17,
             16,
             15,
-            14
+            14,
+            13,
+            12
           ],
           "cost": [
             70,
@@ -15367,11 +15367,11 @@
               "values": [],
               "scaling": [],
               "cooldown": [
-                18,
-                17,
                 16,
                 15,
-                14
+                14,
+                13,
+                12
               ],
               "duration": null,
               "caps": null,
@@ -15391,11 +15391,11 @@
               "values": [],
               "scaling": [],
               "cooldown": [
-                18,
-                17,
                 16,
                 15,
-                14
+                14,
+                13,
+                12
               ],
               "duration": null,
               "caps": null,
@@ -30738,10 +30738,10 @@
           "slot": "W",
           "name": "Void Seeker",
           "cooldown": [
-            22,
             20,
-            18,
-            16,
+            18.5,
+            17,
+            15.5,
             14
           ],
           "cost": [
@@ -30812,10 +30812,10 @@
               "values": [],
               "scaling": [],
               "cooldown": [
-                22,
                 20,
-                18,
-                16,
+                18.5,
+                17,
+                15.5,
                 14
               ],
               "duration": null,
@@ -30836,10 +30836,10 @@
               "values": [],
               "scaling": [],
               "cooldown": [
-                22,
                 20,
-                18,
-                16,
+                18.5,
+                17,
+                15.5,
                 14
               ],
               "duration": null,
@@ -41137,6 +41137,523 @@
       ],
       "keywords": [
         "cc",
+        "engage",
+        "mage",
+        "sustain"
+      ]
+    },
+    "Locke": {
+      "id": "Locke",
+      "title": "the Ashen Exorcist",
+      "resource": "Mana",
+      "stats": {
+        "hp": 655,
+        "hp_per_level": 109,
+        "mp": 280,
+        "mp_per_level": 70,
+        "armor": 32,
+        "armor_per_level": 4.2,
+        "mr": 32,
+        "mr_per_level": 2.05,
+        "ad": 58,
+        "ad_per_level": 0,
+        "attack_speed": 0.688,
+        "attack_speed_per_level": 3.3,
+        "move_speed": 340,
+        "hp_regen": 9,
+        "hp_regen_per_level": 0.9
+      },
+      "passive": {
+        "name": "Silver Stake",
+        "description": "Locke's attacks deal additional magic damage On-Hit, increased based on enemy missing Health.",
+        "effects": [
+          {
+            "name": "Locke's attacks deal additional magic damage On-Hit, increased b",
+            "trigger": "onCast",
+            "effect_type": "damage",
+            "values": [],
+            "scaling": [],
+            "cooldown": [],
+            "duration": null,
+            "caps": null,
+            "conditions": [],
+            "damage_type": "magic",
+            "flags": {
+              "applies_on_hit": true,
+              "can_crit": false,
+              "aoe": false
+            },
+            "source_line": "Locke's attacks deal additional magic damage On-Hit, increased based on enemy missing Health"
+          }
+        ],
+        "effect_parse_status": "ok"
+      },
+      "abilities": [
+        {
+          "slot": "Q",
+          "name": "Ritual Nails",
+          "cooldown": [
+            10,
+            9,
+            8,
+            7,
+            6
+          ],
+          "cost": [
+            70,
+            70,
+            70,
+            70,
+            70
+          ],
+          "range": [
+            950,
+            950,
+            950,
+            950,
+            950
+          ],
+          "base_damage": "0",
+          "damage_type": null,
+          "cc_duration": null,
+          "damage_effects": [
+            {
+              "index": 1,
+              "values": "0"
+            },
+            {
+              "index": 2,
+              "values": "0"
+            },
+            {
+              "index": 3,
+              "values": "0"
+            },
+            {
+              "index": 4,
+              "values": "0"
+            },
+            {
+              "index": 5,
+              "values": "0"
+            },
+            {
+              "index": 6,
+              "values": "0"
+            },
+            {
+              "index": 7,
+              "values": "0"
+            },
+            {
+              "index": 8,
+              "values": "0"
+            },
+            {
+              "index": 9,
+              "values": "0"
+            },
+            {
+              "index": 10,
+              "values": "0"
+            }
+          ],
+          "ratios": [],
+          "effects": [
+            {
+              "name": "Locke readies a set of Soul Nails to throw, dealing damage to an",
+              "trigger": "onCast",
+              "effect_type": "modifier",
+              "values": [],
+              "scaling": [],
+              "cooldown": [
+                10,
+                9,
+                8,
+                7,
+                6
+              ],
+              "duration": null,
+              "caps": null,
+              "conditions": [],
+              "damage_type": null,
+              "flags": {
+                "applies_on_hit": false,
+                "can_crit": false,
+                "aoe": false
+              },
+              "source_line": "Locke readies a set of Soul Nails to throw, dealing damage to and marking enemies hit"
+            },
+            {
+              "name": "Locke can consume the marks to deal bonus damage with his attack",
+              "trigger": "onCast",
+              "effect_type": "modifier",
+              "values": [],
+              "scaling": [],
+              "cooldown": [
+                10,
+                9,
+                8,
+                7,
+                6
+              ],
+              "duration": null,
+              "caps": null,
+              "conditions": [],
+              "damage_type": null,
+              "flags": {
+                "applies_on_hit": false,
+                "can_crit": false,
+                "aoe": false
+              },
+              "source_line": "Locke can consume the marks to deal bonus damage with his attacks"
+            }
+          ],
+          "effect_parse_status": "ok",
+          "description": "Locke readies a set of Soul Nails to throw, dealing damage to and marking enemies hit. Locke can consume the marks to deal bonus damage with his attacks."
+        },
+        {
+          "slot": "W",
+          "name": "Soul Ignition",
+          "cooldown": [
+            18,
+            17,
+            16,
+            15,
+            14
+          ],
+          "cost": [
+            50,
+            55,
+            60,
+            65,
+            70
+          ],
+          "range": [
+            250,
+            250,
+            250,
+            250,
+            250
+          ],
+          "base_damage": "0",
+          "damage_type": null,
+          "cc_duration": null,
+          "damage_effects": [
+            {
+              "index": 1,
+              "values": "0"
+            },
+            {
+              "index": 2,
+              "values": "0"
+            },
+            {
+              "index": 3,
+              "values": "0"
+            },
+            {
+              "index": 4,
+              "values": "0"
+            },
+            {
+              "index": 5,
+              "values": "0"
+            },
+            {
+              "index": 6,
+              "values": "0"
+            },
+            {
+              "index": 7,
+              "values": "0"
+            },
+            {
+              "index": 8,
+              "values": "0"
+            },
+            {
+              "index": 9,
+              "values": "0"
+            },
+            {
+              "index": 10,
+              "values": "0"
+            }
+          ],
+          "ratios": [],
+          "effects": [
+            {
+              "name": "Locke ignites his soul, gaining Attack Speed and Move Speed, and",
+              "trigger": "onCast",
+              "effect_type": "modifier",
+              "values": [],
+              "scaling": [],
+              "cooldown": [
+                18,
+                17,
+                16,
+                15,
+                14
+              ],
+              "duration": null,
+              "caps": null,
+              "conditions": [],
+              "damage_type": null,
+              "flags": {
+                "applies_on_hit": false,
+                "can_crit": false,
+                "aoe": false
+              },
+              "source_line": "Locke ignites his soul, gaining Attack Speed and Move Speed, and dealing damage to himself"
+            },
+            {
+              "name": "At the end of the duration, Locke will heal back a portion of th",
+              "trigger": "onCast",
+              "effect_type": "healing",
+              "values": [],
+              "scaling": [],
+              "cooldown": [
+                18,
+                17,
+                16,
+                15,
+                14
+              ],
+              "duration": null,
+              "caps": null,
+              "conditions": [],
+              "damage_type": null,
+              "flags": {
+                "applies_on_hit": false,
+                "can_crit": false,
+                "aoe": false
+              },
+              "source_line": "At the end of the duration, Locke will heal back a portion of the damage he takes during the effect"
+            }
+          ],
+          "effect_parse_status": "ok",
+          "description": "Locke ignites his soul, gaining Attack Speed and Move Speed, and dealing damage to himself. At the end of the duration, Locke will heal back a portion of the damage he takes during the effect."
+        },
+        {
+          "slot": "E",
+          "name": "Ashen Pursuit",
+          "cooldown": [
+            10,
+            10,
+            10,
+            10,
+            10
+          ],
+          "cost": [
+            30,
+            40,
+            50,
+            60,
+            70
+          ],
+          "range": [
+            425,
+            425,
+            425,
+            425,
+            425
+          ],
+          "base_damage": "0",
+          "damage_type": null,
+          "cc_duration": null,
+          "damage_effects": [
+            {
+              "index": 1,
+              "values": "0"
+            },
+            {
+              "index": 2,
+              "values": "0"
+            },
+            {
+              "index": 3,
+              "values": "0"
+            },
+            {
+              "index": 4,
+              "values": "0"
+            },
+            {
+              "index": 5,
+              "values": "0"
+            },
+            {
+              "index": 6,
+              "values": "0"
+            },
+            {
+              "index": 7,
+              "values": "0"
+            },
+            {
+              "index": 8,
+              "values": "0"
+            },
+            {
+              "index": 9,
+              "values": "0"
+            },
+            {
+              "index": 10,
+              "values": "0"
+            }
+          ],
+          "ratios": [],
+          "effects": [
+            {
+              "name": "Locke teleports to a location before dashing to attack his next ",
+              "trigger": "onCast",
+              "effect_type": "modifier",
+              "values": [],
+              "scaling": [],
+              "cooldown": [
+                10,
+                10,
+                10,
+                10,
+                10
+              ],
+              "duration": null,
+              "caps": null,
+              "conditions": [],
+              "damage_type": null,
+              "flags": {
+                "applies_on_hit": false,
+                "can_crit": false,
+                "aoe": false
+              },
+              "source_line": "Locke teleports to a location before dashing to attack his next target, dealing damage to enemies passed through"
+            }
+          ],
+          "effect_parse_status": "ok",
+          "description": "Locke teleports to a location before dashing to attack his next target, dealing damage to enemies passed through."
+        },
+        {
+          "slot": "R",
+          "name": "Purgatory",
+          "cooldown": [
+            120,
+            100,
+            80
+          ],
+          "cost": [
+            100,
+            100,
+            100
+          ],
+          "range": [
+            1000,
+            1000,
+            1000
+          ],
+          "base_damage": "0",
+          "damage_type": null,
+          "cc_duration": null,
+          "damage_effects": [
+            {
+              "index": 1,
+              "values": "0"
+            },
+            {
+              "index": 2,
+              "values": "0"
+            },
+            {
+              "index": 3,
+              "values": "0"
+            },
+            {
+              "index": 4,
+              "values": "0"
+            },
+            {
+              "index": 5,
+              "values": "0"
+            },
+            {
+              "index": 6,
+              "values": "0"
+            },
+            {
+              "index": 7,
+              "values": "0"
+            },
+            {
+              "index": 8,
+              "values": "0"
+            },
+            {
+              "index": 9,
+              "values": "0"
+            },
+            {
+              "index": 10,
+              "values": "0"
+            }
+          ],
+          "ratios": [],
+          "effects": [
+            {
+              "name": "Locke throws a binding artifact that deals damage and potentiall",
+              "trigger": "onSpellHit",
+              "effect_type": "modifier",
+              "values": [],
+              "scaling": [],
+              "cooldown": [
+                120,
+                100,
+                80
+              ],
+              "duration": null,
+              "caps": null,
+              "conditions": [
+                "execute"
+              ],
+              "damage_type": null,
+              "flags": {
+                "applies_on_hit": false,
+                "can_crit": false,
+                "aoe": false
+              },
+              "source_line": "Locke throws a binding artifact that deals damage and potentially executes enemies hit"
+            },
+            {
+              "name": "Locke gains additional power for sealing away enemy champions",
+              "trigger": "onCast",
+              "effect_type": "modifier",
+              "values": [],
+              "scaling": [],
+              "cooldown": [
+                120,
+                100,
+                80
+              ],
+              "duration": null,
+              "caps": null,
+              "conditions": [],
+              "damage_type": null,
+              "flags": {
+                "applies_on_hit": false,
+                "can_crit": false,
+                "aoe": false
+              },
+              "source_line": "Locke gains additional power for sealing away enemy champions"
+            }
+          ],
+          "effect_parse_status": "ok",
+          "description": "Locke throws a binding artifact that deals damage and potentially executes enemies hit. Locke gains additional power for sealing away enemy champions."
+        }
+      ],
+      "keywords": [
+        "assassin",
+        "burst",
+        "dps",
         "engage",
         "mage",
         "sustain"
@@ -67145,11 +67662,11 @@
             11
           ],
           "cost": [
-            65,
-            70,
             75,
             80,
-            85
+            85,
+            90,
+            95
           ],
           "range": [
             500,
@@ -80947,11 +81464,11 @@
           "slot": "E",
           "name": "Looming Darkness",
           "cooldown": [
-            13,
-            13,
-            13,
-            13,
-            13
+            12,
+            12,
+            12,
+            12,
+            12
           ],
           "cost": [
             70,
@@ -81021,11 +81538,11 @@
               "values": [],
               "scaling": [],
               "cooldown": [
-                13,
-                13,
-                13,
-                13,
-                13
+                12,
+                12,
+                12,
+                12,
+                12
               ],
               "duration": null,
               "caps": null,
@@ -89071,10 +89588,10 @@
           "slot": "W",
           "name": "Dreaded Return",
           "cooldown": [
-            16,
-            15,
             14,
+            13.5,
             13,
+            12.5,
             12
           ],
           "cost": [
@@ -89145,10 +89662,10 @@
               "values": [],
               "scaling": [],
               "cooldown": [
-                16,
-                15,
                 14,
+                13.5,
                 13,
+                12.5,
                 12
               ],
               "duration": null,
