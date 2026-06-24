@@ -1,15 +1,20 @@
 {
   "patch": "7.2",
-  "sourceUrl": "https://wildrift.leagueoflegends.com/en-gb/news/game-updates/patch-7-2-champion-release-update",
-  "generatedAt": "2026-06-24T04:37:01.072346+00:00",
+  "sourceUrl": "https://wildrift.leagueoflegends.com/en-gb/news/game-updates/wild-rift-patch-notes-7-1h",
+  "generatedAt": "2026-06-24T09:50:50.534152+00:00",
   "championBuffs": [
     {
-      "name": "Ahri",
+      "name": "Nautilus",
       "delta": 1.0,
       "note": "Automatisch erkannt: Buff/Verbesserung im Patchtext."
     },
     {
-      "name": "Yone",
+      "name": "Thresh",
+      "delta": 1.0,
+      "note": "Automatisch erkannt: Buff/Verbesserung im Patchtext."
+    },
+    {
+      "name": "Ashe",
       "delta": 1.0,
       "note": "Automatisch erkannt: Buff/Verbesserung im Patchtext."
     },
@@ -19,6 +24,17 @@
       "note": "Automatisch erkannt: Buff/Verbesserung im Patchtext."
     }
   ],
-  "championNerfs": [],
+  "championNerfs": [
+    {
+      "name": "Seraphine",
+      "delta": -1.0,
+      "note": "Automatisch erkannt: Nerf/Abschwächung im Patchtext."
+    },
+    {
+      "name": "Sona",
+      "delta": -1.0,
+      "note": "Automatisch erkannt: Nerf/Abschwächung im Patchtext."
+    }
+  ],
   "itemChanges": []
 }
