@@ -1,145 +1,15 @@
 {
-  "patch": "7.2",
-  "sourceUrl": "https://wildrift.leagueoflegends.com/en-gb/news/game-updates/wild-rift-patch-notes-7-2",
-  "generatedAt": "2026-07-15T08:35:50.991650+00:00",
+  "patch": "7.2a",
+  "sourceUrl": "https://wildrift.leagueoflegends.com/en-gb/news/game-updates/wild-rift-patch-notes-7-2a",
+  "generatedAt": "2026-07-15T14:10:04.348612+00:00",
   "championBuffs": [
     {
-      "name": "Miss Fortune",
-      "delta": 1.0,
-      "note": "Automatisch erkannt: Buff/Verbesserung im Patchtext."
-    },
-    {
-      "name": "Twisted Fate",
-      "delta": 1.0,
-      "note": "Automatisch erkannt: Buff/Verbesserung im Patchtext."
-    },
-    {
-      "name": "Blitzcrank",
-      "delta": 1.0,
-      "note": "Automatisch erkannt: Buff/Verbesserung im Patchtext."
-    },
-    {
-      "name": "Seraphine",
-      "delta": 1.0,
-      "note": "Automatisch erkannt: Buff/Verbesserung im Patchtext."
-    },
-    {
-      "name": "Renekton",
-      "delta": 1.0,
-      "note": "Automatisch erkannt: Buff/Verbesserung im Patchtext."
-    },
-    {
-      "name": "Kassadin",
-      "delta": 1.0,
-      "note": "Automatisch erkannt: Buff/Verbesserung im Patchtext."
-    },
-    {
-      "name": "Kha'Zix",
-      "delta": 1.0,
-      "note": "Automatisch erkannt: Buff/Verbesserung im Patchtext."
-    },
-    {
-      "name": "Orianna",
-      "delta": 1.0,
-      "note": "Automatisch erkannt: Buff/Verbesserung im Patchtext."
-    },
-    {
-      "name": "Draven",
-      "delta": 1.0,
-      "note": "Automatisch erkannt: Buff/Verbesserung im Patchtext."
-    },
-    {
-      "name": "Veigar",
-      "delta": 1.0,
-      "note": "Automatisch erkannt: Buff/Verbesserung im Patchtext."
-    },
-    {
-      "name": "Varus",
-      "delta": 1.0,
-      "note": "Automatisch erkannt: Buff/Verbesserung im Patchtext."
-    },
-    {
-      "name": "Garen",
-      "delta": 1.0,
-      "note": "Automatisch erkannt: Buff/Verbesserung im Patchtext."
-    },
-    {
-      "name": "Jayce",
-      "delta": 1.0,
-      "note": "Automatisch erkannt: Buff/Verbesserung im Patchtext."
-    },
-    {
-      "name": "Amumu",
-      "delta": 1.0,
-      "note": "Automatisch erkannt: Buff/Verbesserung im Patchtext."
-    },
-    {
-      "name": "Yasuo",
-      "delta": 1.0,
-      "note": "Automatisch erkannt: Buff/Verbesserung im Patchtext."
-    },
-    {
-      "name": "Rakan",
-      "delta": 1.0,
-      "note": "Automatisch erkannt: Buff/Verbesserung im Patchtext."
-    },
-    {
-      "name": "Xayah",
-      "delta": 1.0,
-      "note": "Automatisch erkannt: Buff/Verbesserung im Patchtext."
-    },
-    {
-      "name": "Ashe",
+      "name": "Yuumi",
       "delta": 1.0,
       "note": "Automatisch erkannt: Buff/Verbesserung im Patchtext."
     },
     {
       "name": "Sion",
-      "delta": 1.0,
-      "note": "Automatisch erkannt: Buff/Verbesserung im Patchtext."
-    },
-    {
-      "name": "Ahri",
-      "delta": 1.0,
-      "note": "Automatisch erkannt: Buff/Verbesserung im Patchtext."
-    },
-    {
-      "name": "Sona",
-      "delta": 1.0,
-      "note": "Automatisch erkannt: Buff/Verbesserung im Patchtext."
-    },
-    {
-      "name": "Jinx",
-      "delta": 1.0,
-      "note": "Automatisch erkannt: Buff/Verbesserung im Patchtext."
-    },
-    {
-      "name": "Kayn",
-      "delta": 1.0,
-      "note": "Automatisch erkannt: Buff/Verbesserung im Patchtext."
-    },
-    {
-      "name": "Nami",
-      "delta": 1.0,
-      "note": "Automatisch erkannt: Buff/Verbesserung im Patchtext."
-    },
-    {
-      "name": "Sett",
-      "delta": 1.0,
-      "note": "Automatisch erkannt: Buff/Verbesserung im Patchtext."
-    },
-    {
-      "name": "Pyke",
-      "delta": 1.0,
-      "note": "Automatisch erkannt: Buff/Verbesserung im Patchtext."
-    },
-    {
-      "name": "Zed",
-      "delta": 1.0,
-      "note": "Automatisch erkannt: Buff/Verbesserung im Patchtext."
-    },
-    {
-      "name": "Zoe",
       "delta": 1.0,
       "note": "Automatisch erkannt: Buff/Verbesserung im Patchtext."
     },
@@ -151,12 +21,7 @@
   ],
   "championNerfs": [
     {
-      "name": "Thresh",
-      "delta": -1.0,
-      "note": "Automatisch erkannt: Nerf/Abschwächung im Patchtext."
-    },
-    {
-      "name": "Darius",
+      "name": "Senna",
       "delta": -1.0,
       "note": "Automatisch erkannt: Nerf/Abschwächung im Patchtext."
     }
@@ -164,22 +29,23 @@
   "itemChanges": [
     {
       "name": "Blade of the Ruined King",
-      "direction": "changed",
+      "direction": "buff",
       "impactTags": [
         "marksman",
         "fighter",
         "anti_tank"
       ],
-      "delta": 0.6,
+      "delta": 1.0,
       "note": "Automatisch erkannt aus den offiziellen Patchnotes."
     },
     {
-      "name": "Rabadon's Deathcap",
-      "direction": "buff",
+      "name": "Searing Crown",
+      "direction": "changed",
       "impactTags": [
-        "mage"
+        "tank",
+        "hard_engage"
       ],
-      "delta": 1.0,
+      "delta": 0.6,
       "note": "Automatisch erkannt aus den offiziellen Patchnotes."
     }
   ]
