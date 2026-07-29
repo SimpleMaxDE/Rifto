@@ -1,52 +1,50 @@
 {
-  "patch": "7.2a",
-  "sourceUrl": "https://wildrift.leagueoflegends.com/en-gb/news/game-updates/wild-rift-patch-notes-7-2a",
-  "generatedAt": "2026-07-29T03:41:28.446082+00:00",
+  "patch": "7.2b",
+  "sourceUrl": "https://wildrift.leagueoflegends.com/en-gb/news/game-updates/wild-rift-patch-notes-7-2b",
+  "generatedAt": "2026-07-29T09:09:17.540753+00:00",
   "championBuffs": [
     {
-      "name": "Yuumi",
+      "name": "Sett",
       "delta": 1.0,
       "note": "Automatisch erkannt: Buff/Verbesserung im Patchtext."
     },
     {
-      "name": "Sion",
+      "name": "Sona",
       "delta": 1.0,
       "note": "Automatisch erkannt: Buff/Verbesserung im Patchtext."
     },
     {
-      "name": "Vi",
+      "name": "Yone",
+      "delta": 1.0,
+      "note": "Automatisch erkannt: Buff/Verbesserung im Patchtext."
+    },
+    {
+      "name": "Ekko",
+      "delta": 1.0,
+      "note": "Automatisch erkannt: Buff/Verbesserung im Patchtext."
+    },
+    {
+      "name": "Zed",
       "delta": 1.0,
       "note": "Automatisch erkannt: Buff/Verbesserung im Patchtext."
     }
   ],
   "championNerfs": [
     {
-      "name": "Senna",
+      "name": "Nidalee",
+      "delta": -1.0,
+      "note": "Automatisch erkannt: Nerf/Abschwächung im Patchtext."
+    },
+    {
+      "name": "Hecarim",
+      "delta": -1.0,
+      "note": "Automatisch erkannt: Nerf/Abschwächung im Patchtext."
+    },
+    {
+      "name": "Vi",
       "delta": -1.0,
       "note": "Automatisch erkannt: Nerf/Abschwächung im Patchtext."
     }
   ],
-  "itemChanges": [
-    {
-      "name": "Blade of the Ruined King",
-      "direction": "buff",
-      "impactTags": [
-        "marksman",
-        "fighter",
-        "anti_tank"
-      ],
-      "delta": 1.0,
-      "note": "Automatisch erkannt aus den offiziellen Patchnotes."
-    },
-    {
-      "name": "Searing Crown",
-      "direction": "changed",
-      "impactTags": [
-        "tank",
-        "hard_engage"
-      ],
-      "delta": 0.6,
-      "note": "Automatisch erkannt aus den offiziellen Patchnotes."
-    }
-  ]
+  "itemChanges": []
 }
