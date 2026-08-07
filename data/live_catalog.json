@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-07T01:53:50.454301+00:00",
+  "generatedAt": "2026-08-07T06:55:03.525796+00:00",
   "sources": {
     "heroes": "https://game.gtimg.cn/images/lgamem/act/lrlib/js/heroList/hero_list.js",
     "items": "https://game.gtimg.cn/images/lgamem/act/lrlib/js/equip/equip.js",
@@ -2890,7 +2890,7 @@
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/EquipIcons/lol_dzjl.png",
       "price": "2600",
       "description": [
-        "生命值 +350 最大生命值\n法力值 +500 最大法力值\n冷却 +15 技能急速\n\n敬畏：增加相当于8%最大法力值的额外生命值，并返还15%总法力消耗。\n\n法力积攒：每次发起普攻、消耗法力或受到英雄、建筑和史诗野怪伤害时，增加12最大法力值。最多可增加700最大法力值，此时该装备将自动升级为芬布尔之冬。每10秒最多可触发3次效果。限持一件女神之泪装备。\n\n"
+        "生命值 +350 最大生命值\n法力值 +500 最大法力值\n冷却 +15 技能急速\n\n敬畏：增加相当于8%最大法力值的额外生命值，并返还15%总法力消耗。\n\n法力积攒：每次发起普攻、消耗法力或受到英雄、建筑和史诗野怪伤害时，增加12最大法力值。最多可增加700最大法力值，此时该装备将自动升级为芬布尔之冬。每10秒最多可触发3次效果。限持一件女神之泪系列装备。\n\n"
       ],
       "labels": [],
       "from": [
@@ -3075,7 +3075,7 @@
           "source_line": "每10秒最多可触发3次效果"
         },
         {
-          "name": "限持一件女神之泪装备",
+          "name": "限持一件女神之泪系列装备",
           "trigger": "passive_always",
           "effect_type": "modifier",
           "values": [],
@@ -3090,7 +3090,7 @@
             "applies_on_hit": false,
             "unique": false
           },
-          "source_line": "限持一件女神之泪装备"
+          "source_line": "限持一件女神之泪系列装备"
         }
       ],
       "effect_parse_status": "ok",
@@ -3206,9 +3206,9 @@
       "item_id": "2150",
       "name": "冰脉护手",
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/EquipIcons/lol_bmhs.png",
-      "price": "3100",
+      "price": "3000",
       "description": [
-        "生命值 +250 最大生命值\n护甲 +50 护甲\n法力值 +250 最大法力值\n冷却 +30 技能急速\n\n咒刃：施放技能后，10秒内再次发起普攻，会对范围内所有敌人额外造成相当于(100%基础攻击力+25%额外armour_ratio)的物理伤害，并制造一个持续2秒的冰冷地带，使地带内敌人的移动速度降低30%。冰冷地带的大小会因护甲而提升。（1.5秒冷却时间）\n对建筑伤害降低。\n\n"
+        "生命值 +300 最大生命值\n护甲 +50 护甲\n法力值 +250 最大法力值\n冷却 +30 技能急速\n\n咒刃：施放技能后，10秒内再次发起普攻，会对范围内所有敌人额外造成相当于(100%基础攻击力+25%额外armour_ratio)的物理伤害，并制造一个持续2秒的冰冷地带，使地带内敌人的移动速度降低30%。冰冷地带的大小会因护甲而提升。（1.5秒冷却时间）\n对建筑伤害降低。\n\n"
       ],
       "labels": [],
       "from": [
@@ -3224,7 +3224,7 @@
         "stackable": false
       },
       "stats": {
-        "hp": "2500000",
+        "hp": "3000000",
         "armor": "500000",
         "mr": "0",
         "ad": "0",
@@ -4071,7 +4071,7 @@
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/EquipIcons/lol_ldhs.png",
       "price": "2800",
       "description": [
-        "法术强度 +100 法术强度\n法力值 +500 最大法力值\n冷却 +10 技能急速\n\n回声：你的下一个伤害技能或强化攻击会对目标和附近最多3个敌人造成110+10%法术强度魔法伤害。（10秒冷却时间）\n\n"
+        "法术强度 +100 法术强度\n法力值 +500 最大法力值\n冷却 +10 技能急速\n\n回声：你的下一个伤害技能或强化攻击会对目标和附近最多3个敌人造成140+15%法术强度魔法伤害。（9秒冷却时间）\n\n"
       ],
       "labels": [],
       "from": [
@@ -4169,13 +4169,13 @@
           "source_line": "冷却 +10 技能急速"
         },
         {
-          "name": "回声：你的下一个伤害技能或强化攻击会对目标和附近最多3个敌人造成110+10%法术强度魔法伤害",
+          "name": "回声：你的下一个伤害技能或强化攻击会对目标和附近最多3个敌人造成140+15%法术强度魔法伤害",
           "trigger": "passive_always",
           "effect_type": "damage",
           "values": [
             "3",
-            "110",
-            "10%"
+            "140",
+            "15%"
           ],
           "scaling": [],
           "cooldown": null,
@@ -4188,18 +4188,18 @@
             "applies_on_hit": false,
             "unique": false
           },
-          "source_line": "回声：你的下一个伤害技能或强化攻击会对目标和附近最多3个敌人造成110+10%法术强度魔法伤害"
+          "source_line": "回声：你的下一个伤害技能或强化攻击会对目标和附近最多3个敌人造成140+15%法术强度魔法伤害"
         },
         {
-          "name": "（10秒冷却时间）",
+          "name": "（9秒冷却时间）",
           "trigger": "passive_always",
           "effect_type": "modifier",
           "values": [
-            "10"
+            "9"
           ],
           "scaling": [],
-          "cooldown": 10.0,
-          "duration": 10.0,
+          "cooldown": 9.0,
+          "duration": 9.0,
           "caps": null,
           "conditions": [],
           "damage_type": null,
@@ -4208,7 +4208,7 @@
             "applies_on_hit": false,
             "unique": false
           },
-          "source_line": "（10秒冷却时间）"
+          "source_line": "（9秒冷却时间）"
         }
       ],
       "effect_parse_status": "ok",
@@ -5314,7 +5314,7 @@
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/EquipIcons/lol_dmnklz.png",
       "price": "3300",
       "description": [
-        "攻击力 +25 攻击力\n护甲穿透 +36% 护甲穿透率\n暴击率 +25% 暴击率\n\n巨人杀手：基于敌方英雄的额外生命值造成额外伤害。敌方英雄拥有1200额外生命值时，该伤害最高达到12%。\n\n"
+        "攻击力 +30 攻击力\n护甲穿透 +36% 护甲穿透率\n暴击率 +25% 暴击率\n\n巨人杀手：基于敌方英雄的额外生命值造成额外伤害。敌方英雄拥有1200额外生命值时，该伤害最高达到12%。\n\n"
       ],
       "labels": [],
       "from": [
@@ -5333,7 +5333,7 @@
         "hp": "0",
         "armor": "0",
         "mr": "0",
-        "ad": "250000",
+        "ad": "300000",
         "ap": "0",
         "ability_haste": "0",
         "attack_speed": "0",
@@ -5353,16 +5353,16 @@
       },
       "effects": [
         {
-          "name": "攻击力 +25 攻击力",
+          "name": "攻击力 +30 攻击力",
           "trigger": "passive_always",
           "effect_type": "modifier",
           "values": [
-            "25"
+            "30"
           ],
           "scaling": [
             {
               "source": "ad",
-              "ratio": 25.0
+              "ratio": 30.0
             }
           ],
           "cooldown": null,
@@ -5375,7 +5375,7 @@
             "applies_on_hit": false,
             "unique": false
           },
-          "source_line": "攻击力 +25 攻击力"
+          "source_line": "攻击力 +30 攻击力"
         },
         {
           "name": "护甲穿透 +36% 护甲穿透率",
@@ -5624,7 +5624,7 @@
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/EquipIcons/lol_dtszz.png",
       "price": "3000",
       "description": [
-        "法术强度 +60 法术强度\n法力值 +500 最大法力值\n冷却 +25 技能急速\n\n敬畏：增加相当于1%最大法力值的法术强度，并返还25%总法力消耗。\n\n法力积攒：每次消耗法力时，增加14最大法力值。最多增加700最大法力值，此时该装备会自动升级为炽天使之拥。每10秒最多可触发2次效果。限持一件女神之泪系列的装备。\n\n"
+        "法术强度 +60 法术强度\n法力值 +500 最大法力值\n冷却 +25 技能急速\n\n敬畏：增加相当于1%最大法力值的法术强度，并返还25%总法力消耗。\n\n法力积攒：每次消耗法力时，增加14最大法力值。最多增加700最大法力值，此时该装备会自动升级为炽天使之拥。每10秒最多可触发3次效果。限持一件女神之泪系列的装备。\n\n"
       ],
       "labels": [],
       "from": [
@@ -5784,12 +5784,12 @@
           "source_line": "最多增加700最大法力值，此时该装备会自动升级为炽天使之拥"
         },
         {
-          "name": "每10秒最多可触发2次效果",
+          "name": "每10秒最多可触发3次效果",
           "trigger": "periodic",
           "effect_type": "modifier",
           "values": [
             "10",
-            "2"
+            "3"
           ],
           "scaling": [],
           "cooldown": 10.0,
@@ -5802,7 +5802,7 @@
             "applies_on_hit": false,
             "unique": false
           },
-          "source_line": "每10秒最多可触发2次效果"
+          "source_line": "每10秒最多可触发3次效果"
         },
         {
           "name": "限持一件女神之泪系列的装备",
@@ -7861,7 +7861,7 @@
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/EquipIcons/lol_dlnsz.png",
       "price": "2200",
       "description": [
-        "生命值 +150 最大生命值\n魔法抗性 +35 魔法抗性\n韧性 +30% 韧性\n移动速度 +45 移动速度\n\n诺克萨斯的不懈：受到来自英雄的魔法伤害时获得20~140+5%最大的魔法护盾，持续5秒。（12秒冷却）\n\n"
+        "生命值 +150 最大生命值\n魔法抗性 +30 魔法抗性\n韧性 +30% 韧性\n移动速度 +45 移动速度\n\n诺克萨斯的不懈：受到来自英雄的魔法伤害时获得20~140+5%最大的魔法护盾，持续5秒。（12秒冷却）\n\n"
       ],
       "labels": [],
       "from": [
@@ -7877,7 +7877,7 @@
       "stats": {
         "hp": "1500000",
         "armor": "0",
-        "mr": "350000",
+        "mr": "300000",
         "ad": "0",
         "ap": "0",
         "ability_haste": "0",
@@ -7923,11 +7923,11 @@
           "source_line": "生命值 +150 最大生命值"
         },
         {
-          "name": "魔法抗性 +35 魔法抗性",
+          "name": "魔法抗性 +30 魔法抗性",
           "trigger": "passive_always",
           "effect_type": "modifier",
           "values": [
-            "35"
+            "30"
           ],
           "scaling": [],
           "cooldown": null,
@@ -7940,7 +7940,7 @@
             "applies_on_hit": false,
             "unique": false
           },
-          "source_line": "魔法抗性 +35 魔法抗性"
+          "source_line": "魔法抗性 +30 魔法抗性"
         },
         {
           "name": "韧性 +30% 韧性",
@@ -8942,7 +8942,7 @@
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/EquipIcons/lol_qcdc_new.png",
       "price": "3000",
       "description": [
-        "攻击力 +25 攻击力\n暴击率 +25% 暴击率\n攻击速度 +25% 攻击速度\n移动速度 +5% 移动速度\n\n强力闪击：移动和普通攻击均可生成盈能攻击，使你该次攻击额外获得100攻击距离（若为近战攻击，则获得50攻击距离）和40-100额外魔法伤害以及持续0.75秒的60移动速度，此效果的伤害会弹跳至附近至多5名敌人并且可以触发暴击。（对小兵造成额外50%-80%伤害）\n\n"
+        "攻击力 +30 攻击力\n暴击率 +25% 暴击率\n攻击速度 +25% 攻击速度\n移动速度 +5% 移动速度\n\n强力闪击：移动和普通攻击均可生成盈能攻击，使你该次攻击额外获得100攻击距离（若为近战攻击，则获得50攻击距离）和40-100额外魔法伤害以及持续0.75秒的60移动速度，此效果的伤害会弹跳至附近至多5名敌人并且可以触发暴击。（对小兵造成额外50%-80%伤害）\n\n"
       ],
       "labels": [],
       "from": [
@@ -8960,7 +8960,7 @@
         "hp": "0",
         "armor": "0",
         "mr": "0",
-        "ad": "250000",
+        "ad": "300000",
         "ap": "0",
         "ability_haste": "0",
         "attack_speed": "2500",
@@ -8980,16 +8980,16 @@
       },
       "effects": [
         {
-          "name": "攻击力 +25 攻击力",
+          "name": "攻击力 +30 攻击力",
           "trigger": "passive_always",
           "effect_type": "modifier",
           "values": [
-            "25"
+            "30"
           ],
           "scaling": [
             {
               "source": "ad",
-              "ratio": 25.0
+              "ratio": 30.0
             }
           ],
           "cooldown": null,
@@ -9002,7 +9002,7 @@
             "applies_on_hit": false,
             "unique": false
           },
-          "source_line": "攻击力 +25 攻击力"
+          "source_line": "攻击力 +30 攻击力"
         },
         {
           "name": "暴击率 +25% 暴击率",
@@ -9625,7 +9625,7 @@
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/EquipIcons/lol_tjphz.png",
       "price": "3100",
       "description": [
-        "生命值 +400 最大生命值\n攻击力 +40 攻击力\n攻击速度 +15% 攻击速度\n\n破阵冲击波（主动）：主动使用后，向前方位移一小段距离并且对周围造成100%攻击力物理伤害，命中后使敌方减速40%，持续3秒。（冷却时间25秒）\n\n挺进（被动）：造成物理伤害可获得持续2秒的20移动速度。\n\n"
+        "生命值 +400 最大生命值\n攻击力 +40 攻击力\n攻击速度 +25% 攻击速度\n\n破阵冲击波（主动）：主动使用后，向前方位移一小段距离并且对周围造成100%攻击力物理伤害，命中后使敌方减速40%，持续3秒。（冷却时间25秒）\n\n挺进（被动）：造成物理伤害可获得持续2秒的20移动速度。\n\n"
       ],
       "labels": [],
       "from": [
@@ -9647,7 +9647,7 @@
         "ad": "400000",
         "ap": "0",
         "ability_haste": "0",
-        "attack_speed": "1500",
+        "attack_speed": "2500",
         "crit_rate": "0",
         "armor_pen_flat": "0",
         "armor_pen_pct": "0",
@@ -9714,11 +9714,11 @@
           "source_line": "攻击力 +40 攻击力"
         },
         {
-          "name": "攻击速度 +15% 攻击速度",
+          "name": "攻击速度 +25% 攻击速度",
           "trigger": "passive_always",
           "effect_type": "modifier",
           "values": [
-            "15%"
+            "25%"
           ],
           "scaling": [],
           "cooldown": null,
@@ -9731,7 +9731,7 @@
             "applies_on_hit": false,
             "unique": false
           },
-          "source_line": "攻击速度 +15% 攻击速度"
+          "source_line": "攻击速度 +25% 攻击速度"
         },
         {
           "name": "破阵冲击波（主动）：主动使用后，向前方位移一小段距离并且对周围造成100%攻击力物理伤害，命中后使敌方减速40%，持续3秒",
@@ -11385,12 +11385,11 @@
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/EquipIcons/lol_rydp.png",
       "price": "2900",
       "description": [
-        "生命值 +425 最大生命值\n护甲 +20 护甲\n冷却 +15 技能急速\n\n献祭：进入战斗状态后，每秒对附近敌人造成16-25+0.8%额外加成的魔法伤害。当献祭伤害到英雄和史诗野怪，会使其受到的伤害增加5%，持续5秒，最多叠加6次。\n烈焰之触：献祭满层时，攻击会灼烧附近敌人，3秒间造成50%献祭伤害。\n献祭可对野怪造成130%伤害，对小兵造成175-250%（随等级成长）伤害。\n\n"
+        "生命值 +350 最大生命值\n护甲 +40 护甲\n冷却 +15 技能急速\n\n献祭：进入战斗状态后，每秒对附近敌人造成16-25+0.8%额外加成的魔法伤害。当献祭伤害到英雄和史诗野怪，会使其受到的伤害增加5%，持续5秒，最多叠加6次。\n烈焰之触：献祭满层时，攻击会灼烧附近敌人，3秒间造成50%献祭伤害。\n献祭可对野怪造成130%伤害，对小兵造成175-250%（随等级成长）伤害。\n\n"
       ],
       "labels": [],
       "from": [
-        "2301",
-        "2302",
+        "2305",
         "2307"
       ],
       "into": "",
@@ -11401,8 +11400,8 @@
         "stackable": false
       },
       "stats": {
-        "hp": "4250000",
-        "armor": "200000",
+        "hp": "3500000",
+        "armor": "400000",
         "mr": "0",
         "ad": "0",
         "ap": "0",
@@ -11424,16 +11423,16 @@
       },
       "effects": [
         {
-          "name": "生命值 +425 最大生命值",
+          "name": "生命值 +350 最大生命值",
           "trigger": "passive_always",
           "effect_type": "modifier",
           "values": [
-            "425"
+            "350"
           ],
           "scaling": [
             {
               "source": "target_max_hp",
-              "ratio": 425.0
+              "ratio": 350.0
             }
           ],
           "cooldown": null,
@@ -11446,14 +11445,14 @@
             "applies_on_hit": false,
             "unique": false
           },
-          "source_line": "生命值 +425 最大生命值"
+          "source_line": "生命值 +350 最大生命值"
         },
         {
-          "name": "护甲 +20 护甲",
+          "name": "护甲 +40 护甲",
           "trigger": "passive_always",
           "effect_type": "modifier",
           "values": [
-            "20"
+            "40"
           ],
           "scaling": [],
           "cooldown": null,
@@ -11466,7 +11465,7 @@
             "applies_on_hit": false,
             "unique": false
           },
-          "source_line": "护甲 +20 护甲"
+          "source_line": "护甲 +40 护甲"
         },
         {
           "name": "冷却 +15 技能急速",
@@ -13403,7 +13402,7 @@
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/EquipIcons/lol_sycx.png",
       "price": "1200",
       "description": [
-        "生命值 +150 最大生命值\n魔法抗性 +25 魔法抗性\n韧性 +15% 韧性\n移动速度 +45 移动速度\n\n"
+        "生命值 +150 最大生命值\n魔法抗性 +25 魔法抗性\n韧性 +30% 韧性\n移动速度 +45 移动速度\n\n"
       ],
       "labels": [],
       "from": [
@@ -13412,7 +13411,7 @@
       ],
       "into": "",
       "tags": "",
-      "combine_cost": "1500",
+      "combine_cost": "3000",
       "slot_rules": {
         "unique_passive": false,
         "stackable": false
@@ -13486,11 +13485,11 @@
           "source_line": "魔法抗性 +25 魔法抗性"
         },
         {
-          "name": "韧性 +15% 韧性",
+          "name": "韧性 +30% 韧性",
           "trigger": "passive_always",
           "effect_type": "tenacity",
           "values": [
-            "15%"
+            "30%"
           ],
           "scaling": [],
           "cooldown": null,
@@ -13503,7 +13502,7 @@
             "applies_on_hit": false,
             "unique": false
           },
-          "source_line": "韧性 +15% 韧性"
+          "source_line": "韧性 +30% 韧性"
         },
         {
           "name": "移动速度 +45 移动速度",
@@ -16028,7 +16027,7 @@
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/EquipIcons/lol_lns.png",
       "price": "2200",
       "description": [
-        "法术强度 +40 法术强度\n增加法术穿透 +18 法术穿透\n增加法术穿透 +8% 法术穿透\n +100% 基础法力回复\n移动速度 +45 移动速度\n\n互衡：无法力值英雄可获得50%基础生命回复。\n\n恃强凌弱：普攻和主动技能对小兵造成额外22真实伤害。\n\n"
+        "法术强度 +35 法术强度\n增加法术穿透 +18 法术穿透\n增加法术穿透 +8% 法术穿透\n +100% 基础法力回复\n移动速度 +45 移动速度\n\n互衡：无法力值英雄可获得50%基础生命回复。\n\n恃强凌弱：普攻和主动技能对小兵造成额外18真实伤害。\n\n"
       ],
       "labels": [],
       "from": [
@@ -16046,7 +16045,7 @@
         "armor": "0",
         "mr": "0",
         "ad": "0",
-        "ap": "400000",
+        "ap": "350000",
         "ability_haste": "0",
         "attack_speed": "0",
         "crit_rate": "0",
@@ -16065,11 +16064,11 @@
       },
       "effects": [
         {
-          "name": "法术强度 +40 法术强度",
+          "name": "法术强度 +35 法术强度",
           "trigger": "passive_always",
           "effect_type": "stat",
           "values": [
-            "40"
+            "35"
           ],
           "scaling": [],
           "cooldown": null,
@@ -16082,7 +16081,7 @@
             "applies_on_hit": false,
             "unique": false
           },
-          "source_line": "法术强度 +40 法术强度"
+          "source_line": "法术强度 +35 法术强度"
         },
         {
           "name": "增加法术穿透 +18 法术穿透",
@@ -16185,11 +16184,11 @@
           "source_line": "互衡：无法力值英雄可获得50%基础生命回复"
         },
         {
-          "name": "恃强凌弱：普攻和主动技能对小兵造成额外22真实伤害",
+          "name": "恃强凌弱：普攻和主动技能对小兵造成额外18真实伤害",
           "trigger": "onHit",
           "effect_type": "damage",
           "values": [
-            "22"
+            "18"
           ],
           "scaling": [],
           "cooldown": null,
@@ -16202,7 +16201,7 @@
             "applies_on_hit": true,
             "unique": false
           },
-          "source_line": "恃强凌弱：普攻和主动技能对小兵造成额外22真实伤害"
+          "source_line": "恃强凌弱：普攻和主动技能对小兵造成额外18真实伤害"
         }
       ],
       "effect_parse_status": "ok",
@@ -16304,7 +16303,7 @@
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/EquipIcons/lol_ptjj.png",
       "price": "2200",
       "description": [
-        "攻击速度 +50% 攻击速度\n物理吸血 +5% 物理吸血\n移动速度 +45 移动速度\n\n诺克萨斯的步法：普攻命中英雄时获得15%（近战）/12%（远程）移速，2秒内持续衰减。\n锋愈：每次普攻命中为自身回复点生命值。\n\n\n"
+        "攻击速度 +50% 攻击速度\n物理吸血 +5% 物理吸血\n移动速度 +45 移动速度\n\n诺克萨斯的步法：普攻命中英雄时获得10%（近战）/7%（远程）移速，2秒内持续衰减。\n锋愈：每次普攻命中为自身回复点生命值。\n\n\n"
       ],
       "labels": [],
       "from": [
@@ -16401,12 +16400,12 @@
           "source_line": "移动速度 +45 移动速度"
         },
         {
-          "name": "诺克萨斯的步法：普攻命中英雄时获得15%（近战）/12%（远程）移速，2秒内持续衰减",
+          "name": "诺克萨斯的步法：普攻命中英雄时获得10%（近战）/7%（远程）移速，2秒内持续衰减",
           "trigger": "onHit",
           "effect_type": "modifier",
           "values": [
-            "15%",
-            "12%",
+            "10%",
+            "7%",
             "2"
           ],
           "scaling": [],
@@ -16420,7 +16419,7 @@
             "applies_on_hit": true,
             "unique": false
           },
-          "source_line": "诺克萨斯的步法：普攻命中英雄时获得15%（近战）/12%（远程）移速，2秒内持续衰减"
+          "source_line": "诺克萨斯的步法：普攻命中英雄时获得10%（近战）/7%（远程）移速，2秒内持续衰减"
         },
         {
           "name": "锋愈：每次普攻命中为自身回复点生命值",
@@ -17849,7 +17848,7 @@
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/EquipIcons/lol_gsx.png",
       "price": "1200",
       "description": [
-        "攻击速度 +30% 攻击速度\n移动速度 +45 移动速度\n\n锋愈：每次普攻命中为自身回复10点生命值。\n\n\n"
+        "攻击速度 +35% 攻击速度\n移动速度 +45 移动速度\n\n锋愈：每次普攻命中为自身回复10点生命值。\n\n\n"
       ],
       "labels": [],
       "from": [
@@ -17870,7 +17869,7 @@
         "ad": "0",
         "ap": "0",
         "ability_haste": "0",
-        "attack_speed": "3000",
+        "attack_speed": "3500",
         "crit_rate": "0",
         "armor_pen_flat": "0",
         "armor_pen_pct": "0",
@@ -17887,11 +17886,11 @@
       },
       "effects": [
         {
-          "name": "攻击速度 +30% 攻击速度",
+          "name": "攻击速度 +35% 攻击速度",
           "trigger": "passive_always",
           "effect_type": "modifier",
           "values": [
-            "30%"
+            "35%"
           ],
           "scaling": [],
           "cooldown": null,
@@ -17904,7 +17903,7 @@
             "applies_on_hit": false,
             "unique": false
           },
-          "source_line": "攻击速度 +30% 攻击速度"
+          "source_line": "攻击速度 +35% 攻击速度"
         },
         {
           "name": "移动速度 +45 移动速度",
@@ -18932,7 +18931,7 @@
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/EquipIcons/lol_jg.png",
       "price": "3300",
       "description": [
-        "攻击力 +40 攻击力\n攻击速度 +30% 攻击速度\n\n晦影：普通攻击命中时，对目标造成额外35魔法伤害。\n\n交相：每次攻击在光明特效和黑暗特效之间轮换，附带光明特效的攻击命中时提供持续5秒的5-8护甲和魔法抗性（随等级成长），附带黑暗特效的攻击命中时提供持续5秒的11%护甲穿透护甲穿透和11%增加法术穿透 法术穿透，两种攻击特效均最多叠加3层。\n持有此装备时，由装备提供的护甲穿透率护甲穿透和 法术穿透率增加法术穿透的上限为5%。\n\n"
+        "攻击力 +40 攻击力\n攻击速度 +30% 攻击速度\n\n晦影：普通攻击命中时，对目标造成额外35魔法伤害。\n\n交相：每次普攻在光明特效和黑暗特效之间轮换，附带光明特效的普攻命中时提供持续5秒的5-8护甲和魔法抗性（随等级成长），附带黑暗特效的普攻命中时提供持续5秒的11%护甲穿透护甲穿透和11%增加法术穿透 法术穿透，两种攻击特效均最多叠加3层。\n持有此装备时，由装备提供的护甲穿透率护甲穿透和 法术穿透率增加法术穿透的上限为5%。\n\n"
       ],
       "labels": [],
       "from": [
@@ -19035,7 +19034,7 @@
           "source_line": "晦影：普通攻击命中时，对目标造成额外35魔法伤害"
         },
         {
-          "name": "交相：每次攻击在光明特效和黑暗特效之间轮换，附带光明特效的攻击命中时提供持续5秒的5-8护甲和魔法抗性（随等级成长），附带黑暗特",
+          "name": "交相：每次普攻在光明特效和黑暗特效之间轮换，附带光明特效的普攻命中时提供持续5秒的5-8护甲和魔法抗性（随等级成长），附带黑暗特",
           "trigger": "onHit",
           "effect_type": "penetration",
           "values": [
@@ -19058,7 +19057,7 @@
             "applies_on_hit": true,
             "unique": false
           },
-          "source_line": "交相：每次攻击在光明特效和黑暗特效之间轮换，附带光明特效的攻击命中时提供持续5秒的5-8护甲和魔法抗性（随等级成长），附带黑暗特效的攻击命中时提供持续5秒的11%护甲穿透护甲穿透和11%增加法术穿透 法术穿透，两种攻击特效均最多叠加3层"
+          "source_line": "交相：每次普攻在光明特效和黑暗特效之间轮换，附带光明特效的普攻命中时提供持续5秒的5-8护甲和魔法抗性（随等级成长），附带黑暗特效的普攻命中时提供持续5秒的11%护甲穿透护甲穿透和11%增加法术穿透 法术穿透，两种攻击特效均最多叠加3层"
         },
         {
           "name": "持有此装备时，由装备提供的护甲穿透率护甲穿透和 法术穿透率增加法术穿透的上限为5%",
@@ -20764,7 +20763,7 @@
       "item_id": "2271",
       "name": "纳沃利迅刃",
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/EquipIcons/lol_xr_new.png",
-      "price": "2800",
+      "price": "2700",
       "description": [
         "暴击率 +25% 暴击率\n攻击速度 +45% 攻击速度\n移动速度 +5% 移动速度\n\n灵巧打击：你的普攻会让非终极技能的剩余冷却时间缩短15%。\n\n"
       ],
@@ -22557,7 +22556,7 @@
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/EquipIcons/lol_zjzx.png",
       "price": "2200",
       "description": [
-        "生命值 +150 最大生命值\n护甲 +35 护甲\n移动速度 +45 移动速度\n\n格挡：减免{0}%来自英雄的普攻伤害。\n诺克萨斯的耐久：受到来自英雄的物理伤害时获得{0}~{1}+{2}%最大的物理护盾，持续{3}秒。（{4}秒冷却）\n\n"
+        "生命值 +150 最大生命值\n护甲 +30 护甲\n移动速度 +45 移动速度\n\n格挡：减免{0}%来自英雄的普攻伤害。\n诺克萨斯的耐久：受到来自英雄的物理伤害时获得{0}~{1}+{2}%最大的物理护盾，持续{3}秒。（{4}秒冷却）\n\n"
       ],
       "labels": [],
       "from": [
@@ -22572,7 +22571,7 @@
       },
       "stats": {
         "hp": "1500000",
-        "armor": "350000",
+        "armor": "300000",
         "mr": "0",
         "ad": "0",
         "ap": "0",
@@ -22619,11 +22618,11 @@
           "source_line": "生命值 +150 最大生命值"
         },
         {
-          "name": "护甲 +35 护甲",
+          "name": "护甲 +30 护甲",
           "trigger": "passive_always",
           "effect_type": "modifier",
           "values": [
-            "35"
+            "30"
           ],
           "scaling": [],
           "cooldown": null,
@@ -22636,7 +22635,7 @@
             "applies_on_hit": false,
             "unique": false
           },
-          "source_line": "护甲 +35 护甲"
+          "source_line": "护甲 +30 护甲"
         },
         {
           "name": "移动速度 +45 移动速度",
@@ -22950,7 +22949,7 @@
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/EquipIcons/lol_bm.png",
       "price": "2800",
       "description": [
-        "生命值 +350 最大生命值\n +100% 基础生命回复\n魔法抗性 +75 魔法抗性\n\n法师之祸：若12秒内未受到魔法伤害，获得魔法护盾（70~180+10%最大)。\n\n"
+        "生命值 +350 最大生命值\n +100% 基础生命回复\n魔法抗性 +80 魔法抗性\n\n法师之祸：若12秒内未受到魔法伤害，获得魔法护盾（50~150+14%最大)。\n\n"
       ],
       "labels": [],
       "from": [
@@ -22967,7 +22966,7 @@
       "stats": {
         "hp": "3500000",
         "armor": "0",
-        "mr": "750000",
+        "mr": "800000",
         "ad": "0",
         "ap": "0",
         "ability_haste": "0",
@@ -23033,11 +23032,11 @@
           "source_line": "+100% 基础生命回复"
         },
         {
-          "name": "魔法抗性 +75 魔法抗性",
+          "name": "魔法抗性 +80 魔法抗性",
           "trigger": "passive_always",
           "effect_type": "modifier",
           "values": [
-            "75"
+            "80"
           ],
           "scaling": [],
           "cooldown": null,
@@ -23050,17 +23049,17 @@
             "applies_on_hit": false,
             "unique": false
           },
-          "source_line": "魔法抗性 +75 魔法抗性"
+          "source_line": "魔法抗性 +80 魔法抗性"
         },
         {
-          "name": "法师之祸：若12秒内未受到魔法伤害，获得魔法护盾（70~180+10%最大)",
+          "name": "法师之祸：若12秒内未受到魔法伤害，获得魔法护盾（50~150+14%最大)",
           "trigger": "passive_always",
           "effect_type": "shield",
           "values": [
             "12",
-            "70",
-            "180",
-            "10%"
+            "50",
+            "150",
+            "14%"
           ],
           "scaling": [],
           "cooldown": 12.0,
@@ -23075,7 +23074,7 @@
             "applies_on_hit": false,
             "unique": false
           },
-          "source_line": "法师之祸：若12秒内未受到魔法伤害，获得魔法护盾（70~180+10%最大)"
+          "source_line": "法师之祸：若12秒内未受到魔法伤害，获得魔法护盾（50~150+14%最大)"
         }
       ],
       "effect_parse_status": "ok",
@@ -24045,7 +24044,7 @@
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/EquipIcons/lol_rzzj.png",
       "price": "1200",
       "description": [
-        "生命值 +150 最大生命值\n护甲 +25 护甲\n移动速度 +45 移动速度\n\n格挡：减免6%来自英雄的普攻伤害。\n\n"
+        "生命值 +150 最大生命值\n护甲 +25 护甲\n移动速度 +45 移动速度\n\n格挡：减免10%来自英雄的普攻伤害。\n\n"
       ],
       "labels": [],
       "from": [
@@ -24148,11 +24147,11 @@
           "source_line": "移动速度 +45 移动速度"
         },
         {
-          "name": "格挡：减免6%来自英雄的普攻伤害",
+          "name": "格挡：减免10%来自英雄的普攻伤害",
           "trigger": "onHit",
           "effect_type": "modifier",
           "values": [
-            "6%"
+            "10%"
           ],
           "scaling": [],
           "cooldown": null,
@@ -24165,7 +24164,7 @@
             "applies_on_hit": true,
             "unique": false
           },
-          "source_line": "格挡：减免6%来自英雄的普攻伤害"
+          "source_line": "格挡：减免10%来自英雄的普攻伤害"
         }
       ],
       "effect_parse_status": "ok",
@@ -25808,7 +25807,7 @@
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/EquipIcons/lol_mz.png",
       "price": "2700",
       "description": [
-        "攻击力 +25 攻击力\n法力值 +300 最大法力值\n冷却 +20 技能急速\n\n敬畏：增加相当于1.5%最大法力值的攻击力，并返还15%总法力消耗。\n\n法力积攒：每次发起普攻或消耗法力时，增加14最大法力值。最多增加700最大法力值，此时该装备会自动升级为魔切。每10秒最多可触发3次效果。限持一件女神之泪装备。\n\n"
+        "攻击力 +25 攻击力\n法力值 +300 最大法力值\n冷却 +20 技能急速\n\n敬畏：增加相当于1.5%最大法力值的攻击力，并返还15%总法力消耗。\n\n法力积攒：每次发起普攻或消耗法力时，增加14最大法力值。最多增加700最大法力值，此时该装备会自动升级为魔切。每10秒最多可触发3次效果。限持一件女神之泪系列装备。\n\n"
       ],
       "labels": [],
       "from": [
@@ -25998,7 +25997,7 @@
           "source_line": "每10秒最多可触发3次效果"
         },
         {
-          "name": "限持一件女神之泪装备",
+          "name": "限持一件女神之泪系列装备",
           "trigger": "passive_always",
           "effect_type": "modifier",
           "values": [],
@@ -26013,7 +26012,7 @@
             "applies_on_hit": false,
             "unique": false
           },
-          "source_line": "限持一件女神之泪装备"
+          "source_line": "限持一件女神之泪系列装备"
         }
       ],
       "effect_parse_status": "ok",
