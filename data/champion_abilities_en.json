@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-08-11T18:40:46.773475+00:00",
-  "source": "https://ddragon.leagueoflegends.com/cdn/16.15.1/data/en_US/championFull.json",
-  "version": "16.15.1",
+  "generatedAt": "2026-08-12T00:45:41.010213+00:00",
+  "source": "https://ddragon.leagueoflegends.com/cdn/16.16.1/data/en_US/championFull.json",
+  "version": "16.16.1",
   "champions": {
     "Aatrox": {
       "title": "the Darkin Blade",
@@ -37,10 +37,10 @@
       ]
     },
     "Ahri": {
-      "title": "The Nine-Tailed Fox",
+      "title": "the Nine-Tailed Fox",
       "passive": {
         "name": "Essence Theft",
-        "description": "Gains a charge of Essence Theft whenever a spell hits an enemy. Upon reaching maximum charges, the next spell restores Ahri's Health."
+        "description": "After killing 9 minions or monsters, Ahri heals. After taking down an enemy champion, Ahri heals for a greater amount."
       },
       "spells": [
         {
@@ -53,19 +53,19 @@
           "slot": "W",
           "name": "Fox-Fire",
           "cooldown": "9/8/7/6/5",
-          "description": "Ahri releases three fox-fires, that lock onto and attack nearby enemies."
+          "description": "Ahri gains a brief burst of Move Speed and releases three fox-fires, that lock onto and attack nearby enemies."
         },
         {
           "slot": "E",
           "name": "Charm",
           "cooldown": "12",
-          "description": "Ahri blows a kiss that damages and Charms the first enemy hit. They also take more damage from her for several seconds."
+          "description": "Ahri blows a kiss that damages and charms an enemy it encounters, instantly stopping movement abilities and causing them to walk harmlessly towards her."
         },
         {
           "slot": "R",
           "name": "Spirit Rush",
-          "cooldown": "110/95/80",
-          "description": "Ahri dashes forward and fires essence bolts, damaging 3 nearby enemies (prioritizes Champions). Spirit Rush can be cast up to three times before going on cooldown."
+          "cooldown": "140/120/100",
+          "description": "Ahri dashes forward and fires essence bolts, damaging nearby enemies. Spirit Rush can be cast up to three times before going on cooldown, and gains additional recasts when taking…"
         }
       ]
     },
@@ -136,17 +136,17 @@
       ]
     },
     "Alistar": {
-      "title": "The Minotaur",
+      "title": "the Minotaur",
       "passive": {
-        "name": "Trample",
-        "description": "Each time Alistar casts a spell, he Tramples nearby units and turrets for a few seconds, dealing damage to units he walks over."
+        "name": "Triumphant Roar",
+        "description": "Alistar charges his roar by stunning or displacing enemy champions or when nearby enemies die. When fully charged he heals himself all nearby allied champions."
       },
       "spells": [
         {
           "slot": "Q",
           "name": "Pulverize",
-          "cooldown": "17/16/15/14/13",
-          "description": "Alistar smashes the ground, dealing damage to all nearby enemies and tossing them into the air. On landing, enemies are stunned."
+          "cooldown": "14/13/12/11/10",
+          "description": "Alistar smashes the ground, dealing damage to nearby enemies and tossing them into the air."
         },
         {
           "slot": "W",
@@ -156,15 +156,15 @@
         },
         {
           "slot": "E",
-          "name": "Triumphant Roar",
-          "cooldown": "12",
-          "description": "Alistar lets out a commanding war cry, restoring health to himself and nearby allies. Nearby enemy deaths reduce the cooldown."
+          "name": "Trample",
+          "cooldown": "12/11.5/11/10.5/10",
+          "description": "Alistar tramples nearby enemy units, ignoring unit collision and gaining stacks if he damages an enemy champion. At full stacks Alistar's next basic attack against an enemy champi…"
         },
         {
           "slot": "R",
           "name": "Unbreakable Will",
           "cooldown": "120/100/80",
-          "description": "Alistar lets out a wild roar, gaining bonus damage, removing all crowd-control effects on himself, and reducing incoming physical and magical damage for the duration."
+          "description": "Alistar lets out a wild roar, removing all crowd control effects on himself, and reducing incoming physical and magical damage for the duration."
         }
       ]
     },
@@ -202,100 +202,100 @@
       ]
     },
     "Amumu": {
-      "title": "The Sad Mummy",
+      "title": "the Sad Mummy",
       "passive": {
         "name": "Cursed Touch",
-        "description": "Amumu's attacks reduce his target's Magic Resist for 3 seconds."
+        "description": "Amumu's basic attacks Curse his enemies, causing them to take bonus true damage from incoming magic damage."
       },
       "spells": [
         {
           "slot": "Q",
           "name": "Bandage Toss",
-          "cooldown": "16/14/12/10/8",
+          "cooldown": "3",
           "description": "Amumu tosses a sticky bandage at a target, stunning and damaging the target while he pulls himself to them."
         },
         {
           "slot": "W",
           "name": "Despair",
           "cooldown": "1",
-          "description": "Overcome by anguish, nearby enemies lose a percentage of their maximum health each second."
+          "description": "Overcome by anguish, nearby enemies lose a percentage of their maximum Health each second and have their Curses refreshed."
         },
         {
           "slot": "E",
           "name": "Tantrum",
-          "cooldown": "10/9/8/7/6",
+          "cooldown": "9/8/7/6/5",
           "description": "Permanently reduces the physical damage Amumu would take. Amumu can unleash his rage, dealing damage to surrounding enemies. Each time Amumu is hit, the cooldown on Tantrum is red…"
         },
         {
           "slot": "R",
           "name": "Curse of the Sad Mummy",
-          "cooldown": "150/130/110",
+          "cooldown": "150/125/100",
           "description": "Amumu entangles surrounding enemy units in bandages, applying his Curse , damaging and stunning them."
         }
       ]
     },
     "Anivia": {
-      "title": "The Cryopheonix",
+      "title": "the Cryophoenix",
       "passive": {
         "name": "Rebirth",
-        "description": "Upon dying, Anivia will revert into an egg. If the egg can survive for six seconds, she is gloriously reborn."
+        "description": "Upon taking fatal damage, Anivia reverts to an egg and is reborn with full health."
       },
       "spells": [
         {
           "slot": "Q",
           "name": "Flash Frost",
-          "cooldown": "12/11/10/9/8",
+          "cooldown": "11/10/9/8/7",
           "description": "Anivia brings her wings together and summons a sphere of ice that flies towards her opponents, chilling and damaging anyone in its path. When the sphere explodes it does moderate…"
         },
         {
           "slot": "W",
           "name": "Crystallize",
-          "cooldown": "25",
+          "cooldown": "17",
           "description": "Anivia condenses the moisture in the air into an impassable wall of ice to block all movement. The wall only lasts a short duration before it melts."
         },
         {
           "slot": "E",
           "name": "Frostbite",
-          "cooldown": "5",
-          "description": "With a flap of her wings, Anivia blasts a freezing gust of wind at her target, dealing a medium amount of damage. If the target has been slowed by an ice effect, the damage they t…"
+          "cooldown": "4",
+          "description": "With a flap of her wings, Anivia blasts a freezing gust of wind at her target, dealing damage. If the target was recently hit by Flash Frost or damaged by a fully formed Glacial S…"
         },
         {
           "slot": "R",
           "name": "Glacial Storm",
-          "cooldown": "6",
+          "cooldown": "4/3/2",
           "description": "Anivia summons a driving rain of ice and hail to damage her enemies and slow their advance."
         }
       ]
     },
     "Annie": {
-      "title": "The Dark Child",
+      "title": "the Dark Child",
       "passive": {
         "name": "Pyromania",
-        "description": "After casting 4 spells, Annie's next offensive spell Stuns the target(s) for 1.75 seconds."
+        "description": "After casting 4 spells, Annie's next offensive spell will stun the target. Annie begins the game and respawns with Pyromania available."
       },
       "spells": [
         {
           "slot": "Q",
           "name": "Disintegrate",
           "cooldown": "4",
-          "description": "Annie hurls a mana-infused fireball, dealing damage and refunding the mana cost if it destroys the target."
+          "description": "Annie hurls a Mana infused fireball, dealing damage and refunding the Mana cost if it destroys the target."
         },
         {
           "slot": "W",
           "name": "Incinerate",
-          "cooldown": "8",
+          "cooldown": "7",
           "description": "Annie casts a blazing cone of fire, dealing damage to all enemies in the area."
         },
         {
           "slot": "E",
           "name": "Molten Shield",
           "cooldown": "10",
-          "description": "Increases Annie's Armor and Magic Resist and damages enemies who hit Annie with basic attacks."
+          "description": "Grants Annie or an ally a shield, a burst of Move Speed, and damages enemies who strike her with attacks or spells."
         },
         {
           "slot": "R",
           "name": "Summon: Tibbers",
-          "cooldown": "120",
+          "cooldown": "130/115/100",
           "description": "Annie wills her bear Tibbers to life, dealing damage to units in the area. Tibbers can attack and also burns enemies that stand near him."
         }
       ]
@@ -334,35 +334,35 @@
       ]
     },
     "Ashe": {
-      "title": "The Frost Archer",
+      "title": "the Frost Archer",
       "passive": {
-        "name": "Focus",
-        "description": "Ashe gains stacks of Focus while out-of-combat. When Ashe has 100 stacks of Focus , her next basic Attack will critically strike."
+        "name": "Frost Shot",
+        "description": "Ashe's attacks slow their target, causing her to deal increased damage to these targets. Ashe's critical strikes deal no bonus damage but apply an empowered slow to the target."
       },
       "spells": [
         {
           "slot": "Q",
-          "name": "Frost Shot",
-          "cooldown": "1",
-          "description": "While active, each of Ashe's basic attacks slow her targets. This drains Mana with each attack."
+          "name": "Ranger's Focus",
+          "cooldown": "0",
+          "description": "Ashe builds up Focus by attacking. At maximum Focus, Ashe can cast Ranger's Focus to consume all stacks of Focus, temporarily increasing her Attack Speed and transforming her basi…"
         },
         {
           "slot": "W",
           "name": "Volley",
-          "cooldown": "16/13/10/7/4",
-          "description": "Ashe fires 7 arrows in a cone for increased damage. Volley also applies Ashe's current level of Frost Shot."
+          "cooldown": "18/14.5/11/7.5/4",
+          "description": "Ashe fires arrows in a cone for increased damage. Also applies Frost Shot."
         },
         {
           "slot": "E",
           "name": "Hawkshot",
-          "cooldown": "60",
-          "description": "Each time Ashe kills a unit, she gains some extra gold. Ashe can activate to send her Hawk Spirit on a scouting mission."
+          "cooldown": "5",
+          "description": "Ashe sends her Hawk Spirit on a scouting mission anywhere on the map."
         },
         {
           "slot": "R",
           "name": "Enchanted Crystal Arrow",
-          "cooldown": "100/90/80",
-          "description": "Ashe fires a missile of ice in a straight line. If the arrow collides with an enemy Champion, it deals damage and stuns the Champion for up to 3.5 seconds, based on how far the ar…"
+          "cooldown": "100/80/60",
+          "description": "Ashe fires a missile of ice in a straight line. If the arrow collides with an enemy Champion, it deals damage and stuns the Champion, stunning for longer the farther arrow has tra…"
         }
       ]
     },
@@ -532,10 +532,10 @@
       ]
     },
     "Blitzcrank": {
-      "title": "The Great Steam Golem",
+      "title": "the Great Steam Golem",
       "passive": {
         "name": "Mana Barrier",
-        "description": "When Blitzcrank life is brought below 20% health they activate Mana Barrier. This creates a mana shield equal to 50% of their mana for 10 seconds. Mana Barrier can only occur once…"
+        "description": "Blitzcrank gains a shield based on their mana when dropping to low health."
       },
       "spells": [
         {
@@ -548,27 +548,27 @@
           "slot": "W",
           "name": "Overdrive",
           "cooldown": "15",
-          "description": "Blitzcrank supercharges themself to get dramatically increased movement and attack speed."
+          "description": "Blitzcrank super charges themself to get dramatically increased Move and Attack Speed. They are temporarily slowed after the effect ends."
         },
         {
           "slot": "E",
           "name": "Power Fist",
-          "cooldown": "9/8/7/6/5",
-          "description": "Blitzcrank charges up their fist to make their next attack deal double damage and pop their target up in the air."
+          "cooldown": "7/6.5/6/5.5/5",
+          "description": "Blitzcrank charges up their fist to make the next attack deal double damage and pop their target up in the air."
         },
         {
           "slot": "R",
           "name": "Static Field",
-          "cooldown": "30",
-          "description": "Passively causes lightning bolts to damage a nearby enemy. Additionally, Blitzcrank can activate this ability to damage nearby enemies and silence them for 0.5 seconds, but doing…"
+          "cooldown": "60/40/20",
+          "description": "Enemies attacked by Blitzcrank are marked and take lightning damage after 1 second. Additionally, Blitzcrank can activate this ability to remove nearby enemies' shields, damage th…"
         }
       ]
     },
     "Brand": {
-      "title": "The Burning Vengeance",
+      "title": "the Burning Vengeance",
       "passive": {
         "name": "Blaze",
-        "description": "Brand's spells light his targets ablaze, dealing 8% of their maximum Health in magic damage over 4 seconds."
+        "description": "Brand's spells light his targets ablaze, dealing damage over 4 seconds, stacking up to 3 times. If Brand kills an enemy while it is ablaze he regains mana. When Blaze reaches max…"
       },
       "spells": [
         {
@@ -580,20 +580,20 @@
         {
           "slot": "W",
           "name": "Pillar of Flame",
-          "cooldown": "10",
-          "description": "After a short delay, Brand creates a pillar of flame at a target area, dealing magic damage to enemy units with the area. Units that are ablaze take additional damage"
+          "cooldown": "10/9.5/9/8.5/8",
+          "description": "After a short delay, Brand creates a Pillar of Flame at a target area, dealing magic damage to enemy units within the area. Units that are ablaze take an additional 25% damage."
         },
         {
           "slot": "E",
           "name": "Conflagration",
-          "cooldown": "12/11/10/9/8",
-          "description": "Brand conjures a powerful blast at his target, dealing magic damage to them. If the target is ablaze, Conflagration spreads to nearby enemies."
+          "cooldown": "13/12/11/10/9",
+          "description": "Brand conjures a powerful blast at his target that spreads to nearby enemies, dealing magic damage. If the target is ablaze, Conflagration's spread is doubled."
         },
         {
           "slot": "R",
           "name": "Pyroclasm",
-          "cooldown": "105/90/75",
-          "description": "Brand unleashes a devastating torrent of fire, dealing magic damage each time it bounces. If a target is ablaze, Pyroclasm will priotize champions for the next bounce."
+          "cooldown": "100/90/80",
+          "description": "Brand unleashes a devastating torrent of fire that bounces up to 5 times off of Brand and nearby enemies, dealing magic damage to enemies each time bounce. Bounces prioritize stac…"
         }
       ]
     },
@@ -712,7 +712,7 @@
         {
           "slot": "W",
           "name": "Tactical Sweep",
-          "cooldown": "15/14/13/12/11",
+          "cooldown": "12/11.5/11/10.5/10",
           "description": "Camille blasts in a cone after a delay, dealing damage. Enemies in the outer half are slowed and take extra damage, while also healing Camille."
         },
         {
@@ -763,68 +763,68 @@
       ]
     },
     "Cho'Gath": {
-      "title": "The Terror of the Void",
+      "title": "the Terror of the Void",
       "passive": {
         "name": "Carnivore",
-        "description": "Whenever Cho'Gath kills a unit, he recovers health and mana. The values restored increase with Cho'Gath's level."
+        "description": "Whenever Cho'Gath kills a unit, he recovers Health and Mana. The values restored increase with Cho'Gath's level."
       },
       "spells": [
         {
           "slot": "Q",
           "name": "Rupture",
-          "cooldown": "9",
+          "cooldown": "6",
           "description": "Ruptures the ground at target location, popping enemy units into the air, dealing damage and slowing them."
         },
         {
           "slot": "W",
           "name": "Feral Scream",
-          "cooldown": "13",
+          "cooldown": "11/10.5/10/9.5/9",
           "description": "Cho'Gath unleashes a terrible scream at enemies in a cone, dealing magic damage and Silencing enemies for a few seconds."
         },
         {
           "slot": "E",
           "name": "Vorpal Spikes",
-          "cooldown": "0.5",
-          "description": "Cho'Gath's attacks passively release deadly spikes, dealing damage to all enemy units in front of him."
+          "cooldown": "8/7/6/5/4",
+          "description": "Cho'Gath's attacks release deadly spikes, dealing damage and slowing all enemy units in front of him."
         },
         {
           "slot": "R",
           "name": "Feast",
-          "cooldown": "60",
-          "description": "Devours an enemy unit, dealing a high amount of true damage. If the target is killed, Cho'Gath grows, gaining maximum health (maximum 6 stacks). Cho'Gath loses half of his stacks…"
+          "cooldown": "80/70/60",
+          "description": "Devours an enemy unit, dealing a high amount of true damage. If the target is killed, Cho'Gath grows, gaining maximum Health."
         }
       ]
     },
     "Corki": {
-      "title": "The Daring Bombardier",
+      "title": "the Daring Bombardier",
       "passive": {
-        "name": "Hextech Shrapnel Shells",
-        "description": "Corki's basic attacks deal bonus true damage to minions, monsters, and champions."
+        "name": "Hextech Munitions",
+        "description": "A percentage of Corki's basic attack damage is dealt as bonus true damage ."
       },
       "spells": [
         {
           "slot": "Q",
           "name": "Phosphorus Bomb",
-          "cooldown": "8",
-          "description": "Corki fires a flash bomb at a target location. This attack reveals non-stealthed units around the blast and champions for 6 seconds."
+          "cooldown": "9/8.5/8/7.5/7",
+          "description": "Corki fires a flash bomb at a target location, dealing magic damage to enemies in the area. This attack additionally reveals units in the area for a duration."
         },
         {
           "slot": "W",
           "name": "Valkyrie",
-          "cooldown": "26/23/20/17/14",
-          "description": "Corki surges to target location, dropping bombs that create a trail of destruction for opponents who remain in the fire."
+          "cooldown": "20/18/16/14/12",
+          "description": "Corki flies a short distance, dropping bombs that create a trail of fire that damages opponents who remain in it."
         },
         {
           "slot": "E",
           "name": "Gatling Gun",
-          "cooldown": "16",
-          "description": "Corki's gatling gun rapidly fires in a cone in front of him, dealing damage and reducing enemy armor."
+          "cooldown": "12",
+          "description": "Corki's gatling gun rapidly fires in a cone in front of him, dealing damage and reducing enemy Armor and Magic Resist."
         },
         {
           "slot": "R",
           "name": "Missile Barrage",
-          "cooldown": "1.2",
-          "description": "Corki fires a missile toward his target location that explodes on impact, dealing damage to enemies in an area. Corki stores one missile every 12 seconds up to 7 missiles total. E…"
+          "cooldown": "2",
+          "description": "Corki fires a missile toward his target location that explodes on impact, dealing damage to enemies in an area. Corki stores missiles over time, up to a maximum. Every 3rd missile…"
         }
       ]
     },
@@ -928,35 +928,35 @@
       ]
     },
     "Dr. Mundo": {
-      "title": "The Madman of Zaun",
+      "title": "the Madman of Zaun",
       "passive": {
-        "name": "Adrenaline Rush",
-        "description": "Dr. Mundo regenerates 0.3% of his maximum Health each second."
+        "name": "Goes Where He Pleases",
+        "description": "Dr. Mundo resists the first Immobilizing effect that hits him, instead losing Health and dropping a chemical cannister nearby. Dr. Mundo can pick it up by walking over it, restori…"
       },
       "spells": [
         {
           "slot": "Q",
-          "name": "Infected Cleaver",
+          "name": "Infected Bonesaw",
           "cooldown": "4",
-          "description": "Dr. Mundo hurls his cleaver, dealing damage based on his victims maximum health."
+          "description": "Dr. Mundo throws an infected bonesaw, dealing damage to the first enemy hit based on their current health and slowing them."
         },
         {
           "slot": "W",
-          "name": "Burning Agony",
-          "cooldown": "1",
-          "description": "Dr. Mundo drains his health to reduce the duration of disables and deal continual damage to nearby enemies."
+          "name": "Heart Zapper",
+          "cooldown": "17/16.5/16/15.5/15",
+          "description": "Dr. Mundo electrocutes himself, dealing persistent damage to nearby enemies and storing a portion of damage he takes. At the end of the duration or on Recast, Dr. Mundo deals a bu…"
         },
         {
           "slot": "E",
-          "name": "Masochism",
-          "cooldown": "7",
-          "description": "Masochism increases Dr. Mundo's Attack Damage by a flat amount for 5 second. In addition, Dr. Mundo also gains an additional amount of Attack Damage for each percentage of Health…"
+          "name": "Blunt Force Trauma",
+          "cooldown": "9/8.25/7.5/6.75/6",
+          "description": "Passive - Dr. Mundo gains bonus Attack Damage, increasing based on his max Health. Active - Dr. Mundo slams his “medical” bag into an enemy, dealing additional damage based on his…"
         },
         {
           "slot": "R",
-          "name": "Sadism",
-          "cooldown": "75",
-          "description": "Dr. Mundo sacrifices a portion of his Health for increased Movement Speed and drastically increased Health Regeneration."
+          "name": "Maximum Dosage",
+          "cooldown": "120",
+          "description": "Dr. Mundo pumps himself with chemicals, instantly healing a percent of his missing Health. He then gains Move Speed and regenerates a portion of his maximum Health over a long dur…"
         }
       ]
     },
@@ -1027,40 +1027,40 @@
       ]
     },
     "Evelynn": {
-      "title": "The Widowmaker",
+      "title": "Agony's Embrace",
       "passive": {
-        "name": "Shadow Walk",
-        "description": "When out of combat, Evelynn enters Camoflauge only being able to be seen by nearby enemy champions or true sight. While stealthed, she rapidly regenerates Mana."
+        "name": "Demon Shade",
+        "description": "When out of combat, Evelynn enters Demon Shade. Demon Shade heals Evelynn when she is low on health and grants Camouflage after level 6."
       },
       "spells": [
         {
           "slot": "Q",
           "name": "Hate Spike",
-          "cooldown": "1.5",
-          "description": "Evelynn fires a line of spikes through an enemy, dealing damage to all enemies in its path."
+          "cooldown": "4",
+          "description": "Evelynn strikes out with her Lasher, dealing damage to the first unit hit. Then, Evelynn can shoot a line of spikes at nearby foes a few times."
         },
         {
           "slot": "W",
-          "name": "Dark Frenzy",
-          "cooldown": "15",
-          "description": "Evelynn passively increases her Movement Speed when hitting enemy champions with her spells. Upon activation, Evelynn breaks free from slows affecting her and gains a massive Move…"
+          "name": "Allure",
+          "cooldown": "15/14/13/12/11",
+          "description": "Evelynn curses her target, causing her next attack or spell after a delay to charm her target and reduce their magic resist."
         },
         {
           "slot": "E",
-          "name": "Ravage",
-          "cooldown": "9",
-          "description": "Evelynn slashes her target twice, dealing damage with each hit. She then gains increased Attack Speed for a short duration."
+          "name": "Whiplash",
+          "cooldown": "8",
+          "description": "Evelynn whips her target with her Lasher, dealing damage. She then gains Move Speed for a short duration."
         },
         {
           "slot": "R",
-          "name": "Agony's Embrace",
-          "cooldown": "150/120/90",
-          "description": "Evelynn summons spikes from the ground to deal damage and slow enemies in the area. She then gains a shield based on how many enemy champions were hit."
+          "name": "Last Caress",
+          "cooldown": "120/100/80",
+          "description": "Evelynn briefly goes untargetable and decimates the area in front of her before warping backwards a long distance."
         }
       ]
     },
     "Ezreal": {
-      "title": "The Prodigal Explorer",
+      "title": "the Prodigal Explorer",
       "passive": {
         "name": "Rising Spell Force",
         "description": "Ezreal gains increasing Attack Speed each time he successfully hits a spell, stacking up to 5 times."
@@ -1069,59 +1069,59 @@
         {
           "slot": "Q",
           "name": "Mystic Shot",
-          "cooldown": "6/5.5/5/4.5/4",
+          "cooldown": "5.5/5.25/5/4.75/4.5",
           "description": "Ezreal fires a damaging bolt of energy which reduces all of his cooldowns slightly if it strikes an enemy unit."
         },
         {
           "slot": "W",
           "name": "Essence Flux",
-          "cooldown": "10",
-          "description": "Ezreal fires a fluctuating wave of energy, decreasing the Attack Speed and dealing magic damage to enemy champions, while healing and increasing the Attack Speed of allied champio…"
+          "cooldown": "8",
+          "description": "Ezreal fires an orb that sticks to the first champion or objective hit. If Ezreal hits an enemy with the orb, it detonates and deals damage."
         },
         {
           "slot": "E",
           "name": "Arcane Shift",
-          "cooldown": "17/15/13/11/9",
-          "description": "Ezreal teleports to a target nearby location and fires a homing bolt which strikes the nearest enemy unit."
+          "cooldown": "26/23/20/17/14",
+          "description": "Ezreal teleports to a target nearby location and fires a homing bolt which strikes the nearest enemy unit. Prioritizes enemies stuck with Essence Flux."
         },
         {
           "slot": "R",
           "name": "Trueshot Barrage",
-          "cooldown": "100",
-          "description": "Ezreal channels for 1 second to fire a powerful barrage of energy missiles which do massive damage to each unit they pass through (deals 10% less damage to each unit it passes thr…"
+          "cooldown": "120/105/90",
+          "description": "Ezreal winds up before firing a powerful barrage of energy that deals massive damage to each unit it passes through (damage is reduced for minions and non-epic monsters)."
         }
       ]
     },
     "Fiddlesticks": {
-      "title": "The Harbinger of Doom",
+      "title": "the Ancient Fear",
       "passive": {
-        "name": "Dread",
-        "description": "Nearby enemies have reduced Magic Resist."
+        "name": "A Harmless Scarecrow",
+        "description": "Fiddlesticks' trinket is replaced by scarecrow effigies."
       },
       "spells": [
         {
           "slot": "Q",
           "name": "Terrify",
-          "cooldown": "15/14/13/12/11",
-          "description": "Strikes a target unit with fear, causing it to flee in terror for a duration."
+          "cooldown": "15/14.5/14/13.5/13",
+          "description": "Fiddlesticks damaging enemies with spells while unseen or targeting an enemy with Terrify's activation strikes a target unit with fear, causing it to flee in terror for a duration."
         },
         {
           "slot": "W",
-          "name": "Drain",
-          "cooldown": "10/9/8/7/6",
-          "description": "Fiddlesticks saps the life force of an enemy, dealing damage to a target over time and healing himself."
+          "name": "Bountiful Harvest",
+          "cooldown": "10/9.5/9/8.5/8",
+          "description": "Fiddlesticks drains health from nearby enemies, dealing bonus execute damage at the end of the duration."
         },
         {
           "slot": "E",
-          "name": "Dark Wind",
-          "cooldown": "15/14/13/12/11",
-          "description": "A wisp of wind strikes an enemy unit and then bounces to nearby enemy units, dealing damage and silencing the victims."
+          "name": "Reap",
+          "cooldown": "10/9/8/7/6",
+          "description": "Fiddlesticks slashes an area with its scythe, slowing all enemies hit and silencing enemies hit in the center of the slash."
         },
         {
           "slot": "R",
           "name": "Crowstorm",
-          "cooldown": "150/140/130",
-          "description": "A murder of crows flock wildly around Fiddlesticks, dealing damage each second to all enemy units in the area."
+          "cooldown": "140/110/80",
+          "description": "A murder of crows flock wildly around Fiddlesticks, dealing damage per second to all enemy units in the area."
         }
       ]
     },
@@ -1225,40 +1225,40 @@
       ]
     },
     "Gangplank": {
-      "title": "The Saltwater Scourge",
+      "title": "the Saltwater Scourge",
       "passive": {
-        "name": "Grog-Soaked Blade",
-        "description": "Gangplank's attacks apply a poison that deals magic damage per second, increasing with level."
+        "name": "Trial by Fire",
+        "description": "Every few seconds, Gangplank's melee strike will set his opponent on fire."
       },
       "spells": [
         {
           "slot": "Q",
           "name": "Parrrley",
-          "cooldown": "5",
-          "description": "Gangplank takes aim and shoots an enemy unit with his pistol. If Parrrley deals a killing blow, he gains extra gold and half the mana cost is refunded."
+          "cooldown": "4.5",
+          "description": "Shoots target, plundering Gold for each enemy unit killed."
         },
         {
           "slot": "W",
           "name": "Remove Scurvy",
-          "cooldown": "22/21/20/19/18",
-          "description": "Consumes a large quantity of citrus fruit which clears any crowd control effects on him and heals him."
+          "cooldown": "22/20/18/16/14",
+          "description": "Eats citrus to cure crowd control effects and restore Health."
         },
         {
           "slot": "E",
-          "name": "Raise Morale",
-          "cooldown": "20",
-          "description": "Gangplank fires a shot into the air, increasing nearby allied champions' attack damage and movement speed."
+          "name": "Powder Keg",
+          "cooldown": "0",
+          "description": "Gangplank uncovers a powder keg at target location. If he attacks it, it explodes, spreading the attack's damage to enemies in the area, slowing them."
         },
         {
           "slot": "R",
           "name": "Cannon Barrage",
-          "cooldown": "120/115/110",
-          "description": "Gangplank signals his ship to fire upon an area for 7 seconds, slowing enemies and dealing damage in random locations within the area."
+          "cooldown": "160/140/120",
+          "description": "Gangplank signals his ship to bombard an area, slowing and damaging enemies."
         }
       ]
     },
     "Garen": {
-      "title": "The Might of Deamcia",
+      "title": "The Might of Demacia",
       "passive": {
         "name": "Perseverance",
         "description": "If Garen has not recently been struck by damage or enemy abilities, he regenerates a percentage of his total health each second."
@@ -1273,19 +1273,19 @@
         {
           "slot": "W",
           "name": "Courage",
-          "cooldown": "24/23/22/21/20",
-          "description": "Garen performs a dance of death with his sword, dealing damage around him for the duration."
+          "cooldown": "22/19.5/17/14.5/12",
+          "description": "Garen passively increases his Armor and Magic Resist by killing enemies. He may also activate this ability to give him a shield and tenacity for a brief moment followed by a lesse…"
         },
         {
           "slot": "E",
           "name": "Judgment",
-          "cooldown": "13/12/11/10/9",
+          "cooldown": "9/8.25/7.5/6.75/6",
           "description": "Garen rapidly spins his sword around his body, dealing physical damage to nearby enemies."
         },
         {
           "slot": "R",
           "name": "Demacian Justice",
-          "cooldown": "160/120/80",
+          "cooldown": "120/100/80",
           "description": "Garen calls upon the might of Demacia to attempt to execute an enemy champion."
         }
       ]
@@ -1324,35 +1324,35 @@
       ]
     },
     "Gragas": {
-      "title": "The Rabble Rouser",
+      "title": "the Rabble Rouser",
       "passive": {
         "name": "Happy Hour",
-        "description": "On ability use, Gragas takes a drink, restoring some of his Health."
+        "description": "Gragas periodically heals upon using a skill."
       },
       "spells": [
         {
           "slot": "Q",
           "name": "Barrel Roll",
-          "cooldown": "11.5/10.5/9.5/8.5/7.5",
-          "description": "Gragas rolls a barrel that explodes after a short delay, damaging and slowing Attack Speed. Recast to detonate the barrel early."
+          "cooldown": "10/9/8/7/6",
+          "description": "Gragas rolls his cask to a location, which can be activated to explode or will explode on its own after 4 seconds. The potency of the explosion increases over time. Enemies struck…"
         },
         {
           "slot": "W",
           "name": "Drunken Rage",
-          "cooldown": "25",
-          "description": "Gragas guzzles down brew from his cask, restoring Mana. He then gains Attack Damage and reduces damage taken for several seconds."
+          "cooldown": "5",
+          "description": "Gragas samples his latest brew for 1 second. After finishing, he becomes boisterous and belligerent, dealing magic damage to all nearby enemies on his next basic attack and reduci…"
         },
         {
           "slot": "E",
           "name": "Body Slam",
-          "cooldown": "7",
-          "description": "Gragas charges forward, colliding with the first enemy, damaging nearby enemies and Slowing them."
+          "cooldown": "14/13.5/13/12.5/12",
+          "description": "Gragas charges to a location and collides with the first enemy unit he comes across, dealing damage to all nearby enemy units and stunning them."
         },
         {
           "slot": "R",
           "name": "Explosive Cask",
-          "cooldown": "100/90/80",
-          "description": "Gragas hurls his cask, damaging and Knocking Away enemies from the impact."
+          "cooldown": "100/85/70",
+          "description": "Gragas hurls his cask to a location, dealing damage and knocking back enemies caught in the blast radius."
         }
       ]
     },
@@ -1456,35 +1456,35 @@
       ]
     },
     "Heimerdinger": {
-      "title": "The Revered Inventor",
+      "title": "the Revered Inventor",
       "passive": {
-        "name": "Techmaturgical Repair Bots",
-        "description": "Heimerdinger gives nearby allied Turrets and Champions increased Health Regeneration."
+        "name": "Hextech Affinity",
+        "description": "Gain Move Speed while near allied towers and turrets deployed by Heimerdinger."
       },
       "spells": [
         {
           "slot": "Q",
-          "name": "H-28G Evolution Turret",
+          "name": "H-28 G Evolution Turret",
           "cooldown": "1",
-          "description": "Heimerdinger lays down a machine gun turret. Turrets gain abilities as this skill is increased. (Turrets deal half damage to towers)."
+          "description": "Heimerdinger lays down a rapid-fire cannon turret equipped with a secondary pass-through beam attack (turrets deal half damage to towers)."
         },
         {
           "slot": "W",
           "name": "Hextech Micro-Rockets",
-          "cooldown": "10",
-          "description": "Heimerdinger fires long-range rockets that hit the enemies closest to Heimerdinger."
+          "cooldown": "11/10/9/8/7",
+          "description": "Heimerdinger fires long-range rockets that converge on his cursor."
         },
         {
           "slot": "E",
-          "name": "CH-1 Concussion Grenade",
-          "cooldown": "13/12/11/10/9",
-          "description": "Heimerdinger lobs a grenade at a location, dealing damage to enemy units as well as stunning anyone directly hit and blinding surrounding units."
+          "name": "CH-2 Electron Storm Grenade",
+          "cooldown": "11",
+          "description": "Heimerdinger lobs a grenade at a location, dealing damage to enemy units, as well as stunning anyone directly hit and slowing surrounding units."
         },
         {
           "slot": "R",
           "name": "UPGRADE!!!",
-          "cooldown": "120/105/90",
-          "description": "Passive / Active: Passively increases Cooldown Reduction. Activate to heal all active Evolution Turrets and cause them to fire frost shots, which reduce Movement Speed, for a shor…"
+          "cooldown": "100/85/70",
+          "description": "Heimerdinger invents an upgrade, causing his next spell to have increased effects."
         }
       ]
     },
@@ -1719,1293 +1719,6 @@
         }
       ]
     },
-    "Karthus": {
-      "title": "the Deathsinger",
-      "passive": {
-        "name": "Death Defied",
-        "description": "Upon dying, Karthus enters a spirit form that allows him to continue casting spells."
-      },
-      "spells": [
-        {
-          "slot": "Q",
-          "name": "Lay Waste",
-          "cooldown": "0",
-          "description": "Karthus unleashes a delayed blast at a location, dealing damage to nearby enemies. Deals increased damage to isolated enemies."
-        },
-        {
-          "slot": "W",
-          "name": "Wall of Pain",
-          "cooldown": "15",
-          "description": "Karthus creates a passable screen of leeching energy. Any enemy units that walk through the screen have their Move Speed and Magic Resist reduced for a period."
-        },
-        {
-          "slot": "E",
-          "name": "Defile",
-          "cooldown": "0.5",
-          "description": "Karthus passively steals energy from his victims, gaining Mana on each kill. Alternatively, Karthus can surround himself in the souls of his prey, dealing damage to nearby enemies…"
-        },
-        {
-          "slot": "R",
-          "name": "Requiem",
-          "cooldown": "200/180/160",
-          "description": "After channeling for 3 seconds, Karthus deals damage to all enemy champions."
-        }
-      ]
-    },
-    "Kassadin": {
-      "title": "the Void Walker",
-      "passive": {
-        "name": "Void Stone",
-        "description": "Kassadin takes reduced magic damage and ignores unit collision."
-      },
-      "spells": [
-        {
-          "slot": "Q",
-          "name": "Null Sphere",
-          "cooldown": "9/8.5/8/7.5/7",
-          "description": "Kassadin fires an orb of void energy at a target, dealing damage and interrupting channels. The excess energy forms around himself, granting a temporary shield that absorbs magic…"
-        },
-        {
-          "slot": "W",
-          "name": "Nether Blade",
-          "cooldown": "7",
-          "description": "Passive: Kassadin's basic attacks deal bonus magic damage. Active: Kassadin's next basic attack deals significant bonus magic damage and restores Mana."
-        },
-        {
-          "slot": "E",
-          "name": "Force Pulse",
-          "cooldown": "21/20/19/18/17",
-          "description": "Kassadin draws energy from spells cast in his vicinity. Upon charging up, Kassadin can use Force Pulse to damage and slow enemies in a cone in front of him."
-        },
-        {
-          "slot": "R",
-          "name": "Riftwalk",
-          "cooldown": "5/3.5/2",
-          "description": "Kassadin teleports to a nearby location dealing damage to nearby enemy units. Multiple Riftwalks in a short period of time cost additional Mana but also deal additional damage."
-        }
-      ]
-    },
-    "Katarina": {
-      "title": "the Sinister Blade",
-      "passive": {
-        "name": "Voracity",
-        "description": "Whenever an enemy champion dies that Katarina has damaged recently, her remaining ability cooldowns are dramatically reduced. If Katarina picks up a Dagger , she uses it to slash…"
-      },
-      "spells": [
-        {
-          "slot": "Q",
-          "name": "Bouncing Blade",
-          "cooldown": "11/10/9/8/7",
-          "description": "Katarina throws a Dagger at the target that then bounces to nearby enemies before ricocheting onto the ground."
-        },
-        {
-          "slot": "W",
-          "name": "Preparation",
-          "cooldown": "15/14/13/12/11",
-          "description": "Katarina gains a burst of Move Speed, tossing a Dagger into the air directly above herself."
-        },
-        {
-          "slot": "E",
-          "name": "Shunpo",
-          "cooldown": "12/11/10/9/8",
-          "description": "Katarina blinks to the target, striking it if its an enemy, or striking the nearest enemy otherwise."
-        },
-        {
-          "slot": "R",
-          "name": "Death Lotus",
-          "cooldown": "75/60/45",
-          "description": "Katarina becomes a flurry of blades, dealing massive magic damage while she channels to the 3 nearest enemy champions."
-        }
-      ]
-    },
-    "Kayle": {
-      "title": "the Righteous",
-      "passive": {
-        "name": "Divine Ascent",
-        "description": "Kayle's attacks are empowered by the heavens as she levels up and spends skill points. Her wings are lit aflame as she progressively gains Attack Speed, Move Speed, Attack Range,…"
-      },
-      "spells": [
-        {
-          "slot": "Q",
-          "name": "Radiant Blast",
-          "cooldown": "12/11/10/9/8",
-          "description": "Kayle conjures a portal, summoning a celestial sword that pierces through enemies, slowing, damaging, and reducing the resistances of all hit."
-        },
-        {
-          "slot": "W",
-          "name": "Celestial Blessing",
-          "cooldown": "15",
-          "description": "Blessed by the divine, Kayle heals and grants Move Speed to herself and the nearest ally."
-        },
-        {
-          "slot": "E",
-          "name": "Starfire Spellblade",
-          "cooldown": "8/7.5/7/6.5/6",
-          "description": "Passive: Kayle's celestial sword, Virtue, deals bonus magic damage to enemies she attacks. Active: Kayle's next attack smites her target with celestial fire, dealing bonus damage…"
-        },
-        {
-          "slot": "R",
-          "name": "Divine Judgment",
-          "cooldown": "160/120/80",
-          "description": "Kayle makes an ally invulnerable and calls upon former Aspects of Justice to purify the area around her target with a holy rain of swords."
-        }
-      ]
-    },
-    "Kog'Maw": {
-      "title": "the Mouth of the Abyss",
-      "passive": {
-        "name": "Icathian Surprise",
-        "description": "4 seconds after dying, Kogmaw explodes, dealing true damage to surrounding enemies."
-      },
-      "spells": [
-        {
-          "slot": "Q",
-          "name": "Caustic Spittle",
-          "cooldown": "7",
-          "description": "Kog'Maw launches a corrosive projectile which deals magic damage and corrodes the target's armor and magic resist for a short time. Kog'Maw also gains additional attack speed."
-        },
-        {
-          "slot": "W",
-          "name": "Bio-Arcane Barrage",
-          "cooldown": "17",
-          "description": "Kog'Maw's attacks gain range and deal a percent of the target's maximum health as magic damage %i:OnHit% On-Hit ."
-        },
-        {
-          "slot": "E",
-          "name": "Void Ooze",
-          "cooldown": "12",
-          "description": "Kog'Maw launches a peculiar ooze which damages all enemies it passes through and leaves a trail which slows enemies who stand on it."
-        },
-        {
-          "slot": "R",
-          "name": "Living Artillery",
-          "cooldown": "2/1.5/1",
-          "description": "Kog'Maw fires an artillery shell at a great distance dealing magic damage (increased significantly on low health enemies) and revealing non-stealthed targets. Additionally, multip…"
-        }
-      ]
-    },
-    "Lee Sin": {
-      "title": "the Blind Monk",
-      "passive": {
-        "name": "Flurry",
-        "description": "After Lee Sin uses an ability, his next 2 basic attacks gain Attack Speed and return Energy."
-      },
-      "spells": [
-        {
-          "slot": "Q",
-          "name": "Sonic Wave / Resonating Strike",
-          "cooldown": "10/9/8/7/6",
-          "description": "Sonic Wave: Lee Sin projects a discordant wave of sound to locate his enemies, dealing physical damage to the first enemy it encounters. If Sonic Wave hits, Lee Sin can cast Reson…"
-        },
-        {
-          "slot": "W",
-          "name": "Safeguard / Iron Will",
-          "cooldown": "7",
-          "description": "Safeguard: Lee Sin rushes to target ally, shielding himself from damage. If the ally is a champion, they are also shielded. After using Safeguard, Lee Sin can cast Iron Will. Iron…"
-        },
-        {
-          "slot": "E",
-          "name": "Tempest / Cripple",
-          "cooldown": "8",
-          "description": "Tempest: Lee Sin smashes the ground, sending out a shockwave that deals magic damage and reveals enemy units hit. If Tempest hits an enemy, Lee Sin can cast cripple. Cripple: Lee…"
-        },
-        {
-          "slot": "R",
-          "name": "Dragon's Rage",
-          "cooldown": "110/85/60",
-          "description": "Lee Sin performs a powerful roundhouse kick launching his target back, dealing physical damage to the target and any enemies they collide with. Enemies the target collides with ar…"
-        }
-      ]
-    },
-    "Leona": {
-      "title": "the Radiant Dawn",
-      "passive": {
-        "name": "Sunlight",
-        "description": "Damaging spells afflict enemies with Sunlight for 1.5 seconds. When allied Champions deal damage to those targets, they consume the Sunlight to deal additional magic damage."
-      },
-      "spells": [
-        {
-          "slot": "Q",
-          "name": "Shield of Daybreak",
-          "cooldown": "5",
-          "description": "Leona uses her shield to perform her next basic attack, dealing bonus magic damage and stunning the target."
-        },
-        {
-          "slot": "W",
-          "name": "Eclipse",
-          "cooldown": "14/13/12/11/10",
-          "description": "Leona raises her shield to gain Damage Reduction, Armor, and Magic Resist. When the duration first ends, if there are nearby enemies, she will deal magic damage to them and prolon…"
-        },
-        {
-          "slot": "E",
-          "name": "Zenith Blade",
-          "cooldown": "12/10.5/9/7.5/6",
-          "description": "Leona projects a solar image of her sword, dealing magic damage to all enemies in a line. When the image fades, the last enemy champion struck will be briefly immobilized and Leon…"
-        },
-        {
-          "slot": "R",
-          "name": "Solar Flare",
-          "cooldown": "90/75/60",
-          "description": "Leona calls down a beam of solar energy, dealing damage to enemies in an area. Enemies in the center of the area are stunned, while enemies on the outside are slowed."
-        }
-      ]
-    },
-    "Lulu": {
-      "title": "the Fae Sorceress",
-      "passive": {
-        "name": "Pix, Faerie Companion",
-        "description": "Pix fires magical bolts of energy whenever the champion he's following attacks another enemy unit. These bolts are homing, but can be intercepted by other units."
-      },
-      "spells": [
-        {
-          "slot": "Q",
-          "name": "Glitterlance",
-          "cooldown": "7",
-          "description": "Pix and Lulu each fire a bolt of magical energy that damages and heavily slows all enemies it hits."
-        },
-        {
-          "slot": "W",
-          "name": "Whimsy",
-          "cooldown": "18",
-          "description": "If cast on an ally, grants them Attack Speed and Move Speed for a short time. If cast on an enemy, turns them into an adorable critter that can't attack or cast spells."
-        },
-        {
-          "slot": "E",
-          "name": "Help, Pix!",
-          "cooldown": "10/9.5/9/8.5/8",
-          "description": "If cast on an ally, commands Pix to jump to an ally and shield them. He then follows them and aids their attacks. If cast on an enemy, commands Pix to jump to an enemy and damage…"
-        },
-        {
-          "slot": "R",
-          "name": "Wild Growth",
-          "cooldown": "120/100/80",
-          "description": "Lulu enlarges an ally, knocking nearby enemies into the air and granting the ally a large amount of bonus health. For the next few seconds, that ally gains an aura that slows near…"
-        }
-      ]
-    },
-    "Lux": {
-      "title": "the Lady of Luminosity",
-      "passive": {
-        "name": "Illumination",
-        "description": "Lux's damaging spells charge the target with energy for a few seconds. Lux's next attack ignites the energy, dealing bonus magic damage (depending on Lux's level) to the target."
-      },
-      "spells": [
-        {
-          "slot": "Q",
-          "name": "Light Binding",
-          "cooldown": "10",
-          "description": "Lux releases a sphere of light that binds and deals damage to up to two enemy units."
-        },
-        {
-          "slot": "W",
-          "name": "Prismatic Barrier",
-          "cooldown": "12/11.5/11/10.5/10",
-          "description": "Lux throws her wand and bends the light around any friendly target it touches, protecting them from enemy damage."
-        },
-        {
-          "slot": "E",
-          "name": "Lucent Singularity",
-          "cooldown": "10/9.5/9/8.5/8",
-          "description": "Fires an anomaly of twisted light to an area, which slows nearby enemies. Lux can detonate it to damage enemies in the area of effect."
-        },
-        {
-          "slot": "R",
-          "name": "Final Spark",
-          "cooldown": "60/50/40",
-          "description": "After gathering energy, Lux fires a beam of light that deals damage to all targets in the area. In addition, triggers Lux's passive ability and refreshes the Illumination debuff d…"
-        }
-      ]
-    },
-    "Malphite": {
-      "title": "Shard of the Monolith",
-      "passive": {
-        "name": "Granite Shield",
-        "description": "Malphite is shielded by a layer of rock which absorbs damage up to 10% of his maximum Health. If Malphite has not been hit for a few seconds, this effect recharges."
-      },
-      "spells": [
-        {
-          "slot": "Q",
-          "name": "Seismic Shard",
-          "cooldown": "8",
-          "description": "Malphite sends a shard of the earth through the ground at his foe, dealing damage upon impact and stealing Move Speed for 3 seconds."
-        },
-        {
-          "slot": "W",
-          "name": "Thunderclap",
-          "cooldown": "10/9.5/9/8.5/8",
-          "description": "Malphite attacks with such force that it creates a sonic boom. For the next few seconds, his attacks create aftershocks in front of him."
-        },
-        {
-          "slot": "E",
-          "name": "Ground Slam",
-          "cooldown": "7",
-          "description": "Malphite slams the ground, sending out a shockwave that deals magic damage based on his Armor and reduces the Attack Speed of enemies for a short duration."
-        },
-        {
-          "slot": "R",
-          "name": "Unstoppable Force",
-          "cooldown": "130/115/100",
-          "description": "Malphite launches himself to a location at high speed, damaging enemies and knocking them into the air."
-        }
-      ]
-    },
-    "Malzahar": {
-      "title": "the Prophet of the Void",
-      "passive": {
-        "name": "Void Shift",
-        "description": "When he hasn't recently taken damage or been crowd controlled, Malzahar gains massive damage reduction and crowd control immunity, lingering for a short period after taking damage."
-      },
-      "spells": [
-        {
-          "slot": "Q",
-          "name": "Call of the Void",
-          "cooldown": "6",
-          "description": "Malzahar opens up two portals to the Void. After a short delay, they fire projectiles that deal Magic Damage and silence enemy champions."
-        },
-        {
-          "slot": "W",
-          "name": "Void Swarm",
-          "cooldown": "8",
-          "description": "Malzahar summons Voidlings to attack nearby enemies."
-        },
-        {
-          "slot": "E",
-          "name": "Malefic Visions",
-          "cooldown": "11/10/9/8/7",
-          "description": "Malzahar infects his target's mind with cruel visions of their demise, dealing damage over time. Using Malzahar's other spells on the target will refresh the visions. If the targe…"
-        },
-        {
-          "slot": "R",
-          "name": "Nether Grasp",
-          "cooldown": "140/110/80",
-          "description": "Malzahar channels the essence of the Void to suppress an enemy champion over a zone of damaging negative energy."
-        }
-      ]
-    },
-    "Master Yi": {
-      "title": "the Wuju Bladesman",
-      "passive": {
-        "name": "Double Strike",
-        "description": "Every few consecutive basic attack, Master Yi strikes twice."
-      },
-      "spells": [
-        {
-          "slot": "Q",
-          "name": "Alpha Strike",
-          "cooldown": "20/19.5/19/18.5/18",
-          "description": "Master Yi teleports across the battlefield with blinding speed, dealing physical damage to multiple units in his path, while simultaneously becoming untargetable. Alpha Strike can…"
-        },
-        {
-          "slot": "W",
-          "name": "Meditate",
-          "cooldown": "10",
-          "description": "Master Yi rejuvenates his body by focus of mind, restoring Health and taking reduced damage for a short time. In addition, Master Yi will gain stacks of Double Strike and pause th…"
-        },
-        {
-          "slot": "E",
-          "name": "Wuju Style",
-          "cooldown": "14",
-          "description": "Grants bonus true damage on basic attacks."
-        },
-        {
-          "slot": "R",
-          "name": "Highlander",
-          "cooldown": "85",
-          "description": "Master Yi moves with unparalleled agility, temporarily increasing his Move Speed and Attack Speed as well as making him immune to all slowing effects. While active, Champion kills…"
-        }
-      ]
-    },
-    "Miss Fortune": {
-      "title": "the Bounty Hunter",
-      "passive": {
-        "name": "Love Tap",
-        "description": "Miss Fortune deals bonus physical damage whenever she basic attacks a new target."
-      },
-      "spells": [
-        {
-          "slot": "Q",
-          "name": "Double Up",
-          "cooldown": "7/6/5/4/3",
-          "description": "Miss Fortune fires a bullet at an enemy, damaging them and a target behind them. Both strikes can also apply Love Tap."
-        },
-        {
-          "slot": "W",
-          "name": "Strut",
-          "cooldown": "12",
-          "description": "Miss Fortune passively gains Move Speed when not attacked. This ability can be activated to grant bonus Attack Speed for a short duration. While it's on cooldown, Love Taps reduce…"
-        },
-        {
-          "slot": "E",
-          "name": "Make It Rain",
-          "cooldown": "18/17/16/15/14",
-          "description": "Miss Fortune reveals an area with a flurry of bullets, dealing waves of damage to opponents and slowing them."
-        },
-        {
-          "slot": "R",
-          "name": "Bullet Time",
-          "cooldown": "120/110/100",
-          "description": "Miss Fortune channels a barrage of bullets into a cone in front of her, dealing large amounts of damage to enemies. Each wave of Bullet Time can critically strike"
-        }
-      ]
-    },
-    "Morgana": {
-      "title": "the Fallen",
-      "passive": {
-        "name": "Soul Siphon",
-        "description": "Morgana drains spirit from her enemies, healing as she deals damage to champions, large minions, and medium and larger jungler monsters."
-      },
-      "spells": [
-        {
-          "slot": "Q",
-          "name": "Dark Binding",
-          "cooldown": "10",
-          "description": "Morgana binds an enemy in place with dark magic, forcing them to feel the pain they've caused and dealing magic damage."
-        },
-        {
-          "slot": "W",
-          "name": "Tormented Shadow",
-          "cooldown": "12",
-          "description": "Morgana casts a cursed shadow on an area, damaging enemies who dare stand in her dark circle. They receive magic damage over time, which increases the lower health they are."
-        },
-        {
-          "slot": "E",
-          "name": "Black Shield",
-          "cooldown": "26/23.5/21/18.5/16",
-          "description": "Morgana anoints an ally with a protective barrier of starfire, which absorbs magical damage and disabling effects until it is broken."
-        },
-        {
-          "slot": "R",
-          "name": "Soul Shackles",
-          "cooldown": "120/110/100",
-          "description": "Morgana unleashes the full force of her Celestial power as she unbinds her wings and hovers above the ground. She lashes chains of dark pain onto nearby enemy champions, gaining M…"
-        }
-      ]
-    },
-    "Nasus": {
-      "title": "the Curator of the Sands",
-      "passive": {
-        "name": "Soul Eater",
-        "description": "Nasus drains his foe's spiritual energy, giving him bonus Life Steal."
-      },
-      "spells": [
-        {
-          "slot": "Q",
-          "name": "Siphoning Strike",
-          "cooldown": "7.5/6.5/5.5/4.5/3.5",
-          "description": "Nasus strikes his foe, dealing damage and increasing the power of his future Siphoning Strikes if he slays his target."
-        },
-        {
-          "slot": "W",
-          "name": "Wither",
-          "cooldown": "15/14/13/12/11",
-          "description": "Nasus ages an enemy champion, decelerating their Move Speed and Attack Speed over time."
-        },
-        {
-          "slot": "E",
-          "name": "Spirit Fire",
-          "cooldown": "12",
-          "description": "Nasus unleashes a spirit flame at a location, dealing damage and reducing the Armor of enemies who stand on it."
-        },
-        {
-          "slot": "R",
-          "name": "Fury of the Sands",
-          "cooldown": "120/100/80",
-          "description": "Nasus unleashes a mighty sandstorm that batters nearby enemies. While the storm rages, he gains increased Health, Attack Range, damages nearby enemies, has a reduced cooldown on S…"
-        }
-      ]
-    },
-    "Nidalee": {
-      "title": "the Bestial Huntress",
-      "passive": {
-        "name": "Prowl",
-        "description": "Moving through brush increases Nidalee's Move Speed by 10% for 2 seconds, increased to 30% toward visible enemy champions within 1400 range. Hitting champions or monsters with Jav…"
-      },
-      "spells": [
-        {
-          "slot": "Q",
-          "name": "Javelin Toss / Takedown",
-          "cooldown": "6",
-          "description": "In human form, Nidalee throws a spiked javelin at her target that gains damage as it flies. As a cougar, her next attack will attempt to fatally wound her target, dealing more dam…"
-        },
-        {
-          "slot": "W",
-          "name": "Bushwhack / Pounce",
-          "cooldown": "13/12/11/10/9",
-          "description": "In human form, Nidalee lays a trap for unwary opponents that, when sprung, damages and reveals its target. As a cougar, she jumps in a direction, dealing damage in an area where s…"
-        },
-        {
-          "slot": "E",
-          "name": "Primal Surge / Swipe",
-          "cooldown": "12",
-          "description": "In human form, Nidalee channels the spirit of the cougar to heal her allies and imbue them with Attack Speed for a short duration. As a cougar, she claws in a direction, dealing d…"
-        },
-        {
-          "slot": "R",
-          "name": "Aspect Of The Cougar",
-          "cooldown": "3",
-          "description": "Nidalee transforms into a cougar, gaining new abilities."
-        }
-      ]
-    },
-    "Nunu & Willump": {
-      "title": "the Boy and His Yeti",
-      "passive": {
-        "name": "Call of the Freljord",
-        "description": "Nunu increases the attack speed and Move Speed of Willump and a nearby ally, and causes Willump's basic attacks to damage enemies around the target."
-      },
-      "spells": [
-        {
-          "slot": "Q",
-          "name": "Consume",
-          "cooldown": "13/12/11/10/9",
-          "description": "Willump takes a bite out of a minion, monster, or enemy champion, dealing damage and healing himself."
-        },
-        {
-          "slot": "W",
-          "name": "Biggest Snowball Ever!",
-          "cooldown": "14",
-          "description": "Willump creates a snowball that grows in size and speed as he rolls it. The snowball damages and knocks up enemies."
-        },
-        {
-          "slot": "E",
-          "name": "Snowball Barrage",
-          "cooldown": "14/13/12/11/10",
-          "description": "Nunu throws multiple snowballs that damage enemies. When he's finished, Willump roots any champions or large monsters that were hit by a snowball."
-        },
-        {
-          "slot": "R",
-          "name": "Absolute Zero",
-          "cooldown": "110/100/90",
-          "description": "Nunu & Willump create a powerful blizzard in an area that slows enemies and deals massive damage at the end."
-        }
-      ]
-    },
-    "Olaf": {
-      "title": "the Berserker",
-      "passive": {
-        "name": "Berserker Rage",
-        "description": "Olaf gains Attack Speed and Life Steal based on his missing Health."
-      },
-      "spells": [
-        {
-          "slot": "Q",
-          "name": "Undertow",
-          "cooldown": "9",
-          "description": "Olaf throws an axe into the ground at a target location, dealing damage to enemies it passes through and reducing their Armor and Move Speed. If Olaf picks up the axe, the ability…"
-        },
-        {
-          "slot": "W",
-          "name": "Tough It Out",
-          "cooldown": "16/15/14/13/12",
-          "description": "Olaf's Attack Speed is increased and he gains a Shield."
-        },
-        {
-          "slot": "E",
-          "name": "Reckless Swing",
-          "cooldown": "11/10/9/8/7",
-          "description": "Olaf attacks with such force that it deals true damage to his target and himself, refunding the Health cost if he destroys the target."
-        },
-        {
-          "slot": "R",
-          "name": "Ragnarok",
-          "cooldown": "100/90/80",
-          "description": "Olaf passively gains increased armor and magic resist. He can activate this ability to become immune to disables for as long as he keeps attacking."
-        }
-      ]
-    },
-    "Pantheon": {
-      "title": "the Unbreakable Spear",
-      "passive": {
-        "name": "Mortal Will",
-        "description": "Every few spells or attacks, Pantheon's next spell is empowered."
-      },
-      "spells": [
-        {
-          "slot": "Q",
-          "name": "Comet Spear",
-          "cooldown": "11/10.25/9.5/8.75/8",
-          "description": "Pantheon either thrusts his spear or throws his spear in the chosen direction."
-        },
-        {
-          "slot": "W",
-          "name": "Shield Vault",
-          "cooldown": "13/12/11/10/9",
-          "description": "Pantheon dashes to a target, damaging and stunning them."
-        },
-        {
-          "slot": "E",
-          "name": "Aegis Assault",
-          "cooldown": "22/21/20/19/18",
-          "description": "Pantheon sets his shield, becoming invulnerable to damage from the front and striking repeatedly with his spear."
-        },
-        {
-          "slot": "R",
-          "name": "Grand Starfall",
-          "cooldown": "180/165/150",
-          "description": "Pantheon composes himself and then leaps into the air, landing at a chosen location as a comet."
-        }
-      ]
-    },
-    "Rammus": {
-      "title": "the Armordillo",
-      "passive": {
-        "name": "Spiked Shell",
-        "description": "Rammus gains bonus Attack Damage scaling with his Armor and Magic Resistance."
-      },
-      "spells": [
-        {
-          "slot": "Q",
-          "name": "Powerball",
-          "cooldown": "12/10.5/9/7.5/6",
-          "description": "Rammus accelerates in a ball towards his enemies, dealing damage and slowing targets affected by the impact."
-        },
-        {
-          "slot": "W",
-          "name": "Defensive Ball Curl",
-          "cooldown": "7",
-          "description": "Rammus goes into a defensive formation, vastly increasing his Armor and Magic Resistance, and returning damage to enemies that attack him."
-        },
-        {
-          "slot": "E",
-          "name": "Frenzying Taunt",
-          "cooldown": "12",
-          "description": "Rammus taunts an enemy champion or monster into a reckless assault against him."
-        },
-        {
-          "slot": "R",
-          "name": "Soaring Slam",
-          "cooldown": "120/105/90",
-          "description": "Rammus hops into the air and slams down at a target area, dealing magic damage and slowing enemies. If cast while Rammus is in Powerball, Rammus knocks up enemies near the center…"
-        }
-      ]
-    },
-    "Ryze": {
-      "title": "the Rune Mage",
-      "passive": {
-        "name": "Arcane Mastery",
-        "description": "Ryze's spells deal extra damage based on his Bonus Mana, and he gains a percentage increase to his maximum Mana based on his Ability Power."
-      },
-      "spells": [
-        {
-          "slot": "Q",
-          "name": "Overload",
-          "cooldown": "5",
-          "description": "Passively, Ryze's other basic abilities reset the cooldown of Overload and charge a rune. When Ryze casts Overload with 2 runes charged, he gains a brief burst of Move Speed. On c…"
-        },
-        {
-          "slot": "W",
-          "name": "Rune Prison",
-          "cooldown": "11/10.5/10/9.5/9",
-          "description": "Ryze traps a target in a cage of runes, damaging them and slowing their movement. If the target has Flux on it, they are instead rooted."
-        },
-        {
-          "slot": "E",
-          "name": "Spell Flux",
-          "cooldown": "3.5/3.25/3/2.75/2.5",
-          "description": "Ryze releases an orb of pure magical power that damages an enemy and debuffs all nearby enemies. Ryze's spells have additional effects against the debuffed enemy."
-        },
-        {
-          "slot": "R",
-          "name": "Realm Warp",
-          "cooldown": "180/160/140",
-          "description": "Passively, Overload deals even more damage against targets with Flux. On cast, Ryze creates a portal to a nearby location. After a few seconds, allies standing near the portal are…"
-        }
-      ]
-    },
-    "Shaco": {
-      "title": "the Demon Jester",
-      "passive": {
-        "name": "Backstab",
-        "description": "Shaco's basic attacks and Two-Shiv Poison deal additional damage when striking from behind."
-      },
-      "spells": [
-        {
-          "slot": "Q",
-          "name": "Deceive",
-          "cooldown": "13/12.5/12/11.5/11",
-          "description": "Shaco becomes Invisible and teleports to target location. His first attack while Invisible is empowered, dealing bonus damage and critically striking if he attacks from behind."
-        },
-        {
-          "slot": "W",
-          "name": "Jack In The Box",
-          "cooldown": "15",
-          "description": "Shaco creates a hidden animated Jack-in-the-Box. When triggered, it will fear and attack nearby enemies."
-        },
-        {
-          "slot": "E",
-          "name": "Two-Shiv Poison",
-          "cooldown": "8",
-          "description": "Shaco's Shivs passively poison targets on hit, slowing their Move Speed. He can throw his Shivs to deal damage and poison the target. The thrown Shiv deals bonus damage if the tar…"
-        },
-        {
-          "slot": "R",
-          "name": "Hallucinate",
-          "cooldown": "100/90/80",
-          "description": "Shaco creates an illusion of himself near him, which can attack nearby enemies (Deals reduced damage to turrets). Upon death, it explodes, spawning three mini Jack in the Boxes an…"
-        }
-      ]
-    },
-    "Singed": {
-      "title": "the Mad Chemist",
-      "passive": {
-        "name": "Noxious Slipstream",
-        "description": "Singed drafts off nearby champions, gaining a burst of Move Speed when passing them."
-      },
-      "spells": [
-        {
-          "slot": "Q",
-          "name": "Poison Trail",
-          "cooldown": "0",
-          "description": "Leaves a trail of poison behind Singed, dealing damage to enemies caught in the path."
-        },
-        {
-          "slot": "W",
-          "name": "Mega Adhesive",
-          "cooldown": "17/16/15/14/13",
-          "description": "Throws a vial of mega adhesive on the ground, slowing and grounding enemies who walk on it."
-        },
-        {
-          "slot": "E",
-          "name": "Fling",
-          "cooldown": "10/9.5/9/8.5/8",
-          "description": "Damages target enemy unit and flings them into the air behind Singed. If the target Singed flings lands in his Mega Adhesive, they are also rooted."
-        },
-        {
-          "slot": "R",
-          "name": "Insanity Potion",
-          "cooldown": "100",
-          "description": "Singed drinks a potent brew of chemicals, granting him increased combat stats, and making his Poison Trail apply Grievous Wounds."
-        }
-      ]
-    },
-    "Sion": {
-      "title": "The Undead Juggernaut",
-      "passive": {
-        "name": "Glory in Death",
-        "description": "After being killed, Sion will temporarily reanimate with rapidly decaying Health. His attacks become very rapid, heal him, and deal bonus damage based on his target's maximum Heal…"
-      },
-      "spells": [
-        {
-          "slot": "Q",
-          "name": "Decimating Smash",
-          "cooldown": "10/9/8/7/6",
-          "description": "Sion charges a powerful swing in an area in front of himself that will deal damage to enemies when released. If he charges for enough time, enemies hit by the swing will also be k…"
-        },
-        {
-          "slot": "W",
-          "name": "Soul Furnace",
-          "cooldown": "15/14/13/12/11",
-          "description": "Sion shields himself and can reactivate after 3 seconds to deal Magic Damage to enemies nearby. When Sion kills enemies, he passively gains maximum Health."
-        },
-        {
-          "slot": "E",
-          "name": "Roar of the Slayer",
-          "cooldown": "12/11/10/9/8",
-          "description": "Sion fires a short range shockwave that damages and slows and reduces the Armor of the first enemy hit. If the shockwave hits a minion or monster, it will be knocked back, damagin…"
-        },
-        {
-          "slot": "R",
-          "name": "Unstoppable Onslaught",
-          "cooldown": "140/100/60",
-          "description": "Sion charges in a direction, ramping up speed over time. He can steer his charge slightly with the mouse cursor location. When he collides with an enemy he deals damage and knocks…"
-        }
-      ]
-    },
-    "Sivir": {
-      "title": "the Battle Mistress",
-      "passive": {
-        "name": "Fleet of Foot",
-        "description": "Sivir gains a short burst of Move Speed when she attacks an enemy champion."
-      },
-      "spells": [
-        {
-          "slot": "Q",
-          "name": "Boomerang Blade",
-          "cooldown": "10/9.5/9/8.5/8",
-          "description": "Sivir hurls her crossblade like a boomerang, dealing damage each way."
-        },
-        {
-          "slot": "W",
-          "name": "Ricochet",
-          "cooldown": "12",
-          "description": "Sivir's next few basic attacks gain additional attack speed and bounce to nearby targets, dealing reduced damage while bouncing."
-        },
-        {
-          "slot": "E",
-          "name": "Spell Shield",
-          "cooldown": "24/22.5/21/19.5/18",
-          "description": "Creates a magical barrier that blocks a single enemy ability cast on Sivir. She receives health and a burst of movement speed if a spell is blocked."
-        },
-        {
-          "slot": "R",
-          "name": "On The Hunt",
-          "cooldown": "120/100/80",
-          "description": "Sivir leads her allies in battle, granting them a surge of Move Speed for a period of time. In addition, Sivir's attacks reduce her spell cooldowns."
-        }
-      ]
-    },
-    "Skarner": {
-      "title": "the Primordial Sovereign",
-      "passive": {
-        "name": "Threads of Vibration",
-        "description": "Skarner's Attacks, Shattered Earth, Upheaval, and Impale, apply Quaking. At max stacks of Quaking, enemies take max Health magic damage over its duration."
-      },
-      "spells": [
-        {
-          "slot": "Q",
-          "name": "Shattered Earth / Upheaval",
-          "cooldown": "8/6.75/5.5/4.25/3",
-          "description": "Skarner rips a boulder from the earth that empowers his attacks and can be thrown as a powerful projectile."
-        },
-        {
-          "slot": "W",
-          "name": "Seismic Bastion",
-          "cooldown": "10/9/8/7/6",
-          "description": "Skarner gains a shield and creates an earthquake whose shockwave damages and slows foes."
-        },
-        {
-          "slot": "E",
-          "name": "Ixtal's Impact",
-          "cooldown": "22/21/20/19/18",
-          "description": "Skarner charges forward and passes through terrain. If he collides with a champion or large monster, he'll slam them into the next wall he hits to damage and stun them."
-        },
-        {
-          "slot": "R",
-          "name": "Impale",
-          "cooldown": "120/105/90",
-          "description": "Skarner's tails lash forward to suppress enemy champions. Once suppressed, the victims will be dragged along by Skarner as he moves around."
-        }
-      ]
-    },
-    "Sona": {
-      "title": "Maven of the Strings",
-      "passive": {
-        "name": "Power Chord",
-        "description": "Accelerando : Sona gains non-Ultimate ability haste permanently for her basic abilities as she uses her abilities well, up to a cap. Beyond that cap, further successful uses reduc…"
-      },
-      "spells": [
-        {
-          "slot": "Q",
-          "name": "Hymn of Valor",
-          "cooldown": "8",
-          "description": "Sona plays the Hymn of Valor, sends out bolts of sound, dealing magic damage to two nearby enemies, prioritizing champions and monsters. Sona gains a temporary aura that grants al…"
-        },
-        {
-          "slot": "W",
-          "name": "Aria of Perseverance",
-          "cooldown": "10",
-          "description": "Sona plays the Aria of Perseverance, sending out protective melodies, healing Sona and a nearby wounded ally. Sona gains a temporary aura that grants allies tagged by the zone a t…"
-        },
-        {
-          "slot": "E",
-          "name": "Song of Celerity",
-          "cooldown": "14",
-          "description": "Sona plays the Song of Celerity, granting nearby allies bonus Move Speed. Sona gains a temporary aura that grants allied champions tagged by the zone bonus Move Speed."
-        },
-        {
-          "slot": "R",
-          "name": "Crescendo",
-          "cooldown": "140/120/100",
-          "description": "Sona plays her ultimate chord, stunning enemy champions and forcing them to dance and dealing magic damage to them."
-        }
-      ]
-    },
-    "Soraka": {
-      "title": "the Starchild",
-      "passive": {
-        "name": "Salvation",
-        "description": "Soraka runs faster towards nearby low health allies."
-      },
-      "spells": [
-        {
-          "slot": "Q",
-          "name": "Starcall",
-          "cooldown": "8/7/6/5/4",
-          "description": "A star falls from the sky at the target location dealing magic damage and slowing enemies. If an enemy champion is hit by Starcall, Soraka recovers Health."
-        },
-        {
-          "slot": "W",
-          "name": "Astral Infusion",
-          "cooldown": "6/5/4/3/2",
-          "description": "Soraka sacrifices a portion of her own health to heal another friendly champion."
-        },
-        {
-          "slot": "E",
-          "name": "Equinox",
-          "cooldown": "20/19/18/17/16",
-          "description": "Creates a zone at a location that silences all enemies inside. When the zone expires, all enemies still inside are rooted."
-        },
-        {
-          "slot": "R",
-          "name": "Wish",
-          "cooldown": "150/135/120",
-          "description": "Soraka fills her allies with hope, instantly restoring health to herself and all allied champions."
-        }
-      ]
-    },
-    "Taric": {
-      "title": "the Shield of Valoran",
-      "passive": {
-        "name": "Bravado",
-        "description": "Spellcasts empower Taric's next 2 basic attacks to deal bonus magic damage, reduce his spell cooldowns, and attack in quick succession."
-      },
-      "spells": [
-        {
-          "slot": "Q",
-          "name": "Starlight's Touch",
-          "cooldown": "3",
-          "description": "Heals nearby allied champions based on charges stored. Bravado-empowered attacks grant a charge of Starlight's Touch."
-        },
-        {
-          "slot": "W",
-          "name": "Bastion",
-          "cooldown": "15",
-          "description": "Passively increase the Armor of Taric and any allied champion with Bastion. Actively shields an ally and grants them Bastion for as long as they remain near Taric. Taric's spells…"
-        },
-        {
-          "slot": "E",
-          "name": "Dazzle",
-          "cooldown": "16/15/14/13/12",
-          "description": "Taric readies a beam of starlight that, after a brief delay, deals magic damage and stuns enemies."
-        },
-        {
-          "slot": "R",
-          "name": "Cosmic Radiance",
-          "cooldown": "180/150/120",
-          "description": "Pulses cosmic energy onto nearby allied champions after a delay, making them invulnerable for a short duration."
-        }
-      ]
-    },
-    "Teemo": {
-      "title": "the Swift Scout",
-      "passive": {
-        "name": "Guerrilla Warfare",
-        "description": "If Teemo stands still and takes no actions for a short duration, he becomes Invisible indefinitely. If he's in brush, Teemo can enter and maintain his Invisibility while moving. A…"
-      },
-      "spells": [
-        {
-          "slot": "Q",
-          "name": "Blinding Dart",
-          "cooldown": "7",
-          "description": "Obscures an enemy's vision with a powerful venom, dealing damage to the target unit and blinding it for the duration."
-        },
-        {
-          "slot": "W",
-          "name": "Move Quick",
-          "cooldown": "14",
-          "description": "Teemo scampers around, passively increasing his Move Speed until he is struck by an enemy champion or turret. Teemo can sprint to gain bonus Move Speed that isn't stopped by being…"
-        },
-        {
-          "slot": "E",
-          "name": "Toxic Shot",
-          "cooldown": "0",
-          "description": "Each of Teemo's attacks will poison the target %i:OnHit% On-Hit , dealing damage on impact and each second after for 4 seconds."
-        },
-        {
-          "slot": "R",
-          "name": "Noxious Trap",
-          "cooldown": "0.25",
-          "description": "Teemo throws an explosive poisonous trap using one of the mushrooms stored in his pack. If an enemy steps on the trap, it will release a poisonous cloud, slowing enemies and damag…"
-        }
-      ]
-    },
-    "Tristana": {
-      "title": "the Yordle Gunner",
-      "passive": {
-        "name": "Draw a Bead",
-        "description": "Increases Tristana's Attack Range as she levels."
-      },
-      "spells": [
-        {
-          "slot": "Q",
-          "name": "Rapid Fire",
-          "cooldown": "20/19/18/17/16",
-          "description": "Tristana fires her weapon rapidly, increasing her Attack Speed for a short time."
-        },
-        {
-          "slot": "W",
-          "name": "Rocket Jump",
-          "cooldown": "22/20/18/16/14",
-          "description": "Tristana fires at the ground to propel her to a distant location, dealing damage and slowing surrounding units for a brief period where she lands."
-        },
-        {
-          "slot": "E",
-          "name": "Explosive Charge",
-          "cooldown": "16/15.5/15/14.5/14",
-          "description": "When Tristana kills a unit, her cannonballs burst into shrapnel, dealing damage to surrounding enemies. Can be activated to place a bomb on a target enemy that explodes after a sh…"
-        },
-        {
-          "slot": "R",
-          "name": "Buster Shot",
-          "cooldown": "100",
-          "description": "Tristana loads a massive cannonball into her weapon and fires it at an enemy unit. This deals Magic Damage and knocks the target back. If the target is carrying the Explosive Char…"
-        }
-      ]
-    },
-    "Tryndamere": {
-      "title": "the Barbarian King",
-      "passive": {
-        "name": "Battle Fury",
-        "description": "Tryndamere gains Fury for each attack, critical strike, and killing blow he makes. Fury passively increases his Critical Strike Chance and can be consumed with his Bloodlust spell."
-      },
-      "spells": [
-        {
-          "slot": "Q",
-          "name": "Bloodlust",
-          "cooldown": "12",
-          "description": "Tryndamere thrives on the thrills of combat, increasing his Attack Damage as he is more and more wounded. He can cast Bloodlust to consume his Fury and heal himself."
-        },
-        {
-          "slot": "W",
-          "name": "Mocking Shout",
-          "cooldown": "14",
-          "description": "Tryndamere lets out an insulting cry, decreasing surrounding champions' Attack Damage. Enemies with their backs turned to Tryndamere also have their Move Speed reduced."
-        },
-        {
-          "slot": "E",
-          "name": "Spinning Slash",
-          "cooldown": "12/11/10/9/8",
-          "description": "Tryndamere slices toward a target unit, dealing damage to enemies in his path."
-        },
-        {
-          "slot": "R",
-          "name": "Undying Rage",
-          "cooldown": "120/100/80",
-          "description": "Tryndamere's lust for battle becomes so strong that he is unable to die, no matter how wounded he becomes."
-        }
-      ]
-    },
-    "Twisted Fate": {
-      "title": "the Card Master",
-      "passive": {
-        "name": "Loaded Dice",
-        "description": "Upon killing a unit, Twisted Fate rolls his 'lucky' dice receiving 1 to 6 bonus gold."
-      },
-      "spells": [
-        {
-          "slot": "Q",
-          "name": "Wild Cards",
-          "cooldown": "6/5.75/5.5/5.25/5",
-          "description": "Twisted Fate throws three cards, dealing damage to each enemy unit they pass through."
-        },
-        {
-          "slot": "W",
-          "name": "Pick a Card",
-          "cooldown": "6",
-          "description": "Twisted Fate chooses a magic card from his deck, and uses that for his next attack, causing bonus effects."
-        },
-        {
-          "slot": "E",
-          "name": "Stacked Deck",
-          "cooldown": "0",
-          "description": "Every 4 attacks, Twisted Fate deals bonus damage. In addition, his Attack Speed is increased."
-        },
-        {
-          "slot": "R",
-          "name": "Destiny",
-          "cooldown": "170/140/110",
-          "description": "Twisted Fate predicts the fortunes of his foes, revealing all enemy champions and enabling the use of Gate, which teleports Twisted Fate to any target location in 1.5 seconds."
-        }
-      ]
-    },
-    "Twitch": {
-      "title": "the Plague Rat",
-      "passive": {
-        "name": "Deadly Venom",
-        "description": "Twitch's basic attacks infect the target %i:OnHit% On-Hit , dealing true damage each second."
-      },
-      "spells": [
-        {
-          "slot": "Q",
-          "name": "Ambush",
-          "cooldown": "16",
-          "description": "Twitch becomes Camouflaged for a short duration and gains Move Speed. When leaving Camouflage, Twitch gains Attack Speed for a short duration. When an enemy champion with Deadly V…"
-        },
-        {
-          "slot": "W",
-          "name": "Venom Cask",
-          "cooldown": "13/12/11/10/9",
-          "description": "Twitch hurls a cask of venom that explodes in an area, slowing targets and applying deadly venom to the target."
-        },
-        {
-          "slot": "E",
-          "name": "Contaminate",
-          "cooldown": "12/11/10/9/8",
-          "description": "Twitch wreaks further havoc on poisoned enemies with a blast of his vile diseases."
-        },
-        {
-          "slot": "R",
-          "name": "Spray and Pray",
-          "cooldown": "90",
-          "description": "Twitch unleashes the full power of his crossbow, shooting bolts over a great distance that pierce all enemies caught in their path."
-        }
-      ]
-    },
-    "Vayne": {
-      "title": "the Night Hunter",
-      "passive": {
-        "name": "Night Hunter",
-        "description": "Vayne ruthlessly hunts evil-doers, gaining Move Speed when moving toward nearby enemy champions."
-      },
-      "spells": [
-        {
-          "slot": "Q",
-          "name": "Tumble",
-          "cooldown": "6/5/4/3/2",
-          "description": "Vayne tumbles, maneuvering to carefully place her next shot. Her next attack deals bonus damage."
-        },
-        {
-          "slot": "W",
-          "name": "Silver Bolts",
-          "cooldown": "0",
-          "description": "Vayne tips her bolts with a rare metal, toxic to evil things. The third consecutive attack or ability against the same target deals a percentage of the target's max health as bonu…"
-        },
-        {
-          "slot": "E",
-          "name": "Condemn",
-          "cooldown": "20/18/16/14/12",
-          "description": "Vayne draws a heavy crossbow from her back, and fires a huge bolt at her target, knocking them back and dealing damage. If they collide with terrain, they are impaled, dealing bon…"
-        },
-        {
-          "slot": "R",
-          "name": "Final Hour",
-          "cooldown": "100/85/70",
-          "description": "Readying herself for an epic confrontation, Vayne gains increased Attack Damage, Invisibility during Tumble, reduced Tumble cooldown, and more bonus Move Speed from Night Hunter"
-        }
-      ]
-    },
-    "Veigar": {
-      "title": "the Tiny Master of Evil",
-      "passive": {
-        "name": "Phenomenal Evil Power",
-        "description": "Veigar is the greatest Evil to ever strike at the hearts of Runeterra - and he's only getting bigger! Striking an enemy Champion with a spell or scoring a takedown grants Veigar p…"
-      },
-      "spells": [
-        {
-          "slot": "Q",
-          "name": "Baleful Strike",
-          "cooldown": "6/5.5/5/4.5/4",
-          "description": "Veigar unleashes a bolt of dark energy that deals magic damage to the first two enemies hit. Units killed by this bolt grant Veigar some ability power permanently."
-        },
-        {
-          "slot": "W",
-          "name": "Dark Matter",
-          "cooldown": "0",
-          "description": "Veigar calls a great mass of dark matter to fall from the sky to the target location, dealing magic damage when it lands. Stacks of Phenomenal Evil reduce Dark Matter's cooldown."
-        },
-        {
-          "slot": "E",
-          "name": "Event Horizon",
-          "cooldown": "20/18.5/17/15.5/14",
-          "description": "Veigar twists the edges of space, creating a cage that Stuns enemies that pass through."
-        },
-        {
-          "slot": "R",
-          "name": "Primordial Burst",
-          "cooldown": "120/90/60",
-          "description": "Blasts target enemy champion, dealing a large amount of magic damage, increasing based on the target's missing health."
-        }
-      ]
-    },
-    "Warwick": {
-      "title": "the Uncaged Wrath of Zaun",
-      "passive": {
-        "name": "Eternal Hunger",
-        "description": "Warwick's basic attacks deal bonus magic damage. If Warwick is below 50% health, he heals the same amount. If Warwick is below 25% health, this healing triples."
-      },
-      "spells": [
-        {
-          "slot": "Q",
-          "name": "Jaws of the Beast",
-          "cooldown": "8/7.5/7/6.5/6",
-          "description": "Warwick lunges forward and bites his target, dealing damage based on their maximum health and healing for damage dealt."
-        },
-        {
-          "slot": "W",
-          "name": "Blood Hunt",
-          "cooldown": "80/70/60/50/40",
-          "description": "Warwick senses enemies below 50% health, gaining Move Speed toward and attack speed against them. When they fall below 25% health, he frenzies and these bonuses triple."
-        },
-        {
-          "slot": "E",
-          "name": "Primal Howl",
-          "cooldown": "15/14/13/12/11",
-          "description": "Warwick gains damage reduction for 2.5 seconds. At the end, or if re-activated, he howls, causing nearby enemies to flee for 1 second."
-        },
-        {
-          "slot": "R",
-          "name": "Infinite Duress",
-          "cooldown": "110/90/70",
-          "description": "Warwick leaps in a direction (scaling with his bonus Move Speed), suppressing the first champion he collides with for 1.5 seconds."
-        }
-      ]
-    },
-    "Wukong": {
-      "title": "the Monkey King",
-      "passive": {
-        "name": "Stone Skin",
-        "description": "Wukong gains stacking armor and max health regeneration while fighting champions and monsters."
-      },
-      "spells": [
-        {
-          "slot": "Q",
-          "name": "Crushing Blow",
-          "cooldown": "8/7.5/7/6.5/6",
-          "description": "Wukong's next attack gains attack range, deals bonus damage, and reduces the target's armor for a few seconds."
-        },
-        {
-          "slot": "W",
-          "name": "Warrior Trickster",
-          "cooldown": "22/21/20/19/18",
-          "description": "Wukong becomes Invisible and dashes in a direction, leaving behind a clone that will attack nearby enemies."
-        },
-        {
-          "slot": "E",
-          "name": "Nimbus Strike",
-          "cooldown": "10/9.25/8.5/7.75/7",
-          "description": "Wukong dashes to a targeted enemy and sends out images to attack enemies near his target, dealing damage to each enemy struck."
-        },
-        {
-          "slot": "R",
-          "name": "Cyclone",
-          "cooldown": "130/110/90",
-          "description": "Wukong's extends his staff and spins it around repeatedly, gaining Move Speed. Enemies struck take damage and are knocked up."
-        }
-      ]
-    },
-    "Zilean": {
-      "title": "the Chronokeeper",
-      "passive": {
-        "name": "Time In A Bottle",
-        "description": "Zilean stores time as Experience and can grant it to his allies. When he has enough Experience to finish an ally's level up, he can right-click them to impart it. Zilean receives…"
-      },
-      "spells": [
-        {
-          "slot": "Q",
-          "name": "Time Bomb",
-          "cooldown": "10/9.5/9/8.5/8",
-          "description": "Tosses a bomb to target area that sticks to units that come near it (prioritizes Champions). It detonates after 3 seconds, dealing area of effect damage. If a Time Bomb is detonat…"
-        },
-        {
-          "slot": "W",
-          "name": "Rewind",
-          "cooldown": "14/12/10/8/6",
-          "description": "Zilean can prepare himself for future confrontations, reducing the cooldowns of his other basic abilities."
-        },
-        {
-          "slot": "E",
-          "name": "Time Warp",
-          "cooldown": "15",
-          "description": "Zilean bends time around any unit, decreasing an enemy's Move Speed or increasing an ally's Move Speed for a short time."
-        },
-        {
-          "slot": "R",
-          "name": "Chronoshift",
-          "cooldown": "120/90/60",
-          "description": "Zilean places a protective time rune on an allied champion, teleporting the champion back in time if they take lethal damage."
-        }
-      ]
-    },
     "Jayce": {
       "title": "the Defender of Tomorrow",
       "passive": {
@@ -3204,6 +1917,138 @@
         }
       ]
     },
+    "Karthus": {
+      "title": "the Deathsinger",
+      "passive": {
+        "name": "Death Defied",
+        "description": "Upon dying, Karthus enters a spirit form that allows him to continue casting spells."
+      },
+      "spells": [
+        {
+          "slot": "Q",
+          "name": "Lay Waste",
+          "cooldown": "0",
+          "description": "Karthus unleashes a delayed blast at a location, dealing damage to nearby enemies. Deals increased damage to isolated enemies."
+        },
+        {
+          "slot": "W",
+          "name": "Wall of Pain",
+          "cooldown": "15",
+          "description": "Karthus creates a passable screen of leeching energy. Any enemy units that walk through the screen have their Move Speed and Magic Resist reduced for a period."
+        },
+        {
+          "slot": "E",
+          "name": "Defile",
+          "cooldown": "0.5",
+          "description": "Karthus passively steals energy from his victims, gaining Mana on each kill. Alternatively, Karthus can surround himself in the souls of his prey, dealing damage to nearby enemies…"
+        },
+        {
+          "slot": "R",
+          "name": "Requiem",
+          "cooldown": "200/180/160",
+          "description": "After channeling for 3 seconds, Karthus deals damage to all enemy champions."
+        }
+      ]
+    },
+    "Kassadin": {
+      "title": "the Void Walker",
+      "passive": {
+        "name": "Void Stone",
+        "description": "Kassadin takes reduced magic damage and ignores unit collision."
+      },
+      "spells": [
+        {
+          "slot": "Q",
+          "name": "Null Sphere",
+          "cooldown": "9/8.5/8/7.5/7",
+          "description": "Kassadin fires an orb of void energy at a target, dealing damage and interrupting channels. The excess energy forms around himself, granting a temporary shield that absorbs magic…"
+        },
+        {
+          "slot": "W",
+          "name": "Nether Blade",
+          "cooldown": "7",
+          "description": "Passive: Kassadin's basic attacks deal bonus magic damage. Active: Kassadin's next basic attack deals significant bonus magic damage and restores Mana."
+        },
+        {
+          "slot": "E",
+          "name": "Force Pulse",
+          "cooldown": "21/20/19/18/17",
+          "description": "Kassadin draws energy from spells cast in his vicinity. Upon charging up, Kassadin can use Force Pulse to damage and slow enemies in a cone in front of him."
+        },
+        {
+          "slot": "R",
+          "name": "Riftwalk",
+          "cooldown": "5/3.5/2",
+          "description": "Kassadin teleports to a nearby location dealing damage to nearby enemy units. Multiple Riftwalks in a short period of time cost additional Mana but also deal additional damage."
+        }
+      ]
+    },
+    "Katarina": {
+      "title": "the Sinister Blade",
+      "passive": {
+        "name": "Voracity",
+        "description": "Whenever an enemy champion dies that Katarina has damaged recently, her remaining ability cooldowns are dramatically reduced. If Katarina picks up a Dagger , she uses it to slash…"
+      },
+      "spells": [
+        {
+          "slot": "Q",
+          "name": "Bouncing Blade",
+          "cooldown": "11/10/9/8/7",
+          "description": "Katarina throws a Dagger at the target that then bounces to nearby enemies before ricocheting onto the ground."
+        },
+        {
+          "slot": "W",
+          "name": "Preparation",
+          "cooldown": "15/14/13/12/11",
+          "description": "Katarina gains a burst of Move Speed, tossing a Dagger into the air directly above herself."
+        },
+        {
+          "slot": "E",
+          "name": "Shunpo",
+          "cooldown": "12/11/10/9/8",
+          "description": "Katarina blinks to the target, striking it if its an enemy, or striking the nearest enemy otherwise."
+        },
+        {
+          "slot": "R",
+          "name": "Death Lotus",
+          "cooldown": "75/60/45",
+          "description": "Katarina becomes a flurry of blades, dealing massive magic damage while she channels to the 3 nearest enemy champions."
+        }
+      ]
+    },
+    "Kayle": {
+      "title": "the Righteous",
+      "passive": {
+        "name": "Divine Ascent",
+        "description": "Kayle's attacks are empowered by the heavens as she levels up and spends skill points. Her wings are lit aflame as she progressively gains Attack Speed, Move Speed, Attack Range,…"
+      },
+      "spells": [
+        {
+          "slot": "Q",
+          "name": "Radiant Blast",
+          "cooldown": "12/11/10/9/8",
+          "description": "Kayle conjures a portal, summoning a celestial sword that pierces through enemies, slowing, damaging, and reducing the resistances of all hit."
+        },
+        {
+          "slot": "W",
+          "name": "Celestial Blessing",
+          "cooldown": "15",
+          "description": "Blessed by the divine, Kayle heals and grants Move Speed to herself and the nearest ally."
+        },
+        {
+          "slot": "E",
+          "name": "Starfire Spellblade",
+          "cooldown": "8/7.5/7/6.5/6",
+          "description": "Passive: Kayle's celestial sword, Virtue, deals bonus magic damage to enemies she attacks. Active: Kayle's next attack smites her target with celestial fire, dealing bonus damage…"
+        },
+        {
+          "slot": "R",
+          "name": "Divine Judgment",
+          "cooldown": "160/120/80",
+          "description": "Kayle makes an ally invulnerable and calls upon former Aspects of Justice to purify the area around her target with a holy rain of swords."
+        }
+      ]
+    },
     "Kayn": {
       "title": "the Shadow Reaper",
       "passive": {
@@ -3369,6 +2214,39 @@
         }
       ]
     },
+    "Kog'Maw": {
+      "title": "the Mouth of the Abyss",
+      "passive": {
+        "name": "Icathian Surprise",
+        "description": "4 seconds after dying, Kogmaw explodes, dealing true damage to surrounding enemies."
+      },
+      "spells": [
+        {
+          "slot": "Q",
+          "name": "Caustic Spittle",
+          "cooldown": "7",
+          "description": "Kog'Maw launches a corrosive projectile which deals magic damage and corrodes the target's armor and magic resist for a short time. Kog'Maw also gains additional attack speed."
+        },
+        {
+          "slot": "W",
+          "name": "Bio-Arcane Barrage",
+          "cooldown": "17",
+          "description": "Kog'Maw's attacks gain range and deal a percent of the target's maximum health as magic damage %i:OnHit% On-Hit ."
+        },
+        {
+          "slot": "E",
+          "name": "Void Ooze",
+          "cooldown": "12",
+          "description": "Kog'Maw launches a peculiar ooze which damages all enemies it passes through and leaves a trail which slows enemies who stand on it."
+        },
+        {
+          "slot": "R",
+          "name": "Living Artillery",
+          "cooldown": "2/1.5/1",
+          "description": "Kog'Maw fires an artillery shell at a great distance dealing magic damage (increased significantly on low health enemies) and revealing non-stealthed targets. Additionally, multip…"
+        }
+      ]
+    },
     "K'Sante": {
       "title": "the Pride of Nazumah",
       "passive": {
@@ -3432,6 +2310,72 @@
           "name": "Mimic",
           "cooldown": "45/35/25",
           "description": "LeBlanc casts a mimicked version of one of her basic spells."
+        }
+      ]
+    },
+    "Lee Sin": {
+      "title": "the Blind Monk",
+      "passive": {
+        "name": "Flurry",
+        "description": "After Lee Sin uses an ability, his next 2 basic attacks gain Attack Speed and return Energy."
+      },
+      "spells": [
+        {
+          "slot": "Q",
+          "name": "Sonic Wave / Resonating Strike",
+          "cooldown": "10/9/8/7/6",
+          "description": "Sonic Wave: Lee Sin projects a discordant wave of sound to locate his enemies, dealing physical damage to the first enemy it encounters. If Sonic Wave hits, Lee Sin can cast Reson…"
+        },
+        {
+          "slot": "W",
+          "name": "Safeguard / Iron Will",
+          "cooldown": "7",
+          "description": "Safeguard: Lee Sin rushes to target ally, shielding himself from damage. If the ally is a champion, they are also shielded. After using Safeguard, Lee Sin can cast Iron Will. Iron…"
+        },
+        {
+          "slot": "E",
+          "name": "Tempest / Cripple",
+          "cooldown": "8",
+          "description": "Tempest: Lee Sin smashes the ground, sending out a shockwave that deals magic damage and reveals enemy units hit. If Tempest hits an enemy, Lee Sin can cast cripple. Cripple: Lee…"
+        },
+        {
+          "slot": "R",
+          "name": "Dragon's Rage",
+          "cooldown": "110/85/60",
+          "description": "Lee Sin performs a powerful roundhouse kick launching his target back, dealing physical damage to the target and any enemies they collide with. Enemies the target collides with ar…"
+        }
+      ]
+    },
+    "Leona": {
+      "title": "the Radiant Dawn",
+      "passive": {
+        "name": "Sunlight",
+        "description": "Damaging spells afflict enemies with Sunlight for 1.5 seconds. When allied Champions deal damage to those targets, they consume the Sunlight to deal additional magic damage."
+      },
+      "spells": [
+        {
+          "slot": "Q",
+          "name": "Shield of Daybreak",
+          "cooldown": "5",
+          "description": "Leona uses her shield to perform her next basic attack, dealing bonus magic damage and stunning the target."
+        },
+        {
+          "slot": "W",
+          "name": "Eclipse",
+          "cooldown": "14/13/12/11/10",
+          "description": "Leona raises her shield to gain Damage Reduction, Armor, and Magic Resist. When the duration first ends, if there are nearby enemies, she will deal magic damage to them and prolon…"
+        },
+        {
+          "slot": "E",
+          "name": "Zenith Blade",
+          "cooldown": "12/10.5/9/7.5/6",
+          "description": "Leona projects a solar image of her sword, dealing magic damage to all enemies in a line. When the image fades, the last enemy champion struck will be briefly immobilized and Leon…"
+        },
+        {
+          "slot": "R",
+          "name": "Solar Flare",
+          "cooldown": "90/75/60",
+          "description": "Leona calls down a beam of solar energy, dealing damage to enemies in an area. Enemies in the center of the area are stunned, while enemies on the outside are slowed."
         }
       ]
     },
@@ -3567,6 +2511,138 @@
         }
       ]
     },
+    "Lulu": {
+      "title": "the Fae Sorceress",
+      "passive": {
+        "name": "Pix, Faerie Companion",
+        "description": "Pix fires magical bolts of energy whenever the champion he's following attacks another enemy unit. These bolts are homing, but can be intercepted by other units."
+      },
+      "spells": [
+        {
+          "slot": "Q",
+          "name": "Glitterlance",
+          "cooldown": "7",
+          "description": "Pix and Lulu each fire a bolt of magical energy that damages and heavily slows all enemies it hits."
+        },
+        {
+          "slot": "W",
+          "name": "Whimsy",
+          "cooldown": "18",
+          "description": "If cast on an ally, grants them Attack Speed and Move Speed for a short time. If cast on an enemy, turns them into an adorable critter that can't attack or cast spells."
+        },
+        {
+          "slot": "E",
+          "name": "Help, Pix!",
+          "cooldown": "10/9.5/9/8.5/8",
+          "description": "If cast on an ally, commands Pix to jump to an ally and shield them. He then follows them and aids their attacks. If cast on an enemy, commands Pix to jump to an enemy and damage…"
+        },
+        {
+          "slot": "R",
+          "name": "Wild Growth",
+          "cooldown": "120/100/80",
+          "description": "Lulu enlarges an ally, knocking nearby enemies into the air and granting the ally a large amount of bonus health. For the next few seconds, that ally gains an aura that slows near…"
+        }
+      ]
+    },
+    "Lux": {
+      "title": "the Lady of Luminosity",
+      "passive": {
+        "name": "Illumination",
+        "description": "Lux's damaging spells charge the target with energy for a few seconds. Lux's next attack ignites the energy, dealing bonus magic damage (depending on Lux's level) to the target."
+      },
+      "spells": [
+        {
+          "slot": "Q",
+          "name": "Light Binding",
+          "cooldown": "10",
+          "description": "Lux releases a sphere of light that binds and deals damage to up to two enemy units."
+        },
+        {
+          "slot": "W",
+          "name": "Prismatic Barrier",
+          "cooldown": "12/11.5/11/10.5/10",
+          "description": "Lux throws her wand and bends the light around any friendly target it touches, protecting them from enemy damage."
+        },
+        {
+          "slot": "E",
+          "name": "Lucent Singularity",
+          "cooldown": "10/9.5/9/8.5/8",
+          "description": "Fires an anomaly of twisted light to an area, which slows nearby enemies. Lux can detonate it to damage enemies in the area of effect."
+        },
+        {
+          "slot": "R",
+          "name": "Final Spark",
+          "cooldown": "60/50/40",
+          "description": "After gathering energy, Lux fires a beam of light that deals damage to all targets in the area. In addition, triggers Lux's passive ability and refreshes the Illumination debuff d…"
+        }
+      ]
+    },
+    "Malphite": {
+      "title": "Shard of the Monolith",
+      "passive": {
+        "name": "Granite Shield",
+        "description": "Malphite is shielded by a layer of rock which absorbs damage up to 10% of his maximum Health. If Malphite has not been hit for a few seconds, this effect recharges."
+      },
+      "spells": [
+        {
+          "slot": "Q",
+          "name": "Seismic Shard",
+          "cooldown": "8",
+          "description": "Malphite sends a shard of the earth through the ground at his foe, dealing damage upon impact and stealing Move Speed for 3 seconds."
+        },
+        {
+          "slot": "W",
+          "name": "Thunderclap",
+          "cooldown": "10/9.5/9/8.5/8",
+          "description": "Malphite attacks with such force that it creates a sonic boom. For the next few seconds, his attacks create aftershocks in front of him."
+        },
+        {
+          "slot": "E",
+          "name": "Ground Slam",
+          "cooldown": "7",
+          "description": "Malphite slams the ground, sending out a shockwave that deals magic damage based on his Armor and reduces the Attack Speed of enemies for a short duration."
+        },
+        {
+          "slot": "R",
+          "name": "Unstoppable Force",
+          "cooldown": "130/115/100",
+          "description": "Malphite launches himself to a location at high speed, damaging enemies and knocking them into the air."
+        }
+      ]
+    },
+    "Malzahar": {
+      "title": "the Prophet of the Void",
+      "passive": {
+        "name": "Void Shift",
+        "description": "When he hasn't recently taken damage or been crowd controlled, Malzahar gains massive damage reduction and crowd control immunity, lingering for a short period after taking damage."
+      },
+      "spells": [
+        {
+          "slot": "Q",
+          "name": "Call of the Void",
+          "cooldown": "6",
+          "description": "Malzahar opens up two portals to the Void. After a short delay, they fire projectiles that deal Magic Damage and silence enemy champions."
+        },
+        {
+          "slot": "W",
+          "name": "Void Swarm",
+          "cooldown": "8",
+          "description": "Malzahar summons Voidlings to attack nearby enemies."
+        },
+        {
+          "slot": "E",
+          "name": "Malefic Visions",
+          "cooldown": "11/10/9/8/7",
+          "description": "Malzahar infects his target's mind with cruel visions of their demise, dealing damage over time. Using Malzahar's other spells on the target will refresh the visions. If the targe…"
+        },
+        {
+          "slot": "R",
+          "name": "Nether Grasp",
+          "cooldown": "140/110/80",
+          "description": "Malzahar channels the essence of the Void to suppress an enemy champion over a zone of damaging negative energy."
+        }
+      ]
+    },
     "Maokai": {
       "title": "the Twisted Treant",
       "passive": {
@@ -3597,6 +2673,39 @@
           "name": "Nature's Grasp",
           "cooldown": "130/110/90",
           "description": "Maokai summons a colossal wall of brambles and thorns that slowly advances forwards, damaging and rooting any enemies in the path."
+        }
+      ]
+    },
+    "Master Yi": {
+      "title": "the Wuju Bladesman",
+      "passive": {
+        "name": "Double Strike",
+        "description": "Every few consecutive basic attack, Master Yi strikes twice."
+      },
+      "spells": [
+        {
+          "slot": "Q",
+          "name": "Alpha Strike",
+          "cooldown": "20/19.5/19/18.5/18",
+          "description": "Master Yi teleports across the battlefield with blinding speed, dealing physical damage to multiple units in his path, while simultaneously becoming untargetable. Alpha Strike can…"
+        },
+        {
+          "slot": "W",
+          "name": "Meditate",
+          "cooldown": "10",
+          "description": "Master Yi rejuvenates his body by focus of mind, restoring Health and taking reduced damage for a short time. In addition, Master Yi will gain stacks of Double Strike and pause th…"
+        },
+        {
+          "slot": "E",
+          "name": "Wuju Style",
+          "cooldown": "14",
+          "description": "Grants bonus true damage on basic attacks."
+        },
+        {
+          "slot": "R",
+          "name": "Highlander",
+          "cooldown": "85",
+          "description": "Master Yi moves with unparalleled agility, temporarily increasing his Move Speed and Attack Speed as well as making him immune to all slowing effects. While active, Champion kills…"
         }
       ]
     },
@@ -3666,6 +2775,72 @@
         }
       ]
     },
+    "Miss Fortune": {
+      "title": "the Bounty Hunter",
+      "passive": {
+        "name": "Love Tap",
+        "description": "Miss Fortune deals bonus physical damage whenever she basic attacks a new target."
+      },
+      "spells": [
+        {
+          "slot": "Q",
+          "name": "Double Up",
+          "cooldown": "7/6/5/4/3",
+          "description": "Miss Fortune fires a bullet at an enemy, damaging them and a target behind them. Both strikes can also apply Love Tap."
+        },
+        {
+          "slot": "W",
+          "name": "Strut",
+          "cooldown": "12",
+          "description": "Miss Fortune passively gains Move Speed when not attacked. This ability can be activated to grant bonus Attack Speed for a short duration. While it's on cooldown, Love Taps reduce…"
+        },
+        {
+          "slot": "E",
+          "name": "Make It Rain",
+          "cooldown": "18/17/16/15/14",
+          "description": "Miss Fortune reveals an area with a flurry of bullets, dealing waves of damage to opponents and slowing them."
+        },
+        {
+          "slot": "R",
+          "name": "Bullet Time",
+          "cooldown": "120/110/100",
+          "description": "Miss Fortune channels a barrage of bullets into a cone in front of her, dealing large amounts of damage to enemies. Each wave of Bullet Time can critically strike"
+        }
+      ]
+    },
+    "Wukong": {
+      "title": "the Monkey King",
+      "passive": {
+        "name": "Stone Skin",
+        "description": "Wukong gains stacking armor and max health regeneration while fighting champions and monsters."
+      },
+      "spells": [
+        {
+          "slot": "Q",
+          "name": "Crushing Blow",
+          "cooldown": "8/7.5/7/6.5/6",
+          "description": "Wukong's next attack gains attack range, deals bonus damage, and reduces the target's armor for a few seconds."
+        },
+        {
+          "slot": "W",
+          "name": "Warrior Trickster",
+          "cooldown": "22/21/20/19/18",
+          "description": "Wukong becomes Invisible and dashes in a direction, leaving behind a clone that will attack nearby enemies."
+        },
+        {
+          "slot": "E",
+          "name": "Nimbus Strike",
+          "cooldown": "10/9.25/8.5/7.75/7",
+          "description": "Wukong dashes to a targeted enemy and sends out images to attack enemies near his target, dealing damage to each enemy struck."
+        },
+        {
+          "slot": "R",
+          "name": "Cyclone",
+          "cooldown": "130/110/90",
+          "description": "Wukong's extends his staff and spins it around repeatedly, gaining Move Speed. Enemies struck take damage and are knocked up."
+        }
+      ]
+    },
     "Mordekaiser": {
       "title": "the Iron Revenant",
       "passive": {
@@ -3696,6 +2871,39 @@
           "name": "Realm of Death",
           "cooldown": "140/120/100",
           "description": "Mordekaiser drags his victim to a different dimension with him and steals a portion of their stats. If he kills them, he keeps the stats until the victim respawns."
+        }
+      ]
+    },
+    "Morgana": {
+      "title": "the Fallen",
+      "passive": {
+        "name": "Soul Siphon",
+        "description": "Morgana drains spirit from her enemies, healing as she deals damage to champions, large minions, and medium and larger jungler monsters."
+      },
+      "spells": [
+        {
+          "slot": "Q",
+          "name": "Dark Binding",
+          "cooldown": "10",
+          "description": "Morgana binds an enemy in place with dark magic, forcing them to feel the pain they've caused and dealing magic damage."
+        },
+        {
+          "slot": "W",
+          "name": "Tormented Shadow",
+          "cooldown": "12",
+          "description": "Morgana casts a cursed shadow on an area, damaging enemies who dare stand in her dark circle. They receive magic damage over time, which increases the lower health they are."
+        },
+        {
+          "slot": "E",
+          "name": "Black Shield",
+          "cooldown": "26/23.5/21/18.5/16",
+          "description": "Morgana anoints an ally with a protective barrier of starfire, which absorbs magical damage and disabling effects until it is broken."
+        },
+        {
+          "slot": "R",
+          "name": "Soul Shackles",
+          "cooldown": "120/110/100",
+          "description": "Morgana unleashes the full force of her Celestial power as she unbinds her wings and hovers above the ground. She lashes chains of dark pain onto nearby enemy champions, gaining M…"
         }
       ]
     },
@@ -3765,6 +2973,39 @@
         }
       ]
     },
+    "Nasus": {
+      "title": "the Curator of the Sands",
+      "passive": {
+        "name": "Soul Eater",
+        "description": "Nasus drains his foe's spiritual energy, giving him bonus Life Steal."
+      },
+      "spells": [
+        {
+          "slot": "Q",
+          "name": "Siphoning Strike",
+          "cooldown": "7.5/6.5/5.5/4.5/3.5",
+          "description": "Nasus strikes his foe, dealing damage and increasing the power of his future Siphoning Strikes if he slays his target."
+        },
+        {
+          "slot": "W",
+          "name": "Wither",
+          "cooldown": "15/14/13/12/11",
+          "description": "Nasus ages an enemy champion, decelerating their Move Speed and Attack Speed over time."
+        },
+        {
+          "slot": "E",
+          "name": "Spirit Fire",
+          "cooldown": "12",
+          "description": "Nasus unleashes a spirit flame at a location, dealing damage and reducing the Armor of enemies who stand on it."
+        },
+        {
+          "slot": "R",
+          "name": "Fury of the Sands",
+          "cooldown": "120/100/80",
+          "description": "Nasus unleashes a mighty sandstorm that batters nearby enemies. While the storm rages, he gains increased Health, Attack Range, damages nearby enemies, has a reduced cooldown on S…"
+        }
+      ]
+    },
     "Nautilus": {
       "title": "the Titan of the Depths",
       "passive": {
@@ -3828,6 +3069,39 @@
           "name": "Pop Blossom",
           "cooldown": "120/105/90",
           "description": "After a short preparation, Neeko leaps into the air, knocking up all nearby enemies. Upon landing, nearby enemies are damaged and stunned. The preparation is hidden if Neeko is di…"
+        }
+      ]
+    },
+    "Nidalee": {
+      "title": "the Bestial Huntress",
+      "passive": {
+        "name": "Prowl",
+        "description": "Moving through brush increases Nidalee's Move Speed by 10% for 2 seconds, increased to 30% toward visible enemy champions within 1400 range. Hitting champions or monsters with Jav…"
+      },
+      "spells": [
+        {
+          "slot": "Q",
+          "name": "Javelin Toss / Takedown",
+          "cooldown": "6",
+          "description": "In human form, Nidalee throws a spiked javelin at her target that gains damage as it flies. As a cougar, her next attack will attempt to fatally wound her target, dealing more dam…"
+        },
+        {
+          "slot": "W",
+          "name": "Bushwhack / Pounce",
+          "cooldown": "13/12/11/10/9",
+          "description": "In human form, Nidalee lays a trap for unwary opponents that, when sprung, damages and reveals its target. As a cougar, she jumps in a direction, dealing damage in an area where s…"
+        },
+        {
+          "slot": "E",
+          "name": "Primal Surge / Swipe",
+          "cooldown": "12",
+          "description": "In human form, Nidalee channels the spirit of the cougar to heal her allies and imbue them with Attack Speed for a short duration. As a cougar, she claws in a direction, dealing d…"
+        },
+        {
+          "slot": "R",
+          "name": "Aspect Of The Cougar",
+          "cooldown": "3",
+          "description": "Nidalee transforms into a cougar, gaining new abilities."
         }
       ]
     },
@@ -3897,6 +3171,72 @@
         }
       ]
     },
+    "Nunu & Willump": {
+      "title": "the Boy and His Yeti",
+      "passive": {
+        "name": "Call of the Freljord",
+        "description": "Nunu increases the attack speed and Move Speed of Willump and a nearby ally, and causes Willump's basic attacks to damage enemies around the target."
+      },
+      "spells": [
+        {
+          "slot": "Q",
+          "name": "Consume",
+          "cooldown": "13/12/11/10/9",
+          "description": "Willump takes a bite out of a minion, monster, or enemy champion, dealing damage and healing himself."
+        },
+        {
+          "slot": "W",
+          "name": "Biggest Snowball Ever!",
+          "cooldown": "14",
+          "description": "Willump creates a snowball that grows in size and speed as he rolls it. The snowball damages and knocks up enemies."
+        },
+        {
+          "slot": "E",
+          "name": "Snowball Barrage",
+          "cooldown": "14/13/12/11/10",
+          "description": "Nunu throws multiple snowballs that damage enemies. When he's finished, Willump roots any champions or large monsters that were hit by a snowball."
+        },
+        {
+          "slot": "R",
+          "name": "Absolute Zero",
+          "cooldown": "110/100/90",
+          "description": "Nunu & Willump create a powerful blizzard in an area that slows enemies and deals massive damage at the end."
+        }
+      ]
+    },
+    "Olaf": {
+      "title": "the Berserker",
+      "passive": {
+        "name": "Berserker Rage",
+        "description": "Olaf gains Attack Speed and Life Steal based on his missing Health."
+      },
+      "spells": [
+        {
+          "slot": "Q",
+          "name": "Undertow",
+          "cooldown": "9",
+          "description": "Olaf throws an axe into the ground at a target location, dealing damage to enemies it passes through and reducing their Armor and Move Speed. If Olaf picks up the axe, the ability…"
+        },
+        {
+          "slot": "W",
+          "name": "Tough It Out",
+          "cooldown": "16/15/14/13/12",
+          "description": "Olaf's Attack Speed is increased and he gains a Shield."
+        },
+        {
+          "slot": "E",
+          "name": "Reckless Swing",
+          "cooldown": "11/10/9/8/7",
+          "description": "Olaf attacks with such force that it deals true damage to his target and himself, refunding the Health cost if he destroys the target."
+        },
+        {
+          "slot": "R",
+          "name": "Ragnarok",
+          "cooldown": "100/90/80",
+          "description": "Olaf passively gains increased armor and magic resist. He can activate this ability to become immune to disables for as long as he keeps attacking."
+        }
+      ]
+    },
     "Orianna": {
       "title": "the Lady of Clockwork",
       "passive": {
@@ -3960,6 +3300,39 @@
           "name": "Call of the Forge God",
           "cooldown": "140/120/100",
           "description": "Ornn summons a massive elemental at a location which travels toward him with increasing speed. Enemies run over by the elemental take damage, are slowed and are made Brittle. Ornn…"
+        }
+      ]
+    },
+    "Pantheon": {
+      "title": "the Unbreakable Spear",
+      "passive": {
+        "name": "Mortal Will",
+        "description": "Every few spells or attacks, Pantheon's next spell is empowered."
+      },
+      "spells": [
+        {
+          "slot": "Q",
+          "name": "Comet Spear",
+          "cooldown": "11/10.25/9.5/8.75/8",
+          "description": "Pantheon either thrusts his spear or throws his spear in the chosen direction."
+        },
+        {
+          "slot": "W",
+          "name": "Shield Vault",
+          "cooldown": "13/12/11/10/9",
+          "description": "Pantheon dashes to a target, damaging and stunning them."
+        },
+        {
+          "slot": "E",
+          "name": "Aegis Assault",
+          "cooldown": "22/21/20/19/18",
+          "description": "Pantheon sets his shield, becoming invulnerable to damage from the front and striking repeatedly with his spear."
+        },
+        {
+          "slot": "R",
+          "name": "Grand Starfall",
+          "cooldown": "180/165/150",
+          "description": "Pantheon composes himself and then leaps into the air, landing at a chosen location as a comet."
         }
       ]
     },
@@ -4125,6 +3498,39 @@
           "name": "The Quickness",
           "cooldown": "130/110/90",
           "description": "Gains Move Speed, charming and dealing magic damage to enemies touched."
+        }
+      ]
+    },
+    "Rammus": {
+      "title": "the Armordillo",
+      "passive": {
+        "name": "Spiked Shell",
+        "description": "Rammus gains bonus Attack Damage scaling with his Armor and Magic Resistance."
+      },
+      "spells": [
+        {
+          "slot": "Q",
+          "name": "Powerball",
+          "cooldown": "12/10.5/9/7.5/6",
+          "description": "Rammus accelerates in a ball towards his enemies, dealing damage and slowing targets affected by the impact."
+        },
+        {
+          "slot": "W",
+          "name": "Defensive Ball Curl",
+          "cooldown": "7",
+          "description": "Rammus goes into a defensive formation, vastly increasing his Armor and Magic Resistance, and returning damage to enemies that attack him."
+        },
+        {
+          "slot": "E",
+          "name": "Frenzying Taunt",
+          "cooldown": "12",
+          "description": "Rammus taunts an enemy champion or monster into a reckless assault against him."
+        },
+        {
+          "slot": "R",
+          "name": "Soaring Slam",
+          "cooldown": "120/105/90",
+          "description": "Rammus hops into the air and slams down at a target area, dealing magic damage and slowing enemies. If cast while Rammus is in Powerball, Rammus knocks up enemies near the center…"
         }
       ]
     },
@@ -4359,6 +3765,39 @@
         }
       ]
     },
+    "Ryze": {
+      "title": "the Rune Mage",
+      "passive": {
+        "name": "Arcane Mastery",
+        "description": "Ryze's spells deal extra damage based on his Bonus Mana, and he gains a percentage increase to his maximum Mana based on his Ability Power."
+      },
+      "spells": [
+        {
+          "slot": "Q",
+          "name": "Overload",
+          "cooldown": "5",
+          "description": "Passively, Ryze's other basic abilities reset the cooldown of Overload and charge a rune. When Ryze casts Overload with 2 runes charged, he gains a brief burst of Move Speed. On c…"
+        },
+        {
+          "slot": "W",
+          "name": "Rune Prison",
+          "cooldown": "11/10.5/10/9.5/9",
+          "description": "Ryze traps a target in a cage of runes, damaging them and slowing their movement. If the target has Flux on it, they are instead rooted."
+        },
+        {
+          "slot": "E",
+          "name": "Spell Flux",
+          "cooldown": "3.5/3.25/3/2.75/2.5",
+          "description": "Ryze releases an orb of pure magical power that damages an enemy and debuffs all nearby enemies. Ryze's spells have additional effects against the debuffed enemy."
+        },
+        {
+          "slot": "R",
+          "name": "Realm Warp",
+          "cooldown": "180/160/140",
+          "description": "Passively, Overload deals even more damage against targets with Flux. On cast, Ryze creates a portal to a nearby location. After a few seconds, allies standing near the portal are…"
+        }
+      ]
+    },
     "Samira": {
       "title": "the Desert Rose",
       "passive": {
@@ -4524,6 +3963,39 @@
         }
       ]
     },
+    "Shaco": {
+      "title": "the Demon Jester",
+      "passive": {
+        "name": "Backstab",
+        "description": "Shaco's basic attacks and Two-Shiv Poison deal additional damage when striking from behind."
+      },
+      "spells": [
+        {
+          "slot": "Q",
+          "name": "Deceive",
+          "cooldown": "13/12.5/12/11.5/11",
+          "description": "Shaco becomes Invisible and teleports to target location. His first attack while Invisible is empowered, dealing bonus damage and critically striking if he attacks from behind."
+        },
+        {
+          "slot": "W",
+          "name": "Jack In The Box",
+          "cooldown": "15",
+          "description": "Shaco creates a hidden animated Jack-in-the-Box. When triggered, it will fear and attack nearby enemies."
+        },
+        {
+          "slot": "E",
+          "name": "Two-Shiv Poison",
+          "cooldown": "8",
+          "description": "Shaco's Shivs passively poison targets on hit, slowing their Move Speed. He can throw his Shivs to deal damage and poison the target. The thrown Shiv deals bonus damage if the tar…"
+        },
+        {
+          "slot": "R",
+          "name": "Hallucinate",
+          "cooldown": "100/90/80",
+          "description": "Shaco creates an illusion of himself near him, which can attack nearby enemies (Deals reduced damage to turrets). Upon death, it explodes, spawning three mini Jack in the Boxes an…"
+        }
+      ]
+    },
     "Shen": {
       "title": "the Eye of Twilight",
       "passive": {
@@ -4590,6 +4062,138 @@
         }
       ]
     },
+    "Singed": {
+      "title": "the Mad Chemist",
+      "passive": {
+        "name": "Noxious Slipstream",
+        "description": "Singed drafts off nearby champions, gaining a burst of Move Speed when passing them."
+      },
+      "spells": [
+        {
+          "slot": "Q",
+          "name": "Poison Trail",
+          "cooldown": "0",
+          "description": "Leaves a trail of poison behind Singed, dealing damage to enemies caught in the path."
+        },
+        {
+          "slot": "W",
+          "name": "Mega Adhesive",
+          "cooldown": "17/16/15/14/13",
+          "description": "Throws a vial of mega adhesive on the ground, slowing and grounding enemies who walk on it."
+        },
+        {
+          "slot": "E",
+          "name": "Fling",
+          "cooldown": "10/9.5/9/8.5/8",
+          "description": "Damages target enemy unit and flings them into the air behind Singed. If the target Singed flings lands in his Mega Adhesive, they are also rooted."
+        },
+        {
+          "slot": "R",
+          "name": "Insanity Potion",
+          "cooldown": "100",
+          "description": "Singed drinks a potent brew of chemicals, granting him increased combat stats, and making his Poison Trail apply Grievous Wounds."
+        }
+      ]
+    },
+    "Sion": {
+      "title": "The Undead Juggernaut",
+      "passive": {
+        "name": "Glory in Death",
+        "description": "After being killed, Sion will temporarily reanimate with rapidly decaying Health. His attacks become very rapid, heal him, and deal bonus damage based on his target's maximum Heal…"
+      },
+      "spells": [
+        {
+          "slot": "Q",
+          "name": "Decimating Smash",
+          "cooldown": "10/9/8/7/6",
+          "description": "Sion charges a powerful swing in an area in front of himself that will deal damage to enemies when released. If he charges for enough time, enemies hit by the swing will also be k…"
+        },
+        {
+          "slot": "W",
+          "name": "Soul Furnace",
+          "cooldown": "15/14/13/12/11",
+          "description": "Sion shields himself and can reactivate after 3 seconds to deal Magic Damage to enemies nearby. When Sion kills enemies, he passively gains maximum Health."
+        },
+        {
+          "slot": "E",
+          "name": "Roar of the Slayer",
+          "cooldown": "12/11/10/9/8",
+          "description": "Sion fires a short range shockwave that damages and slows and reduces the Armor of the first enemy hit. If the shockwave hits a minion or monster, it will be knocked back, damagin…"
+        },
+        {
+          "slot": "R",
+          "name": "Unstoppable Onslaught",
+          "cooldown": "140/100/60",
+          "description": "Sion charges in a direction, ramping up speed over time. He can steer his charge slightly with the mouse cursor location. When he collides with an enemy he deals damage and knocks…"
+        }
+      ]
+    },
+    "Sivir": {
+      "title": "the Battle Mistress",
+      "passive": {
+        "name": "Fleet of Foot",
+        "description": "Sivir gains a short burst of Move Speed when she attacks an enemy champion."
+      },
+      "spells": [
+        {
+          "slot": "Q",
+          "name": "Boomerang Blade",
+          "cooldown": "10/9.5/9/8.5/8",
+          "description": "Sivir hurls her crossblade like a boomerang, dealing damage each way."
+        },
+        {
+          "slot": "W",
+          "name": "Ricochet",
+          "cooldown": "12",
+          "description": "Sivir's next few basic attacks gain additional attack speed and bounce to nearby targets, dealing reduced damage while bouncing."
+        },
+        {
+          "slot": "E",
+          "name": "Spell Shield",
+          "cooldown": "24/22.5/21/19.5/18",
+          "description": "Creates a magical barrier that blocks a single enemy ability cast on Sivir. She receives health and a burst of movement speed if a spell is blocked."
+        },
+        {
+          "slot": "R",
+          "name": "On The Hunt",
+          "cooldown": "120/100/80",
+          "description": "Sivir leads her allies in battle, granting them a surge of Move Speed for a period of time. In addition, Sivir's attacks reduce her spell cooldowns."
+        }
+      ]
+    },
+    "Skarner": {
+      "title": "the Primordial Sovereign",
+      "passive": {
+        "name": "Threads of Vibration",
+        "description": "Skarner's Attacks, Shattered Earth, Upheaval, and Impale, apply Quaking. At max stacks of Quaking, enemies take max Health magic damage over its duration."
+      },
+      "spells": [
+        {
+          "slot": "Q",
+          "name": "Shattered Earth / Upheaval",
+          "cooldown": "8/6.75/5.5/4.25/3",
+          "description": "Skarner rips a boulder from the earth that empowers his attacks and can be thrown as a powerful projectile."
+        },
+        {
+          "slot": "W",
+          "name": "Seismic Bastion",
+          "cooldown": "10/9/8/7/6",
+          "description": "Skarner gains a shield and creates an earthquake whose shockwave damages and slows foes."
+        },
+        {
+          "slot": "E",
+          "name": "Ixtal's Impact",
+          "cooldown": "22/21/20/19/18",
+          "description": "Skarner charges forward and passes through terrain. If he collides with a champion or large monster, he'll slam them into the next wall he hits to damage and stun them."
+        },
+        {
+          "slot": "R",
+          "name": "Impale",
+          "cooldown": "120/105/90",
+          "description": "Skarner's tails lash forward to suppress enemy champions. Once suppressed, the victims will be dragged along by Skarner as he moves around."
+        }
+      ]
+    },
     "Smolder": {
       "title": "the Fiery Fledgling",
       "passive": {
@@ -4620,6 +4224,72 @@
           "name": "MMOOOMMMM!",
           "cooldown": "120/110/100",
           "description": "Smolder calls his mom to breath fire from above, dealing extra damage and slowing enemies in the center of her fire."
+        }
+      ]
+    },
+    "Sona": {
+      "title": "Maven of the Strings",
+      "passive": {
+        "name": "Power Chord",
+        "description": "Accelerando : Sona gains non-Ultimate ability haste permanently for her basic abilities as she uses her abilities well, up to a cap. Beyond that cap, further successful uses reduc…"
+      },
+      "spells": [
+        {
+          "slot": "Q",
+          "name": "Hymn of Valor",
+          "cooldown": "8",
+          "description": "Sona plays the Hymn of Valor, sends out bolts of sound, dealing magic damage to two nearby enemies, prioritizing champions and monsters. Sona gains a temporary aura that grants al…"
+        },
+        {
+          "slot": "W",
+          "name": "Aria of Perseverance",
+          "cooldown": "10",
+          "description": "Sona plays the Aria of Perseverance, sending out protective melodies, healing Sona and a nearby wounded ally. Sona gains a temporary aura that grants allies tagged by the zone a t…"
+        },
+        {
+          "slot": "E",
+          "name": "Song of Celerity",
+          "cooldown": "14",
+          "description": "Sona plays the Song of Celerity, granting nearby allies bonus Move Speed. Sona gains a temporary aura that grants allied champions tagged by the zone bonus Move Speed."
+        },
+        {
+          "slot": "R",
+          "name": "Crescendo",
+          "cooldown": "140/120/100",
+          "description": "Sona plays her ultimate chord, stunning enemy champions and forcing them to dance and dealing magic damage to them."
+        }
+      ]
+    },
+    "Soraka": {
+      "title": "the Starchild",
+      "passive": {
+        "name": "Salvation",
+        "description": "Soraka runs faster towards nearby low health allies."
+      },
+      "spells": [
+        {
+          "slot": "Q",
+          "name": "Starcall",
+          "cooldown": "8/7/6/5/4",
+          "description": "A star falls from the sky at the target location dealing magic damage and slowing enemies. If an enemy champion is hit by Starcall, Soraka recovers Health."
+        },
+        {
+          "slot": "W",
+          "name": "Astral Infusion",
+          "cooldown": "6/5/4/3/2",
+          "description": "Soraka sacrifices a portion of her own health to heal another friendly champion."
+        },
+        {
+          "slot": "E",
+          "name": "Equinox",
+          "cooldown": "20/19/18/17/16",
+          "description": "Creates a zone at a location that silences all enemies inside. When the zone expires, all enemies still inside are rooted."
+        },
+        {
+          "slot": "R",
+          "name": "Wish",
+          "cooldown": "150/135/120",
+          "description": "Soraka fills her allies with hope, instantly restoring health to herself and all allied champions."
         }
       ]
     },
@@ -4821,6 +4491,72 @@
         }
       ]
     },
+    "Taric": {
+      "title": "the Shield of Valoran",
+      "passive": {
+        "name": "Bravado",
+        "description": "Spellcasts empower Taric's next 2 basic attacks to deal bonus magic damage, reduce his spell cooldowns, and attack in quick succession."
+      },
+      "spells": [
+        {
+          "slot": "Q",
+          "name": "Starlight's Touch",
+          "cooldown": "3",
+          "description": "Heals nearby allied champions based on charges stored. Bravado-empowered attacks grant a charge of Starlight's Touch."
+        },
+        {
+          "slot": "W",
+          "name": "Bastion",
+          "cooldown": "15",
+          "description": "Passively increase the Armor of Taric and any allied champion with Bastion. Actively shields an ally and grants them Bastion for as long as they remain near Taric. Taric's spells…"
+        },
+        {
+          "slot": "E",
+          "name": "Dazzle",
+          "cooldown": "16/15/14/13/12",
+          "description": "Taric readies a beam of starlight that, after a brief delay, deals magic damage and stuns enemies."
+        },
+        {
+          "slot": "R",
+          "name": "Cosmic Radiance",
+          "cooldown": "180/150/120",
+          "description": "Pulses cosmic energy onto nearby allied champions after a delay, making them invulnerable for a short duration."
+        }
+      ]
+    },
+    "Teemo": {
+      "title": "the Swift Scout",
+      "passive": {
+        "name": "Guerrilla Warfare",
+        "description": "If Teemo stands still and takes no actions for a short duration, he becomes Invisible indefinitely. If he's in brush, Teemo can enter and maintain his Invisibility while moving. A…"
+      },
+      "spells": [
+        {
+          "slot": "Q",
+          "name": "Blinding Dart",
+          "cooldown": "7",
+          "description": "Obscures an enemy's vision with a powerful venom, dealing damage to the target unit and blinding it for the duration."
+        },
+        {
+          "slot": "W",
+          "name": "Move Quick",
+          "cooldown": "14",
+          "description": "Teemo scampers around, passively increasing his Move Speed until he is struck by an enemy champion or turret. Teemo can sprint to gain bonus Move Speed that isn't stopped by being…"
+        },
+        {
+          "slot": "E",
+          "name": "Toxic Shot",
+          "cooldown": "0",
+          "description": "Each of Teemo's attacks will poison the target %i:OnHit% On-Hit , dealing damage on impact and each second after for 4 seconds."
+        },
+        {
+          "slot": "R",
+          "name": "Noxious Trap",
+          "cooldown": "0.25",
+          "description": "Teemo throws an explosive poisonous trap using one of the mushrooms stored in his pack. If an enemy steps on the trap, it will release a poisonous cloud, slowing enemies and damag…"
+        }
+      ]
+    },
     "Thresh": {
       "title": "the Chain Warden",
       "passive": {
@@ -4854,6 +4590,39 @@
         }
       ]
     },
+    "Tristana": {
+      "title": "the Yordle Gunner",
+      "passive": {
+        "name": "Draw a Bead",
+        "description": "Increases Tristana's Attack Range as she levels."
+      },
+      "spells": [
+        {
+          "slot": "Q",
+          "name": "Rapid Fire",
+          "cooldown": "20/19/18/17/16",
+          "description": "Tristana fires her weapon rapidly, increasing her Attack Speed for a short time."
+        },
+        {
+          "slot": "W",
+          "name": "Rocket Jump",
+          "cooldown": "22/20/18/16/14",
+          "description": "Tristana fires at the ground to propel her to a distant location, dealing damage and slowing surrounding units for a brief period where she lands."
+        },
+        {
+          "slot": "E",
+          "name": "Explosive Charge",
+          "cooldown": "16/15.5/15/14.5/14",
+          "description": "When Tristana kills a unit, her cannonballs burst into shrapnel, dealing damage to surrounding enemies. Can be activated to place a bomb on a target enemy that explodes after a sh…"
+        },
+        {
+          "slot": "R",
+          "name": "Buster Shot",
+          "cooldown": "100",
+          "description": "Tristana loads a massive cannonball into her weapon and fires it at an enemy unit. This deals Magic Damage and knocks the target back. If the target is carrying the Explosive Char…"
+        }
+      ]
+    },
     "Trundle": {
       "title": "the Troll King",
       "passive": {
@@ -4884,6 +4653,105 @@
           "name": "Subjugate",
           "cooldown": "120/100/80",
           "description": "Trundle immediately steals a percent of his target's Health, Armor and Magic Resistance. Over the next 4 seconds the amount of Health, Armor, and Magic Resistance stolen is double…"
+        }
+      ]
+    },
+    "Tryndamere": {
+      "title": "the Barbarian King",
+      "passive": {
+        "name": "Battle Fury",
+        "description": "Tryndamere gains Fury for each attack, critical strike, and killing blow he makes. Fury passively increases his Critical Strike Chance and can be consumed with his Bloodlust spell."
+      },
+      "spells": [
+        {
+          "slot": "Q",
+          "name": "Bloodlust",
+          "cooldown": "12",
+          "description": "Tryndamere thrives on the thrills of combat, increasing his Attack Damage as he is more and more wounded. He can cast Bloodlust to consume his Fury and heal himself."
+        },
+        {
+          "slot": "W",
+          "name": "Mocking Shout",
+          "cooldown": "14",
+          "description": "Tryndamere lets out an insulting cry, decreasing surrounding champions' Attack Damage. Enemies with their backs turned to Tryndamere also have their Move Speed reduced."
+        },
+        {
+          "slot": "E",
+          "name": "Spinning Slash",
+          "cooldown": "12/11/10/9/8",
+          "description": "Tryndamere slices toward a target unit, dealing damage to enemies in his path."
+        },
+        {
+          "slot": "R",
+          "name": "Undying Rage",
+          "cooldown": "120/100/80",
+          "description": "Tryndamere's lust for battle becomes so strong that he is unable to die, no matter how wounded he becomes."
+        }
+      ]
+    },
+    "Twisted Fate": {
+      "title": "the Card Master",
+      "passive": {
+        "name": "Loaded Dice",
+        "description": "Upon killing a unit, Twisted Fate rolls his 'lucky' dice receiving 1 to 6 bonus gold."
+      },
+      "spells": [
+        {
+          "slot": "Q",
+          "name": "Wild Cards",
+          "cooldown": "6/5.75/5.5/5.25/5",
+          "description": "Twisted Fate throws three cards, dealing damage to each enemy unit they pass through."
+        },
+        {
+          "slot": "W",
+          "name": "Pick a Card",
+          "cooldown": "6",
+          "description": "Twisted Fate chooses a magic card from his deck, and uses that for his next attack, causing bonus effects."
+        },
+        {
+          "slot": "E",
+          "name": "Stacked Deck",
+          "cooldown": "0",
+          "description": "Every 4 attacks, Twisted Fate deals bonus damage. In addition, his Attack Speed is increased."
+        },
+        {
+          "slot": "R",
+          "name": "Destiny",
+          "cooldown": "170/140/110",
+          "description": "Twisted Fate predicts the fortunes of his foes, revealing all enemy champions and enabling the use of Gate, which teleports Twisted Fate to any target location in 1.5 seconds."
+        }
+      ]
+    },
+    "Twitch": {
+      "title": "the Plague Rat",
+      "passive": {
+        "name": "Deadly Venom",
+        "description": "Twitch's basic attacks infect the target %i:OnHit% On-Hit , dealing true damage each second."
+      },
+      "spells": [
+        {
+          "slot": "Q",
+          "name": "Ambush",
+          "cooldown": "16",
+          "description": "Twitch becomes Camouflaged for a short duration and gains Move Speed. When leaving Camouflage, Twitch gains Attack Speed for a short duration. When an enemy champion with Deadly V…"
+        },
+        {
+          "slot": "W",
+          "name": "Venom Cask",
+          "cooldown": "13/12/11/10/9",
+          "description": "Twitch hurls a cask of venom that explodes in an area, slowing targets and applying deadly venom to the target."
+        },
+        {
+          "slot": "E",
+          "name": "Contaminate",
+          "cooldown": "12/11/10/9/8",
+          "description": "Twitch wreaks further havoc on poisoned enemies with a blast of his vile diseases."
+        },
+        {
+          "slot": "R",
+          "name": "Spray and Pray",
+          "cooldown": "90",
+          "description": "Twitch unleashes the full power of his crossbow, shooting bolts over a great distance that pierce all enemies caught in their path."
         }
       ]
     },
@@ -4983,6 +4851,72 @@
           "name": "Chain of Corruption",
           "cooldown": "100/80/60",
           "description": "Varus flings out a damaging tendril of corruption that immobilizes the first enemy champion hit and then spreads towards nearby uninfected champions, immobilizing them too on cont…"
+        }
+      ]
+    },
+    "Vayne": {
+      "title": "the Night Hunter",
+      "passive": {
+        "name": "Night Hunter",
+        "description": "Vayne ruthlessly hunts evil-doers, gaining Move Speed when moving toward nearby enemy champions."
+      },
+      "spells": [
+        {
+          "slot": "Q",
+          "name": "Tumble",
+          "cooldown": "6/5/4/3/2",
+          "description": "Vayne tumbles, maneuvering to carefully place her next shot. Her next attack deals bonus damage."
+        },
+        {
+          "slot": "W",
+          "name": "Silver Bolts",
+          "cooldown": "0",
+          "description": "Vayne tips her bolts with a rare metal, toxic to evil things. The third consecutive attack or ability against the same target deals a percentage of the target's max health as bonu…"
+        },
+        {
+          "slot": "E",
+          "name": "Condemn",
+          "cooldown": "20/18/16/14/12",
+          "description": "Vayne draws a heavy crossbow from her back, and fires a huge bolt at her target, knocking them back and dealing damage. If they collide with terrain, they are impaled, dealing bon…"
+        },
+        {
+          "slot": "R",
+          "name": "Final Hour",
+          "cooldown": "100/85/70",
+          "description": "Readying herself for an epic confrontation, Vayne gains increased Attack Damage, Invisibility during Tumble, reduced Tumble cooldown, and more bonus Move Speed from Night Hunter"
+        }
+      ]
+    },
+    "Veigar": {
+      "title": "the Tiny Master of Evil",
+      "passive": {
+        "name": "Phenomenal Evil Power",
+        "description": "Veigar is the greatest Evil to ever strike at the hearts of Runeterra - and he's only getting bigger! Striking an enemy Champion with a spell or scoring a takedown grants Veigar p…"
+      },
+      "spells": [
+        {
+          "slot": "Q",
+          "name": "Baleful Strike",
+          "cooldown": "6/5.5/5/4.5/4",
+          "description": "Veigar unleashes a bolt of dark energy that deals magic damage to the first two enemies hit. Units killed by this bolt grant Veigar some ability power permanently."
+        },
+        {
+          "slot": "W",
+          "name": "Dark Matter",
+          "cooldown": "0",
+          "description": "Veigar calls a great mass of dark matter to fall from the sky to the target location, dealing magic damage when it lands. Stacks of Phenomenal Evil reduce Dark Matter's cooldown."
+        },
+        {
+          "slot": "E",
+          "name": "Event Horizon",
+          "cooldown": "20/18.5/17/15.5/14",
+          "description": "Veigar twists the edges of space, creating a cage that Stuns enemies that pass through."
+        },
+        {
+          "slot": "R",
+          "name": "Primordial Burst",
+          "cooldown": "120/90/60",
+          "description": "Blasts target enemy champion, dealing a large amount of magic damage, increasing based on the target's missing health."
         }
       ]
     },
@@ -5214,6 +5148,39 @@
           "name": "Stormbringer",
           "cooldown": "160/135/110",
           "description": "Volibear leaps to a target location, Slowing and damaging enemies beneath him while gaining bonus Health. Enemy towers near his landing location become temporarily disabled."
+        }
+      ]
+    },
+    "Warwick": {
+      "title": "the Uncaged Wrath of Zaun",
+      "passive": {
+        "name": "Eternal Hunger",
+        "description": "Warwick's basic attacks deal bonus magic damage. If Warwick is below 50% health, he heals the same amount. If Warwick is below 25% health, this healing triples."
+      },
+      "spells": [
+        {
+          "slot": "Q",
+          "name": "Jaws of the Beast",
+          "cooldown": "8/7.5/7/6.5/6",
+          "description": "Warwick lunges forward and bites his target, dealing damage based on their maximum health and healing for damage dealt."
+        },
+        {
+          "slot": "W",
+          "name": "Blood Hunt",
+          "cooldown": "80/70/60/50/40",
+          "description": "Warwick senses enemies below 50% health, gaining Move Speed toward and attack speed against them. When they fall below 25% health, he frenzies and these bonuses triple."
+        },
+        {
+          "slot": "E",
+          "name": "Primal Howl",
+          "cooldown": "15/14/13/12/11",
+          "description": "Warwick gains damage reduction for 2.5 seconds. At the end, or if re-activated, he howls, causing nearby enemies to flee for 1 second."
+        },
+        {
+          "slot": "R",
+          "name": "Infinite Duress",
+          "cooldown": "110/90/70",
+          "description": "Warwick leaps in a direction (scaling with his bonus Move Speed), suppressing the first champion he collides with for 1.5 seconds."
         }
       ]
     },
@@ -5643,6 +5610,39 @@
           "name": "Mega Inferno Bomb",
           "cooldown": "120/95/70",
           "description": "Ziggs deploys his ultimate creation, the Mega Inferno Bomb, hurling it an enormous distance. Enemies in the primary blast zone take more damage than those farther away."
+        }
+      ]
+    },
+    "Zilean": {
+      "title": "the Chronokeeper",
+      "passive": {
+        "name": "Time In A Bottle",
+        "description": "Zilean stores time as Experience and can grant it to his allies. When he has enough Experience to finish an ally's level up, he can right-click them to impart it. Zilean receives…"
+      },
+      "spells": [
+        {
+          "slot": "Q",
+          "name": "Time Bomb",
+          "cooldown": "10/9.5/9/8.5/8",
+          "description": "Tosses a bomb to target area that sticks to units that come near it (prioritizes Champions). It detonates after 3 seconds, dealing area of effect damage. If a Time Bomb is detonat…"
+        },
+        {
+          "slot": "W",
+          "name": "Rewind",
+          "cooldown": "14/12/10/8/6",
+          "description": "Zilean can prepare himself for future confrontations, reducing the cooldowns of his other basic abilities."
+        },
+        {
+          "slot": "E",
+          "name": "Time Warp",
+          "cooldown": "15",
+          "description": "Zilean bends time around any unit, decreasing an enemy's Move Speed or increasing an ally's Move Speed for a short time."
+        },
+        {
+          "slot": "R",
+          "name": "Chronoshift",
+          "cooldown": "120/90/60",
+          "description": "Zilean places a protective time rune on an allied champion, teleporting the champion back in time if they take lethal damage."
         }
       ]
     },
