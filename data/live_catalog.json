@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-13T12:36:35.406132+00:00",
+  "generatedAt": "2026-08-13T18:42:04.568954+00:00",
   "sources": {
     "heroes": "https://game.gtimg.cn/images/lgamem/act/lrlib/js/heroList/hero_list.js",
     "items": "https://game.gtimg.cn/images/lgamem/act/lrlib/js/equip/equip.js",
@@ -20128,7 +20128,7 @@
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/EquipIcons/lol_gg.png",
       "price": "2500",
       "description": [
-        "生命值 +300 最大生命值\n +50% 基础法力回复\n冷却 +15 技能急速\n\n净除（主动）：移除一名友方英雄身上所有的控制效果（除击飞和压制以外），并免疫所有控制效果，持续0.2秒，还会治疗目标150~250生命值。（90秒冷却时间）\n\n"
+        "生命值 +300 最大生命值\n +50% 基础法力回复\n冷却 +15 技能急速\n\n净除（主动）：移除一名友方英雄身上所有的控制效果（除击飞和压制以外），并免疫所有控制效果，持续0.2秒，还会治疗目标150~250生命值。（75秒冷却时间）\n\n"
       ],
       "labels": [],
       "from": [
@@ -20253,15 +20253,15 @@
           "source_line": "净除（主动）：移除一名友方英雄身上所有的控制效果（除击飞和压制以外），并免疫所有控制效果，持续0.2秒，还会治疗目标150~250生命值"
         },
         {
-          "name": "（90秒冷却时间）",
+          "name": "（75秒冷却时间）",
           "trigger": "passive_always",
           "effect_type": "modifier",
           "values": [
-            "90"
+            "75"
           ],
           "scaling": [],
-          "cooldown": 90.0,
-          "duration": 90.0,
+          "cooldown": 75.0,
+          "duration": 75.0,
           "caps": null,
           "conditions": [],
           "damage_type": null,
@@ -20270,7 +20270,7 @@
             "applies_on_hit": false,
             "unique": false
           },
-          "source_line": "（90秒冷却时间）"
+          "source_line": "（75秒冷却时间）"
         }
       ],
       "effect_parse_status": "ok",
