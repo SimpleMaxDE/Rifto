@@ -1,77 +1,47 @@
 {
-  "patch": "7.2c",
-  "sourceUrl": "https://wildrift.leagueoflegends.com/en-gb/news/game-updates/wild-rift-patch-notes-7-2c",
-  "generatedAt": "2026-08-26T07:09:16.607724+00:00",
+  "patch": "7.2d",
+  "sourceUrl": "https://wildrift.leagueoflegends.com/en-gb/news/game-updates/wild-rift-patch-notes-7-2d",
+  "generatedAt": "2026-08-26T13:16:57.800716+00:00",
   "championBuffs": [
     {
-      "name": "Diana",
+      "name": "Syndra",
       "delta": 1.0,
       "note": "Automatisch erkannt: Buff/Verbesserung im Patchtext."
     },
     {
-      "name": "Jinx",
+      "name": "Yuumi",
       "delta": 1.0,
       "note": "Automatisch erkannt: Buff/Verbesserung im Patchtext."
     },
     {
-      "name": "Ryze",
+      "name": "Vi",
       "delta": 1.0,
       "note": "Automatisch erkannt: Buff/Verbesserung im Patchtext."
     }
   ],
   "championNerfs": [
     {
-      "name": "Master Yi",
+      "name": "Twisted Fate",
       "delta": -1.0,
       "note": "Automatisch erkannt: Nerf/Abschwächung im Patchtext."
     },
     {
-      "name": "Jarvan IV",
+      "name": "Mordekaiser",
       "delta": -1.0,
       "note": "Automatisch erkannt: Nerf/Abschwächung im Patchtext."
     },
     {
-      "name": "Nocturne",
+      "name": "Vladimir",
       "delta": -1.0,
       "note": "Automatisch erkannt: Nerf/Abschwächung im Patchtext."
     },
     {
-      "name": "Xin Zhao",
+      "name": "Pantheon",
       "delta": -1.0,
       "note": "Automatisch erkannt: Nerf/Abschwächung im Patchtext."
     },
     {
-      "name": "Orianna",
-      "delta": -1.0,
-      "note": "Automatisch erkannt: Nerf/Abschwächung im Patchtext."
-    },
-    {
-      "name": "Kennen",
-      "delta": -1.0,
-      "note": "Automatisch erkannt: Nerf/Abschwächung im Patchtext."
-    },
-    {
-      "name": "Zilean",
-      "delta": -1.0,
-      "note": "Automatisch erkannt: Nerf/Abschwächung im Patchtext."
-    },
-    {
-      "name": "Karma",
-      "delta": -1.0,
-      "note": "Automatisch erkannt: Nerf/Abschwächung im Patchtext."
-    },
-    {
-      "name": "Amumu",
-      "delta": -1.0,
-      "note": "Automatisch erkannt: Nerf/Abschwächung im Patchtext."
-    },
-    {
-      "name": "Viego",
-      "delta": -1.0,
-      "note": "Automatisch erkannt: Nerf/Abschwächung im Patchtext."
-    },
-    {
-      "name": "Riven",
+      "name": "Thresh",
       "delta": -1.0,
       "note": "Automatisch erkannt: Nerf/Abschwächung im Patchtext."
     },
@@ -81,45 +51,20 @@
       "note": "Automatisch erkannt: Nerf/Abschwächung im Patchtext."
     },
     {
-      "name": "Nasus",
-      "delta": -1.0,
-      "note": "Automatisch erkannt: Nerf/Abschwächung im Patchtext."
-    },
-    {
-      "name": "Annie",
-      "delta": -1.0,
-      "note": "Automatisch erkannt: Nerf/Abschwächung im Patchtext."
-    },
-    {
-      "name": "Shen",
-      "delta": -1.0,
-      "note": "Automatisch erkannt: Nerf/Abschwächung im Patchtext."
-    },
-    {
-      "name": "Gnar",
-      "delta": -1.0,
-      "note": "Automatisch erkannt: Nerf/Abschwächung im Patchtext."
-    },
-    {
-      "name": "Bard",
-      "delta": -1.0,
-      "note": "Automatisch erkannt: Nerf/Abschwächung im Patchtext."
-    },
-    {
-      "name": "Olaf",
-      "delta": -1.0,
-      "note": "Automatisch erkannt: Nerf/Abschwächung im Patchtext."
-    },
-    {
-      "name": "Zed",
-      "delta": -1.0,
-      "note": "Automatisch erkannt: Nerf/Abschwächung im Patchtext."
-    },
-    {
-      "name": "Zoe",
+      "name": "Fiora",
       "delta": -1.0,
       "note": "Automatisch erkannt: Nerf/Abschwächung im Patchtext."
     }
   ],
-  "itemChanges": []
+  "itemChanges": [
+    {
+      "name": "Rabadon's Deathcap",
+      "direction": "nerf",
+      "impactTags": [
+        "mage"
+      ],
+      "delta": -1.0,
+      "note": "Automatisch erkannt aus den offiziellen Patchnotes."
+    }
+  ]
 }
