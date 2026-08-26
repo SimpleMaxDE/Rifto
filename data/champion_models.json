@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-08-25T18:19:45.390006+00:00",
-  "source": "https://ddragon.leagueoflegends.com/cdn/16.16.1/data/en_US/championFull.json",
-  "version": "16.16.1",
+  "generatedAt": "2026-08-26T00:26:52.584681+00:00",
+  "source": "https://ddragon.leagueoflegends.com/cdn/16.17.1/data/en_US/championFull.json",
+  "version": "16.17.1",
   "champions": {
     "Aatrox": {
       "id": "Aatrox",
@@ -6040,11 +6040,11 @@
             3
           ],
           "cost": [
+            30,
             35,
             40,
             45,
-            50,
-            55
+            50
           ],
           "range": [
             750,
@@ -6181,10 +6181,10 @@
           "name": "Astral Flight",
           "cooldown": [
             22,
-            20.5,
-            19,
-            17.5,
-            16
+            20,
+            18,
+            16,
+            14
           ],
           "cost": [
             50,
@@ -6255,10 +6255,10 @@
               "scaling": [],
               "cooldown": [
                 22,
-                20.5,
-                19,
-                17.5,
-                16
+                20,
+                18,
+                16,
+                14
               ],
               "duration": null,
               "caps": null,
@@ -6279,10 +6279,10 @@
               "scaling": [],
               "cooldown": [
                 22,
-                20.5,
-                19,
-                17.5,
-                16
+                20,
+                18,
+                16,
+                14
               ],
               "duration": null,
               "caps": null,
@@ -6303,10 +6303,10 @@
               "scaling": [],
               "cooldown": [
                 22,
-                20.5,
-                19,
-                17.5,
-                16
+                20,
+                18,
+                16,
+                14
               ],
               "duration": null,
               "caps": null,
@@ -6327,10 +6327,10 @@
               "scaling": [],
               "cooldown": [
                 22,
-                20.5,
-                19,
-                17.5,
-                16
+                20,
+                18,
+                16,
+                14
               ],
               "duration": null,
               "caps": null,
@@ -6351,10 +6351,10 @@
               "scaling": [],
               "cooldown": [
                 22,
-                20.5,
-                19,
-                17.5,
-                16
+                20,
+                18,
+                16,
+                14
               ],
               "duration": null,
               "caps": null,
@@ -38220,7 +38220,7 @@
         "ad": 55,
         "ad_per_level": 0,
         "attack_speed": 0.658,
-        "attack_speed_per_level": 2.35,
+        "attack_speed_per_level": 1.5,
         "move_speed": 340,
         "hp_regen": 7.5,
         "hp_regen_per_level": 0.55
@@ -52111,11 +52111,11 @@
       "title": "the Eternal Nightmare",
       "resource": "Mana",
       "stats": {
-        "hp": 655,
+        "hp": 640,
         "hp_per_level": 109,
         "mp": 275,
         "mp_per_level": 35,
-        "armor": 38,
+        "armor": 36,
         "armor_per_level": 4.2,
         "mr": 32,
         "mr_per_level": 1.55,
@@ -76212,29 +76212,29 @@
             750,
             750
           ],
-          "base_damage": "0.2/0.28/0.36/0.44/0.52",
+          "base_damage": "0",
           "damage_type": null,
           "cc_duration": null,
           "damage_effects": [
             {
               "index": 1,
-              "values": "0.2/0.28/0.36/0.44/0.52"
+              "values": "0"
             },
             {
               "index": 2,
-              "values": "0.3/0.45/0.6/0.75/0.9"
+              "values": "0"
             },
             {
               "index": 3,
-              "values": "0.25"
+              "values": "0"
             },
             {
               "index": 4,
-              "values": "8"
+              "values": "0"
             },
             {
               "index": 5,
-              "values": "775"
+              "values": "0"
             },
             {
               "index": 6,
@@ -79657,8 +79657,8 @@
       "title": "the Night Hunter",
       "resource": "Mana",
       "stats": {
-        "hp": 550,
-        "hp_per_level": 103,
+        "hp": 580,
+        "hp_per_level": 98,
         "mp": 232,
         "mp_per_level": 35,
         "armor": 23,
@@ -79668,10 +79668,10 @@
         "ad": 60,
         "ad_per_level": 0,
         "attack_speed": 0.658,
-        "attack_speed_per_level": 3.3,
+        "attack_speed_per_level": 2.8,
         "move_speed": 330,
-        "hp_regen": 3.5,
-        "hp_regen_per_level": 0.55
+        "hp_regen": 4,
+        "hp_regen_per_level": 0.5
       },
       "passive": {
         "name": "Night Hunter",
@@ -79710,10 +79710,10 @@
             2
           ],
           "cost": [
-            30,
-            30,
-            30,
-            30,
+            46,
+            42,
+            38,
+            34,
             30
           ],
           "range": [
@@ -85475,7 +85475,7 @@
       "title": "the Magus Ascendant",
       "resource": "Mana",
       "stats": {
-        "hp": 596,
+        "hp": 575,
         "hp_per_level": 106,
         "mp": 400,
         "mp_per_level": 22,
@@ -85559,13 +85559,13 @@
             750,
             750
           ],
-          "base_damage": "75/115/155/195/235",
+          "base_damage": "70/110/150/190/230",
           "damage_type": "magic",
           "cc_duration": null,
           "damage_effects": [
             {
               "index": 1,
-              "values": "75/115/155/195/235"
+              "values": "70/110/150/190/230"
             },
             {
               "index": 2,
@@ -89875,7 +89875,6 @@
         }
       ],
       "keywords": [
-        "assassin",
         "cc",
         "dps",
         "engage",
