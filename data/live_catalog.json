@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-04T09:59:53.537555+00:00",
+  "generatedAt": "2026-09-04T15:10:30.954337+00:00",
   "sources": {
     "heroes": "https://game.gtimg.cn/images/lgamem/act/lrlib/js/heroList/hero_list.js",
     "items": "https://game.gtimg.cn/images/lgamem/act/lrlib/js/equip/equip.js",
@@ -5466,7 +5466,7 @@
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/EquipIcons/lol_yzfr.png",
       "price": "3000",
       "description": [
-        "生命值 +250 最大生命值\n攻击力 +50 攻击力\n护甲穿透 +8 护甲穿透\n\n废除：提供一个可以阻挡下一个敌方技能的法术护盾。（35秒冷却时间）\n\n"
+        "生命值 +250 最大生命值\n攻击力 +50 攻击力\n护甲穿透 +12 护甲穿透\n\n废除：提供一个可以阻挡下一个敌方技能的法术护盾。（35秒冷却时间）\n\n"
       ],
       "labels": [],
       "from": [
@@ -5490,7 +5490,7 @@
         "ability_haste": "0",
         "attack_speed": "0",
         "crit_rate": "0",
-        "armor_pen_flat": "80000",
+        "armor_pen_flat": "120000",
         "armor_pen_pct": "0",
         "magic_pen_flat": "0",
         "magic_pen_pct": "0",
@@ -5555,11 +5555,11 @@
           "source_line": "攻击力 +50 攻击力"
         },
         {
-          "name": "护甲穿透 +8 护甲穿透",
+          "name": "护甲穿透 +12 护甲穿透",
           "trigger": "passive_always",
           "effect_type": "penetration",
           "values": [
-            "8"
+            "12"
           ],
           "scaling": [],
           "cooldown": null,
@@ -5572,7 +5572,7 @@
             "applies_on_hit": false,
             "unique": false
           },
-          "source_line": "护甲穿透 +8 护甲穿透"
+          "source_line": "护甲穿透 +12 护甲穿透"
         },
         {
           "name": "废除：提供一个可以阻挡下一个敌方技能的法术护盾",
@@ -24631,7 +24631,7 @@
       "item_id": "2701",
       "name": "风暴狂涌",
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/EquipIcons/lol_fbky.png",
-      "price": "2900",
+      "price": "2800",
       "description": [
         "法术强度 +90 法术强度\n增加法术穿透 +15 法术穿透\n移动速度 +6% 移动速度\n\n风暴掠袭：在2.5秒内对一个英雄造成相当于其25%最大生命值的伤害时，对其施加风啸，并为自身提供持续2.5秒的25%移动速度加成。（25秒冷却时间）\n\n风啸：在2秒后，打击该目标，从而对其造成魔法伤害（125+10%法术强度）。如果敌人在打击前被击败，那么它会立刻引爆，造成大范围爆炸并提供25金币。\n\n"
       ],
