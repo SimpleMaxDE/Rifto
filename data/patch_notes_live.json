@@ -1,15 +1,30 @@
 {
-  "patch": "7.2d",
-  "sourceUrl": "https://wildrift.leagueoflegends.com/en-gb/news/game-updates/wild-rift-patch-notes-7-2d",
-  "generatedAt": "2026-09-09T04:44:47.171285+00:00",
+  "patch": "7.2e",
+  "sourceUrl": "https://wildrift.leagueoflegends.com/en-gb/news/game-updates/wild-rift-patch-notes-72e",
+  "generatedAt": "2026-09-09T11:25:28.280936+00:00",
   "championBuffs": [
     {
-      "name": "Syndra",
+      "name": "Nautilus",
       "delta": 1.0,
       "note": "Automatisch erkannt: Buff/Verbesserung im Patchtext."
     },
     {
-      "name": "Yuumi",
+      "name": "Malphite",
+      "delta": 1.0,
+      "note": "Automatisch erkannt: Buff/Verbesserung im Patchtext."
+    },
+    {
+      "name": "Swain",
+      "delta": 1.0,
+      "note": "Automatisch erkannt: Buff/Verbesserung im Patchtext."
+    },
+    {
+      "name": "Janna",
+      "delta": 1.0,
+      "note": "Automatisch erkannt: Buff/Verbesserung im Patchtext."
+    },
+    {
+      "name": "Pyke",
       "delta": 1.0,
       "note": "Automatisch erkannt: Buff/Verbesserung im Patchtext."
     },
@@ -19,52 +34,6 @@
       "note": "Automatisch erkannt: Buff/Verbesserung im Patchtext."
     }
   ],
-  "championNerfs": [
-    {
-      "name": "Twisted Fate",
-      "delta": -1.0,
-      "note": "Automatisch erkannt: Nerf/Abschwächung im Patchtext."
-    },
-    {
-      "name": "Mordekaiser",
-      "delta": -1.0,
-      "note": "Automatisch erkannt: Nerf/Abschwächung im Patchtext."
-    },
-    {
-      "name": "Pantheon",
-      "delta": -1.0,
-      "note": "Automatisch erkannt: Nerf/Abschwächung im Patchtext."
-    },
-    {
-      "name": "Vladimir",
-      "delta": -1.0,
-      "note": "Automatisch erkannt: Nerf/Abschwächung im Patchtext."
-    },
-    {
-      "name": "Thresh",
-      "delta": -1.0,
-      "note": "Automatisch erkannt: Nerf/Abschwächung im Patchtext."
-    },
-    {
-      "name": "Fiora",
-      "delta": -1.0,
-      "note": "Automatisch erkannt: Nerf/Abschwächung im Patchtext."
-    },
-    {
-      "name": "Akali",
-      "delta": -1.0,
-      "note": "Automatisch erkannt: Nerf/Abschwächung im Patchtext."
-    }
-  ],
-  "itemChanges": [
-    {
-      "name": "Rabadon's Deathcap",
-      "direction": "nerf",
-      "impactTags": [
-        "mage"
-      ],
-      "delta": -1.0,
-      "note": "Automatisch erkannt aus den offiziellen Patchnotes."
-    }
-  ]
+  "championNerfs": [],
+  "itemChanges": []
 }
