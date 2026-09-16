@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-16T01:47:26.980828+00:00",
+  "generatedAt": "2026-09-16T15:35:43.830410+00:00",
   "sources": {
     "heroes": "https://game.gtimg.cn/images/lgamem/act/lrlib/js/heroList/hero_list.js",
     "items": "https://game.gtimg.cn/images/lgamem/act/lrlib/js/equip/equip.js",
@@ -9902,7 +9902,7 @@
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/EquipIcons/Seekers_Armguard.png",
       "price": "1400",
       "description": [
-        "护甲 +20 护甲\n法术强度 +35 法术强度\n\n凝滞（主动）：使用后2.5秒内对伤害免疫且无法被选定，但无法移动、发起普攻、施放技能或再使用装备。（120秒冷却时间）\n\n"
+        "护甲 +20 护甲\n法术强度 +35 法术强度\n\n凝滞（主动）：使用后2.5秒内对伤害免疫且无法被选定，但无法移动、发起普攻、施放技能或再使用装备。（150秒冷却时间）\n\n"
       ],
       "labels": [],
       "from": [
@@ -10000,15 +10000,15 @@
           "source_line": "凝滞（主动）：使用后2.5秒内对伤害免疫且无法被选定，但无法移动、发起普攻、施放技能或再使用装备"
         },
         {
-          "name": "（120秒冷却时间）",
+          "name": "（150秒冷却时间）",
           "trigger": "passive_always",
           "effect_type": "modifier",
           "values": [
-            "120"
+            "150"
           ],
           "scaling": [],
-          "cooldown": 120.0,
-          "duration": 120.0,
+          "cooldown": 150.0,
+          "duration": 150.0,
           "caps": null,
           "conditions": [],
           "damage_type": null,
@@ -10017,7 +10017,7 @@
             "applies_on_hit": false,
             "unique": false
           },
-          "source_line": "（120秒冷却时间）"
+          "source_line": "（150秒冷却时间）"
         }
       ],
       "effect_parse_status": "ok",
@@ -11117,12 +11117,12 @@
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/EquipIcons/lol_wzhy.png",
       "price": "3000",
       "description": [
-        "生命值 +200 最大生命值\n护甲 +45 护甲\n魔法抗性 +45 魔法抗性\n\n苦楚：在与英雄的战斗状态下，每隔4秒对附近英雄造成3%自身最大生命值的魔法伤害，并治疗自身相当于250%已造成伤害的生命值。苦楚不受装备技能急速影响。\n\n"
+        "生命值 +300 最大生命值\n护甲 +40 护甲\n魔法抗性 +40 魔法抗性\n冷却 +10 技能急速\n\n苦楚：在与英雄的战斗状态下，每隔4秒对附近英雄造成3%自身最大生命值的魔法伤害，并治疗自身相当于250%已造成伤害的生命值。苦楚不受装备技能急速影响。\n\n"
       ],
       "labels": [],
       "from": [
-        "2302",
         "2305",
+        "2306",
         "2309"
       ],
       "into": "",
@@ -11133,9 +11133,9 @@
         "stackable": false
       },
       "stats": {
-        "hp": "2000000",
-        "armor": "450000",
-        "mr": "450000",
+        "hp": "3000000",
+        "armor": "400000",
+        "mr": "400000",
         "ad": "0",
         "ap": "0",
         "ability_haste": "0",
@@ -11156,16 +11156,16 @@
       },
       "effects": [
         {
-          "name": "生命值 +200 最大生命值",
+          "name": "生命值 +300 最大生命值",
           "trigger": "passive_always",
           "effect_type": "modifier",
           "values": [
-            "200"
+            "300"
           ],
           "scaling": [
             {
               "source": "target_max_hp",
-              "ratio": 200.0
+              "ratio": 300.0
             }
           ],
           "cooldown": null,
@@ -11178,14 +11178,14 @@
             "applies_on_hit": false,
             "unique": false
           },
-          "source_line": "生命值 +200 最大生命值"
+          "source_line": "生命值 +300 最大生命值"
         },
         {
-          "name": "护甲 +45 护甲",
+          "name": "护甲 +40 护甲",
           "trigger": "passive_always",
           "effect_type": "modifier",
           "values": [
-            "45"
+            "40"
           ],
           "scaling": [],
           "cooldown": null,
@@ -11198,14 +11198,14 @@
             "applies_on_hit": false,
             "unique": false
           },
-          "source_line": "护甲 +45 护甲"
+          "source_line": "护甲 +40 护甲"
         },
         {
-          "name": "魔法抗性 +45 魔法抗性",
+          "name": "魔法抗性 +40 魔法抗性",
           "trigger": "passive_always",
           "effect_type": "modifier",
           "values": [
-            "45"
+            "40"
           ],
           "scaling": [],
           "cooldown": null,
@@ -11218,7 +11218,27 @@
             "applies_on_hit": false,
             "unique": false
           },
-          "source_line": "魔法抗性 +45 魔法抗性"
+          "source_line": "魔法抗性 +40 魔法抗性"
+        },
+        {
+          "name": "冷却 +10 技能急速",
+          "trigger": "passive_always",
+          "effect_type": "modifier",
+          "values": [
+            "10"
+          ],
+          "scaling": [],
+          "cooldown": null,
+          "duration": null,
+          "caps": null,
+          "conditions": [],
+          "damage_type": null,
+          "flags": {
+            "can_crit": false,
+            "applies_on_hit": false,
+            "unique": false
+          },
+          "source_line": "冷却 +10 技能急速"
         },
         {
           "name": "苦楚：在与英雄的战斗状态下，每隔4秒对附近英雄造成3%自身最大生命值的魔法伤害，并治疗自身相当于250%已造成伤害的生命值",
@@ -12082,9 +12102,9 @@
       "item_id": "2286",
       "name": "星蚀",
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/EquipIcons/lol_xingshi.png",
-      "price": "3000",
+      "price": "2900",
       "description": [
-        "攻击力 +65 攻击力\n冷却 +20 技能急速\n\n永升之月：1.8秒内使用2次独立的普攻或技能命中同一名敌方英雄时，造成目标7%最大生命值的额外物理伤害（远程则为3.5%），并为自身提供140+35%额外攻击力的护盾（远程则为70+18%额外攻击力），持续2秒。（6秒冷却时间）\n\n"
+        "攻击力 +65 攻击力\n冷却 +20 技能急速\n\n永升之月：1.8秒内使用2次独立的普攻或技能命中同一名敌方英雄时，造成目标7%最大生命值的额外物理伤害（远程则为3.5%），并为自身提供150+40%额外攻击力的护盾（远程则为70+18%额外攻击力），持续2秒。（6秒冷却时间）\n\n"
       ],
       "labels": [],
       "from": [
@@ -12175,8 +12195,8 @@
             "2",
             "7%",
             "3.5%",
-            "140",
-            "35%",
+            "150",
+            "40%",
             "70",
             "18%",
             "2"
@@ -12203,7 +12223,7 @@
             "applies_on_hit": true,
             "unique": false
           },
-          "source_line": "永升之月：1.8秒内使用2次独立的普攻或技能命中同一名敌方英雄时，造成目标7%最大生命值的额外物理伤害（远程则为3.5%），并为自身提供140+35%额外攻击力的护盾（远程则为70+18%额外攻击力），持续2秒"
+          "source_line": "永升之月：1.8秒内使用2次独立的普攻或技能命中同一名敌方英雄时，造成目标7%最大生命值的额外物理伤害（远程则为3.5%），并为自身提供150+40%额外攻击力的护盾（远程则为70+18%额外攻击力），持续2秒"
         },
         {
           "name": "（6秒冷却时间）",
@@ -20985,7 +21005,7 @@
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/EquipIcons/lol_clpz.png",
       "price": "1600",
       "description": [
-        "法术强度 +40 法术强度\n魔法抗性 +25 魔法抗性\n\n废除：提供一个可以阻挡下一个敌方技能的法术护盾。（50秒冷却时间）\n\n"
+        "法术强度 +40 法术强度\n魔法抗性 +25 魔法抗性\n\n废除：提供一个可以阻挡下一个敌方技能的法术护盾。（65秒冷却时间）\n\n"
       ],
       "labels": [],
       "from": [
@@ -21083,15 +21103,15 @@
           "source_line": "废除：提供一个可以阻挡下一个敌方技能的法术护盾"
         },
         {
-          "name": "（50秒冷却时间）",
+          "name": "（65秒冷却时间）",
           "trigger": "passive_always",
           "effect_type": "modifier",
           "values": [
-            "50"
+            "65"
           ],
           "scaling": [],
-          "cooldown": 50.0,
-          "duration": 50.0,
+          "cooldown": 65.0,
+          "duration": 65.0,
           "caps": null,
           "conditions": [],
           "damage_type": null,
@@ -21100,7 +21120,7 @@
             "applies_on_hit": false,
             "unique": false
           },
-          "source_line": "（50秒冷却时间）"
+          "source_line": "（65秒冷却时间）"
         }
       ],
       "effect_parse_status": "ok",
