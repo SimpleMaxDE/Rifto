@@ -1,44 +1,156 @@
 {
   "patch": "7.3",
-  "sourceUrl": "https://wildrift.leagueoflegends.com/en-gb/news/game-updates/rift-pacing-and-jungle-updates-coming-in-patch-73",
-  "generatedAt": "2026-09-21T04:58:54.638012+00:00",
+  "sourceUrl": "https://wildrift.leagueoflegends.com/en-gb/news/game-updates/wild-rift-patch-notes-7-3",
+  "generatedAt": "2026-09-21T12:51:11.291225+00:00",
   "championBuffs": [
     {
-      "name": "Nautilus",
+      "name": "Miss Fortune",
       "delta": 1.0,
       "note": "Automatisch erkannt: Buff/Verbesserung im Patchtext."
     },
     {
-      "name": "Malphite",
+      "name": "Heimerdinger",
       "delta": 1.0,
       "note": "Automatisch erkannt: Buff/Verbesserung im Patchtext."
     },
     {
-      "name": "Janna",
+      "name": "Volibear",
       "delta": 1.0,
       "note": "Automatisch erkannt: Buff/Verbesserung im Patchtext."
     },
     {
-      "name": "Swain",
+      "name": "Renekton",
       "delta": 1.0,
       "note": "Automatisch erkannt: Buff/Verbesserung im Patchtext."
     },
     {
-      "name": "Sion",
+      "name": "Warwick",
       "delta": 1.0,
       "note": "Automatisch erkannt: Buff/Verbesserung im Patchtext."
     },
     {
-      "name": "Ashe",
+      "name": "Smolder",
       "delta": 1.0,
       "note": "Automatisch erkannt: Buff/Verbesserung im Patchtext."
     },
     {
-      "name": "Vi",
+      "name": "Lucian",
+      "delta": 1.0,
+      "note": "Automatisch erkannt: Buff/Verbesserung im Patchtext."
+    },
+    {
+      "name": "Twitch",
+      "delta": 1.0,
+      "note": "Automatisch erkannt: Buff/Verbesserung im Patchtext."
+    },
+    {
+      "name": "Milio",
+      "delta": 1.0,
+      "note": "Automatisch erkannt: Buff/Verbesserung im Patchtext."
+    },
+    {
+      "name": "Yasuo",
+      "delta": 1.0,
+      "note": "Automatisch erkannt: Buff/Verbesserung im Patchtext."
+    },
+    {
+      "name": "Urgot",
+      "delta": 1.0,
+      "note": "Automatisch erkannt: Buff/Verbesserung im Patchtext."
+    },
+    {
+      "name": "Jinx",
+      "delta": 1.0,
+      "note": "Automatisch erkannt: Buff/Verbesserung im Patchtext."
+    },
+    {
+      "name": "Lulu",
+      "delta": 1.0,
+      "note": "Automatisch erkannt: Buff/Verbesserung im Patchtext."
+    },
+    {
+      "name": "Jhin",
+      "delta": 1.0,
+      "note": "Automatisch erkannt: Buff/Verbesserung im Patchtext."
+    },
+    {
+      "name": "Yone",
+      "delta": 1.0,
+      "note": "Automatisch erkannt: Buff/Verbesserung im Patchtext."
+    },
+    {
+      "name": "Gnar",
+      "delta": 1.0,
+      "note": "Automatisch erkannt: Buff/Verbesserung im Patchtext."
+    },
+    {
+      "name": "Nami",
+      "delta": 1.0,
+      "note": "Automatisch erkannt: Buff/Verbesserung im Patchtext."
+    },
+    {
+      "name": "Sona",
       "delta": 1.0,
       "note": "Automatisch erkannt: Buff/Verbesserung im Patchtext."
     }
   ],
-  "championNerfs": [],
-  "itemChanges": []
+  "championNerfs": [
+    {
+      "name": "Tryndamere",
+      "delta": -1.0,
+      "note": "Automatisch erkannt: Nerf/Abschwächung im Patchtext."
+    },
+    {
+      "name": "Tristana",
+      "delta": -1.0,
+      "note": "Automatisch erkannt: Nerf/Abschwächung im Patchtext."
+    },
+    {
+      "name": "Ezreal",
+      "delta": -1.0,
+      "note": "Automatisch erkannt: Nerf/Abschwächung im Patchtext."
+    }
+  ],
+  "itemChanges": [
+    {
+      "name": "Blade of the Ruined King",
+      "direction": "changed",
+      "impactTags": [
+        "marksman",
+        "fighter",
+        "anti_tank"
+      ],
+      "delta": 0.6,
+      "note": "Automatisch erkannt aus den offiziellen Patchnotes."
+    },
+    {
+      "name": "Searing Crown",
+      "direction": "changed",
+      "impactTags": [
+        "tank",
+        "hard_engage"
+      ],
+      "delta": 0.6,
+      "note": "Automatisch erkannt aus den offiziellen Patchnotes."
+    },
+    {
+      "name": "Zeke's Convergence",
+      "direction": "changed",
+      "impactTags": [
+        "tank_support",
+        "support"
+      ],
+      "delta": 0.6,
+      "note": "Automatisch erkannt aus den offiziellen Patchnotes."
+    },
+    {
+      "name": "Infinity Edge",
+      "direction": "buff",
+      "impactTags": [
+        "marksman"
+      ],
+      "delta": 1.0,
+      "note": "Automatisch erkannt aus den offiziellen Patchnotes."
+    }
+  ]
 }
