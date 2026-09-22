@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-22T01:57:00.653511+00:00",
+  "generatedAt": "2026-09-22T10:23:34.063555+00:00",
   "sources": {
     "heroes": "https://game.gtimg.cn/images/lgamem/act/lrlib/js/heroList/hero_list.js",
     "items": "https://game.gtimg.cn/images/lgamem/act/lrlib/js/equip/equip.js",
@@ -27661,35 +27661,6 @@
       "effect_source": "auto"
     },
     {
-      "rune_id": "572219001",
-      "name": "弱点",
-      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/RuneIcons/Offense_Weakness.png",
-      "description": "对一名敌方英雄施加移动受损效果后，会使其在接下来承受更多伤害。",
-      "slot": "",
-      "effects": [
-        {
-          "name": "对一名敌方英雄施加移动受损效果后，会使其在接下来承受更多伤害",
-          "trigger": "onDamageTaken",
-          "effect_type": "modifier",
-          "values": [],
-          "scaling": [],
-          "cooldown": null,
-          "duration": null,
-          "caps": null,
-          "conditions": [],
-          "damage_type": null,
-          "flags": {
-            "can_crit": false,
-            "applies_on_hit": false,
-            "unique": false
-          },
-          "source_line": "对一名敌方英雄施加移动受损效果后，会使其在接下来承受更多伤害"
-        }
-      ],
-      "effect_parse_status": "parser_could_not_extract_values",
-      "effect_source": "auto"
-    },
-    {
       "rune_id": "572514001",
       "name": "强化攻击",
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/RuneIcons/Offense_EmpoweredAttack.png",
@@ -27872,53 +27843,6 @@
             "unique": false
           },
           "source_line": "与敌方英雄战斗时，对敌方英雄的基础技能伤害获得增幅"
-        }
-      ],
-      "effect_parse_status": "parser_could_not_extract_values",
-      "effect_source": "auto"
-    },
-    {
-      "rune_id": "572413001",
-      "name": "战略家",
-      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/RuneIcons/Utility_Mastermind.png",
-      "description": "对史诗级野怪造成额外伤害。参与击败史诗级野怪，会获得额外金币。",
-      "slot": "",
-      "effects": [
-        {
-          "name": "对史诗级野怪造成额外伤害",
-          "trigger": "passive_always",
-          "effect_type": "modifier",
-          "values": [],
-          "scaling": [],
-          "cooldown": null,
-          "duration": null,
-          "caps": null,
-          "conditions": [],
-          "damage_type": null,
-          "flags": {
-            "can_crit": false,
-            "applies_on_hit": false,
-            "unique": false
-          },
-          "source_line": "对史诗级野怪造成额外伤害"
-        },
-        {
-          "name": "参与击败史诗级野怪，会获得额外金币",
-          "trigger": "passive_always",
-          "effect_type": "modifier",
-          "values": [],
-          "scaling": [],
-          "cooldown": null,
-          "duration": null,
-          "caps": null,
-          "conditions": [],
-          "damage_type": null,
-          "flags": {
-            "can_crit": false,
-            "applies_on_hit": false,
-            "unique": false
-          },
-          "source_line": "参与击败史诗级野怪，会获得额外金币"
         }
       ],
       "effect_parse_status": "parser_could_not_extract_values",
@@ -28211,58 +28135,6 @@
             "unique": false
           },
           "source_line": "特定时间内击败英雄获得一定时间的适应之力"
-        }
-      ],
-      "effect_parse_status": "parser_could_not_extract_values",
-      "effect_source": "auto"
-    },
-    {
-      "rune_id": "572214001",
-      "name": "猎人：吸血",
-      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/RuneIcons/Offense_HunterVampirism.png",
-      "description": "参与击败不同的敌方英雄，能获得攻击力或法术强度、物理或魔法吸血效果。（自适应）",
-      "slot": "",
-      "effects": [
-        {
-          "name": "参与击败不同的敌方英雄，能获得攻击力或法术强度、物理或魔法吸血效果",
-          "trigger": "passive_always",
-          "effect_type": "stat",
-          "values": [],
-          "scaling": [
-            {
-              "source": "ad",
-              "ratio": null
-            }
-          ],
-          "cooldown": null,
-          "duration": null,
-          "caps": null,
-          "conditions": [],
-          "damage_type": "magic",
-          "flags": {
-            "can_crit": false,
-            "applies_on_hit": false,
-            "unique": false
-          },
-          "source_line": "参与击败不同的敌方英雄，能获得攻击力或法术强度、物理或魔法吸血效果"
-        },
-        {
-          "name": "（自适应）",
-          "trigger": "passive_always",
-          "effect_type": "modifier",
-          "values": [],
-          "scaling": [],
-          "cooldown": null,
-          "duration": null,
-          "caps": null,
-          "conditions": [],
-          "damage_type": null,
-          "flags": {
-            "can_crit": false,
-            "applies_on_hit": false,
-            "unique": false
-          },
-          "source_line": "（自适应）"
         }
       ],
       "effect_parse_status": "parser_could_not_extract_values",
@@ -28845,71 +28717,6 @@
       "effect_source": "auto"
     },
     {
-      "rune_id": "572419001",
-      "name": "集群猎手",
-      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/RuneIcons/Utility_PackHunter.png",
-      "description": "在我方英雄附近时会获得移动速度加成。与我方英雄合作完成击败，还能获得额外赏金。每个队友只提供一次效果。",
-      "slot": "",
-      "effects": [
-        {
-          "name": "在我方英雄附近时会获得移动速度加成",
-          "trigger": "passive_always",
-          "effect_type": "modifier",
-          "values": [],
-          "scaling": [],
-          "cooldown": null,
-          "duration": null,
-          "caps": null,
-          "conditions": [],
-          "damage_type": null,
-          "flags": {
-            "can_crit": false,
-            "applies_on_hit": false,
-            "unique": false
-          },
-          "source_line": "在我方英雄附近时会获得移动速度加成"
-        },
-        {
-          "name": "与我方英雄合作完成击败，还能获得额外赏金",
-          "trigger": "passive_always",
-          "effect_type": "modifier",
-          "values": [],
-          "scaling": [],
-          "cooldown": null,
-          "duration": null,
-          "caps": null,
-          "conditions": [],
-          "damage_type": null,
-          "flags": {
-            "can_crit": false,
-            "applies_on_hit": false,
-            "unique": false
-          },
-          "source_line": "与我方英雄合作完成击败，还能获得额外赏金"
-        },
-        {
-          "name": "每个队友只提供一次效果",
-          "trigger": "periodic",
-          "effect_type": "modifier",
-          "values": [],
-          "scaling": [],
-          "cooldown": null,
-          "duration": null,
-          "caps": null,
-          "conditions": [],
-          "damage_type": null,
-          "flags": {
-            "can_crit": false,
-            "applies_on_hit": false,
-            "unique": false
-          },
-          "source_line": "每个队友只提供一次效果"
-        }
-      ],
-      "effect_parse_status": "parser_could_not_extract_values",
-      "effect_source": "auto"
-    },
-    {
       "rune_id": "572215001",
       "name": "风暴聚集",
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/RuneIcons/Utility_572215001.png",
@@ -29106,7 +28913,7 @@
   "counts": {
     "champions": 142,
     "items": 186,
-    "runes": 59,
+    "runes": 55,
     "summonerSpells": 14
   }
 }
