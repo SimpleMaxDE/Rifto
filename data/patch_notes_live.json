@@ -1,102 +1,47 @@
 {
   "patch": "7.3",
-  "sourceUrl": "https://wildrift.leagueoflegends.com/en-gb/news/game-updates/wild-rift-patch-notes-7-3",
-  "generatedAt": "2026-09-29T05:45:42.453114+00:00",
+  "sourceUrl": "https://wildrift.leagueoflegends.com/en-gb/news/game-updates/wild-rift-patch-notes-7-3a",
+  "generatedAt": "2026-09-29T12:55:32.362627+00:00",
   "championBuffs": [
     {
-      "name": "Miss Fortune",
+      "name": "Nautilus",
       "delta": 1.0,
       "note": "Automatisch erkannt: Buff/Verbesserung im Patchtext."
     },
     {
-      "name": "Heimerdinger",
+      "name": "Syndra",
       "delta": 1.0,
       "note": "Automatisch erkannt: Buff/Verbesserung im Patchtext."
     },
     {
-      "name": "Volibear",
+      "name": "Thresh",
       "delta": 1.0,
       "note": "Automatisch erkannt: Buff/Verbesserung im Patchtext."
     },
     {
-      "name": "Renekton",
+      "name": "Yuumi",
       "delta": 1.0,
       "note": "Automatisch erkannt: Buff/Verbesserung im Patchtext."
     },
     {
-      "name": "Smolder",
+      "name": "Janna",
       "delta": 1.0,
       "note": "Automatisch erkannt: Buff/Verbesserung im Patchtext."
     },
     {
-      "name": "Warwick",
+      "name": "Viego",
       "delta": 1.0,
       "note": "Automatisch erkannt: Buff/Verbesserung im Patchtext."
     },
     {
-      "name": "Lucian",
-      "delta": 1.0,
-      "note": "Automatisch erkannt: Buff/Verbesserung im Patchtext."
-    },
-    {
-      "name": "Twitch",
-      "delta": 1.0,
-      "note": "Automatisch erkannt: Buff/Verbesserung im Patchtext."
-    },
-    {
-      "name": "Milio",
-      "delta": 1.0,
-      "note": "Automatisch erkannt: Buff/Verbesserung im Patchtext."
-    },
-    {
-      "name": "Yasuo",
-      "delta": 1.0,
-      "note": "Automatisch erkannt: Buff/Verbesserung im Patchtext."
-    },
-    {
-      "name": "Urgot",
-      "delta": 1.0,
-      "note": "Automatisch erkannt: Buff/Verbesserung im Patchtext."
-    },
-    {
-      "name": "Nami",
-      "delta": 1.0,
-      "note": "Automatisch erkannt: Buff/Verbesserung im Patchtext."
-    },
-    {
-      "name": "Jinx",
-      "delta": 1.0,
-      "note": "Automatisch erkannt: Buff/Verbesserung im Patchtext."
-    },
-    {
-      "name": "Sona",
-      "delta": 1.0,
-      "note": "Automatisch erkannt: Buff/Verbesserung im Patchtext."
-    },
-    {
-      "name": "Gnar",
-      "delta": 1.0,
-      "note": "Automatisch erkannt: Buff/Verbesserung im Patchtext."
-    },
-    {
-      "name": "Lulu",
-      "delta": 1.0,
-      "note": "Automatisch erkannt: Buff/Verbesserung im Patchtext."
-    },
-    {
-      "name": "Yone",
-      "delta": 1.0,
-      "note": "Automatisch erkannt: Buff/Verbesserung im Patchtext."
-    },
-    {
-      "name": "Jhin",
+      "name": "Nasus",
       "delta": 1.0,
       "note": "Automatisch erkannt: Buff/Verbesserung im Patchtext."
     }
   ],
   "championNerfs": [
     {
-      "name": "Tryndamere",
+      "name": "Blitzcrank",
       "delta": -1.0,
       "note": "Automatisch erkannt: Nerf/Abschwächung im Patchtext."
     },
@@ -106,7 +51,7 @@
       "note": "Automatisch erkannt: Nerf/Abschwächung im Patchtext."
     },
     {
-      "name": "Ezreal",
+      "name": "Rammus",
       "delta": -1.0,
       "note": "Automatisch erkannt: Nerf/Abschwächung im Patchtext."
     }
@@ -114,33 +59,13 @@
   "itemChanges": [
     {
       "name": "Blade of the Ruined King",
-      "direction": "changed",
+      "direction": "buff",
       "impactTags": [
         "marksman",
         "fighter",
         "anti_tank"
       ],
-      "delta": 0.6,
-      "note": "Automatisch erkannt aus den offiziellen Patchnotes."
-    },
-    {
-      "name": "Searing Crown",
-      "direction": "changed",
-      "impactTags": [
-        "tank",
-        "hard_engage"
-      ],
-      "delta": 0.6,
-      "note": "Automatisch erkannt aus den offiziellen Patchnotes."
-    },
-    {
-      "name": "Zeke's Convergence",
-      "direction": "changed",
-      "impactTags": [
-        "tank_support",
-        "support"
-      ],
-      "delta": 0.6,
+      "delta": 1.0,
       "note": "Automatisch erkannt aus den offiziellen Patchnotes."
     },
     {
