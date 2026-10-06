@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-10-06T12:15:18.273920+00:00",
-  "source": "https://ddragon.leagueoflegends.com/cdn/16.19.1/data/en_US/championFull.json",
-  "version": "16.19.1",
+  "generatedAt": "2026-10-06T21:54:57.790920+00:00",
+  "source": "https://ddragon.leagueoflegends.com/cdn/16.20.1/data/en_US/championFull.json",
+  "version": "16.20.1",
   "champions": {
     "Aatrox": {
       "id": "Aatrox",
@@ -12209,9 +12209,9 @@
       "title": "the Serpent's Embrace",
       "resource": "Mana",
       "stats": {
-        "hp": 630,
+        "hp": 610,
         "hp_per_level": 98,
-        "mp": 480,
+        "mp": 450,
         "mp_per_level": 40,
         "armor": 18,
         "armor_per_level": 4.7,
@@ -35676,12 +35676,10 @@
               "source_line": "Kha'Zix leaps to an area, dealing physical damage upon landing"
             },
             {
-              "name": "If he chooses to Evolve Wings , Leap's range increases by 200 an",
+              "name": "If he chooses to Evolve Wings , Leap's range increases and the c",
               "trigger": "onCast",
               "effect_type": "modifier",
-              "values": [
-                "200"
-              ],
+              "values": [],
               "scaling": [],
               "cooldown": [
                 20,
@@ -35699,11 +35697,11 @@
                 "can_crit": false,
                 "aoe": false
               },
-              "source_line": "If he chooses to Evolve Wings , Leap's range increases by 200 and the cooldown resets on champion kill or assist"
+              "source_line": "If he chooses to Evolve Wings , Leap's range increases and the cooldown resets on champion kill or assist"
             }
           ],
           "effect_parse_status": "ok",
-          "description": "Kha'Zix leaps to an area, dealing physical damage upon landing. If he chooses to Evolve Wings , Leap's range increases by 200 and the cooldown resets on champion kill or assist."
+          "description": "Kha'Zix leaps to an area, dealing physical damage upon landing. If he chooses to Evolve Wings , Leap's range increases and the cooldown resets on champion kill or assist."
         },
         {
           "slot": "R",
@@ -37821,11 +37819,11 @@
             10
           ],
           "cost": [
-            40,
             45,
             50,
             55,
-            60
+            60,
+            65
           ],
           "range": [
             600,
@@ -47787,8 +47785,8 @@
           "slot": "R",
           "name": "Realm of Death",
           "cooldown": [
-            140,
             120,
+            110,
             100
           ],
           "cost": [
@@ -47855,8 +47853,8 @@
               "values": [],
               "scaling": [],
               "cooldown": [
-                140,
                 120,
+                110,
                 100
               ],
               "duration": null,
@@ -47877,8 +47875,8 @@
               "values": [],
               "scaling": [],
               "cooldown": [
-                140,
                 120,
+                110,
                 100
               ],
               "duration": null,
@@ -70584,9 +70582,9 @@
         "hp_per_level": 99,
         "mp": 400,
         "mp_per_level": 29,
-        "armor": 25,
+        "armor": 23,
         "armor_per_level": 4.7,
-        "mr": 31,
+        "mr": 34,
         "mr_per_level": 1.55,
         "ad": 58,
         "ad_per_level": 0,
@@ -70749,11 +70747,11 @@
           "slot": "W",
           "name": "Vision of Empire",
           "cooldown": [
-            22,
-            21,
             20,
             19,
-            18
+            18,
+            17,
+            16
           ],
           "cost": [
             60,
@@ -70823,11 +70821,11 @@
               "values": [],
               "scaling": [],
               "cooldown": [
-                22,
-                21,
                 20,
                 19,
-                18
+                18,
+                17,
+                16
               ],
               "duration": null,
               "caps": null,
@@ -70847,11 +70845,11 @@
               "values": [],
               "scaling": [],
               "cooldown": [
-                22,
-                21,
                 20,
                 19,
-                18
+                18,
+                17,
+                16
               ],
               "duration": null,
               "caps": null,
@@ -79670,8 +79668,8 @@
         "attack_speed": 0.658,
         "attack_speed_per_level": 2.8,
         "move_speed": 330,
-        "hp_regen": 4,
-        "hp_regen_per_level": 0.5
+        "hp_regen": 5.5,
+        "hp_regen_per_level": 0.4
       },
       "passive": {
         "name": "Night Hunter",
@@ -79710,10 +79708,10 @@
             2
           ],
           "cost": [
-            46,
-            42,
-            38,
-            34,
+            30,
+            30,
+            30,
+            30,
             30
           ],
           "range": [
