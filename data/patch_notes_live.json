@@ -1,8 +1,13 @@
 {
   "patch": "7.3",
-  "sourceUrl": "https://wildrift.leagueoflegends.com/en-gb/news/game-updates/wild-rift-patch-notes-7-3a",
-  "generatedAt": "2026-10-14T04:55:53.725770+00:00",
+  "sourceUrl": "https://wildrift.leagueoflegends.com/en-gb/news/game-updates/wild-rift-patch-notes-7-3b",
+  "generatedAt": "2026-10-14T11:55:34.706473+00:00",
   "championBuffs": [
+    {
+      "name": "Malphite",
+      "delta": 1.0,
+      "note": "Automatisch erkannt: Buff/Verbesserung im Patchtext."
+    },
     {
       "name": "Nautilus",
       "delta": 1.0,
@@ -14,17 +19,12 @@
       "note": "Automatisch erkannt: Buff/Verbesserung im Patchtext."
     },
     {
-      "name": "Syndra",
+      "name": "Swain",
       "delta": 1.0,
       "note": "Automatisch erkannt: Buff/Verbesserung im Patchtext."
     },
     {
-      "name": "Nasus",
-      "delta": 1.0,
-      "note": "Automatisch erkannt: Buff/Verbesserung im Patchtext."
-    },
-    {
-      "name": "Viego",
+      "name": "Senna",
       "delta": 1.0,
       "note": "Automatisch erkannt: Buff/Verbesserung im Patchtext."
     },
@@ -34,48 +34,17 @@
       "note": "Automatisch erkannt: Buff/Verbesserung im Patchtext."
     },
     {
-      "name": "Yuumi",
+      "name": "Jhin",
       "delta": 1.0,
       "note": "Automatisch erkannt: Buff/Verbesserung im Patchtext."
     }
   ],
   "championNerfs": [
     {
-      "name": "Blitzcrank",
-      "delta": -1.0,
-      "note": "Automatisch erkannt: Nerf/Abschwächung im Patchtext."
-    },
-    {
-      "name": "Tristana",
-      "delta": -1.0,
-      "note": "Automatisch erkannt: Nerf/Abschwächung im Patchtext."
-    },
-    {
-      "name": "Rammus",
+      "name": "Nocturne",
       "delta": -1.0,
       "note": "Automatisch erkannt: Nerf/Abschwächung im Patchtext."
     }
   ],
-  "itemChanges": [
-    {
-      "name": "Blade of the Ruined King",
-      "direction": "buff",
-      "impactTags": [
-        "marksman",
-        "fighter",
-        "anti_tank"
-      ],
-      "delta": 1.0,
-      "note": "Automatisch erkannt aus den offiziellen Patchnotes."
-    },
-    {
-      "name": "Infinity Edge",
-      "direction": "buff",
-      "impactTags": [
-        "marksman"
-      ],
-      "delta": 1.0,
-      "note": "Automatisch erkannt aus den offiziellen Patchnotes."
-    }
-  ]
+  "itemChanges": []
 }
