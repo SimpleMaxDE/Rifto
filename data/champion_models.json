@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-10-20T20:55:40.009201+00:00",
-  "source": "https://ddragon.leagueoflegends.com/cdn/16.20.1/data/en_US/championFull.json",
-  "version": "16.20.1",
+  "generatedAt": "2026-10-21T02:05:33.050503+00:00",
+  "source": "https://ddragon.leagueoflegends.com/cdn/16.21.1/data/en_US/championFull.json",
+  "version": "16.21.1",
   "champions": {
     "Aatrox": {
       "id": "Aatrox",
@@ -7271,7 +7271,7 @@
         "hp": 575,
         "hp_per_level": 108,
         "mp": 320,
-        "mp_per_level": 40,
+        "mp_per_level": 50,
         "armor": 25,
         "armor_per_level": 5,
         "mr": 30,
@@ -13763,10 +13763,10 @@
           "name": "Decimate",
           "cooldown": [
             9,
-            8,
-            7,
-            6,
-            5
+            7.75,
+            6.5,
+            5.25,
+            4
           ],
           "cost": [
             25,
@@ -13837,10 +13837,10 @@
               "scaling": [],
               "cooldown": [
                 9,
-                8,
-                7,
-                6,
-                5
+                7.75,
+                6.5,
+                5.25,
+                4
               ],
               "duration": null,
               "caps": null,
@@ -13861,10 +13861,10 @@
               "scaling": [],
               "cooldown": [
                 9,
-                8,
-                7,
-                6,
-                5
+                7.75,
+                6.5,
+                5.25,
+                4
               ],
               "duration": null,
               "caps": null,
@@ -13885,10 +13885,10 @@
               "scaling": [],
               "cooldown": [
                 9,
-                8,
-                7,
-                6,
-                5
+                7.75,
+                6.5,
+                5.25,
+                4
               ],
               "duration": null,
               "caps": null,
@@ -30016,7 +30016,7 @@
       "title": "the Loose Cannon",
       "resource": "Mana",
       "stats": {
-        "hp": 630,
+        "hp": 610,
         "hp_per_level": 105,
         "mp": 260,
         "mp_per_level": 50,
@@ -39009,11 +39009,11 @@
           "slot": "W",
           "name": "Safeguard / Iron Will",
           "cooldown": [
-            7,
-            7,
-            7,
-            7,
-            7
+            8,
+            8,
+            8,
+            8,
+            8
           ],
           "cost": [
             50,
@@ -39083,11 +39083,11 @@
               "values": [],
               "scaling": [],
               "cooldown": [
-                7,
-                7,
-                7,
-                7,
-                7
+                8,
+                8,
+                8,
+                8,
+                8
               ],
               "duration": null,
               "caps": null,
@@ -39107,11 +39107,11 @@
               "values": [],
               "scaling": [],
               "cooldown": [
-                7,
-                7,
-                7,
-                7,
-                7
+                8,
+                8,
+                8,
+                8,
+                8
               ],
               "duration": null,
               "caps": null,
@@ -39131,11 +39131,11 @@
               "values": [],
               "scaling": [],
               "cooldown": [
-                7,
-                7,
-                7,
-                7,
-                7
+                8,
+                8,
+                8,
+                8,
+                8
               ],
               "duration": null,
               "caps": null,
@@ -39155,11 +39155,11 @@
               "values": [],
               "scaling": [],
               "cooldown": [
-                7,
-                7,
-                7,
-                7,
-                7
+                8,
+                8,
+                8,
+                8,
+                8
               ],
               "duration": null,
               "caps": null,
@@ -39179,11 +39179,11 @@
               "values": [],
               "scaling": [],
               "cooldown": [
-                7,
-                7,
-                7,
-                7,
-                7
+                8,
+                8,
+                8,
+                8,
+                8
               ],
               "duration": null,
               "caps": null,
@@ -41148,7 +41148,7 @@
         "hp": 620,
         "hp_per_level": 109,
         "mp": 280,
-        "mp_per_level": 70,
+        "mp_per_level": 60,
         "armor": 32,
         "armor_per_level": 4.2,
         "mr": 32,
@@ -41321,11 +41321,11 @@
             14
           ],
           "cost": [
-            50,
-            55,
             60,
             65,
-            70
+            70,
+            75,
+            80
           ],
           "range": [
             250,
@@ -46938,7 +46938,7 @@
         "attack_speed": 0.69,
         "attack_speed_per_level": 3,
         "move_speed": 340,
-        "hp_regen": 3.5,
+        "hp_regen": 5.5,
         "hp_regen_per_level": 0.65
       },
       "passive": {
@@ -53708,21 +53708,21 @@
             815,
             815
           ],
-          "base_damage": "60/90/120/150/180",
+          "base_damage": "0",
           "damage_type": "magic",
           "cc_duration": null,
           "damage_effects": [
             {
               "index": 1,
-              "values": "60/90/120/150/180"
+              "values": "0"
             },
             {
               "index": 2,
-              "values": "30"
+              "values": "0"
             },
             {
               "index": 3,
-              "values": "70"
+              "values": "0"
             },
             {
               "index": 4,
@@ -67467,7 +67467,7 @@
       "resource": "Mana",
       "stats": {
         "hp": 655,
-        "hp_per_level": 87,
+        "hp_per_level": 95,
         "mp": 400,
         "mp_per_level": 52,
         "armor": 36,
@@ -79217,23 +79217,23 @@
             },
             {
               "index": 3,
-              "values": "0.15"
+              "values": "0"
             },
             {
               "index": 4,
-              "values": "0.5"
+              "values": "0"
             },
             {
               "index": 5,
-              "values": "4"
+              "values": "0"
             },
             {
               "index": 6,
-              "values": "3"
+              "values": "0"
             },
             {
               "index": 7,
-              "values": "-0.2"
+              "values": "0"
             },
             {
               "index": 8,
@@ -79241,7 +79241,7 @@
             },
             {
               "index": 9,
-              "values": "0.33"
+              "values": "0"
             },
             {
               "index": 10,
@@ -79312,19 +79312,19 @@
             },
             {
               "index": 2,
-              "values": "0.03/0.035/0.04/0.045/0.05"
+              "values": "0"
             },
             {
               "index": 3,
-              "values": "6"
+              "values": "0"
             },
             {
               "index": 4,
-              "values": "3"
+              "values": "0"
             },
             {
               "index": 5,
-              "values": "120"
+              "values": "0"
             },
             {
               "index": 6,
@@ -82760,7 +82760,7 @@
         "ad_per_level": 0,
         "attack_speed": 0.658,
         "attack_speed_per_level": 2.11,
-        "move_speed": 335,
+        "move_speed": 330,
         "hp_regen": 8,
         "hp_regen_per_level": 0.65
       },
@@ -86249,7 +86249,7 @@
             },
             {
               "index": 5,
-              "values": "250"
+              "values": "0"
             },
             {
               "index": 6,
@@ -89143,11 +89143,11 @@
             120
           ],
           "range": [
-            25000,
-            25000,
-            25000,
-            25000,
-            25000
+            500,
+            500,
+            500,
+            500,
+            500
           ],
           "base_damage": "0",
           "damage_type": null,
