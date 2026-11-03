@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-11-03T13:02:55.490798+00:00",
-  "source": "https://ddragon.leagueoflegends.com/cdn/16.21.1/data/en_US/championFull.json",
-  "version": "16.21.1",
+  "generatedAt": "2026-11-03T22:36:00.296017+00:00",
+  "source": "https://ddragon.leagueoflegends.com/cdn/16.22.1/data/en_US/championFull.json",
+  "version": "16.22.1",
   "champions": {
     "Aatrox": {
       "id": "Aatrox",
@@ -33744,10 +33744,10 @@
           "slot": "Q",
           "name": "Radiant Blast",
           "cooldown": [
-            12,
-            11,
             10,
+            9.5,
             9,
+            8.5,
             8
           ],
           "cost": [
@@ -33818,10 +33818,10 @@
               "values": [],
               "scaling": [],
               "cooldown": [
-                12,
-                11,
                 10,
+                9.5,
                 9,
+                8.5,
                 8
               ],
               "duration": null,
@@ -34065,8 +34065,8 @@
           "slot": "R",
           "name": "Divine Judgment",
           "cooldown": [
-            160,
-            120,
+            140,
+            110,
             80
           ],
           "cost": [
@@ -34133,8 +34133,8 @@
               "values": [],
               "scaling": [],
               "cooldown": [
-                160,
-                120,
+                140,
+                110,
                 80
               ],
               "duration": null,
@@ -45364,18 +45364,18 @@
       "title": "the Soul's Reflection",
       "resource": "Mana",
       "stats": {
-        "hp": 630,
-        "hp_per_level": 99,
-        "mp": 480,
-        "mp_per_level": 28,
+        "hp": 590,
+        "hp_per_level": 107,
+        "mp": 455,
+        "mp_per_level": 38,
         "armor": 21,
-        "armor_per_level": 5.2,
+        "armor_per_level": 5.4,
         "mr": 30,
         "mr_per_level": 1.3,
-        "ad": 54,
+        "ad": 52,
         "ad_per_level": 0,
         "attack_speed": 0.625,
-        "attack_speed_per_level": 2.5,
+        "attack_speed_per_level": 2.75,
         "move_speed": 330,
         "hp_regen": 6,
         "hp_regen_per_level": 0.55
@@ -45446,7 +45446,7 @@
       "abilities": [
         {
           "slot": "Q",
-          "name": "Radiant Volley",
+          "name": "Radiant Barrage",
           "cooldown": [
             10,
             9,
@@ -45455,11 +45455,11 @@
             6
           ],
           "cost": [
+            60,
+            65,
             70,
             75,
-            80,
-            85,
-            90
+            80
           ],
           "range": [
             950,
@@ -45469,7 +45469,7 @@
             950
           ],
           "base_damage": "0",
-          "damage_type": null,
+          "damage_type": "magic",
           "cc_duration": null,
           "damage_effects": [
             {
@@ -45516,7 +45516,31 @@
           "ratios": [],
           "effects": [
             {
-              "name": "Mel fires a barrage of projectiles that explode around a target ",
+              "name": "Mel unleashes a volley of projectiles that deal magic damage",
+              "trigger": "onCast",
+              "effect_type": "damage",
+              "values": [],
+              "scaling": [],
+              "cooldown": [
+                10,
+                9,
+                8,
+                7,
+                6
+              ],
+              "duration": null,
+              "caps": null,
+              "conditions": [],
+              "damage_type": "magic",
+              "flags": {
+                "applies_on_hit": false,
+                "can_crit": false,
+                "aoe": false
+              },
+              "source_line": "Mel unleashes a volley of projectiles that deal magic damage"
+            },
+            {
+              "name": "Hitting an enemy champion reduces this ability's cooldown",
               "trigger": "onCast",
               "effect_type": "modifier",
               "values": [],
@@ -45535,37 +45559,37 @@
               "flags": {
                 "applies_on_hit": false,
                 "can_crit": false,
-                "aoe": true
+                "aoe": false
               },
-              "source_line": "Mel fires a barrage of projectiles that explode around a target location, dealing damage repeatedly to enemies within the area"
+              "source_line": "Hitting an enemy champion reduces this ability's cooldown"
             }
           ],
           "effect_parse_status": "ok",
-          "description": "Mel fires a barrage of projectiles that explode around a target location, dealing damage repeatedly to enemies within the area."
+          "description": "Mel unleashes a volley of projectiles that deal magic damage. Hitting an enemy champion reduces this ability's cooldown."
         },
         {
           "slot": "W",
           "name": "Rebuttal",
           "cooldown": [
-            38,
-            35,
-            33,
-            29,
-            26
+            30,
+            28.5,
+            27,
+            25.5,
+            24
           ],
           "cost": [
-            80,
-            60,
-            40,
-            20,
+            100,
+            75,
+            50,
+            25,
             0
           ],
           "range": [
-            250,
-            250,
-            250,
-            250,
-            250
+            400,
+            400,
+            400,
+            400,
+            400
           ],
           "base_damage": "0",
           "damage_type": null,
@@ -45615,17 +45639,17 @@
           "ratios": [],
           "effects": [
             {
-              "name": "Mel forms a barrier around herself that reflects enemy projectil",
+              "name": "Mel unleashes a refraction nova that destroys enemy projectiles ",
               "trigger": "onCast",
               "effect_type": "modifier",
               "values": [],
               "scaling": [],
               "cooldown": [
-                38,
-                35,
-                33,
-                29,
-                26
+                30,
+                28.5,
+                27,
+                25.5,
+                24
               ],
               "duration": null,
               "caps": null,
@@ -45634,13 +45658,37 @@
               "flags": {
                 "applies_on_hit": false,
                 "can_crit": false,
-                "aoe": true
+                "aoe": false
               },
-              "source_line": "Mel forms a barrier around herself that reflects enemy projectiles back at the attacker, prevents her from taking damage, and grants her movement speed"
+              "source_line": "Mel unleashes a refraction nova that destroys enemy projectiles it collides with, retaliating with magic missiles"
+            },
+            {
+              "name": "The nova also shields and grants move speed to Mel and her allie",
+              "trigger": "onCast",
+              "effect_type": "shield",
+              "values": [],
+              "scaling": [],
+              "cooldown": [
+                30,
+                28.5,
+                27,
+                25.5,
+                24
+              ],
+              "duration": null,
+              "caps": null,
+              "conditions": [],
+              "damage_type": null,
+              "flags": {
+                "applies_on_hit": false,
+                "can_crit": false,
+                "aoe": false
+              },
+              "source_line": "The nova also shields and grants move speed to Mel and her allies"
             }
           ],
           "effect_parse_status": "ok",
-          "description": "Mel forms a barrier around herself that reflects enemy projectiles back at the attacker, prevents her from taking damage, and grants her movement speed."
+          "description": "Mel unleashes a refraction nova that destroys enemy projectiles it collides with, retaliating with magic missiles. The nova also shields and grants move speed to Mel and her allies."
         },
         {
           "slot": "E",
@@ -45653,11 +45701,11 @@
             9
           ],
           "cost": [
+            40,
             50,
             60,
             70,
-            80,
-            90
+            80
           ],
           "range": [
             1000,
@@ -45746,8 +45794,8 @@
           "name": "Golden Eclipse",
           "cooldown": [
             120,
-            100,
-            80
+            90,
+            60
           ],
           "cost": [
             100,
@@ -45814,8 +45862,8 @@
               "scaling": [],
               "cooldown": [
                 120,
-                100,
-                80
+                90,
+                60
               ],
               "duration": null,
               "caps": null,
@@ -45836,8 +45884,8 @@
               "scaling": [],
               "cooldown": [
                 120,
-                100,
-                80
+                90,
+                60
               ],
               "duration": null,
               "caps": null,
@@ -45860,6 +45908,7 @@
         "cc",
         "dps",
         "mage",
+        "shield",
         "support"
       ]
     },
@@ -75024,7 +75073,7 @@
         "armor_per_level": 0,
         "mr": 30,
         "mr_per_level": 1.55,
-        "ad": 56,
+        "ad": 54,
         "ad_per_level": 0,
         "attack_speed": 0.625,
         "attack_speed_per_level": 3.5,
@@ -75445,13 +75494,13 @@
             450,
             450
           ],
-          "base_damage": "250/400/550",
+          "base_damage": "0",
           "damage_type": null,
           "cc_duration": null,
           "damage_effects": [
             {
               "index": 1,
-              "values": "250/400/550"
+              "values": "0"
             },
             {
               "index": 2,
@@ -82749,7 +82798,7 @@
       "resource": "Mana",
       "stats": {
         "hp": 600,
-        "hp_per_level": 100,
+        "hp_per_level": 105,
         "mp": 405,
         "mp_per_level": 45,
         "armor": 23,
@@ -89463,10 +89512,10 @@
           "slot": "Q",
           "name": "The Darkin Glaive",
           "cooldown": [
-            10,
-            9,
             8,
+            7.5,
             7,
+            6.5,
             6
           ],
           "cost": [
@@ -89537,10 +89586,10 @@
               "values": [],
               "scaling": [],
               "cooldown": [
-                10,
-                9,
                 8,
+                7.5,
                 7,
+                6.5,
                 6
               ],
               "duration": null,
@@ -89561,10 +89610,10 @@
               "values": [],
               "scaling": [],
               "cooldown": [
-                10,
-                9,
                 8,
+                7.5,
                 7,
+                6.5,
                 6
               ],
               "duration": null,
