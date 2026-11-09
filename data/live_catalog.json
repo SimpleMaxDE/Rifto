@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-09T03:05:13.788855+00:00",
+  "generatedAt": "2026-11-09T14:25:05.671215+00:00",
   "sources": {
     "heroes": "https://game.gtimg.cn/images/lgamem/act/lrlib/js/heroList/hero_list.js",
     "items": "https://game.gtimg.cn/images/lgamem/act/lrlib/js/equip/equip.js",
@@ -1268,6 +1268,17 @@
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10119.png"
     },
     {
+      "hero_id": "10120",
+      "name": "塞拉斯",
+      "alias": "sailasi",
+      "title": "解脱者",
+      "lane": "中路;打野;单人路",
+      "roles": [
+        "法师"
+      ],
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10120.png"
+    },
+    {
       "hero_id": "10121",
       "name": "雷克顿",
       "alias": "leikedun",
@@ -1508,6 +1519,17 @@
         "法师"
       ],
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10144.png"
+    },
+    {
+      "hero_id": "10145",
+      "name": "雷克塞",
+      "alias": "leikesai",
+      "title": "虚空遁地兽",
+      "lane": "打野;单人路",
+      "roles": [
+        "战士"
+      ],
+      "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/HeadIcon/H_S_10145.png"
     },
     {
       "hero_id": "10146",
@@ -6036,7 +6058,7 @@
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/EquipIcons/lol_dczl_new.png",
       "price": "3000",
       "description": [
-        "攻击力 +50 攻击力\n暴击率 +25% 暴击率\n冷却 +20 技能急速\n\n咒刃：施放技能后，10秒内你的下一次普攻会造成135%基础攻击力+0~80（每1%暴击率提高0.8）的额外物理伤害并回复50%上述伤害值的法力值。（1.5秒冷却时间）\n\n"
+        "攻击力 +55 攻击力\n暴击率 +25% 暴击率\n冷却 +20 技能急速\n\n咒刃：施放技能后，10秒内你的下一次普攻会造成135%基础攻击力+0~80（每1%暴击率提高0.8）的额外物理伤害并回复50%上述伤害值的法力值。（1.5秒冷却时间）\n\n"
       ],
       "labels": [],
       "from": [
@@ -6055,7 +6077,7 @@
         "hp": "0",
         "armor": "0",
         "mr": "0",
-        "ad": "500000",
+        "ad": "550000",
         "ap": "0",
         "ability_haste": "0",
         "attack_speed": "0",
@@ -6075,16 +6097,16 @@
       },
       "effects": [
         {
-          "name": "攻击力 +50 攻击力",
+          "name": "攻击力 +55 攻击力",
           "trigger": "passive_always",
           "effect_type": "modifier",
           "values": [
-            "50"
+            "55"
           ],
           "scaling": [
             {
               "source": "ad",
-              "ratio": 50.0
+              "ratio": 55.0
             }
           ],
           "cooldown": null,
@@ -6097,7 +6119,7 @@
             "applies_on_hit": false,
             "unique": false
           },
-          "source_line": "攻击力 +50 攻击力"
+          "source_line": "攻击力 +55 攻击力"
         },
         {
           "name": "暴击率 +25% 暴击率",
@@ -6857,7 +6879,7 @@
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/EquipIcons/lol_lq.png",
       "price": "3000",
       "description": [
-        "攻击力 +50 攻击力\n暴击率 +25% 暴击率\n攻击速度 +20% 攻击速度\n\n弩箭：移动和普攻会生成一次盈能攻击，附带120额外魔法伤害并提供持续1.5秒的45%移动速度。\n\n"
+        "攻击力 +50 攻击力\n暴击率 +25% 暴击率\n攻击速度 +20% 攻击速度\n\n弩箭：移动和普攻会生成一次盈能攻击，附带100额外魔法伤害并提供持续1.5秒的35%移动速度。\n\n"
       ],
       "labels": [],
       "from": [
@@ -6961,13 +6983,13 @@
           "source_line": "攻击速度 +20% 攻击速度"
         },
         {
-          "name": "弩箭：移动和普攻会生成一次盈能攻击，附带120额外魔法伤害并提供持续1.5秒的45%移动速度",
+          "name": "弩箭：移动和普攻会生成一次盈能攻击，附带100额外魔法伤害并提供持续1.5秒的35%移动速度",
           "trigger": "onHit",
           "effect_type": "damage",
           "values": [
-            "120",
+            "100",
             "1.5",
-            "45%"
+            "35%"
           ],
           "scaling": [],
           "cooldown": 1.5,
@@ -6980,7 +7002,7 @@
             "applies_on_hit": true,
             "unique": false
           },
-          "source_line": "弩箭：移动和普攻会生成一次盈能攻击，附带120额外魔法伤害并提供持续1.5秒的45%移动速度"
+          "source_line": "弩箭：移动和普攻会生成一次盈能攻击，附带100额外魔法伤害并提供持续1.5秒的35%移动速度"
         }
       ],
       "effect_parse_status": "ok",
@@ -18271,7 +18293,7 @@
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/EquipIcons/lol_lmrnj.png",
       "price": "2650",
       "description": [
-        "暴击率 +25% 暴击率\n攻击速度 +45% 攻击速度\n移动速度 +4% 移动速度\n\n守夜：获得20终极技能急速。\n\n开战弹幕：在施放你的终极技能后，你的下3次普攻获得50%攻击速度并且必定产生暴击，造成你的80%常规暴击伤害，持续8秒。如果一次普攻本应暴击，则此攻击转而造成15%额外真实伤害。（45秒冷却时间）\n\n"
+        "暴击率 +25% 暴击率\n攻击速度 +45% 攻击速度\n移动速度 +4% 移动速度\n\n守夜：获得20终极技能急速。\n\n开战弹幕：在施放你的终极技能后，你的下3次普攻获得50%攻击速度并且必定产生暴击，造成你的85%常规暴击伤害，持续8秒。如果一次普攻本应暴击，则此攻击转而造成17.5%额外真实伤害。（45秒冷却时间）\n\n"
       ],
       "labels": [],
       "from": [
@@ -18389,13 +18411,13 @@
           "source_line": "守夜：获得20终极技能急速"
         },
         {
-          "name": "开战弹幕：在施放你的终极技能后，你的下3次普攻获得50%攻击速度并且必定产生暴击，造成你的80%常规暴击伤害，持续8秒",
+          "name": "开战弹幕：在施放你的终极技能后，你的下3次普攻获得50%攻击速度并且必定产生暴击，造成你的85%常规暴击伤害，持续8秒",
           "trigger": "onHit",
           "effect_type": "modifier",
           "values": [
             "3",
             "50%",
-            "80%",
+            "85%",
             "8"
           ],
           "scaling": [],
@@ -18409,14 +18431,14 @@
             "applies_on_hit": true,
             "unique": false
           },
-          "source_line": "开战弹幕：在施放你的终极技能后，你的下3次普攻获得50%攻击速度并且必定产生暴击，造成你的80%常规暴击伤害，持续8秒"
+          "source_line": "开战弹幕：在施放你的终极技能后，你的下3次普攻获得50%攻击速度并且必定产生暴击，造成你的85%常规暴击伤害，持续8秒"
         },
         {
-          "name": "如果一次普攻本应暴击，则此攻击转而造成15%额外真实伤害",
+          "name": "如果一次普攻本应暴击，则此攻击转而造成17.5%额外真实伤害",
           "trigger": "onHit",
           "effect_type": "damage",
           "values": [
-            "15%"
+            "17.5%"
           ],
           "scaling": [],
           "cooldown": null,
@@ -18429,7 +18451,7 @@
             "applies_on_hit": true,
             "unique": false
           },
-          "source_line": "如果一次普攻本应暴击，则此攻击转而造成15%额外真实伤害"
+          "source_line": "如果一次普攻本应暴击，则此攻击转而造成17.5%额外真实伤害"
         },
         {
           "name": "（45秒冷却时间）",
@@ -20278,7 +20300,7 @@
       "item_id": "2272",
       "name": "神圣分离者",
       "icon": "https://game.gtimg.cn/images/lgamem/act/lrlib/img/EquipIcons/lol_DivineSunderer.png",
-      "price": "3400",
+      "price": "3300",
       "description": [
         "生命值 +425 最大生命值\n攻击力 +25 攻击力\n冷却 +25 技能急速\n\n咒刃：使用一个技能后，你在10秒内的下一次普攻将造成相当于目标10%最大生命值的额外物理伤害（若为远程攻击，则比例变为7%）。如果目标为英雄，则为自己进行相当于目标6%最大生命值的治疗（若为远程攻击，则比例变为2.5%）。（1.5秒冷却时间）\n对建筑伤害降低。\n\n"
       ],
@@ -28905,13 +28927,16 @@
     }
   ],
   "diff": {
-    "newChampions": [],
+    "newChampions": [
+      "塞拉斯",
+      "雷克塞"
+    ],
     "newItems": [],
     "newRunes": [],
     "newSummonerSpells": []
   },
   "counts": {
-    "champions": 142,
+    "champions": 144,
     "items": 186,
     "runes": 55,
     "summonerSpells": 14
