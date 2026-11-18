@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-11-17T14:56:51.286478+00:00",
-  "source": "https://ddragon.leagueoflegends.com/cdn/16.22.1/data/en_US/championFull.json",
-  "version": "16.22.1",
+  "generatedAt": "2026-11-18T00:03:13.732270+00:00",
+  "source": "https://ddragon.leagueoflegends.com/cdn/16.23.1/data/en_US/championFull.json",
+  "version": "16.23.1",
   "champions": {
     "Aatrox": {
       "id": "Aatrox",
@@ -37820,10 +37820,10 @@
           ],
           "cost": [
             45,
-            50,
-            55,
-            60,
-            65
+            45,
+            45,
+            45,
+            45
           ],
           "range": [
             600,
@@ -72071,18 +72071,18 @@
           "slot": "E",
           "name": "Scatter the Weak",
           "cooldown": [
-            15,
-            15,
-            15,
-            15,
+            17,
+            16.5,
+            16,
+            15.5,
             15
           ],
           "cost": [
-            50,
-            50,
-            50,
-            50,
-            50
+            60,
+            60,
+            60,
+            60,
+            60
           ],
           "range": [
             650,
@@ -72145,10 +72145,10 @@
               "values": [],
               "scaling": [],
               "cooldown": [
-                15,
-                15,
-                15,
-                15,
+                17,
+                16.5,
+                16,
+                15.5,
                 15
               ],
               "duration": null,
@@ -72169,10 +72169,10 @@
               "values": [],
               "scaling": [],
               "cooldown": [
-                15,
-                15,
-                15,
-                15,
+                17,
+                16.5,
+                16,
+                15.5,
                 15
               ],
               "duration": null,
@@ -81113,13 +81113,13 @@
             1575,
             1575
           ],
-          "base_damage": "450/700/925",
+          "base_damage": "450/700/950",
           "damage_type": "magic",
           "cc_duration": 2.5,
           "damage_effects": [
             {
               "index": 1,
-              "values": "450/700/925"
+              "values": "450/700/950"
             },
             {
               "index": 2,
